@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fa">
+  <title>知研 · AI 资料研究助手</title>
+  <style>
+    :root{font-family:Inter,"PingFang SC","Microsoft YaHei",sans-serif;color:#202637;background:#f4f6fa;font-synthesis:none;text-rendering:optimizeLegibility}*{box-sizing:border-box}body{margin:0;min-height:100vh}button{font:inherit;cursor:pointer}.shell{height:100vh;min-height:620px;display:grid;grid-template-columns:292px minmax(0,1fr);background:#fff;overflow:hidden}.brand{height:76px;display:flex;align-items:center;gap:11px;padding:0 24px;border-bottom:1px solid #e9ecf2;font-weight:700;font-size:16px}.logo{width:36px;height:36px;border-radius:11px;background:linear-gradient(145deg,#5868e8,#8065d9);color:#fff;display:grid;place-items:center;font-size:17px}.sidebar{position:relative;min-height:0;background:#f8f9fc;border-right:1px solid #e8ebf1;display:flex;flex-direction:column}.sidebar-scroll{padding:19px 16px 70px;overflow:auto;min-height:0;flex:1}.side-label{display:flex;justify-content:space-between;align-items:center;color:#798398;font-size:12px;font-weight:700;letter-spacing:.3px;margin:0 5px 10px}.database-list{display:grid;gap:6px}.database-item{border-radius:11px;border:1px solid transparent;overflow:hidden}.database-item[open]{background:#fff;border-color:#e7eaf1}.database-item summary{list-style:none;cursor:pointer;padding:11px 10px;display:flex;align-items:center;gap:10px}.database-item summary::-webkit-details-marker{display:none}.db-icon{width:30px;height:30px;border-radius:9px;background:#edefff;color:#626ee0;display:grid;place-items:center;flex:none}.db-heading{min-width:0;flex:1}.db-name{font-size:12px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.db-meta{font-size:10px;color:#8b94a5;margin-top:3px}.db-caret{color:#9aa3b2;font-size:11px;transition:transform .16s}.database-item[open] .db-caret{transform:rotate(90deg)}.db-details{border-top:1px solid #eff1f5;margin:0 10px 10px;padding:8px 2px 0 12px;max-height:230px;overflow:auto}.db-details .source-row{font-size:10px;margin:6px 0;color:#6c7688}.db-type{display:inline-block;padding:2px 6px;border-radius:5px;background:#f1f3f7;color:#727c8d;font-size:9px;margin-left:4px}.import-open{width:100%;margin-top:12px;padding:10px 12px;border:1px dashed #bec5ed;border-radius:10px;color:#5864d5;background:#f7f7ff;text-align:left;font-size:12px;font-weight:650}.import-open:hover{background:#efefff}.side-divider{height:1px;background:#e7eaf0;margin:18px 2px}.history-head{display:flex;align-items:center;justify-content:space-between;margin:0 5px 9px;color:#798398;font-size:12px;font-weight:700}.history-list{display:grid;gap:3px;max-height:260px;overflow:auto}.history-item{display:block;width:100%;padding:9px 10px;border:0;border-radius:8px;background:transparent;text-align:left;color:#596478;font-size:11px;line-height:1.45;overflow-wrap:anywhere}.history-item:hover,.history-item.active{background:#eeeefe;color:#505dcd}.history-empty{padding:8px 7px;color:#9aa2b0;font-size:11px}.sidebar-new-chat{position:absolute;left:16px;right:16px;bottom:63px;z-index:2;min-height:40px;border:1px solid #d8dcfa;border-radius:10px;background:#fff;color:#5662d2;box-shadow:0 7px 20px #26336b18;font-size:12px;font-weight:650}.sidebar-new-chat:hover{background:#f5f5ff}.sidebar-foot{padding:12px 18px 16px;border-top:1px solid #e7eaf0;color:#717d90;font-size:10px;display:flex;align-items:center;gap:9px}.status{display:inline-flex;align-items:center;gap:7px}.dot{width:8px;height:8px;border-radius:50%;background:#d39a35;box-shadow:0 0 0 4px #f7efdf}.status.connected .dot{background:#45ad7a;box-shadow:0 0 0 4px #e6f4ed}.status.disconnected .dot{background:#c4514b;box-shadow:0 0 0 4px #f7e9e8}.status-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.workspace{min-width:0;min-height:0;display:flex;flex-direction:column;background:#fff}.workspace-head{height:70px;flex:none;padding:0 32px;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between}.title-wrap{min-width:0}.workspace-title{font-size:15px;font-weight:700}.workspace-subtitle{font-size:11px;color:#8a93a4;margin-top:4px}.top-actions{display:flex;align-items:center;gap:15px}.session{display:none!important}.new-chat{border:1px solid #e0e4ed;border-radius:8px;background:#fff;color:#59657b;padding:8px 11px;font-size:11px;white-space:nowrap}.new-chat:hover{background:#f7f8fc}.mobile-new-chat{display:none}.chat{min-height:0;flex:1;display:flex;flex-direction:column;max-width:1080px;width:100%;margin:0 auto;padding:0 28px}.chat-head{height:1px;overflow:hidden;flex:none}.chat-content{min-height:0;flex:1;display:flex;flex-direction:column;justify-content:flex-start}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0 2px}.chip{border:1px solid #e4e7ef;background:#fff;color:#68738a;border-radius:20px;padding:7px 11px;font-size:11px}.chip:hover{background:#f7f8fc;border-color:#cdd3e3}#messages{padding:22px 4px 16px;max-height:calc(100vh - 310px);overflow:auto;min-height:150px}.empty{min-height:260px;display:grid;place-items:center;text-align:center;color:#8a93a4;font-size:13px;line-height:1.9}.empty strong{font-size:20px;color:#31394e;font-weight:650}.message{margin:0 0 22px;white-space:pre-wrap;line-height:1.8;font-size:14px}.message.user{margin-left:auto;max-width:80%;width:max-content;background:#f1f3f8;border:1px solid #e9ecf3;border-radius:14px 14px 4px 14px;padding:10px 14px}.message.assistant{padding:0 3px;color:#303747}.message.error{color:#a33d38}.message-label{display:block;color:#737f95;font-size:11px;margin-bottom:6px}.typing{display:inline-block;width:7px;height:15px;vertical-align:-3px;margin-left:3px;background:#6671e4;animation:pulse .8s infinite alternate}@keyframes pulse{to{opacity:.2}}.composer{padding:0 0 13px;flex:none}.input-wrap{display:flex;align-items:flex-end;gap:10px;border:1px solid #dfe3ec;border-radius:14px;padding:10px 10px 10px 15px;background:#fff;box-shadow:0 8px 30px #202a420a}.input-wrap:focus-within{border-color:#aab1ef;box-shadow:0 0 0 3px #f0f0ff}textarea{border:0;outline:0;resize:vertical;max-height:130px;min-height:45px;flex:1;font:inherit;font-size:14px;line-height:1.6;color:#202637;padding:8px 0;background:transparent}textarea::placeholder{color:#a2a8b5}.send{border:0;background:linear-gradient(145deg,#5968e8,#765fe0);color:white;border-radius:10px;padding:11px 16px;font-size:12px}.send:hover{filter:brightness(.97)}.send:disabled{opacity:.45;cursor:wait}.hint{font-size:10px;color:#a0a6b2;margin:8px 4px 0}.suggestions{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 20px}.suggestion{border:1px solid #e3e6ed;background:#fbfcfe;color:#59657a;border-radius:20px;padding:7px 11px;font-size:12px}.suggestion:hover{border-color:#c9cef2;background:#f7f7ff}.sources{border-top:1px solid #eff0f4;padding-top:11px;margin-top:12px}.sources summary{font-size:12px;color:#6e7b91;cursor:pointer}.source-row{font-size:11px;line-height:1.7;color:#646f84;margin:7px 0 0 8px;overflow-wrap:anywhere}.source-row a{color:#5865d9}.consent-actions{display:flex;gap:8px;margin-top:12px}.consent-actions button{border:1px solid #dce0ec;border-radius:8px;padding:8px 11px;font-size:12px}.consent-allow{background:#5968e8;color:white}.consent-decline{background:white;color:#546078}.modal-backdrop{position:fixed;inset:0;z-index:10;background:#17213a70;display:none;align-items:center;justify-content:center;padding:20px}.modal-backdrop.open{display:flex}.modal{width:min(620px,100%);max-height:min(90vh,780px);overflow:auto;border-radius:18px;background:#fff;box-shadow:0 24px 80px #15203d35;padding:25px}.modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px}.modal-title{font-size:19px;font-weight:700}.modal-desc{font-size:12px;color:#8992a4;margin-top:5px}.modal-close{border:0;background:transparent;font-size:21px;color:#8490a4}.mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:19px}.mode-tab{border:1px solid #e2e5ed;background:#fff;color:#717c91;border-radius:9px;padding:10px;font-size:12px}.mode-tab.active{border-color:#cdd0ff;background:#f1f1ff;color:#565fd1;font-weight:650}.field-label{display:block;font-size:12px;font-weight:650;color:#394258;margin:0 0 7px}.modal input[type=text],.modal select{width:100%;height:42px;padding:0 12px;border:1px solid #dfe3ec;border-radius:9px;background:#fff;color:#394258;font:inherit;font-size:12px}.modal select{margin-bottom:16px}.drop{border:1px dashed #c6cce0;border-radius:12px;background:#fafbfe;padding:22px;text-align:center;color:#788398;font-size:11px;margin-top:18px}.drop:hover{background:#f7f7ff}.drop input{display:none}.choose{display:inline-block;color:#5865d9;cursor:pointer;font-weight:650}.selected-files{margin-top:10px;color:#768197;font-size:11px;line-height:1.7;max-height:90px;overflow:auto}.modal-note{font-size:11px;line-height:1.6;color:#818ba0;margin-top:14px}.modal-actions{display:flex;justify-content:flex-end;align-items:center;gap:9px;margin-top:22px}.modal-actions .cancel{border:1px solid #e0e4ec;background:#fff;color:#69748a;border-radius:9px;padding:10px 15px;font-size:12px}.modal-actions .send{padding:10px 17px}.notice{font-size:11px;color:#5d6bd4;line-height:1.5;margin:12px 0 0;min-height:16px}.database-select{display:none}.file-list{display:grid;gap:8px;margin-top:11px}.file-item{background:#fff;border:1px solid #e5e9ef;border-radius:9px;padding:9px;font-size:11px;overflow-wrap:anywhere}.file-item button{display:block;margin-top:7px;border:0;border-radius:6px;background:#edf0ff;color:#555fca;padding:6px 9px;font-size:11px}.file-item button:disabled{opacity:.55;cursor:wait}.upload-card{display:none}footer{padding:0 32px 14px;color:#a0a6b2;font-size:10px;text-align:center;flex:none}
+    .chips{margin:0 0 8px 2px;flex:none;position:relative;z-index:1}
+    .history-row{display:flex;align-items:center;gap:4px}.history-row .history-item{min-width:0;flex:1}.row-delete{flex:none;border:0;border-radius:7px;background:transparent;color:#9aa2b1;padding:6px 8px;font-size:12px}.row-delete:hover{background:#fff0ef;color:#b94b45}.folder-row{display:flex;align-items:flex-start;gap:5px}.folder-row>.database-item{min-width:0;flex:1}.folder-row>.row-delete{margin:7px 4px 0 0}.file-entry{display:flex;justify-content:space-between;align-items:flex-start;gap:7px}.file-title{min-width:0;overflow-wrap:anywhere}.file-badge{flex:none;border-radius:5px;padding:2px 6px;font-size:9px;line-height:1.4}.file-badge.original{background:#eef1ff;color:#5c66ce}.file-badge.supplement{background:#edf7f1;color:#43815f}.confirm-modal{width:min(420px,100%)}.confirm-desc{font-size:13px;color:#68738a;line-height:1.7}
+    .folder-row{align-items:center;gap:2px}.folder-row>.folder-delete{width:30px;height:30px;margin:0 4px 0 0;padding:0;display:grid;place-items:center;font-size:0}.folder-delete::before{content:'×';font-size:19px;line-height:1}.folder-delete:hover{background:#fff0ef;color:#b94b45}.database-summary{font-size:10px;color:#8a93a4;margin:2px 0 8px 0;line-height:1.6}
+    #messages{overflow-x:hidden}.message{max-width:100%;overflow-wrap:anywhere;word-break:break-word}
+    .message.assistant p{margin:0 0 12px}.message.assistant p:last-child{margin-bottom:0}.message.assistant h1,.message.assistant h2,.message.assistant h3,.message.assistant h4{line-height:1.4;color:#252d40;margin:19px 0 9px}.message.assistant h1{font-size:21px}.message.assistant h2{font-size:18px}.message.assistant h3,.message.assistant h4{font-size:15px}.message.assistant ul,.message.assistant ol{padding-left:24px;margin:7px 0 13px}.message.assistant li{padding-left:3px;margin:4px 0}.message.assistant blockquote{margin:10px 0;padding:8px 14px;border-left:3px solid #8892e9;background:#f7f8ff;color:#667087;border-radius:0 8px 8px 0}.message.assistant pre{margin:10px 0;padding:13px 15px;border-radius:10px;background:#f4f5f8;overflow:auto;font-size:12px;line-height:1.6}.message.assistant code{font-family:Consolas,"Cascadia Code",monospace;font-size:.92em;background:#f0f1f6;border-radius:4px;padding:2px 5px}.message.assistant pre code{padding:0;background:transparent}.message.assistant table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:11px 0 15px;font-size:12px}.message.assistant th,.message.assistant td{border:1px solid #e2e6ef;padding:7px 10px;text-align:left;vertical-align:top}.message.assistant th{background:#f5f6fa;font-weight:650}.message.assistant a{color:#5865d9;text-decoration:underline;text-underline-offset:2px}
+    @media(max-width:760px){.shell{grid-template-columns:250px minmax(0,1fr)}.workspace-head{padding:0 18px}.chat{padding:0 18px}.top-actions{gap:8px}.top-actions .status-text{max-width:130px}}
+    @media(max-width:560px){.shell{grid-template-columns:1fr;height:100vh;min-height:540px}.sidebar{display:none}.workspace-head{height:62px;padding:0 14px}.workspace-title{font-size:13px}.workspace-subtitle{font-size:10px}.top-actions{gap:6px}.top-actions .status{display:none}.mobile-new-chat{display:block;padding:7px 8px;font-size:10px}.chat{padding:0 13px}#messages{max-height:calc(100vh - 250px)}.empty{min-height:210px}.empty strong{font-size:18px}.modal{padding:20px}.mode-tabs{gap:6px}footer{padding:0 12px 10px}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="logo">知</div><span>知研 <span style="font-weight:400;color:#8991a3">/ 研究助手</span></span></div>
+      <div class="sidebar-scroll">
+        <div class="side-label"><span>资料库</span><span id="databaseCount"></span></div>
+        <div id="databaseList" class="database-list"><div class="history-empty">正在读取资料库…</div></div>
+        <button class="import-open" id="openImport" type="button">＋　导入资料</button>
+        <div class="side-divider"></div>
+        <div class="history-head"><span>历史会话</span><span>最近</span></div>
+        <div id="conversationList" class="history-list"><div class="history-empty">正在读取…</div></div>
+      </div>
+      <button id="newConversation" class="sidebar-new-chat" type="button">＋　新建对话</button>
+      <div class="sidebar-foot"><span id="knowledgeStatus" class="status" role="status" aria-live="polite" title="正在检查本地 RAG 知识库"><i class="dot"></i><span id="knowledgeStatusText" class="status-text">正在检查知识库…</span></span></div>
+    </aside>
+    <main class="workspace">
+      <header class="workspace-head">
+        <div class="title-wrap"><div class="workspace-title">研究对话</div><div class="workspace-subtitle">基于新旧资料检索，回答附带来源</div></div>
+        <div class="top-actions"><span id="sessionLabel" class="session"></span><button id="newConversationMobile" class="new-chat mobile-new-chat" type="button">＋ 新对话</button></div>
+      </header>
+      <section class="chat">
+        <div class="chat-head"><span>研究对话</span><span id="sessionId" class="session"></span></div>
+        <div class="chat-content">
+          <div id="messages"><div class="empty"><div><strong>开始一场有来源的研究对话</strong><br>从左侧资料库选择主题，或直接提出问题。</div></div></div>
+        </div>
+        <div class="chips" aria-label="快捷询问">
+          <button class="chip" data-prompt="请联网查找与资料库主题相关的可靠网上资料，对比网上资料与本地资料库内容，指出一致之处、差异和各自来源。">联网对比网上与库内资料</button>
+          <button class="chip" data-prompt="请比较资料库中新资料和旧资料对同一主题的记载，概括主要区别，并分别标注来源。">比较新旧资料</button>
+          <button class="chip" data-prompt="请检查资料库中与当前主题相关的内容，找出资料之间的矛盾、信息缺漏和需要进一步核实的说法，并列出对应来源；只指出证据支持的问题，不要推测。">查找矛盾与待核实信息</button>
+        </div>
+        <form id="chatForm" class="composer">
+          <div class="input-wrap"><textarea id="question" rows="1" placeholder="向资料库提问，或输入你想梳理的主题…" required></textarea><button class="send" id="sendButton" type="submit">发送 ↗</button></div>
+          <div class="hint">Enter 发送 · Shift + Enter 换行 · 回答会标注参考来源</div>
+        </form>
+      </section>
+      <footer>内容由 AI 整理，请结合原始资料核对；联网搜索会将关键词发送至外部搜索服务。</footer>
+    </main>
+  </div>
+  <div class="modal-backdrop" id="importModal" aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="importTitle">
+      <div class="modal-header"><div><div class="modal-title" id="importTitle">导入资料</div><div class="modal-desc">所有资料统一归入数据库，并按目录整理</div></div><button class="modal-close" id="closeImport" type="button" aria-label="关闭">×</button></div>
+      <div class="mode-tabs"><button class="mode-tab active" type="button" data-mode="new">新建目录</button><button class="mode-tab" type="button" data-mode="existing">添加到已有目录</button></div>
+      <label class="field-label" id="databaseFieldLabel" for="newDatabaseName">新目录名称</label>
+      <input id="newDatabaseName" type="text" placeholder="请输入目录名称" maxlength="80">
+      <label class="field-label existing-label" for="databaseSelect" style="display:none;margin-top:0">选择已有目录</label>
+      <select id="databaseSelect" class="database-select"></select>
+      <div class="drop" id="fileDrop"><label class="choose" for="fileInput">选择文件</label>　<label class="choose" for="folderInput">选择文件夹</label>，也可拖放文件<input id="fileInput" type="file" accept=".txt,.md,.pdf" multiple><input id="folderInput" type="file" accept=".txt,.md,.pdf" webkitdirectory directory multiple><div class="selected-files" id="selectedFiles">支持选择多个 TXT、Markdown、PDF 文件，或选择包含这些文件的文件夹；单次上传总量不超过 100 MB。</div></div>
+      <div class="modal-note">文件会归入所选目录，解析并使用本地 BGE-M3 向量化后增量写入 Milvus；问答时会优先根据问题匹配目录。扫描版 PDF 暂不支持 OCR。</div>
+      <div class="notice" id="uploadNotice" role="status" aria-live="polite"></div>
+      <div class="modal-actions"><button class="cancel" id="cancelImport" type="button">取消</button><button id="createDatabase" class="send" type="button">开始导入</button></div>
+    </section>
+  </div>
+  <div class="modal-backdrop" id="confirmModal" aria-hidden="true">
+    <section class="modal confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+      <div class="modal-header"><div><div class="modal-title" id="confirmTitle">确认删除</div><div class="confirm-desc" id="confirmDescription"></div></div><button class="modal-close" id="closeConfirm" type="button" aria-label="关闭">×</button></div>
+      <div class="modal-actions"><button class="cancel" id="cancelConfirm" type="button">取消</button><button class="send" id="confirmDelete" type="button" style="background:#c8514b">删除</button></div>
+    </section>
+  </div>
+  <script>
+    const messages = document.querySelector('#messages');
+    const form = document.querySelector('#chatForm');
+    const input = document.querySelector('#question');
+    const sendButton = document.querySelector('#sendButton');
+    const sessionId = localStorage.getItem('research-agent-session') || crypto.randomUUID().replaceAll('-', '').slice(0, 12);
+    localStorage.setItem('research-agent-session', sessionId);
+    document.querySelector('#sessionId').textContent = `会话 ${sessionId}`;
+    document.querySelector('#sessionLabel').textContent = sessionId;
+    let empty = true;
+    let currentSessionId = sessionId;
+
+    function resetMessages() {
+      messages.innerHTML = '<div class="empty"><div><strong>开始一场有来源的研究对话</strong><br>试着问一个关于资料库的问题，或搜索最新信息。</div></div>';
+      empty = true;
+    }
+    function newConversation() {
+      currentSessionId = crypto.randomUUID().replaceAll('-', '').slice(0, 12);
+      localStorage.setItem('research-agent-session', currentSessionId);
+      document.querySelector('#sessionId').textContent = `会话 ${currentSessionId}`;
+      document.querySelector('#sessionLabel').textContent = currentSessionId;
+      resetMessages();
+      refreshConversations();
+      input.focus();
+    }
+    async function refreshConversations() {
+      const list = document.querySelector('#conversationList');
+      try {
+        const response = await fetch('/api/conversations', {cache:'no-store'});
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || '读取失败');
+        list.innerHTML = '';
+        if (!data.conversations.length) { list.innerHTML='<div class="history-empty">暂时没有已完成的对话</div>'; return; }
+        for (const conversation of data.conversations) {
+          const row=document.createElement('div');row.className='history-row';
+          const button = document.createElement('button');
+          button.type='button'; button.className=`history-item ${conversation.id===currentSessionId?'active':''}`;
+          button.textContent=conversation.title; button.title=conversation.title;
+          button.onclick=()=>openConversation(conversation.id);
+          const remove=document.createElement('button');remove.type='button';remove.className='row-delete';remove.textContent='删除';remove.title='删除此会话';
+          remove.onclick=()=>confirmDeletion('删除历史会话',`确定删除“${conversation.title}”吗？删除后无法恢复。`,async()=>{
+            const response=await fetch(`/api/conversations/${encodeURIComponent(conversation.id)}`,{method:'DELETE'});await readDeleteResponse(response,'删除会话失败。');
+            if(currentSessionId===conversation.id){localStorage.removeItem('research-agent-session');newConversation();}else await refreshConversations();
+          });
+          row.append(button,remove);list.append(row);
+        }
+      } catch { list.innerHTML='<div class="history-empty">暂时无法读取历史对话</div>'; }
+    }
+    async function openConversation(id) {
+      try {
+        const response=await fetch(`/api/conversations/${encodeURIComponent(id)}`,{cache:'no-store'});
+        const data=await response.json();
+        if(!response.ok) throw new Error(data.error||'读取失败');
+        currentSessionId=id; localStorage.setItem('research-agent-session',id);
+        document.querySelector('#sessionId').textContent=`会话 ${id}`;
+        document.querySelector('#sessionLabel').textContent=id;
+        resetMessages();
+        for(const turn of data.turns){addMessage('user',turn.user);addMessage('assistant',turn.assistant);}
+        refreshConversations();
+      } catch(error) { addMessage('error',error.message||'无法读取历史对话。'); }
+    }
+    const confirmModal=document.querySelector('#confirmModal');const confirmButton=document.querySelector('#confirmDelete');
+    let pendingDelete=null;
+    async function readDeleteResponse(response,fallback){
+      let data;
+      try{data=await response.json();}
+      catch{
+        const contentType=response.headers.get('content-type')||'';
+        if(response.status===501||response.status===405||contentType.includes('text/html'))throw new Error('本地网页服务尚未加载删除功能，请重启网页服务后再试。');
+        throw new Error(fallback);
+      }
+      if(!response.ok)throw new Error(data.error||fallback);
+      return data;
+    }
+    function closeConfirmation(){confirmModal.classList.remove('open');confirmModal.setAttribute('aria-hidden','true');pendingDelete=null;}
+    function confirmDeletion(title,description,action){
+      document.querySelector('#confirmTitle').textContent=title;document.querySelector('#confirmDescription').textContent=description;
+      pendingDelete=action;confirmButton.disabled=false;confirmButton.textContent='删除';confirmModal.classList.add('open');confirmModal.setAttribute('aria-hidden','false');
+    }
+    document.querySelector('#closeConfirm').addEventListener('click',closeConfirmation);
+    document.querySelector('#cancelConfirm').addEventListener('click',closeConfirmation);
+    confirmModal.addEventListener('click',event=>{if(event.target===confirmModal)closeConfirmation();});
+    confirmButton.addEventListener('click',async()=>{
+      if(!pendingDelete)return;confirmButton.disabled=true;confirmButton.textContent='正在删除…';
+      try{await pendingDelete();closeConfirmation();}
+      catch(error){document.querySelector('#confirmDescription').textContent=error.message||'删除失败，请稍后重试。';confirmButton.disabled=false;confirmButton.textContent='重试';}
+    });
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&confirmModal.classList.contains('open'))closeConfirmation();});
+    document.querySelector('#newConversation').addEventListener('click',newConversation);
+    document.querySelector('#newConversationMobile').addEventListener('click',newConversation);
+    refreshConversations();
+
+    let knowledgeStatusPending = false;
+    async function refreshKnowledgeStatus() {
+      if (knowledgeStatusPending) return;
+      knowledgeStatusPending = true;
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 8000);
+      const badge = document.querySelector('#knowledgeStatus');
+      const label = document.querySelector('#knowledgeStatusText');
+      try {
+        const response = await fetch('/api/knowledge-status', {cache:'no-store', signal:controller.signal});
+        const data = await response.json();
+        if (!data.connected) throw new Error(data.error || 'Milvus 不可用');
+        const ready = data.collections.new || data.collections.old || data.collections.databases;
+        badge.className = `status ${ready ? 'connected' : 'disconnected'}`;
+        label.textContent = ready ? '本地 RAG 知识库已连接' : 'Milvus 已连接，尚无索引';
+        badge.title = `补充资料索引：${data.collections.new ? '已就绪' : '未建立'}；独立资料库：${data.collections.databases ? '已就绪' : '未建立'}；原有资料索引：${data.collections.old ? '已就绪' : '未建立'}。地址：${data.uri}`;
+      } catch (error) {
+        badge.className = 'status disconnected';
+        label.textContent = '本地 RAG 知识库未连接';
+        badge.title = `无法连接本地 Milvus：${error.message || '请求失败'}`;
+      } finally {
+        window.clearTimeout(timeout);
+        knowledgeStatusPending = false;
+      }
+    }
+    refreshKnowledgeStatus();
+    setInterval(refreshKnowledgeStatus, 10000);
+
+    function appendInlineMarkdown(parent, source) {
+      const pattern = /\[([^\]]+)\]\(([^\s)]+)\)|`([^`]+)`|\*\*(.+?)\*\*|__(.+?)__|\*(?!\s)(.+?)\*|_(?!\s)(.+?)_/g;
+      let cursor = 0;
+      for (const match of source.matchAll(pattern)) {
+        parent.append(document.createTextNode(source.slice(cursor, match.index)));
+        if (match[3] !== undefined) {
+          const code = document.createElement('code'); code.textContent = match[3]; parent.append(code);
+        } else if (match[1] !== undefined) {
+          let url;
+          try { url = new URL(match[2], window.location.href); } catch {}
+          if (url && ['http:', 'https:', 'mailto:'].includes(url.protocol)) {
+            const link = document.createElement('a'); link.href = url.href; link.textContent = match[1];
+            if (url.protocol !== 'mailto:') { link.target = '_blank'; link.rel = 'noopener noreferrer'; }
+            parent.append(link);
+          } else parent.append(document.createTextNode(match[0]));
+        } else {
+          const strong = match[4] ?? match[5];
+          const node = document.createElement(strong !== undefined ? 'strong' : 'em');
+          node.textContent = strong ?? match[6] ?? match[7]; parent.append(node);
+        }
+        cursor = match.index + match[0].length;
+      }
+      parent.append(document.createTextNode(source.slice(cursor)));
+    }
+    function renderMarkdown(container, markdown) {
+      container.replaceChildren();
+      const lines = markdown.replace(/\r\n?/g, '\n').split('\n');
+      const isTableRule = line => /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);
+      const cells = line => line.trim().replace(/^\||\|$/g, '').split('|').map(cell => cell.trim());
+      let index = 0;
+      while (index < lines.length) {
+        const line = lines[index];
+        if (!line.trim()) { index++; continue; }
+        if (/^\s{0,3}(?:#{1,6}\s*)?可继续追问[:：]?\s*$/.test(line)) {
+          index++; const items = [];
+          while (index < lines.length && lines[index].trim()) {
+            const item = lines[index].match(/^\s*(?:[-+*]|\d+[.)])\s+(.+)$/);
+            if (!item) break;
+            items.push(item[1]); index++;
+          }
+          if (items.length) addSuggestions(items, container);
+          continue;
+        }
+        if (/^\s*```/.test(line)) {
+          index++; const codeLines = [];
+          while (index < lines.length && !/^\s*```/.test(lines[index])) codeLines.push(lines[index++]);
+          if (index < lines.length) index++;
+          const pre = document.createElement('pre'); const code = document.createElement('code');
+          code.textContent = codeLines.join('\n'); pre.append(code); container.append(pre); continue;
+        }
+        const heading = line.match(/^\s{0,3}(#{1,6})\s+(.+?)\s*#*\s*$/);
+        if (heading) {
+          const node = document.createElement(`h${heading[1].length}`); appendInlineMarkdown(node, heading[2]); container.append(node); index++; continue;
+        }
+        if (/^\s{0,3}([-*_])(?:\s*\1){2,}\s*$/.test(line)) { container.append(document.createElement('hr')); index++; continue; }
+        if (index + 1 < lines.length && line.includes('|') && isTableRule(lines[index + 1])) {
+          const headers = cells(line); index += 2;
+          const table = document.createElement('table'); const thead = document.createElement('thead'); const headRow = document.createElement('tr');
+          for (const value of headers) { const th = document.createElement('th'); appendInlineMarkdown(th, value); headRow.append(th); }
+          thead.append(headRow); table.append(thead); const tbody = document.createElement('tbody');
+          while (index < lines.length && lines[index].includes('|') && lines[index].trim()) {
+            const row = document.createElement('tr');
+            for (const value of cells(lines[index++])) { const td = document.createElement('td'); appendInlineMarkdown(td, value); row.append(td); }
+            tbody.append(row);
+          }
+          table.append(tbody); container.append(table); continue;
+        }
+        if (/^\s*>/.test(line)) {
+          const quote = document.createElement('blockquote'); const content = [];
+          while (index < lines.length && /^\s*>/.test(lines[index])) content.push(lines[index++].replace(/^\s*>\s?/, ''));
+          const p = document.createElement('p'); appendInlineMarkdown(p, content.join(' ')); quote.append(p); container.append(quote); continue;
+        }
+        const list = line.match(/^\s*(?:([-+*])|((?:\d+)[.)]))\s+(.+)$/);
+        if (list) {
+          const ordered = Boolean(list[2]); const node = document.createElement(ordered ? 'ol' : 'ul');
+          while (index < lines.length) {
+            const item = lines[index].match(/^\s*(?:([-+*])|((?:\d+)[.)]))\s+(.+)$/);
+            if (!item || Boolean(item[2]) !== ordered) break;
+            const li = document.createElement('li'); appendInlineMarkdown(li, item[3]); node.append(li); index++;
+          }
+          container.append(node); continue;
+        }
+        const paragraph = [];
+        while (index < lines.length && lines[index].trim() && !/^\s{0,3}(?:#{1,6}\s|```|>|([-+*])\s|\d+[.)]\s)/.test(lines[index])) paragraph.push(lines[index++].trim());
+        if (paragraph.length) { const p = document.createElement('p'); appendInlineMarkdown(p, paragraph.join(' ')); container.append(p); }
+        else { const p = document.createElement('p'); appendInlineMarkdown(p, lines[index++]); container.append(p); }
+      }
+    }
+    function addMessage(role, text = '') {
+      if (empty) { messages.innerHTML = ''; empty = false; }
+      const node = document.createElement('div');
+      node.className = `message ${role}`;
+      if (role !== 'user') {
+        const label = document.createElement('span'); label.className = 'message-label'; label.textContent = role === 'error' ? '请求未完成' : '知研'; node.append(label);
+      }
+      const body = document.createElement('div');
+      if (role === 'assistant') renderMarkdown(body, text); else body.textContent = text;
+      node.append(body);
+      messages.append(node); messages.scrollTop = messages.scrollHeight;
+      return {node, body};
+    }
+    function addSources(data) {
+      const groups = [['新增资料', data.new_sources], ['旧资料对照', data.old_sources], ['联网搜索', data.web_sources]];
+      const available = groups.filter(([,items]) => items?.length);
+      if (!available.length) return;
+      const details = document.createElement('details'); details.className = 'sources';
+      const summary = document.createElement('summary'); summary.textContent = `查看来源 · ${available.reduce((n,g)=>n+g[1].length,0)} 条`; details.append(summary);
+      for (const [title, items] of available) {
+        const heading = document.createElement('div'); heading.className = 'source-row'; heading.style.fontWeight = '650'; heading.textContent = title; details.append(heading);
+        for (const item of items) { const row = document.createElement('div'); row.className = 'source-row'; row.textContent = item; details.append(row); }
+      }
+      messages.append(details); messages.scrollTop = messages.scrollHeight;
+    }
+    function addSuggestions(items, parent = messages) {
+      if (!items?.length) return;
+      const row = document.createElement('div'); row.className = 'suggestions';
+      for (const text of items) { const button = document.createElement('button'); button.className = 'suggestion'; button.textContent = text; button.onclick = () => { input.value = text; form.requestSubmit(); }; row.append(button); }
+      parent.append(row); messages.scrollTop = messages.scrollHeight;
+    }
+    async function ask(question, options = {}) {
+      if (!options.output) addMessage('user', question);
+      const output = options.output || addMessage('assistant');
+      output.body.textContent = '';
+      let streamedAnswer = '';
+      const cursor = document.createElement('i'); cursor.className = 'typing'; output.body.append(cursor);
+      sendButton.disabled = true;
+      try {
+        const response = await fetch('/api/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({question, session_id:currentSessionId, allow_web_search:!!options.allowWebSearch, decline_web_search:!!options.declineWebSearch})});
+        if (!response.ok || !response.body) throw new Error((await response.text()) || `HTTP ${response.status}`);
+        const reader = response.body.getReader(); const decoder = new TextDecoder(); let buffer = '';
+        while (true) {
+          const {value, done} = await reader.read(); if (done) break;
+          buffer += decoder.decode(value, {stream:true});
+          const blocks = buffer.split('\n\n'); buffer = blocks.pop();
+          for (const block of blocks) {
+            const line = block.split('\n').find(x => x.startsWith('data: ')); if (!line) continue;
+            const event = JSON.parse(line.slice(6));
+            if (event.kind === 'token') { streamedAnswer += event.text; cursor.remove(); output.body.append(document.createTextNode(event.text)); output.body.append(cursor); messages.scrollTop = messages.scrollHeight; }
+            else if (event.kind === 'replace') { streamedAnswer = event.text; cursor.remove(); output.body.textContent=event.text; messages.scrollTop=messages.scrollHeight; }
+            else if (event.kind === 'web_search_consent') {
+              cursor.remove(); output.body.textContent=event.text;
+              const actions=document.createElement('div'); actions.className='consent-actions';
+              const allow=document.createElement('button'); allow.type='button'; allow.className='consent-allow'; allow.textContent='联网搜索';
+              const decline=document.createElement('button'); decline.type='button'; decline.className='consent-decline'; decline.textContent='暂不联网';
+              allow.onclick=()=>{actions.remove();ask(question,{output,allowWebSearch:true});};
+              decline.onclick=()=>{actions.remove();ask(question,{output,declineWebSearch:true});};
+              actions.append(allow,decline); output.node.append(actions); messages.scrollTop=messages.scrollHeight;
+            }
+            else if (event.kind === 'sources') addSources(event);
+            else if (event.kind === 'suggestions') { cursor.remove(); addSuggestions(event.suggestions); }
+            else if (event.kind === 'error') throw new Error(event.message);
+          }
+        }
+        cursor.remove();
+        if (streamedAnswer) renderMarkdown(output.body, streamedAnswer);
+        await refreshConversations();
+      } catch (error) { cursor.remove(); output.node.classList.add('error'); output.body.textContent = error.message || '连接失败，请确认本地服务正在运行。'; }
+      finally { sendButton.disabled = false; input.focus(); }
+    }
+    form.addEventListener('submit', event => { event.preventDefault(); const value = input.value.trim(); if (!value || sendButton.disabled) return; input.value=''; ask(value); });
+    input.addEventListener('keydown', event => { if (event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); form.requestSubmit(); } });
+    document.querySelectorAll('.chip').forEach(button => button.addEventListener('click', () => { input.value = button.dataset.prompt; form.requestSubmit(); }));
+
+    const fileInput = document.querySelector('#fileInput');const folderInput=document.querySelector('#folderInput'); const notice = document.querySelector('#uploadNotice');
+    let selectedUploads=[];
+    function setSelectedUploads(files,append=false){
+      const merged=append?[...selectedUploads,...files]:[...files];const unique=new Map();
+      for(const file of merged){const relativePath=file.webkitRelativePath||file.name;unique.set(`${relativePath}\0${file.size}\0${file.lastModified}`,file);}
+      selectedUploads=[...unique.values()];
+      document.querySelector('#selectedFiles').textContent=selectedUploads.length?selectedUploads.map(file=>`${file.webkitRelativePath||file.name} · ${(file.size/1024/1024).toFixed(2)} MB`).join('；'):'支持选择多个 TXT、Markdown、PDF 文件，或选择包含这些文件的文件夹；单次上传总量不超过 100 MB。';
+    }
+    const databaseSelect=document.querySelector('#databaseSelect');
+    const drop=document.querySelector('#fileDrop');
+    async function refreshDatabases(selectId) {
+      const controller=new AbortController();const timeout=window.setTimeout(()=>controller.abort(),20000);
+      let data;
+      try {
+        const response=await fetch('/api/databases/details',{cache:'no-store',signal:controller.signal});
+        data=await response.json();
+        if(!response.ok)throw new Error(data.error||'无法读取资料库列表');
+      } finally {window.clearTimeout(timeout);}
+      databaseSelect.innerHTML='';document.querySelector('#databaseList').innerHTML='';
+      const folders=data.databases;
+      document.querySelector('#databaseCount').textContent='';
+      const root=document.createElement('details');root.className='database-item';root.open=true;
+      const rootSummary=document.createElement('summary');const rootIcon=document.createElement('span');rootIcon.className='db-icon';rootIcon.textContent='▤';
+      const rootHeading=document.createElement('span');rootHeading.className='db-heading';const rootName=document.createElement('span');rootName.className='db-name';rootName.textContent='数据库';rootHeading.append(rootName);
+      const rootCaret=document.createElement('span');rootCaret.className='db-caret';rootCaret.textContent='›';rootSummary.append(rootIcon,rootHeading,rootCaret);root.append(rootSummary);
+      const rootDetails=document.createElement('div');rootDetails.className='db-details';
+      for(const db of folders){
+        const option=document.createElement('option');option.value=db.id;option.textContent=db.id==='initial'?'上海地方志':db.name;databaseSelect.append(option);
+        const folderRow=document.createElement('div');folderRow.className='folder-row';
+        const folder=document.createElement('details');folder.className='database-item';
+        const summary=document.createElement('summary');const icon=document.createElement('span');icon.className='db-icon';icon.textContent='▱';
+        const heading=document.createElement('span');heading.className='db-heading';const name=document.createElement('span');name.className='db-name';name.textContent=db.id==='initial'?'上海地方志':db.name;
+        heading.append(name);const caret=document.createElement('span');caret.className='db-caret';caret.textContent='›';summary.append(icon,heading,caret);folder.append(summary);
+        const fileDetails=document.createElement('div');fileDetails.className='db-details';
+        const indexedFiles=db.indexed_files||[];
+        const originalCount=indexedFiles.filter(file=>file.data_version!=='supplement').length;
+        const supplementCount=indexedFiles.length-originalCount;
+        const counts=document.createElement('div');counts.className='database-summary';counts.textContent=`原始 ${originalCount} · 补充 ${supplementCount}`;fileDetails.append(counts);
+        for(const file of indexedFiles){
+          const row=document.createElement('div');row.className='source-row file-entry';
+          const title=document.createElement('span');title.className='file-title';title.textContent=(file.source.split('/').pop()||file.source).replace(/\.[^.]+$/,'');
+          const badge=document.createElement('span');badge.className=`file-badge ${file.data_version==='supplement'?'supplement':'original'}`;badge.textContent=file.data_version==='supplement'?'补充资料':'原始资料';
+          row.append(title,badge);fileDetails.append(row);
+        }
+        if(!indexedFiles.length){const empty=document.createElement('div');empty.className='source-row';empty.textContent='目录暂时没有文件';fileDetails.append(empty);}
+        folder.append(fileDetails);
+        if(db.id!=='legacy-additions'){
+          const remove=document.createElement('button');remove.type='button';remove.className='row-delete folder-delete';remove.textContent='删除';remove.title='删除此目录';remove.setAttribute('aria-label','删除此目录');
+          const warning=db.id==='initial'?'删除后将移除上海地方志原始文件、原始索引，以及该目录下导入的补充文件和索引。此操作无法恢复。':`确定删除目录“${db.name}”及其中所有原始资料、补充资料和索引吗？删除后无法恢复。`;
+          remove.onclick=()=>confirmDeletion('删除资料目录',warning,async()=>{
+            const response=await fetch(`/api/databases/${encodeURIComponent(db.id)}`,{method:'DELETE'});await readDeleteResponse(response,'删除目录失败。');
+            await refreshDatabases();await refreshKnowledgeStatus();
+          });
+          folderRow.append(folder,remove);
+        }else folderRow.append(folder);
+        rootDetails.append(folderRow);
+      }
+      root.append(rootDetails);document.querySelector('#databaseList').append(root);
+      if(selectId&&[...databaseSelect.options].some(option=>option.value===selectId))databaseSelect.value=selectId;
+      if(!databaseSelect.options.length){const option=document.createElement('option');option.value='';option.textContent='请先新建目录';databaseSelect.append(option);}
+    }
+    async function upload(files, targetDatabaseId) {
+      if (!files.length) throw new Error('请先选择要导入的文件。');
+      const formData=new FormData(); for(const file of files) formData.append('files',file,file.webkitRelativePath||file.name);
+      const response=await fetch(`/api/upload?database_id=${encodeURIComponent(targetDatabaseId)}`,{method:'POST',body:formData});
+      const data=await response.json();if(!response.ok)throw new Error(data.error||'文件上传失败。');return data.files;
+    }
+    async function updateIndexedFile(databaseId, oldHash, file) {
+      if(!file)return;
+      try{const files=await upload([file],databaseId);if(!files?.length)return;notice.textContent='新文件已暂存，正在安全更新单文件索引…';
+          const response=await fetch('/api/index',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({path:files[0],database_id:databaseId,replace_hash:oldHash,data_version:'supplement'})});const result=await response.json();if(!response.ok)throw new Error(result.error);notice.textContent=`单文件更新完成：${result.message}`;await refreshDatabases(databaseId);await refreshKnowledgeStatus();}
+      catch(error){notice.textContent=`单文件更新未完成：${error.message||'请查看索引状态后重试。'}`;await refreshDatabases(databaseId);}
+    }
+    const importModal=document.querySelector('#importModal');const importButton=document.querySelector('#createDatabase');
+    let importMode='new';
+    function setImportMode(mode){
+      importMode=mode;
+      document.querySelectorAll('.mode-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.mode===mode));
+      const isNew=mode==='new';
+      document.querySelector('#databaseFieldLabel').textContent='新目录名称';
+      document.querySelector('#databaseFieldLabel').style.display=isNew?'block':'none';
+      document.querySelector('#newDatabaseName').style.display=isNew?'':'none';
+      document.querySelector('#newDatabaseName').required=isNew;
+      document.querySelector('.existing-label').style.display=isNew?'none':'block';
+      databaseSelect.style.display=isNew?'none':'block';
+      importButton.textContent=isNew?'新建目录并导入':'导入到此目录';
+    }
+    function closeImport(){importModal.classList.remove('open');importModal.setAttribute('aria-hidden','true');}
+    function openImport(){
+      importModal.classList.add('open');importModal.setAttribute('aria-hidden','false');notice.textContent='';fileInput.value='';folderInput.value='';setSelectedUploads([]);
+      refreshDatabases().then(()=>setImportMode(importMode)).catch(()=>{notice.textContent='无法读取资料库列表，请检查本地服务。';});
+      (importMode==='new'?document.querySelector('#newDatabaseName'):databaseSelect).focus();
+    }
+    document.querySelector('#openImport').addEventListener('click',openImport);
+    document.querySelector('#closeImport').addEventListener('click',closeImport);
+    document.querySelector('#cancelImport').addEventListener('click',closeImport);
+    importModal.addEventListener('click',event=>{if(event.target===importModal)closeImport();});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&importModal.classList.contains('open'))closeImport();});
+    document.querySelectorAll('.mode-tab').forEach(tab=>tab.addEventListener('click',()=>setImportMode(tab.dataset.mode)));
+    fileInput.addEventListener('change',()=>setSelectedUploads([...fileInput.files],true));
+    folderInput.addEventListener('change',()=>setSelectedUploads([...folderInput.files],true));
+    importButton.addEventListener('click',async()=>{
+      const files=selectedUploads;if(!files.length){notice.textContent='请选择文件或文件夹。';return;}
+      // 整个批次固定使用点击开始时的模式，避免导入途中切换标签导致文件分类不一致。
+      const operationMode=importMode;
+      importButton.disabled=true;importButton.textContent='正在处理…';
+      try{
+        let databaseId=databaseSelect.value;
+        if(operationMode==='new'){
+          const name=document.querySelector('#newDatabaseName').value.trim();if(!name)throw new Error('请填写新目录名称。');
+          notice.textContent='正在创建目录…';
+          const response=await fetch('/api/databases',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name})});const data=await response.json();if(!response.ok)throw new Error(data.error||'创建目录失败。');databaseId=data.database.id;
+        }
+        if(!databaseId)throw new Error('请先创建或选择一个目录。');
+        notice.textContent='正在上传文件…';const paths=await upload(files,databaseId);
+        for(let index=0;index<paths.length;index++){
+          notice.textContent=`正在解析并向量化：${paths[index]}（${index+1}/${paths.length}）`;
+          const dataVersion=operationMode==='new'?'original':'supplement';
+          const response=await fetch('/api/index',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({path:paths[index],database_id:databaseId,data_version:dataVersion})});const result=await response.json();if(!response.ok)throw new Error(result.error||`${paths[index]} 索引失败。`);
+        }
+        notice.textContent=`导入完成：${paths.length} 个文件已写入 Milvus。`;
+        await refreshDatabases(databaseId);await refreshKnowledgeStatus();
+        fileInput.value='';folderInput.value='';selectedUploads=[];document.querySelector('#selectedFiles').textContent='导入完成。';
+        window.setTimeout(closeImport,1100);
+      }catch(error){notice.textContent=`导入未完成：${error.message||'请检查文件和 Milvus 状态后重试。'}`;await refreshDatabases().catch(()=>{});}
+      finally{importButton.disabled=false;importButton.textContent=importMode==='new'?'新建目录并导入':'导入到此目录';}
+    });
+    drop.addEventListener('dragover',event=>{event.preventDefault();drop.style.background='#f0f0ff'});
+    drop.addEventListener('dragleave',()=>drop.style.background='');
+    drop.addEventListener('drop',event=>{event.preventDefault();drop.style.background='';setSelectedUploads([...event.dataTransfer.files],true);});
+    refreshDatabases().catch(()=>{document.querySelector('#databaseList').innerHTML='<div class="history-empty">无法读取资料库列表</div>';});
+  </script>
+</body>
+</html>
+

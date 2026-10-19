@@ -1,0 +1,390 @@
+{
+  "run_file": "results/acceptance_20261019T095000005021Z.json",
+  "questions_sha256": "0d5a98522502b36e2eef716739a992857f70cfa8ded560bbbf4c8006c9fd2176",
+  "retrieval_reviews": [
+    {
+      "id": "H01",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "题名及版权候选2列明陈树德与朱瑞熙。",
+      "supporting_ranks": [
+        2
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H02",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1明确记载2000年11月命名国际汽车城。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H03",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选3记载2000年9月两镇合并。",
+      "supporting_ranks": [
+        3
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H04",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选3支持初稿四卷、编入后三卷；其他候选有不同著录，需分别说明。",
+      "supporting_ranks": [
+        3
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H05",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1列明十二卷、张承先编纂和程攸熙增订。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H06",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1明确记载杨志达及康熙五十一年完稿。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H07",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选2版权记录同时提供出版社和ISBN。",
+      "supporting_ranks": [
+        2
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H08",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选3版权记录包含乡人民政府编和1994年8月第一版。",
+      "supporting_ranks": [
+        3
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H09",
+      "status": "已审核",
+      "verdict": "部分",
+      "reason": "候选1为总述，耕地14583.89亩；未召回指定地貌面积一节的14583.9亩，不自行合并不同章节、时期数值。",
+      "supporting_ranks": [],
+      "hit_at_4": false
+    },
+    {
+      "id": "H10",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1、3明确提供1984年10月7日及杨浦区归属。",
+      "supporting_ranks": [
+        1,
+        3
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H11",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选2题名及版权明确列出两位主编。",
+      "supporting_ranks": [
+        2
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H12",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选2明确同时包含三派和本书以中派为主。",
+      "supporting_ranks": [
+        2
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H13",
+      "status": "已审核",
+      "verdict": "部分",
+      "reason": "候选为后记、出版信息及导言前半，缺少初稿和修订定稿年份。",
+      "supporting_ranks": [],
+      "hit_at_4": false
+    },
+    {
+      "id": "H14",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1同时包含两位主编及中国戏剧出版社。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H15",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1委员会名录明确为袁雪芬。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H16",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1明确包含1997年12月第1版和第1次印刷。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H17",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1列明吴贵芳及1982年12月第一版。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H18",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1青龙镇与青龙塔正文同时记载七级和报德寺塔。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H19",
+      "status": "已审核",
+      "verdict": "部分",
+      "reason": "候选1给出1985年03月，但缺少长春邮电学院印刷厂。",
+      "supporting_ranks": [],
+      "hit_at_4": false
+    },
+    {
+      "id": "H20",
+      "status": "已审核",
+      "verdict": "无关",
+      "reason": "候选主要为其他县志的编纂者、序和编纂始末，没有两篇述略的执笔人。",
+      "supporting_ranks": [],
+      "hit_at_4": false
+    },
+    {
+      "id": "N01",
+      "status": "已审核",
+      "retrieval_verdict": "无充分证据",
+      "reason": "合成唯一实体未在源Markdown中出现，候选均不支持所问实体。",
+      "retrieval_returned_irrelevant": true
+    },
+    {
+      "id": "N02",
+      "status": "已审核",
+      "retrieval_verdict": "无充分证据",
+      "reason": "合成唯一实体未在源Markdown中出现，候选均不支持所问实体。",
+      "retrieval_returned_irrelevant": true
+    },
+    {
+      "id": "N03",
+      "status": "已审核",
+      "retrieval_verdict": "无充分证据",
+      "reason": "合成唯一实体未在源Markdown中出现，候选均不支持所问实体。",
+      "retrieval_returned_irrelevant": true
+    },
+    {
+      "id": "N04",
+      "status": "已审核",
+      "retrieval_verdict": "无充分证据",
+      "reason": "合成唯一实体未在源Markdown中出现，候选均不支持所问实体。",
+      "retrieval_returned_irrelevant": true
+    }
+  ],
+  "answer_reviews": [
+    {
+      "id": "H01",
+      "status": "已审核",
+      "task_answer_correct": true,
+      "appropriate_abstention": false,
+      "main_claim_citation_supported": true,
+      "unsupported_factual_answer": false,
+      "reason": "核心答案与参考答案一致，引用候选支持该结论。另有标点者和出版者的版本差异，回答分别列出来源。"
+    },
+    {
+      "id": "H02",
+      "status": "已审核",
+      "task_answer_correct": true,
+      "appropriate_abstention": false,
+      "main_claim_citation_supported": true,
+      "unsupported_factual_answer": false,
+      "reason": "核心答案与参考答案一致，引用候选支持该结论。"
+    },
+    {
+      "id": "H03",
+      "status": "已审核",
+      "task_answer_correct": true,
+      "appropriate_abstention": false,
+      "main_claim_citation_supported": true,
+      "unsupported_factual_answer": false,
+      "reason": "核心答案与参考答案一致，引用候选支持该结论。"
+    },
+    {
+      "id": "H04",
+      "status": "已审核",
+      "task_answer_correct": true,
+      "appropriate_abstention": false,
+      "main_claim_citation_supported": true,
+      "unsupported_factual_answer": false,
+      "reason": "核心答案与参考答案一致，引用候选支持该结论。不同初稿卷数著录已分列；不将多数表述当作历史真伪裁定。"
+    },
+    {
+      "id": "H05",
+      "status": "已审核",
+      "task_answer_correct": true,
+      "appropriate_abstention": false,
+      "main_claim_citation_supported": true,
+      "unsupported_factual_answer": false,
+      "reason": "核心答案与参考答案一致，引用候选支持该结论。"
+    },
+    {
+      "id": "H06",
+      "status": "已审核",
+      "task_answer_correct": true,
+      "appropriate_abstention": false,
+      "main_claim_citation_supported": true,
+      "unsupported_factual_answer": false,
+      "reason": "核心答案与参考答案一致，引用候选支持该结论。"
+    },
+    {
+      "id": "H07",
+      "status": "已审核",
+      "task_answer_correct": true,
+      "appropriate_abstention": false,
+      "main_claim_citation_supported": true,
+      "unsupported_factual_answer": false,
+      "reason": "核心答案与参考答案一致，引用候选支持该结论。"
+    },
+    {
+      "id": "H08",
+      "status": "已审核",
+      "task_answer_correct": true,
+      "appropriate_abstention": false,
+      "main_claim_citation_supported": true,
+      "unsupported_factual_answer": false,
+      "reason": "核心答案与参考答案一致，引用候选支持该结论。回答区分编修组与版权页乡人民政府编。"
+    },
+    {
+      "id": "H09",
+      "status": "已审核",
+      "task_answer_correct": false,
+      "appropriate_abstention": true,
+      "main_claim_citation_supported": null,
+      "unsupported_factual_answer": false,
+      "reason": "正确识别缺少指定章节证据，未混用不同面积。"
+    },
+    {
+      "id": "H10",
+      "status": "已审核",
+      "task_answer_correct": true,
+      "appropriate_abstention": false,
+      "main_claim_citation_supported": true,
+      "unsupported_factual_answer": false,
+      "reason": "核心答案与参考答案一致，引用候选支持该结论。"
+    },
+    {
+      "id": "H11",
+      "status": "已审核",
+      "task_answer_correct": true,
+      "appropriate_abstention": false,
+      "main_claim_citation_supported": true,
+      "unsupported_factual_answer": false,
+      "reason": "核心答案与参考答案一致，引用候选支持该结论。"
+    },
+    {
+      "id": "H12",
+      "status": "已审核",
+      "task_answer_correct": true,
+      "appropriate_abstention": false,
+      "main_claim_citation_supported": true,
+      "unsupported_factual_answer": false,
+      "reason": "核心答案与参考答案一致，引用候选支持该结论。"
+    },
+    {
+      "id": "N01",
+      "status": "已审核",
+      "task_answer_correct": false,
+      "appropriate_abstention": true,
+      "main_claim_citation_supported": null,
+      "unsupported_factual_answer": false,
+      "reason": "明确说明证据不足，未编造所问实体及属性。"
+    },
+    {
+      "id": "N02",
+      "status": "已审核",
+      "task_answer_correct": false,
+      "appropriate_abstention": true,
+      "main_claim_citation_supported": null,
+      "unsupported_factual_answer": false,
+      "reason": "明确说明证据不足，未编造所问实体及属性。"
+    },
+    {
+      "id": "N03",
+      "status": "已审核",
+      "task_answer_correct": false,
+      "appropriate_abstention": true,
+      "main_claim_citation_supported": null,
+      "unsupported_factual_answer": false,
+      "reason": "明确说明证据不足，未编造所问实体及属性。"
+    },
+    {
+      "id": "N04",
+      "status": "已审核",
+      "task_answer_correct": false,
+      "appropriate_abstention": true,
+      "main_claim_citation_supported": null,
+      "unsupported_factual_answer": false,
+      "reason": "明确说明证据不足，未编造所问实体及属性。"
+    }
+  ],
+  "summary": {
+    "answerable_count": 20,
+    "sufficient": 16,
+    "partial": 3,
+    "irrelevant": 1,
+    "hit_at_4": 0.8,
+    "negative_count": 4,
+    "negative_nonempty_retrieval": 4,
+    "answer_sample_count": 12,
+    "correct_answers": 11,
+    "appropriate_abstentions_on_answerable": 1,
+    "negative_abstentions": 4,
+    "invalid_citation_labels": 0,
+    "main_claim_supported": 11,
+    "main_claim_reviewed": 11
+  },
+  "review_scope": "核心答案正确性与核心结论引用支持；未对每个扩展事实做逐句量化统计；仅基于Markdown证据。"
+}

@@ -1,0 +1,27 @@
+{
+  "status": "在检索前固定；后续不据结果调优本轮实现",
+  "questions_sha256": "0d5a98522502b36e2eef716739a992857f70cfa8ded560bbbf4c8006c9fd2176",
+  "retrieval_code_sha256": "61a1df2e0e64919397a1bf415d3fee2f9157a902313d04bafa860682a05b4777",
+  "answerable": 20,
+  "synthetic_unanswerable": 4,
+  "source_files": 7,
+  "answer_sample": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "N01",
+    "N02",
+    "N03",
+    "N04"
+  ],
+  "limitations": "按新段落独立拟题；非盲测，非外部人工标注；无答案题为合成实体；不对扫描原件作事实背书。"
+}

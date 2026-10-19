@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-19",
+  "scope": "简历展示版本轮收尾；非生产就绪认证",
+  "offline_tests": {
+    "command": "$env:PYTHONPATH='src'; .venv\\Scripts\\python.exe -m pytest --basetemp=.pytest-final-tmp",
+    "exit_code": 0,
+    "passed": 40,
+    "deselected": 1,
+    "duration_seconds": 3.81
+  },
+  "embedding_integration": {
+    "command": "$env:PYTHONPATH='src'; $env:HF_HUB_OFFLINE='1'; $env:BGE_M3_EXPECTED_DIMENSION='1024'; .venv\\Scripts\\python.exe -m pytest -m integration tests/test_embedding_integration.py --basetemp=.pytest-integration-final-tmp",
+    "exit_code": 0,
+    "passed": 1,
+    "duration_seconds": 9.94,
+    "expected_dimension": 1024
+  },
+  "hardware_extra": {
+    "cpu": "Intel(R) Core(TM) Ultra 9 275HX",
+    "physical_memory_bytes": 33752997888
+  },
+  "retrieval_unchanged_since_holdout_freeze": true,
+  "code_sha256": {
+    "src/research_agent/acceptance.py": "22a6540f2921e431ca26da5303bbb1e91fb91cfb09830366c80ac870fdbe7153",
+    "src/research_agent/agent.py": "10c12d6d4ea77274760901f978cacc4de72dbbb39c6bb5aec2e42d3718a0ff2e",
+    "src/research_agent/answer.py": "dfdfca42ef92c61e77262a3f11f2d7154a940acac331012a65dc2a8e9954ca0d",
+    "src/research_agent/cli.py": "d702f429b3180f8ea82bf1605ec0831581b9600946c3ca70a0882f0b1b731964",
+    "src/research_agent/config.py": "3e4e4be9ce3c2c80e2e4f884982edda83531893a0bf6744d7aec7e9a9e4cb9e5",
+    "src/research_agent/conversation.py": "75d2008c1feca1d4d15801d4efe0e6ff111be834678667e6ce122fb8fd408c97",
+    "src/research_agent/embeddings.py": "7cdcf4ae9717aa5543166bfca69f09e3e75c0656aca71d26231b22bdb19510eb",
+    "src/research_agent/evaluate.py": "477e70e180ad928d043aa61cdca5d841d470449411ed26a3c3d705f5f421c09a",
+    "src/research_agent/ingest.py": "cafdebf4e1b2272f5ce911b57f1533b39a4f9733c990723a5fc2950d85cb8c67",
+    "src/research_agent/rag_updates.py": "7cb075381db0f8788a802ea71fe632909ca5fa22d1fbefcd2e66e7a496e47cf3",
+    "src/research_agent/retrieval.py": "61a1df2e0e64919397a1bf415d3fee2f9157a902313d04bafa860682a05b4777",
+    "src/research_agent/smoke.py": "98cce8b8ed29affc865fecc4a39817bbae79bd3df9fc7cfe290aa73e245a9329",
+    "src/research_agent/storage.py": "799a20b75cadb6db9f488c19d45d51d1ae221577e71460ecd896f79af0fd7b69",
+    "src/research_agent/web_search.py": "d912db0c2c2997892dd590d148f4f690ea8297c49a3ac8fa6d4034fef641f5f9",
+    "src/research_agent/web_server.py": "1e4ab9139256d91e73d13aa068ba229d79baf8050f9d654d7ed309d487859f0f",
+    "src/research_agent/__init__.py": "2b2e1267c2443063ab11504cbbe93384dae1dda24aa75edcd2b73f13132456bb"
+  },
+  "http_review": [
+    {
+      "question": "《安亭志》的清代编纂者和现代标点者分别是谁？",
+      "status": "已审核",
+      "passed": true,
+      "persisted_turns": 1,
+      "elapsed_seconds": 8.86827180000546,
+      "first_content_seconds": 6.029201400000602,
+      "reason": "正常回答及本轮来源、追问和保存均已核对"
+    },
+    {
+      "question": "刚才回答的现代标点者叫什么名字？",
+      "status": "已审核",
+      "passed": true,
+      "persisted_turns": 2,
+      "elapsed_seconds": 3.1983374999981606,
+      "first_content_seconds": 1.1245784999919124,
+      "reason": "正常回答及本轮来源、追问和保存均已核对"
+    },
+    {
+      "question": "玄鹭量子档案馆ZX2099的馆长是谁？",
+      "status": "已审核",
+      "passed": true,
+      "persisted_turns": 1,
+      "elapsed_seconds": 3.3934527000092203,
+      "first_content_seconds": 0.9225212000019383,
+      "reason": "证据不足时拒答，未返回联网来源"
+    }
+  ],
+  "secret_scan": "未发现已配置API密钥写入eval或docs文本文件",
+  "syntax_check": "src/research_agent全部Python文件编译通过",
+  "created_at": "2026-10-19T10:00:05.611079+00:00"
+}

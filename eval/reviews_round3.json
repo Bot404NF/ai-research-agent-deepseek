@@ -1,0 +1,202 @@
+{
+  "run_file": "results/20261019T093831172405Z.json",
+  "baseline_run": "results/20261019T093158984894Z.json",
+  "scope": "固定20题、前4条、同阈值、严格指定来源；Markdown证据审核",
+  "index_observation": {
+    "index_type": "AUTOINDEX",
+    "metric_type": "L2",
+    "field_name": "vector",
+    "total_rows": 28216,
+    "indexed_rows": 28216,
+    "pending_index_rows": 0,
+    "state": "Finished"
+  },
+  "retrieval_code_sha256": "61a1df2e0e64919397a1bf415d3fee2f9157a902313d04bafa860682a05b4777",
+  "reviews": {
+    "Q01": {
+      "verdict": "充分",
+      "reason": "候选1为第一卷第一期卷首，明确包含民国廿二年六月。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q02": {
+      "verdict": "充分",
+      "reason": "候选明确包含搜求志料两个月、整理考证三个月及总计五个月。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q03": {
+      "verdict": "部分",
+      "reason": "候选提供后期已完成十一编等背景，但未召回发刊词当时已完成四编的指定证据。",
+      "supporting_ranks": [],
+      "hit_at_4": false,
+      "status": "已审核"
+    },
+    "Q04": {
+      "verdict": "充分",
+      "reason": "候选2来自指定上册，明确记载“一人品首孝行尚本也”，直接说明排序理由。",
+      "supporting_ranks": [
+        2
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q05": {
+      "verdict": "充分",
+      "reason": "候选1来自指定上册，明确记载有关山川景物的名公题咏“散附于各类之下”，足以回答编排方式；原文“攻究”存在识别疑点，不影响该核心判断。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q06": {
+      "verdict": "部分",
+      "reason": "候选3提要记载光绪青浦县志卷二十七艺文上、二十八艺文下，但不是指定文件，严格来源口径仍不计命中。",
+      "supporting_ranks": [],
+      "hit_at_4": false,
+      "status": "已审核"
+    },
+    "Q07": {
+      "verdict": "充分",
+      "reason": "候选1在盛桥里志卷五举人项明确记载李索字天佑、雍正十年壬子中。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q08": {
+      "verdict": "充分",
+      "reason": "候选1及2均直接记载申志刚字宗钻、号醉霞。",
+      "supporting_ranks": [
+        1,
+        2
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q09": {
+      "verdict": "充分",
+      "reason": "候选2版权信息明确记载第一版和第一次印刷均为1999年12月。",
+      "supporting_ranks": [
+        2
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q10": {
+      "verdict": "充分",
+      "reason": "候选1明确记载上海长鹰印刷厂承印，并附1999年版本日期。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q11": {
+      "verdict": "充分",
+      "reason": "候选1在同一段落列明上海市地方志办公室编、上海社会科学院出版社。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q12": {
+      "verdict": "充分",
+      "reason": "候选1及2均含ISBN 7-80681-664-X；斜线后的K·154不属于ISBN主体。",
+      "supporting_ranks": [
+        1,
+        2
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q13": {
+      "verdict": "部分",
+      "reason": "候选1、3明确支持县治设在青龙镇这一事实，但均非题目指定的《青浦县志（二）》。按指定来源口径不算充分命中；事实支持与来源约束分别记录。",
+      "supporting_ranks": [],
+      "hit_at_4": false,
+      "status": "已审核",
+      "fact_supporting_ranks": [
+        1,
+        3
+      ]
+    },
+    "Q14": {
+      "verdict": "充分",
+      "reason": "候选2及3均来自原文文件，明确记载乾隆八年裁福泉仍归青浦管理；候选1另有相同记述。",
+      "supporting_ranks": [
+        2
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q15": {
+      "verdict": "部分",
+      "reason": "候选1、2记载陆逊字伯言，但未包含本名议；候选4虽来自目标文件，也没有该信息，整题未答全。",
+      "supporting_ranks": [],
+      "hit_at_4": false,
+      "status": "已审核"
+    },
+    "Q16": {
+      "verdict": "充分",
+      "reason": "候选2明确记载陆抗字幼节、为陆逊次子；候选1仅写逊子，不足以支持次子。",
+      "supporting_ranks": [
+        2
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q17": {
+      "verdict": "充分",
+      "reason": "候选3来自指定嘉庆松江府志卷二十七，明确记载唐百户为里五里为乡。",
+      "supporting_ranks": [
+        3
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q18": {
+      "verdict": "部分",
+      "reason": "候选1仅支持华亭统十三乡这一背景，没有里正六十五人的答案；其余候选是其他表格或户口数据。",
+      "supporting_ranks": [],
+      "hit_at_4": false,
+      "status": "已审核"
+    },
+    "Q19": {
+      "verdict": "充分",
+      "reason": "候选3发刊词段落直接记载志料来源不外参考探访及征求。",
+      "supporting_ranks": [
+        3
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q20": {
+      "verdict": "部分",
+      "reason": "候选提供已完成编目等背景，没有发刊词中不日将完成三编的证据。",
+      "supporting_ranks": [],
+      "hit_at_4": false,
+      "status": "已审核"
+    }
+  },
+  "summary": {
+    "reviewed": 20,
+    "sufficient": 14,
+    "hit_at_4": 0.7,
+    "baseline_hit_at_4": 0.6,
+    "improved": [
+      "Q01",
+      "Q19"
+    ],
+    "regressed": []
+  }
+}

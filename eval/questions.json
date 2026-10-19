@@ -1,0 +1,346 @@
+[
+  {
+    "id": "Q01",
+    "question": "《上海通志馆期刊》第一卷第一期出版于何时？",
+    "reference_answer": "民国二十二年六月。",
+    "expected_source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+    "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+    "evidence_anchors": [
+      {
+        "text": "民国廿二年六月",
+        "line": 7
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q02",
+    "question": "《上海通志馆期刊》发刊词中，原先预计一编初稿需要多久完成？资料搜求和整理考证各安排多久？",
+    "reference_answer": "预计五个月；搜求志料两个月，整理考证并加编制三个月。",
+    "expected_source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+    "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+    "evidence_anchors": [
+      {
+        "text": "用两个月时间搜求志料用三个月时间整理考证并加编制",
+        "line": 92
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q03",
+    "question": "《上海通志馆期刊》发刊词记载，当时已经完成初稿的有哪四编？",
+    "reference_answer": "学艺、法租界、社会事业、金融。",
+    "expected_source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+    "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+    "evidence_anchors": [
+      {
+        "text": "近来初稿已完成的有学艺法租界社会事业金融等四编",
+        "line": 94
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q04",
+    "question": "《弘治上海志（上）》的凡例为什么把“孝行”放在人品类的首位？",
+    "reference_answer": "尚本也，即重视根本。",
+    "expected_source": "上海地方志资料集/弘治上海志（上）/弘治上海志（上）.md",
+    "source_sha256": "2df69c6c2c66c4ceede66138c1459c16cc6b3d03441a7d0ebe02f8f2f397d4b8",
+    "evidence_anchors": [
+      {
+        "text": "一人品首孝行尚本也",
+        "line": 57
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q05",
+    "question": "《弘治上海志（上）》对涉及山川景物的名公题咏，采用怎样的编排方式？",
+    "reference_answer": "散附于各类之下，以便考究。",
+    "expected_source": "上海地方志资料集/弘治上海志（上）/弘治上海志（上）.md",
+    "source_sha256": "2df69c6c2c66c4ceede66138c1459c16cc6b3d03441a7d0ebe02f8f2f397d4b8",
+    "evidence_anchors": [
+      {
+        "text": "有系于山川景物者散附于各类之下",
+        "line": 55
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q06",
+    "question": "《青浦县志（十一）-1》中，卷二十七、卷二十八分别是什么内容？",
+    "reference_answer": "卷二十七为艺文上，卷二十八为艺文下。",
+    "expected_source": "上海地方志资料集/青浦县志（十一）-1/青浦县志（十一）-1.md",
+    "source_sha256": "3cfed94c2dc8c6b05d727dcd890a38ad83c029899a8c4daea2d88b5db727d9eb",
+    "evidence_anchors": [
+      {
+        "text": "卷二十七",
+        "line": 5
+      },
+      {
+        "text": "艺文上",
+        "line": 6
+      },
+      {
+        "text": "卷二十八",
+        "line": 7
+      },
+      {
+        "text": "艺文下",
+        "line": 8
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q07",
+    "question": "《盛桥里志》卷五记载，举人李索的字是什么，在哪一年中举？",
+    "reference_answer": "字天佑，清雍正十年壬子中举。",
+    "expected_source": "上海地方志资料集/（清）罗店镇志 （民国）盛桥里志 大场里志 江湾 (1)/（清）罗店镇志 （民国）盛桥里志 大场里志 江湾 (1).md",
+    "source_sha256": "fceeaffed0fe5a5e2285faad0cd86b4a0837083223b8999feac153050674eaac",
+    "evidence_anchors": [
+      {
+        "text": "李索字天佑。居元号十图施家宅。清雍正十年壬子中。",
+        "line": 11
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q08",
+    "question": "《盛桥里志》卷五中，申志刚的字、号分别是什么？",
+    "reference_answer": "字宗钻，号醉霞。",
+    "expected_source": "上海地方志资料集/（清）罗店镇志 （民国）盛桥里志 大场里志 江湾 (1)/（清）罗店镇志 （民国）盛桥里志 大场里志 江湾 (1).md",
+    "source_sha256": "fceeaffed0fe5a5e2285faad0cd86b4a0837083223b8999feac153050674eaac",
+    "evidence_anchors": [
+      {
+        "text": "申志刚 字宗钻，号醉霞。",
+        "line": 15
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q09",
+    "question": "《洋泾乡志》第一版及第一次印刷分别在什么时候？",
+    "reference_answer": "均为1999年12月。",
+    "expected_source": "上海地方志资料集/上海 洋泾乡志/上海 洋泾乡志.md",
+    "source_sha256": "f26daa35d4a0e1a617574f260df5bd26e75a4c8e486f1b24a6ad5b2a10fee10b",
+    "evidence_anchors": [
+      {
+        "text": "1999年12月第1版 1999年12月第1次印刷",
+        "line": 17
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q10",
+    "question": "哪家印刷厂承印了1999年版《洋泾乡志》？",
+    "reference_answer": "上海长鹰印刷厂。",
+    "expected_source": "上海地方志资料集/上海 洋泾乡志/上海 洋泾乡志.md",
+    "source_sha256": "f26daa35d4a0e1a617574f260df5bd26e75a4c8e486f1b24a6ad5b2a10fee10b",
+    "evidence_anchors": [
+      {
+        "text": "上海长鹰印刷厂承印",
+        "line": 13
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q11",
+    "question": "《上海方志提要》由哪个机构编写、哪家出版社出版？",
+    "reference_answer": "上海市地方志办公室编，上海社会科学院出版社出版。",
+    "expected_source": "上海地方志资料集/上海方志提要/上海方志提要.md",
+    "source_sha256": "35f6604fe5f8fed4b67f4e9888651302e3ba6bf1bf52cb26463de590a7225e57",
+    "evidence_anchors": [
+      {
+        "text": "上海市地方志办公室编",
+        "line": 3
+      },
+      {
+        "text": "上海社会科学院出版社",
+        "line": 5
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q12",
+    "question": "《上海方志提要》的ISBN是什么？",
+    "reference_answer": "7-80681-664-X。",
+    "expected_source": "上海地方志资料集/上海方志提要/上海方志提要.md",
+    "source_sha256": "35f6604fe5f8fed4b67f4e9888651302e3ba6bf1bf52cb26463de590a7225e57",
+    "evidence_anchors": [
+      {
+        "text": "ISBN 7-80681-664-X",
+        "line": 13
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q13",
+    "question": "据《青浦县志（二）》沿革记载，明嘉靖二十一年设置青浦县时，县治设在哪里？",
+    "reference_answer": "青龙镇。",
+    "expected_source": "上海地方志资料集/青浦县志（二）/青浦县志（二）.md",
+    "source_sha256": "e5ab4fe24d86533365dfc813e800d6a22853a8b37090739120f33f9a81ca422c",
+    "evidence_anchors": [
+      {
+        "text": "隶南京嘉靖二十一年析华亭上海西北境地置青浦县建",
+        "line": 27
+      },
+      {
+        "text": "治于青龙镇此立县所由始",
+        "line": 28
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q14",
+    "question": "青浦县在雍正二年析出福泉县后，福泉县何时被裁撤并归回青浦管理？",
+    "reference_answer": "乾隆八年。",
+    "expected_source": "上海地方志资料集/青浦县志（二）/青浦县志（二）.md",
+    "source_sha256": "e5ab4fe24d86533365dfc813e800d6a22853a8b37090739120f33f9a81ca422c",
+    "evidence_anchors": [
+      {
+        "text": "使司雍正二年析县北亭新江二乡地置福泉县乾隆八年",
+        "line": 34
+      },
+      {
+        "text": "裁福泉仍归青浦管理",
+        "line": 35
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q15",
+    "question": "《青浦县志》人物记载中，陆逊的字和本名分别是什么？",
+    "reference_answer": "字伯言，本名议。",
+    "expected_source": "上海地方志资料集/青浦县志（七）-1/青浦县志（七）-1.md",
+    "source_sha256": "6f38aa443af502a926442ad3011abda0bb9bd59d8600a8b786cb84c038404a6e",
+    "evidence_anchors": [
+      {
+        "text": "吴陆逊字伯言本名议",
+        "line": 18
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q16",
+    "question": "陆抗与陆逊是什么关系，陆抗字什么？",
+    "reference_answer": "陆抗为陆逊次子，字幼节。",
+    "expected_source": "上海地方志资料集/青浦县志（七）-1/青浦县志（七）-1.md",
+    "source_sha256": "6f38aa443af502a926442ad3011abda0bb9bd59d8600a8b786cb84c038404a6e",
+    "evidence_anchors": [
+      {
+        "text": "陆抗字幼节逊次子也",
+        "line": 22
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q17",
+    "question": "嘉庆《松江府志》卷二十七记述唐代役法时，每里多少户、每乡多少里？",
+    "reference_answer": "百户为里，五里为乡。",
+    "expected_source": "上海地方志资料集/（嘉庆）松江府志（卷二十七至卷五十五）/（嘉庆）松江府志（卷二十七至卷五十五）.md",
+    "source_sha256": "a9fdf02bbd5732369c7729c6d7549604ee19207243108fcebcdaaf2807d4815c",
+    "evidence_anchors": [
+      {
+        "text": "唐百户为里五里为乡里设正一人",
+        "line": 11
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q18",
+    "question": "嘉庆《松江府志》役法篇记述，华亭一县统十三乡，设里正多少人？",
+    "reference_answer": "六十五人。",
+    "expected_source": "上海地方志资料集/（嘉庆）松江府志（卷二十七至卷五十五）/（嘉庆）松江府志（卷二十七至卷五十五）.md",
+    "source_sha256": "a9fdf02bbd5732369c7729c6d7549604ee19207243108fcebcdaaf2807d4815c",
+    "evidence_anchors": [
+      {
+        "text": "居者名村正华亭一县统乡十三则里正六十五人",
+        "line": 13
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q19",
+    "question": "《上海通志馆期刊》发刊词把志料来源概括为哪三种方式？",
+    "reference_answer": "参考、探访及征求。",
+    "expected_source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+    "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+    "evidence_anchors": [
+      {
+        "text": "志料的来源不外参考探访及征求",
+        "line": 92
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  },
+  {
+    "id": "Q20",
+    "question": "《上海通志馆期刊》发刊词称当时不日将完成初稿的是哪几编？",
+    "reference_answer": "公共租界、外交、沿革。",
+    "expected_source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+    "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+    "evidence_anchors": [
+      {
+        "text": "不日将告完成的有公共租界外交沿革等编",
+        "line": 94
+      }
+    ],
+    "should_abstain": false,
+    "annotation_status": "draft_text_verified",
+    "human_review": null
+  }
+]

@@ -1,0 +1,62 @@
+{
+  "run_file": "results/20261019T081904526013Z.json",
+  "scope": "每题前四条候选整体的证据充分性判断；仅依据现有 Markdown 原文，未核对扫描图片",
+  "reviews": {
+    "Q01": {
+      "verdict": "无关",
+      "reason": "卷次不对；四条候选均为第二卷的重复刊名，未包含第一卷第一期出版日期。",
+      "supporting_ranks": [],
+      "hit_at_4": false,
+      "status": "已审核"
+    },
+    "Q02": {
+      "verdict": "充分",
+      "reason": "候选明确包含搜求志料两个月、整理考证三个月及总计五个月。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q03": {
+      "verdict": "无关",
+      "reason": "候选只有重复刊名，没有发刊词中已完成初稿的四编名称；前三条虽然来源文件正确，也不构成答案证据。",
+      "supporting_ranks": [],
+      "hit_at_4": false,
+      "status": "已审核"
+    },
+    "Q04": {
+      "verdict": "充分",
+      "reason": "候选2来自指定上册，明确记载“一人品首孝行尚本也”，直接说明排序理由。",
+      "supporting_ranks": [
+        2
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q05": {
+      "verdict": "充分",
+      "reason": "候选1来自指定上册，明确记载有关山川景物的名公题咏“散附于各类之下”，足以回答编排方式；原文“攻究”存在识别疑点，不影响该核心判断。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true,
+      "status": "已审核"
+    },
+    "Q06": {
+      "verdict": "无关",
+      "reason": "候选没有指定文件卷二十七、卷二十八的内容对应关系；候选2、4为民国续志的卷二十一、二十二，不能替代目标版本。",
+      "supporting_ranks": [],
+      "hit_at_4": false,
+      "status": "已审核"
+    }
+  },
+  "summary": {
+    "reviewed": 6,
+    "sufficient": 3,
+    "partial": 0,
+    "irrelevant": 3,
+    "undetermined": 0,
+    "hit_at_4": 0.5
+  }
+}
