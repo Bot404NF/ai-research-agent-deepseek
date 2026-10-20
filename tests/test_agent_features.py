@@ -350,40 +350,102 @@ def test_streaming_agent_emits_tokens_suggestions_and_saves_turn(
     assert "可继续追问" in store.load("test")[0]["assistant"]
 
 
-def test_web_search_prioritizes_official_sources_and_deduplicates(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    class FakeDDGS:
-        def text(self, query, **_kwargs):
-            if "site:gov.cn" in query:
-                return [{"title": "官方", "href": "https://a.gov.cn/x", "body": "政府信息"}]
-            return [
-                {"title": "重复", "href": "https://a.gov.cn/x", "body": "重复"},
-                {"title": "普通", "href": "https://example.com/x", "body": "普通信息"},
-            ]
-
-    monkeypatch.setattr(web_search, "DDGS", FakeDDGS)
-    results = web_search.search_web("测试", max_results=5)
-    assert [item.title for item in results] == ["官方", "普通"]
-    assert results[0].publisher == "搜索结果未注明"
-    assert results[0].published_date == "未注明"
-    assert results[0].access_date
+def install_search_transport(monkeypatch, handler):
+    import httpx
+    original = httpx.Client
+    monkeypatch.setattr(web_search.httpx, "Client", lambda **kwargs: original(
+        **kwargs, transport=httpx.MockTransport(handler)))
 
 
-def test_news_search_combines_official_and_news_results(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_deepseek_search_and_fetch(tmp_path, monkeypatch):
+    import httpx
     calls = []
 
-    class FakeDDGS:
-        def text(self, query, **kwargs):
-            calls.append(("text", query, kwargs))
-            return [{"title": "官方", "href": "https://news.gov.cn/a", "body": "公告"}]
+    def handler(request):
+        calls.append(request)
+        assert request.headers["Authorization"] == "Bearer test-key"
+        if request.url.path == "/v1/tools/search":
+            body = json.loads(request.content)
+            assert body["need_content"] is True
+            assert body["query"] == "测试 lang:zh"
+            return httpx.Response(200, json={"results": [
+                {"title": "普通", "url": "https://example.com/x", "summary": "摘要"},
+                {"title": "官方", "url": "https://a.gov.cn/x", "content": "官方正文", "date": "2026-10-01"},
+                {"title": "重复", "url": "https://a.gov.cn/x"},
+                {"url": "javascript:alert(1)"},
+            ]})
+        assert request.url.path == "/v1/tools/fetch"
+        assert json.loads(request.content) == {"url": "https://example.com/x"}
+        return httpx.Response(200, json={"content": "抓取正文"})
 
-        def news(self, query, **kwargs):
-            calls.append(("news", query, kwargs))
-            return [{"title": "新闻", "url": "https://news.example.cn/a", "body": "报道"}]
+    install_search_transport(monkeypatch, handler)
+    results = web_search.search_web("测试", settings=make_settings(tmp_path))
+    assert [x.title for x in results] == ["官方", "普通"]
+    assert "官方正文" in results[0].snippet
+    assert "抓取正文" in results[1].snippet
+    assert results[0].published_date == "2026-10-01"
+    assert results[0].publisher == "搜索结果未注明发布机构"
+    assert [x.label for x in results] == ["W1", "W2"]
+    assert len(calls) == 2
 
-    monkeypatch.setattr(web_search, "DDGS", FakeDDGS)
-    results = web_search.search_web("近期消息", news=True)
-    assert [item.title for item in results] == ["官方", "新闻"]
-    assert any(call[0] == "news" and call[2]["timelimit"] == "m" for call in calls)
 
+def test_deepseek_news_and_fetch_failure(tmp_path, monkeypatch):
+    import httpx
+    from dataclasses import replace
+    calls = []
+
+    def handler(request):
+        calls.append(request)
+        if request.url.path == "/v1/tools/search":
+            assert " after:" in json.loads(request.content)["query"]
+            return httpx.Response(200, json={"results": [
+                {"title": "新闻", "url": "https://news.cn/a", "summary": "新闻摘要"},
+            ]})
+        return httpx.Response(404, json={"error": "不可访问"})
+
+    install_search_transport(monkeypatch, handler)
+    settings = replace(make_settings(tmp_path), base_url="https://api.deepseek.com/v1")
+    results = web_search.search_web("新闻", news=True, settings=settings)
+    assert "正文抓取失败" in results[0].snippet
+    assert "新闻摘要" in results[0].snippet
+    assert len(calls) == 2
+
+
+@pytest.mark.parametrize("status", [401, 402, 429, 500])
+def test_deepseek_search_http_errors(tmp_path, monkeypatch, status):
+    import httpx
+    install_search_transport(monkeypatch, lambda request: httpx.Response(
+        status, json={"error": "不应泄露的服务端信息"}))
+    with pytest.raises(RuntimeError, match=f"HTTP {status}") as exc:
+        web_search.search_web("测试", settings=make_settings(tmp_path))
+    assert "不应泄露" not in str(exc.value)
+
+
+@pytest.mark.parametrize("payload", [{"results": []}, {"results": None}, {"results": [None]}])
+def test_deepseek_empty_and_invalid_results(tmp_path, monkeypatch, payload):
+    import httpx
+    install_search_transport(monkeypatch, lambda request: httpx.Response(200, json=payload))
+    if payload == {"results": []}:
+        assert web_search.search_web("测试", settings=make_settings(tmp_path)) == []
+    else:
+        with pytest.raises(RuntimeError, match="格式无效"):
+            web_search.search_web("测试", settings=make_settings(tmp_path))
+
+
+def test_deepseek_rejects_invalid_query_and_missing_key(tmp_path):
+    from dataclasses import replace
+    settings = make_settings(tmp_path)
+    for query in (" ", "字" * 128):
+        with pytest.raises(ValueError):
+            web_search.search_web(query, settings=settings)
+    with pytest.raises(ValueError, match="DEEPSEEK_API_KEY"):
+        web_search.search_web("测试", settings=replace(settings, api_key=""))
+
+
+def test_deepseek_timeout_is_not_empty_result(tmp_path, monkeypatch):
+    import httpx
+    def handler(request):
+        raise httpx.ReadTimeout("超时", request=request)
+    install_search_transport(monkeypatch, handler)
+    with pytest.raises(RuntimeError, match="连接失败"):
+        web_search.search_web("测试", settings=make_settings(tmp_path))

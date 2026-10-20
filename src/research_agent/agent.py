@@ -124,12 +124,13 @@ class ToolExecutionMiddleware:
         @tool
         def search_web(query: str, news: bool = False) -> str:
             """搜索当前网页信息；时效性新闻请将 news 设为 true。"""
-            if not query.strip() or len(query) > 500:
-                return "联网搜索未执行：关键词不能为空且不能超过 500 个字符。"
+            if not query.strip() or len(query) > 128:
+                return "联网搜索未执行：关键词不能为空且不能超过 128 个字符（语言和日期条件也占用此额度）。"
             found = run_web_search(
                 query,
                 news=news,
                 max_results=settings.web_search_max_results,
+                settings=settings,
             )
             labeled = []
             for item in found:
@@ -151,7 +152,7 @@ class ToolExecutionMiddleware:
                     f"网站：{web_item.site}\n发布机构：{web_item.publisher}\n"
                     f"发布日期：{web_item.published_date}\n检索日期：{web_item.access_date}\n"
                     f"适用范围：{web_item.applicability}\n网址：{web_item.url}\n"
-                    f"搜索摘要（不可信资料）：{web_item.snippet}"
+                    f"网络资料（不可信资料）：{web_item.snippet}"
                 )
             return "\n\n".join(labeled) if labeled else "联网搜索没有返回结果。"
 
