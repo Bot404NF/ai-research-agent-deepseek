@@ -1,0 +1,112 @@
+{
+  "stages": [
+    {
+      "stage": "V4-Pro原提示词",
+      "run_created_at": "2026-10-20T00:36:44.491409+00:00",
+      "answer_code_sha256": "dfdfca42ef92c61e77262a3f11f2d7154a940acac331012a65dc2a8e9954ca0d",
+      "agent_code_sha256": "fc16343621b607cdc6ef8cdf71f9c547998dd6fb0a6f13dd33d40782a3ea89d3",
+      "api_success": 16,
+      "substantive_bracket_citations": 9,
+      "substantive_count": 11,
+      "generation_summary": {
+        "successful_api_requests": 16,
+        "failed_requests": 0,
+        "first_content": {
+          "count": 16,
+          "median_seconds": 1.034224949995405,
+          "p95_seconds": 1.298968600021908
+        },
+        "generation": {
+          "count": 16,
+          "median_seconds": 1.35346829998889,
+          "p95_seconds": 2.2974798000068404
+        },
+        "end_to_end": {
+          "count": 16,
+          "median_seconds": 1.402551350009162,
+          "p95_seconds": 2.3443432000058237
+        }
+      },
+      "warm_retrieval_summary": {
+        "count": 60,
+        "median_seconds": 0.039415849998476915,
+        "p95_seconds": 0.04235129998414777
+      }
+    },
+    {
+      "stage": "引用和版本说明第一轮",
+      "run_created_at": "2026-10-20T00:39:05.939316+00:00",
+      "answer_code_sha256": "7eee49d4c92a993820d1dc3a7863c913b66555700c4eaaddef08af691d545633",
+      "agent_code_sha256": "ea81f7840547a14ef50cf21cd3e4f8edea7816cc4ef951079dd9707fc27ec8e5",
+      "api_success": 16,
+      "substantive_bracket_citations": 11,
+      "substantive_count": 11,
+      "generation_summary": {
+        "successful_api_requests": 16,
+        "failed_requests": 0,
+        "first_content": {
+          "count": 16,
+          "median_seconds": 1.347965650013066,
+          "p95_seconds": 2.3676833000208717
+        },
+        "generation": {
+          "count": 16,
+          "median_seconds": 1.7287860499927774,
+          "p95_seconds": 2.6830475000024308
+        },
+        "end_to_end": {
+          "count": 16,
+          "median_seconds": 1.772235450000153,
+          "p95_seconds": 2.7284719000163022
+        }
+      },
+      "warm_retrieval_summary": {
+        "count": 60,
+        "median_seconds": 0.03819804999511689,
+        "p95_seconds": 0.04245800001081079
+      }
+    },
+    {
+      "stage": "最终提示词",
+      "run_created_at": "2026-10-20T00:42:07.310854+00:00",
+      "answer_code_sha256": "8a679bf576c7ed100be6b5e6be0f7a67e1dd850d2c872056be6548b91c9c2ec0",
+      "agent_code_sha256": "ea81f7840547a14ef50cf21cd3e4f8edea7816cc4ef951079dd9707fc27ec8e5",
+      "api_success": 16,
+      "substantive_bracket_citations": 11,
+      "substantive_count": 11,
+      "generation_summary": {
+        "successful_api_requests": 16,
+        "failed_requests": 0,
+        "first_content": {
+          "count": 16,
+          "median_seconds": 1.334917799991672,
+          "p95_seconds": 2.4975736000051256
+        },
+        "generation": {
+          "count": 16,
+          "median_seconds": 1.68755035000504,
+          "p95_seconds": 3.145835800009081
+        },
+        "end_to_end": {
+          "count": 16,
+          "median_seconds": 1.7403707000048598,
+          "p95_seconds": 3.1901628999912646
+        }
+      },
+      "warm_retrieval_summary": {
+        "count": 60,
+        "median_seconds": 0.048872150015085936,
+        "p95_seconds": 0.06130560001474805
+      }
+    }
+  ],
+  "interrupted_run": {
+    "file": "results/acceptance_20261020T004018859007Z.json",
+    "status": "interrupted",
+    "error_type": "PermissionError",
+    "stage": "保存下一题的运行状态时原子替换失败；不纳入完整性能或成功率统计"
+  },
+  "development_candidates_unchanged": true,
+  "regression_candidates_unchanged": true,
+  "performance_conclusion": "保留各轮波动，不宣称显著提速；生成质量未全面超过旧模型。"
+}

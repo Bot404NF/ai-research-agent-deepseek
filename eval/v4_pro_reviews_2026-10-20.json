@@ -1,0 +1,417 @@
+{
+  "date": "2026-10-20",
+  "run_file": "eval/results/acceptance_20261020T004207367828Z.json",
+  "scope": "既有验收题集复用为回归集；协作流程逐题文本复核，非独立盲测或外部人工审核。",
+  "questions_sha256": "0d5a98522502b36e2eef716739a992857f70cfa8ded560bbbf4c8006c9fd2176",
+  "retrieval_review_method": "新旧运行24题的来源和候选原文按顺序逐条完全一致，沿用旧逐题证据判断；开发集20题亦完全一致。没有把锚点匹配当成答案正确。",
+  "retrieval_reviews": [
+    {
+      "id": "H01",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "题名及版权候选2列明陈树德与朱瑞熙。",
+      "supporting_ranks": [
+        2
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H02",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1明确记载2000年11月命名国际汽车城。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H03",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选3记载2000年9月两镇合并。",
+      "supporting_ranks": [
+        3
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H04",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选3支持初稿四卷、编入后三卷；其他候选有不同著录，需分别说明。",
+      "supporting_ranks": [
+        3
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H05",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1列明十二卷、张承先编纂和程攸熙增订。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H06",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1明确记载杨志达及康熙五十一年完稿。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H07",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选2版权记录同时提供出版社和ISBN。",
+      "supporting_ranks": [
+        2
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H08",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选3版权记录包含乡人民政府编和1994年8月第一版。",
+      "supporting_ranks": [
+        3
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H09",
+      "status": "已审核",
+      "verdict": "部分",
+      "reason": "候选1为总述，耕地14583.89亩；未召回指定地貌面积一节的14583.9亩，不自行合并不同章节、时期数值。",
+      "supporting_ranks": [],
+      "hit_at_4": false
+    },
+    {
+      "id": "H10",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1、3明确提供1984年10月7日及杨浦区归属。",
+      "supporting_ranks": [
+        1,
+        3
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H11",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选2题名及版权明确列出两位主编。",
+      "supporting_ranks": [
+        2
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H12",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选2明确同时包含三派和本书以中派为主。",
+      "supporting_ranks": [
+        2
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H13",
+      "status": "已审核",
+      "verdict": "部分",
+      "reason": "候选为后记、出版信息及导言前半，缺少初稿和修订定稿年份。",
+      "supporting_ranks": [],
+      "hit_at_4": false
+    },
+    {
+      "id": "H14",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1同时包含两位主编及中国戏剧出版社。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H15",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1委员会名录明确为袁雪芬。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H16",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1明确包含1997年12月第1版和第1次印刷。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H17",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1列明吴贵芳及1982年12月第一版。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H18",
+      "status": "已审核",
+      "verdict": "充分",
+      "reason": "候选1青龙镇与青龙塔正文同时记载七级和报德寺塔。",
+      "supporting_ranks": [
+        1
+      ],
+      "hit_at_4": true
+    },
+    {
+      "id": "H19",
+      "status": "已审核",
+      "verdict": "部分",
+      "reason": "候选1给出1985年03月，但缺少长春邮电学院印刷厂。",
+      "supporting_ranks": [],
+      "hit_at_4": false
+    },
+    {
+      "id": "H20",
+      "status": "已审核",
+      "verdict": "无关",
+      "reason": "候选主要为其他县志的编纂者、序和编纂始末，没有两篇述略的执笔人。",
+      "supporting_ranks": [],
+      "hit_at_4": false
+    },
+    {
+      "id": "N01",
+      "status": "已审核",
+      "retrieval_verdict": "无充分证据",
+      "reason": "合成唯一实体未在源Markdown中出现，候选均不支持所问实体。",
+      "retrieval_returned_irrelevant": true
+    },
+    {
+      "id": "N02",
+      "status": "已审核",
+      "retrieval_verdict": "无充分证据",
+      "reason": "合成唯一实体未在源Markdown中出现，候选均不支持所问实体。",
+      "retrieval_returned_irrelevant": true
+    },
+    {
+      "id": "N03",
+      "status": "已审核",
+      "retrieval_verdict": "无充分证据",
+      "reason": "合成唯一实体未在源Markdown中出现，候选均不支持所问实体。",
+      "retrieval_returned_irrelevant": true
+    },
+    {
+      "id": "N04",
+      "status": "已审核",
+      "retrieval_verdict": "无充分证据",
+      "reason": "合成唯一实体未在源Markdown中出现，候选均不支持所问实体。",
+      "retrieval_returned_irrelevant": true
+    }
+  ],
+  "answer_reviews": [
+    {
+      "id": "H01",
+      "verdict": "正确",
+      "task_answer_correct": true,
+      "reason": "核对本轮原始回答、固定参考答案与候选证据，核心答案一致且有有效标签指向支持证据。包含朱瑞熙和陈树德；另述其他整理本。不同版本的判断仍属基于出版著录的解释，不代表扫描原件已核验。",
+      "cited_labels": [
+        "S2",
+        "S3"
+      ],
+      "invalid_labels": []
+    },
+    {
+      "id": "H02",
+      "verdict": "正确",
+      "task_answer_correct": true,
+      "reason": "核对本轮原始回答、固定参考答案与候选证据，核心答案一致且有有效标签指向支持证据。",
+      "cited_labels": [
+        "S1"
+      ],
+      "invalid_labels": []
+    },
+    {
+      "id": "H03",
+      "verdict": "正确",
+      "task_answer_correct": true,
+      "reason": "核对本轮原始回答、固定参考答案与候选证据，核心答案一致且有有效标签指向支持证据。",
+      "cited_labels": [
+        "S3"
+      ],
+      "invalid_labels": []
+    },
+    {
+      "id": "H04",
+      "verdict": "正确",
+      "task_answer_correct": true,
+      "reason": "核对本轮原始回答、固定参考答案与候选证据，核心答案一致且有有效标签指向支持证据。",
+      "cited_labels": [
+        "S3",
+        "S4"
+      ],
+      "invalid_labels": []
+    },
+    {
+      "id": "H05",
+      "verdict": "正确",
+      "task_answer_correct": true,
+      "reason": "核对本轮原始回答、固定参考答案与候选证据，核心答案一致且有有效标签指向支持证据。",
+      "cited_labels": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "invalid_labels": []
+    },
+    {
+      "id": "H06",
+      "verdict": "正确",
+      "task_answer_correct": true,
+      "reason": "核对本轮原始回答、固定参考答案与候选证据，核心答案一致且有有效标签指向支持证据。",
+      "cited_labels": [
+        "S1"
+      ],
+      "invalid_labels": []
+    },
+    {
+      "id": "H07",
+      "verdict": "正确",
+      "task_answer_correct": true,
+      "reason": "核对本轮原始回答、固定参考答案与候选证据，核心答案一致且有有效标签指向支持证据。",
+      "cited_labels": [
+        "S2"
+      ],
+      "invalid_labels": []
+    },
+    {
+      "id": "H08",
+      "verdict": "部分",
+      "task_answer_correct": false,
+      "reason": "第一版时间正确，但将编修组作为编写机构，未给出参考答案要求的版权页署名“张桥乡人民政府编”；不能算严格正确。引用可支持实际编修组这一事实。",
+      "cited_labels": [
+        "S1",
+        "S3"
+      ],
+      "invalid_labels": []
+    },
+    {
+      "id": "H09",
+      "verdict": "合理拒答",
+      "task_answer_correct": false,
+      "reason": "候选未包含指定地貌面积章节，明确拒绝混用其他章节、时期和单位的数值，拒答合理。",
+      "cited_labels": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "invalid_labels": []
+    },
+    {
+      "id": "H10",
+      "verdict": "正确",
+      "task_answer_correct": true,
+      "reason": "核对本轮原始回答、固定参考答案与候选证据，核心答案一致且有有效标签指向支持证据。",
+      "cited_labels": [
+        "S1",
+        "S3"
+      ],
+      "invalid_labels": []
+    },
+    {
+      "id": "H11",
+      "verdict": "正确",
+      "task_answer_correct": true,
+      "reason": "核对本轮原始回答、固定参考答案与候选证据，核心答案一致且有有效标签指向支持证据。",
+      "cited_labels": [
+        "S1",
+        "S2"
+      ],
+      "invalid_labels": []
+    },
+    {
+      "id": "H12",
+      "verdict": "正确",
+      "task_answer_correct": true,
+      "reason": "核对本轮原始回答、固定参考答案与候选证据，核心答案一致且有有效标签指向支持证据。",
+      "cited_labels": [
+        "S1",
+        "S2"
+      ],
+      "invalid_labels": []
+    },
+    {
+      "id": "N01",
+      "verdict": "合理拒答",
+      "task_answer_correct": null,
+      "reason": "明确说明所给证据不含该合成实体及所问属性，没有编造目标答案。",
+      "cited_labels": [],
+      "invalid_labels": []
+    },
+    {
+      "id": "N02",
+      "verdict": "合理拒答",
+      "task_answer_correct": null,
+      "reason": "明确说明所给证据不含该合成实体及所问属性，没有编造目标答案。",
+      "cited_labels": [],
+      "invalid_labels": []
+    },
+    {
+      "id": "N03",
+      "verdict": "合理拒答",
+      "task_answer_correct": null,
+      "reason": "明确说明所给证据不含该合成实体及所问属性，没有编造目标答案。",
+      "cited_labels": [],
+      "invalid_labels": []
+    },
+    {
+      "id": "N04",
+      "verdict": "合理拒答",
+      "task_answer_correct": null,
+      "reason": "明确说明所给证据不含该合成实体及所问属性，没有编造目标答案。",
+      "cited_labels": [
+        "S1",
+        "S2",
+        "S3",
+        "S4"
+      ],
+      "invalid_labels": []
+    }
+  ],
+  "summary": {
+    "development_hit_at_4": "14/20",
+    "regression_hit_at_4": "16/20",
+    "answerable_core_correct": "10/12",
+    "answerable_partial": "1/12",
+    "answerable_appropriate_abstention": "1/12",
+    "synthetic_abstention": "4/4",
+    "substantive_answers_with_valid_bracket_citation": "11/11",
+    "invalid_labels": 0,
+    "api_successes": "16/16"
+  },
+  "limitations": [
+    "H08把实际编修组与版权页署名混同，仍未解决。",
+    "H09缺少指定章节证据，不能靠升级生成模型弥补。",
+    "4道无答案题均返回非空候选，阈值仍不能可靠识别无答案。",
+    "有合法标签不等于逐句语义引用准确；只核对核心答案和所指向候选。",
+    "题集已被查看并用于提示词优化，不能再称为本轮独立验收。"
+  ]
+}

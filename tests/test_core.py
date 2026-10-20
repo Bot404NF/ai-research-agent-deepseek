@@ -59,3 +59,10 @@ def test_invalid_chunk_configuration_raises(monkeypatch: pytest.MonkeyPatch) -> 
 def test_default_milvus_port_matches_compose(monkeypatch):
     monkeypatch.delenv("MILVUS_URI", raising=False)
     assert get_settings().milvus_uri == "http://localhost:19531"
+
+
+def test_default_chat_model_and_environment_override(monkeypatch):
+    monkeypatch.delenv("DEEPSEEK_CHAT_MODEL", raising=False)
+    assert get_settings().chat_model == "deepseek-v4-pro"
+    monkeypatch.setenv("DEEPSEEK_CHAT_MODEL", "custom-model")
+    assert get_settings().chat_model == "custom-model"

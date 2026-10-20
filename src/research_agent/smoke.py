@@ -19,7 +19,7 @@ def main() -> None:
     directory = PROJECT_ROOT / "eval/runtime" / run_id
     settings = replace(get_settings(), conversation_dir=directory, web_search_enabled=False)
     report = {"created_at": datetime.now(timezone.utc).isoformat(),
-              "scope": "本机HTTP和完整流式代理；禁用联网；独立测试会话；非浏览器视觉验收", "checks": [], "chat": []}
+              "scope": "本机HTTP和完整流式代理；禁用联网；独立测试会话；非浏览器视觉验收", "chat_model": settings.chat_model, "checks": [], "chat": []}
     destination = PROJECT_ROOT / "eval/results" / f"smoke_{run_id}.json"
     server = ThreadingHTTPServer(("127.0.0.1", 0), create_handler(settings))
     worker = threading.Thread(target=server.serve_forever, daemon=True)
@@ -66,7 +66,8 @@ def main() -> None:
                             first = time.perf_counter() - started
                 with urlopen(origin + "/api/conversations/" + session, timeout=10) as response:
                     turns = json.loads(response.read())["turns"]
-                item.update(status="ok", events=events, first_content_seconds=first,
+                passed = first is not None and not any(e["kind"] == "error" for e in events) and bool(turns and turns[-1]["user"] == question)
+                item.update(status="ok" if passed else "failed", events=events, first_content_seconds=first,
                             elapsed_seconds=time.perf_counter() - started, saved_turns=len(turns),
                             persisted=bool(turns and turns[-1]["user"] == question))
             except Exception as exc:

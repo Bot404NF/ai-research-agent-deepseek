@@ -6,9 +6,9 @@
 
 项目已接入 Milvus，并已加入用户提供的上海地方志资料集。资料目录及来源记录约定见 [资料目录说明](data/documents/README.md)；现有Markdown可能存在识别错字和重复，尚未逐页核对扫描原件。
 
-2026-10-19 已完成小样本验收：独立20题 Hit@4 为16/20；60次预热后检索中位数41 ms、P95 49 ms。16次真实证据问答请求成功，4道合成无答案题均拒答。数据仅代表本次单用户样本，不等同于全库准确率或并发能力。
+2026-10-20 已切换 DeepSeek-V4-Pro 并重跑小样本回归：开发集 Hit@4 为14/20，原验收集复用回归为16/20；16次真实生成全部成功，12道可回答题中10道核心答案一致、1道部分、1道合理拒答，4道合成无答案题均拒答。60次预热检索中位数49 ms，检索加单次回答中位数1.74 s。题集已参与提示词优化，这些结果不代表新独立验收、全库准确率或并发能力。
 
-- [完整验收与性能口径](docs/acceptance-2026-10-19.md)
+- [当前模型回归与性能口径](docs/acceptance-2026-10-20.md)
 - [项目介绍、架构与简历素材](docs/resume-project.md)
 - [评估入口与复现方法](eval/README.md)
 
@@ -30,7 +30,7 @@ uv sync
 Copy-Item .env.example .env
 ```
 
-编辑 `.env`，设置 `DEEPSEEK_API_KEY`。默认聊天模型为 `deepseek-flash`，向量模型为本地 `BAAI/bge-m3`；`BGE_M3_DEVICE=auto` 会优先使用可用的 NVIDIA GPU，否则回退到 CPU。本项目 Milvus 服务地址默认为 `http://localhost:19531`，可通过 `MILVUS_URI` 修改。
+编辑 `.env`，设置 `DEEPSEEK_API_KEY`。默认聊天模型为 `deepseek-v4-pro`，向量模型为本地 `BAAI/bge-m3`；`BGE_M3_DEVICE=auto` 会优先使用可用的 NVIDIA GPU，否则回退到 CPU。本项目 Milvus 服务地址默认为 `http://localhost:19531`，可通过 `MILVUS_URI` 修改。
 
 ## 启动 Milvus
 
@@ -183,7 +183,7 @@ $env:PYTHONPATH = 'src'
 
 2026-10-18 的检查范围、改动及限制见 [项目检查记录](docs/project-review-2026-10-18.md)。
 
-2026-10-19 的检索、回答、引用、性能及HTTP检查见 [验收记录](docs/acceptance-2026-10-19.md)。指代性追问会补充最近一轮用户问题用于检索；历史来源标签不会直接传给下一轮模型。模型请求设置60秒超时与最多1次重试；这不是整轮代理的总时限。
+当前模型的检索、回答、引用、性能及HTTP检查见 [V4-Pro回归记录](docs/acceptance-2026-10-20.md)，旧模型数据保留在 [2026-10-19验收记录](docs/acceptance-2026-10-19.md)。指代性追问会补充最近一轮用户问题用于检索；历史来源标签不会直接传给下一轮模型。模型请求设置60秒超时与最多1次重试；这不是整轮代理的总时限。
 
 ## 说明
 

@@ -142,3 +142,42 @@ def test_shared_collection_statistics_are_requested_once(tmp_path, monkeypatch):
     catalog = rag_updates.database_details(settings)
     assert counts == [settings.additions_collection_name]
     assert [item["chunks"] for item in catalog if item["id"] != "initial"] == [12, 12]
+
+
+def test_atomic_replace_retries_temporary_windows_lock(tmp_path, monkeypatch):
+    path = tmp_path / "state.json"
+    write_json_atomic(path, {"value": "原值"})
+    original = Path.replace
+    calls = []
+
+    def replace(temporary, destination):
+        calls.append(destination)
+        if len(calls) < 3:
+            assert json.loads(path.read_text(encoding="utf-8")) == {"value": "原值"}
+            raise PermissionError("模拟短暂占用")
+        return original(temporary, destination)
+
+    monkeypatch.setattr(Path, "replace", replace)
+    monkeypatch.setattr("research_agent.storage.time.sleep", lambda _: None)
+    write_json_atomic(path, {"value": "新值"})
+    assert len(calls) == 3
+    assert json.loads(path.read_text(encoding="utf-8")) == {"value": "新值"}
+    assert list(tmp_path.glob("*.tmp")) == []
+
+
+def test_atomic_replace_stops_retrying_permanent_permission_error(tmp_path, monkeypatch):
+    path = tmp_path / "state.json"
+    write_json_atomic(path, {"value": "原值"})
+    calls = []
+
+    def fail(*_):
+        calls.append(1)
+        raise PermissionError("模拟永久拒绝")
+
+    monkeypatch.setattr(Path, "replace", fail)
+    monkeypatch.setattr("research_agent.storage.time.sleep", lambda _: None)
+    with pytest.raises(PermissionError):
+        write_json_atomic(path, {"value": "新值"})
+    assert len(calls) == 5
+    assert json.loads(path.read_text(encoding="utf-8")) == {"value": "原值"}
+    assert list(tmp_path.glob("*.tmp")) == []

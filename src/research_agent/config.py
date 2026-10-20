@@ -51,7 +51,7 @@ def get_settings() -> Settings:
         raise ValueError("ADDITIONS_COLLECTION_NAME 必须与 COLLECTION_NAME 不同。")
     return Settings(
         api_key=os.getenv("DEEPSEEK_API_KEY", ""),
-        chat_model=os.getenv("DEEPSEEK_CHAT_MODEL", "deepseek-flash"),
+        chat_model=os.getenv("DEEPSEEK_CHAT_MODEL", "deepseek-v4-pro"),
         embedding_model=os.getenv("BGE_M3_MODEL", "BAAI/bge-m3"),
         data_dir=data_dir,
         milvus_uri=os.getenv("MILVUS_URI", "http://localhost:19531"),

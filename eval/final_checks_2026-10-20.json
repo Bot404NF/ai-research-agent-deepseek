@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-20",
+  "chat_model": "deepseek-v4-pro",
+  "offline_tests": {
+    "command": ".venv/Scripts/python.exe -m pytest --basetemp=.pytest-tmp-v4-pro-final",
+    "passed": 52,
+    "deselected": 1,
+    "exit_code": 0,
+    "seconds": 4.18
+  },
+  "embedding_integration": {
+    "passed": 1,
+    "expected_dimension": 1024,
+    "exit_code": 0,
+    "seconds": 7.6
+  },
+  "acceptance_run": "eval/results/acceptance_20261020T004207367828Z.json",
+  "development_run": "eval/results/20261020T004035708375Z.json",
+  "http_run": "eval/results/smoke_20261020T004246437837Z.json",
+  "http_checks_passed": 6,
+  "http_chat_passed": 3,
+  "production_thinking": "disabled",
+  "git_diff_check": "passed",
+  "live_response_models": [
+    "deepseek-v4-pro"
+  ]
+}

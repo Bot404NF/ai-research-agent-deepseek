@@ -71,6 +71,9 @@ def main() -> None:
         "created_at": datetime.now(timezone.utc).isoformat(),
         "scope": "原始集合、单用户、顺序执行；生成使用answer.py证据提示词，非网页完整代理链路",
         "questions_sha256": digest(questions_path),
+        "answer_code_sha256": digest(PROJECT_ROOT / "src/research_agent/answer.py"),
+        "agent_code_sha256": digest(PROJECT_ROOT / "src/research_agent/agent.py"),
+        "generation_thinking": "disabled",
         "retrieval_code_sha256": manifest["retrieval_code_sha256"],
         "environment": {"python": platform.python_version(), "platform": platform.platform(),
                         "packages": {name: version(name) for name in
@@ -112,7 +115,7 @@ def main() -> None:
         from research_agent.answer import SYSTEM_PROMPT, CITATION_PATTERN, render_context, validate_citation_labels
 
         model = ChatOpenAI(model=settings.chat_model, api_key=settings.api_key, base_url=settings.base_url,
-                           temperature=0, max_tokens=700, timeout=60, max_retries=0,
+                           temperature=0, max_tokens=700, timeout=60, max_retries=0, stream_usage=True,
                            extra_body={"thinking": {"type": "disabled"}})
         for row in report["results"]:
             if row["id"] not in manifest["answer_sample"]:
@@ -129,6 +132,7 @@ def main() -> None:
                 raw = ""
                 first_token = None
                 finish_reason = None
+                response_model = None
                 usage = None
                 if evidence:
                     messages = [SystemMessage(content=SYSTEM_PROMPT), HumanMessage(
@@ -138,6 +142,7 @@ def main() -> None:
                             if first_token is None:
                                 first_token = time.perf_counter() - generation_started
                             raw += chunk.content
+                        response_model = chunk.response_metadata.get("model_name", response_model)
                         finish_reason = chunk.response_metadata.get("finish_reason", finish_reason)
                         usage = chunk.usage_metadata or usage
                 else:
@@ -150,7 +155,7 @@ def main() -> None:
                             end_to_end_seconds=time.perf_counter() - started,
                             used_api=bool(evidence), invalid_labels=list(invalid),
                             cited_labels=sorted(set(CITATION_PATTERN.findall(raw))),
-                            finish_reason=finish_reason, usage=usage)
+                            finish_reason=finish_reason, response_model=response_model, usage=usage)
             except Exception as exc:
                 # 只记录异常类型，避免连接诊断中意外保存密钥或请求头。
                 item.update(status="error", error_type=type(exc).__name__, elapsed_seconds=time.perf_counter() - started)
