@@ -1,0 +1,36 @@
+{
+  "checked_at_utc": "2026-10-29T13:22:30.103261+00:00",
+  "workflow_tests": {
+    "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/test_workflow.py --basetemp=.pytest-research-acceptance-20261030-tmp",
+    "result": "19 passed in 3.93s",
+    "uses_real_model": false
+  },
+  "lint": {
+    "command": "uvx --from ruff==0.17.2 ruff check eval/run_research_acceptance.py",
+    "exit_code": 0
+  },
+  "format": {
+    "command": "uvx --from ruff==0.17.2 ruff format --check eval/run_research_acceptance.py",
+    "exit_code": 0
+  },
+  "git_diff_check": {
+    "command": "git diff --check",
+    "exit_code": 0
+  },
+  "report_hash_unchanged": true,
+  "persisted_task_matches_final_snapshot": true,
+  "source_hashes_unchanged_since_recording": true,
+  "source_verbatim_matches": 12,
+  "executed_runner_matches_frozen_hash": true,
+  "runner_note": "实际运行后仅对入口做Ruff格式调整；原始版本保留于executed_runner.py，匹配manifest中的执行前摘要。产品代码摘要一致。",
+  "credential_literal_scan": "未发现当前配置API密钥完整字面值；未输出密钥",
+  "relative_links_checked": 12,
+  "boundaries": [
+    "未运行全量测试",
+    "未核对扫描图像",
+    "未浏览器视觉验收",
+    "未真实测试运行中断恢复和取消",
+    "未查询账单",
+    "未修复本轮发现的产品质量缺陷"
+  ]
+}

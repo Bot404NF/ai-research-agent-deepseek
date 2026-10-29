@@ -1,0 +1,16 @@
+{
+  "status": "completed",
+  "allow_web": false,
+  "steps_succeeded": true,
+  "search_calls": 0,
+  "web_evidence": 0,
+  "invalid_citations": [],
+  "download_matches": true,
+  "reopen_matches": true,
+  "source_sha256": {
+    "上海地方志资料集/上海方志通考/上海方志通考.md": "ce63749183032f8771b31cdaa0d8dd938fbbe6f430d570f8a9cb8907d4de24ca",
+    "上海地方志资料集/安亭志/安亭志.md": "91c769df340ee94fc9e09541a840049fa44f7b254b8e386f10eaefad8280198f",
+    "上海地方志资料集/上海方志提要/上海方志提要.md": "35f6604fe5f8fed4b67f4e9888651302e3ba6bf1bf52cb26463de590a7225e57"
+  },
+  "report_sha256": "51ad2fa66cb409a1e12c4e3d33db6064e8ace09ba6b0d6232be861121326a24b"
+}

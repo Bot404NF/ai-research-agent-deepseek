@@ -1,0 +1,9 @@
+{
+  "stage": "本机HTTP连接",
+  "result": "沙箱权限阻止运行",
+  "error_type": "PermissionError",
+  "windows_error": 10013,
+  "model_calls": 0,
+  "retrieval_calls": 0,
+  "note": "调用创建任务HTTP接口前套接字连接失败，未进入模型调用。获得沙箱外执行许可后改用独立的research_20261030_anting_live目录，未覆盖本次记录。"
+}

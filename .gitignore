@@ -19,6 +19,7 @@ data/.rag_databases.json
 data/.rag_deleted_directories.json
 data/.*.tmp
 data/conversations/
+data/research_tasks/
 data/documents/*
 !data/documents/README.md
 volumes/

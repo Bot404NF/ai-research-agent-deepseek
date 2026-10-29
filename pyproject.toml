@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "ai-research-agent"
 version = "0.1.0"
-description = "本地文档检索增强生成、联网搜索与来源引用"
+description = "可确认计划、分题取证、恢复执行与报告汇总的专题研究工作流"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [
@@ -37,6 +37,8 @@ packages = ["src/research_agent"]
 
 [tool.hatch.build.targets.wheel.force-include]
 "src/research_agent/static/index.html" = "research_agent/static/index.html"
+"src/research_agent/static/workflow.js" = "research_agent/static/workflow.js"
+"src/research_agent/static/workflow.css" = "research_agent/static/workflow.css"
 
 [tool.ruff]
 line-length = 100

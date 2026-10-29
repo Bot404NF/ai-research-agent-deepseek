@@ -1,0 +1,54 @@
+{
+  "model_calls": 6,
+  "model_errors": 0,
+  "models": [
+    "deepseek-v4-pro",
+    "deepseek-v4-pro",
+    "deepseek-v4-pro",
+    "deepseek-v4-pro",
+    "deepseek-v4-pro",
+    "deepseek-v4-pro"
+  ],
+  "finish_reasons": [
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "stop"
+  ],
+  "tokens": {
+    "input_tokens": 33224,
+    "output_tokens": 10754,
+    "total_tokens": 43978
+  },
+  "model_seconds": [
+    3.464,
+    12.955,
+    10.819,
+    18.123,
+    32.966,
+    33.611
+  ],
+  "retrieval_seconds": [
+    9.78,
+    0.092,
+    0.074
+  ],
+  "stage_seconds": {
+    "plan": 3.499,
+    "execute": 118.569
+  },
+  "evidence_count": 12,
+  "unique_evidence_count": 7,
+  "sources": {
+    "上海地方志资料集/上海方志通考/上海方志通考.md": 2,
+    "上海地方志资料集/安亭志/安亭志.md": 6,
+    "上海地方志资料集/上海方志提要/上海方志提要.md": 4
+  },
+  "http_statuses": {
+    "202": 1,
+    "200": 6,
+    "409": 2
+  }
+}

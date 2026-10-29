@@ -1,0 +1,31 @@
+{
+  "started_at": "2026-10-29T13:15:02.903153+00:00",
+  "goal": "研究《安亭志》的编纂、版本与史料价值，仅依据本地上海地方志资料，不联网。拆为恰好3个子问题：一、清代编纂者及成书刊刻沿革；二、现代整理本的标点者、出版社和出版时间，分别记录不同版本，不能合并；三、内容体例与史料价值，给出证据支持的具体例子及使用局限。不讨论当代安亭发展，不以外部常识补足缺口。",
+  "allow_web": false,
+  "settings": {
+    "chat_model": "deepseek-v4-pro",
+    "embedding_model": "BAAI/bge-m3",
+    "collection_name": "research_docs",
+    "additions_collection_name": "research_docs_additions",
+    "top_k": 4,
+    "rag_relevance_threshold": 0.55
+  },
+  "code_sha256": {
+    "src/research_agent/workflow.py": "d1d8e7c2b6b597ddc0ffd2858ae685509ae0cb05ec33fd0df45bb11d8c1da2c1",
+    "src/research_agent/retrieval.py": "61a1df2e0e64919397a1bf415d3fee2f9157a902313d04bafa860682a05b4777",
+    "src/research_agent/agent.py": "ea81f7840547a14ef50cf21cd3e4f8edea7816cc4ef951079dd9707fc27ec8e5",
+    "src/research_agent/web_server.py": "9aa5f838119f61e8abb75ea41174f0766dd97980563eb5dd14d177fc90b20b5b",
+    "eval/run_research_acceptance.py": "5fbd0aecdbdb312684a00b4ef9ef7363c83840af320f13528d99d4c8f85b8ffe"
+  },
+  "criteria": [
+    "真实模型生成3题计划，经保存并确认后执行；步骤完成且无错误。",
+    "每题执行真实本地检索，保存原文、来源、分数及源文件摘要。",
+    "联网关闭，搜索函数调用数为0，证据无W标签。",
+    "三个研究维度分别判断充分、部分或不足；不以相关性分数代替审核。",
+    "核心事实与所引证据一致，版本差异分别呈现，缺口明确说明。",
+    "引用标签均存在；单独审核引用语义，不把格式合法视为事实通过。",
+    "真实HTTP下载内容与持久化报告逐字一致，重开任务无额外取证。"
+  ],
+  "boundary": "已查看相关原文和历史题，属单案例验收；不测独立准确率、浏览器视觉、取消或运行中恢复。",
+  "task_id": "75da14acc94948fab64e01f9f5bb219d"
+}

@@ -1,0 +1,33 @@
+{
+  "access_date": "2026-10-30",
+  "source_type": "用户已有本地Markdown资料；本次未访问任何来源网站",
+  "verification": "按源Markdown题名和版权信息补录，未核对扫描图片或出版机构网站。出版时间不是史实核实截止时间。",
+  "sources": [
+    {
+      "source": "上海地方志资料集/安亭志/安亭志.md",
+      "website": "本地资料，原下载网站未记录",
+      "publisher": "上海古籍出版社",
+      "published_date": "2003-07",
+      "applicability": "江南名镇志、陈树德编纂、朱瑞熙标点本；不能将其版权信息移用于王健本或1990年新编镇志",
+      "metadata_lines": [1, 48]
+    },
+    {
+      "source": "上海地方志资料集/上海方志提要/上海方志提要.md",
+      "website": "本地资料，原下载网站未记录",
+      "issuing_body": "上海市地方志办公室编",
+      "publisher": "上海社会科学院出版社",
+      "published_date": "2005-07",
+      "applicability": "该书对清代安亭志及2003年整理本的二手著录，不代表现代馆藏现状",
+      "metadata_lines": [1, 45]
+    },
+    {
+      "source": "上海地方志资料集/上海方志通考/上海方志通考.md",
+      "website": "本地资料，原下载网站未记录",
+      "authors": "陈金林、徐恭时",
+      "publisher": "上海辞书出版社",
+      "published_date": "2007-12",
+      "applicability": "9.38为清代安亭志，9.39为1990年新编安亭志；本轮检索取得的是9.39，9.38仅用于验收后补查",
+      "metadata_lines": [27, 40]
+    }
+  ]
+}

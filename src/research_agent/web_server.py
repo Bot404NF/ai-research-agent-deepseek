@@ -15,8 +15,16 @@ from pymilvus import MilvusClient
 from research_agent.agent import stream_answer_turn
 from research_agent.config import Settings
 from research_agent.conversation import ConversationStore
-from research_agent.rag_updates import MAX_FILE_SIZE, add_file_to_rag, create_database, database_details, delete_database, list_databases, list_incoming_files
-
+from research_agent.rag_updates import (
+    MAX_FILE_SIZE,
+    add_file_to_rag,
+    create_database,
+    database_details,
+    delete_database,
+    list_databases,
+    list_incoming_files,
+)
+from research_agent.workflow import ResearchWorkflow, WorkflowConflict
 
 STATIC_PAGE = Path(__file__).parent / "static" / "index.html"
 MAX_UPLOAD_REQUEST_SIZE = MAX_FILE_SIZE + 1024 * 1024
@@ -42,11 +50,12 @@ def _knowledge_status(settings: Settings) -> dict:
                 "old": settings.collection_name in collections,
                 "databases": any(
                     item["collection"] in collections
-                    for item in databases if item["id"] != "initial"
+                    for item in databases
+                    if item["id"] != "initial"
                 ),
             },
         }
-    except Exception as exc:
+    except Exception as exc:  # noqa: BLE001 - 隔离第三方连接错误，避免泄露响应正文
         return {
             "connected": False,
             "uri": settings.milvus_uri,
@@ -101,7 +110,9 @@ def _uploaded_parts(body: bytes, content_type: str) -> list[tuple[str, bytes]]:
     return parts
 
 
-def create_handler(settings: Settings):
+def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None):
+    research = workflow or ResearchWorkflow(settings)
+
     class ResearchAgentHandler(BaseHTTPRequestHandler):
         server_version = "ResearchAgentDemo/1.0"
 
@@ -130,12 +141,23 @@ def create_handler(settings: Settings):
             except (json.JSONDecodeError, UnicodeDecodeError) as exc:
                 raise ValueError("请求内容不是有效 JSON。") from exc
             if not isinstance(data, dict):
-                raise ValueError("请求内容格式无效。")
+                raise ValueError("请求内容格式无效。")  # noqa: TRY004 - 保留 HTTP 校验契约
             return data
 
         def do_GET(self) -> None:
             path = urlparse(self.path).path
-            if path == "/":
+            if path == "/api/research/tasks" or path.startswith("/api/research/tasks/"):
+                self._research_get(path)
+            elif path in {"/workflow.js", "/workflow.css"}:
+                resource = STATIC_PAGE.parent / path.removeprefix("/")
+                body = resource.read_bytes()
+                self.send_response(200)
+                mime = "text/javascript" if path.endswith(".js") else "text/css"
+                self.send_header("Content-Type", mime + "; charset=utf-8")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+            elif path == "/":
                 try:
                     body = STATIC_PAGE.read_bytes()
                 except OSError:
@@ -175,11 +197,15 @@ def create_handler(settings: Settings):
 
         def do_POST(self) -> None:
             origin = self.headers.get("Origin")
-            if origin and origin.rstrip("/") != f"http://{self.headers.get('Host', '')}".rstrip("/"):
+            if origin and origin.rstrip("/") != f"http://{self.headers.get('Host', '')}".rstrip(
+                "/"
+            ):
                 self._send_json(403, {"error": "只接受来自本地演示网页的请求。"})
                 return
             path = urlparse(self.path).path
-            if path == "/api/chat":
+            if path == "/api/research/tasks" or path.startswith("/api/research/tasks/"):
+                self._research_post(path)
+            elif path == "/api/chat":
                 self._chat()
             elif path == "/api/upload":
                 self._upload()
@@ -190,9 +216,73 @@ def create_handler(settings: Settings):
             else:
                 self.send_error(404)
 
+        def _research_get(self, path: str) -> None:
+            try:
+                if path == "/api/research/tasks":
+                    self._send_json(200, {"tasks": research.list_tasks()})
+                    return
+                parts = path.removeprefix("/api/research/tasks/").split("/")
+                if len(parts) > 2 or (len(parts) == 2 and parts[1] != "report"):
+                    self._send_json(404, {"error": "研究接口不存在。"})
+                    return
+                task = research.get(parts[0])
+                if len(parts) == 1:
+                    self._send_json(200, task)
+                    return
+                if task["status"] != "completed":
+                    raise WorkflowConflict("报告尚未完成。")
+                body = task["report"].encode("utf-8")
+                self.send_response(200)
+                self.send_header("Content-Type", "text/markdown; charset=utf-8")
+                self.send_header(
+                    "Content-Disposition", f'attachment; filename="research-{task["id"]}.md"'
+                )
+                self.send_header("Content-Length", str(len(body)))
+                self.send_header("Cache-Control", "no-store")
+                self.end_headers()
+                self.wfile.write(body)
+            except FileNotFoundError:
+                self._send_json(404, {"error": "研究任务不存在。"})
+            except WorkflowConflict as exc:
+                self._send_json(409, {"error": str(exc)})
+            except ValueError as exc:
+                self._send_json(400, {"error": str(exc)})
+            except OSError:
+                self._send_json(500, {"error": "研究任务读取失败，请检查本地存储。"})
+
+        def _research_post(self, path: str) -> None:
+            try:
+                payload = self._read_json()
+                if path == "/api/research/tasks":
+                    task = research.create(payload.get("goal"), payload.get("allow_web", False))
+                    self._send_json(202, task)
+                    return
+                parts = path.removeprefix("/api/research/tasks/").split("/")
+                if len(parts) != 2:
+                    self._send_json(404, {"error": "研究接口不存在。"})
+                    return
+                task_id, action = parts
+                if action == "plan":
+                    task = research.update_plan(
+                        task_id, payload.get("plan"), payload.get("allow_web", False)
+                    )
+                else:
+                    task = research.action(task_id, action, payload)
+                self._send_json(200, task)
+            except FileNotFoundError:
+                self._send_json(404, {"error": "研究任务不存在。"})
+            except WorkflowConflict as exc:
+                self._send_json(409, {"error": str(exc)})
+            except ValueError as exc:
+                self._send_json(400, {"error": str(exc)})
+            except OSError:
+                self._send_json(500, {"error": "研究任务保存失败，请检查本地存储。"})
+
         def do_DELETE(self) -> None:
             origin = self.headers.get("Origin")
-            if origin and origin.rstrip("/") != f"http://{self.headers.get('Host', '')}".rstrip("/"):
+            if origin and origin.rstrip("/") != f"http://{self.headers.get('Host', '')}".rstrip(
+                "/"
+            ):
                 self._send_json(403, {"error": "只接受来自本地演示网页的请求。"})
                 return
             path = urlparse(self.path).path
@@ -223,8 +313,10 @@ def create_handler(settings: Settings):
                     self._send_json(200, {"deleted": True})
                 except ValueError as exc:
                     self._send_json(400, {"error": str(exc)})
-                except Exception as exc:
-                    self._send_json(500, {"error": f"删除目录失败（{type(exc).__name__}），目录记录已保留。"})
+                except Exception as exc:  # noqa: BLE001 - HTTP 边界隔离第三方错误
+                    self._send_json(
+                        500, {"error": f"删除目录失败（{type(exc).__name__}），目录记录已保留。"}
+                    )
                 return
             self.send_error(404)
 
@@ -239,8 +331,10 @@ def create_handler(settings: Settings):
                     raise ValueError("问题不能为空且不能超过 10000 个字符。")
                 if not isinstance(session_id, str) or not SESSION_PATTERN.fullmatch(session_id):
                     raise ValueError("会话 ID 格式无效，请刷新网页后重试。")
-                if not isinstance(allow_web_search, bool) or not isinstance(decline_web_search, bool):
-                    raise ValueError("联网搜索许可格式无效。")
+                if not isinstance(allow_web_search, bool) or not isinstance(
+                    decline_web_search, bool
+                ):
+                    raise ValueError("联网搜索许可格式无效。")  # noqa: TRY004
                 if allow_web_search and decline_web_search:
                     raise ValueError("联网搜索许可状态冲突。")
             except ValueError as exc:
@@ -274,9 +368,14 @@ def create_handler(settings: Settings):
                     self.wfile.flush()
             except (BrokenPipeError, ConnectionResetError):
                 return
-            except Exception as exc:
+            except Exception as exc:  # noqa: BLE001 - 流式 HTTP 边界必须发送受控错误
                 try:
-                    error = _json_bytes({"kind": "error", "message": f"本轮处理失败（{type(exc).__name__}）。请检查服务配置后重试。"})
+                    error = _json_bytes(
+                        {
+                            "kind": "error",
+                            "message": f"本轮处理失败（{type(exc).__name__}）。请检查服务配置后重试。",
+                        }
+                    )
                     self.wfile.write(b"data: " + error + b"\n\n")
                     self.wfile.flush()
                 except (BrokenPipeError, ConnectionResetError):
@@ -297,7 +396,11 @@ def create_handler(settings: Settings):
                 known_ids = {item["id"] for item in list_databases(settings)}
                 if database_id and database_id not in known_ids:
                     raise ValueError("所选资料库不存在。")
-                incoming = settings.data_dir.parent / "incoming" / database_id if database_id and database_id != "legacy-additions" else settings.data_dir.parent / "incoming"
+                incoming = (
+                    settings.data_dir.parent / "incoming" / database_id
+                    if database_id and database_id != "legacy-additions"
+                    else settings.data_dir.parent / "incoming"
+                )
                 total = 0
                 validated = []
                 for filename, payload in parts:
@@ -336,9 +439,14 @@ def create_handler(settings: Settings):
                 if data_version not in {"original", "supplement"}:
                     raise ValueError("资料标签无效。")
                 replace_hash = payload.get("replace_hash")
-                if replace_hash is not None and (not isinstance(replace_hash, str) or not re.fullmatch(r"[a-f0-9]{64}", replace_hash)):
+                if replace_hash is not None and (
+                    not isinstance(replace_hash, str)
+                    or not re.fullmatch(r"[a-f0-9]{64}", replace_hash)
+                ):
                     raise ValueError("更新文件标识无效，请刷新管理页后重试。")
-                result = add_file_to_rag(relative_path, settings, database_id, replace_hash, data_version)
+                result = add_file_to_rag(
+                    relative_path, settings, database_id, replace_hash, data_version
+                )
                 message = (
                     f"{result['source']} 已存在于当前新增资料索引（{result['chunks']} 个文本块）。"
                     if not result["added"]
@@ -349,15 +457,20 @@ def create_handler(settings: Settings):
                 self._send_json(200, {"added": result["added"], "message": message})
             except (ValueError, FileNotFoundError, RuntimeError) as exc:
                 self._send_json(400, {"error": str(exc)})
-            except Exception as exc:
-                self._send_json(500, {"error": f"索引操作未完成（{type(exc).__name__}）。旧索引保留；请查看索引状态后重试。"})
+            except Exception as exc:  # noqa: BLE001 - 索引失败不能透传上游敏感信息
+                self._send_json(
+                    500,
+                    {
+                        "error": f"索引操作未完成（{type(exc).__name__}）。旧索引保留；请查看索引状态后重试。"
+                    },
+                )
 
         def _create_database(self) -> None:
             try:
                 payload = self._read_json()
                 name = payload.get("name")
                 if not isinstance(name, str):
-                    raise ValueError("请填写资料库名称。")
+                    raise ValueError("请填写资料库名称。")  # noqa: TRY004
                 database = create_database(name, settings)
                 self._send_json(201, {"database": database})
             except (ValueError, OSError, json.JSONDecodeError) as exc:

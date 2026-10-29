@@ -1,0 +1,98 @@
+[
+  {
+    "label": "O1",
+    "source": "上海地方志资料集/上海方志通考/上海方志通考.md",
+    "verbatim_match": true,
+    "line_start": 6379,
+    "line_end": 6387,
+    "text_sha256": "a335525cef737d540b96b9d9ebd60ab426ef798a5b925b667349253ee44e57e7"
+  },
+  {
+    "label": "O2",
+    "source": "上海地方志资料集/安亭志/安亭志.md",
+    "verbatim_match": true,
+    "line_start": 58,
+    "line_end": 65,
+    "text_sha256": "790c0bdf4ac6d7df7a0e38ac03386b93d9a564d378a41d51795ca3287cd29823"
+  },
+  {
+    "label": "O3",
+    "source": "上海地方志资料集/安亭志/安亭志.md",
+    "verbatim_match": true,
+    "line_start": 73,
+    "line_end": 77,
+    "text_sha256": "9ad68cb84a08443653ebfae477aa2f075b1cd77ae93435f029767f87f14447c0"
+  },
+  {
+    "label": "O4",
+    "source": "上海地方志资料集/上海方志提要/上海方志提要.md",
+    "verbatim_match": true,
+    "line_start": 3515,
+    "line_end": 3515,
+    "text_sha256": "819e7ae3f16b0a15a8e9e7fc057f0311457807dcdc4dc210c104ecbc8771f05c"
+  },
+  {
+    "label": "O5",
+    "source": "上海地方志资料集/上海方志提要/上海方志提要.md",
+    "verbatim_match": true,
+    "line_start": 3515,
+    "line_end": 3515,
+    "text_sha256": "819e7ae3f16b0a15a8e9e7fc057f0311457807dcdc4dc210c104ecbc8771f05c"
+  },
+  {
+    "label": "O6",
+    "source": "上海地方志资料集/安亭志/安亭志.md",
+    "verbatim_match": true,
+    "line_start": 1,
+    "line_end": 48,
+    "text_sha256": "107e00e7ef8f23cdf40facc7a0c6d8188751782dc695c846d5594ae23b0e7f97"
+  },
+  {
+    "label": "O7",
+    "source": "上海地方志资料集/上海方志提要/上海方志提要.md",
+    "verbatim_match": true,
+    "line_start": 3529,
+    "line_end": 3531,
+    "text_sha256": "a815a700c4669ca466a0aa723abb8a0597a730adfcd4796a0a926b2c228c8ebf"
+  },
+  {
+    "label": "O8",
+    "source": "上海地方志资料集/安亭志/安亭志.md",
+    "verbatim_match": true,
+    "line_start": 91,
+    "line_end": 103,
+    "text_sha256": "d33f6f9064dba14585e277205cfa047f30cba3139db6491e916c6bb815224a9b"
+  },
+  {
+    "label": "O9",
+    "source": "上海地方志资料集/安亭志/安亭志.md",
+    "verbatim_match": true,
+    "line_start": 73,
+    "line_end": 77,
+    "text_sha256": "9ad68cb84a08443653ebfae477aa2f075b1cd77ae93435f029767f87f14447c0"
+  },
+  {
+    "label": "O10",
+    "source": "上海地方志资料集/上海方志通考/上海方志通考.md",
+    "verbatim_match": true,
+    "line_start": 6379,
+    "line_end": 6387,
+    "text_sha256": "a335525cef737d540b96b9d9ebd60ab426ef798a5b925b667349253ee44e57e7"
+  },
+  {
+    "label": "O11",
+    "source": "上海地方志资料集/安亭志/安亭志.md",
+    "verbatim_match": true,
+    "line_start": 1,
+    "line_end": 48,
+    "text_sha256": "107e00e7ef8f23cdf40facc7a0c6d8188751782dc695c846d5594ae23b0e7f97"
+  },
+  {
+    "label": "O12",
+    "source": "上海地方志资料集/上海方志提要/上海方志提要.md",
+    "verbatim_match": true,
+    "line_start": 3529,
+    "line_end": 3531,
+    "text_sha256": "a815a700c4669ca466a0aa723abb8a0597a730adfcd4796a0a926b2c228c8ebf"
+  }
+]
