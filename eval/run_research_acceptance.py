@@ -95,7 +95,7 @@ def main():
         trace.append(event)
         write_json_atomic(trace_path, trace)
 
-    real_model, real_retrieve = workflow._model, workflow.retrieve_versions
+    real_model, real_retrieve = workflow._model, workflow.retrieve_library
 
     class RecordedModel:
         def invoke(self, messages):
@@ -126,7 +126,7 @@ def main():
     def retrieve(question, current_settings):
         start = time.perf_counter()
         try:
-            new, old = real_retrieve(question, current_settings)
+            local = real_retrieve(question, current_settings)
         except Exception as exc:
             record(
                 {
@@ -141,11 +141,10 @@ def main():
                 "kind": "retrieval",
                 "question": question,
                 "seconds": time.perf_counter() - start,
-                "new": [asdict(e) for e in new],
-                "old": [asdict(e) for e in old],
+                "library": [asdict(e) for e in local],
             }
         )
-        return new, old
+        return local
 
     def blocked_search(*_args, **_kwargs):
         record({"kind": "forbidden_search"})
@@ -153,7 +152,7 @@ def main():
 
     # 仅包裹真实调用记录输入、输出和用量；搜索入口增加拒绝守卫。
     workflow._model = lambda _settings: RecordedModel()
-    workflow.retrieve_versions = retrieve
+    workflow.retrieve_library = retrieve
     workflow.search_web = blocked_search
     engine = workflow.ResearchWorkflow(settings, directory / "tasks")
     handler = create_handler(settings, engine)

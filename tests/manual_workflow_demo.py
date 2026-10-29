@@ -55,15 +55,14 @@ def main():
             label = context["evidence"][0]["label"]
             return f"### 阶段结论\n演示资料描述了应用场景及条件[{label}]。\n\n### 待核实\n示例版本存在差异，需要核对配置与日期。"
         if "检查各子问题" in instruction:
-            return "## 证据缺口\n演示资料不能支持真实市场结论。\n\n## 来源冲突\n模拟新版为20[N1]，旧版为10[O1]，不应合并。\n\n## 适用范围与时效局限\n所有数据仅用于功能验收。"
-        return "## 主要结论\n模拟资料展示了任务取证流程[N1]。\n\n## 分题分析\n按应用场景、实施条件和局限三个维度组织成果。\n\n## 分歧与局限\n新版20[N1]与旧版10[O1]需要分别记录。所有证据均为模拟，不构成真实研究结论。"
+            return "## 证据缺口\n演示资料不能支持真实市场结论。\n\n## 来源冲突\n模拟新版为20[S1]，旧版为10[S2]，不应合并。\n\n## 适用范围与时效局限\n所有数据仅用于功能验收。"
+        return "## 主要结论\n模拟资料展示了任务取证流程[S1]。\n\n## 分题分析\n按应用场景、实施条件和局限三个维度组织成果。\n\n## 分歧与局限\n新版20[S1]与旧版10[S2]需要分别记录。所有证据均为模拟，不构成真实研究结论。"
 
     def retrieve(*_):
         time.sleep(args.delay)
         return [
-            Evidence("N1", "【模拟证据】新版示例值20，适用于演示配置。", "模拟新版.md", 1, 0.9)
-        ], [
-            Evidence("O1", "【模拟证据】旧版示例值10，仅适用于旧配置。", "模拟旧版.md", 2, 0.8),
+            Evidence("S1", "【模拟证据】新版示例值20，适用于演示配置。", "模拟新版.md", 1, 0.9),
+            Evidence("S2", "【模拟证据】旧版示例值10，仅适用于旧配置。", "模拟旧版.md", 2, 0.8),
         ]
 
     def search(*_, **__):
@@ -84,7 +83,7 @@ def main():
 
     service._generate = generate
     with (
-        patch.object(workflow, "retrieve_versions", retrieve),
+        patch.object(workflow, "retrieve_library", retrieve),
         patch.object(workflow, "search_web", search),
         patch.object(web_server, "list_databases", lambda _: []),
         patch.object(web_server, "database_details", lambda _: []),

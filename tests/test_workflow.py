@@ -40,11 +40,11 @@ def engine(tmp_path, monkeypatch):
     service = workflow.ResearchWorkflow(settings)
     monkeypatch.setattr(
         workflow,
-        "retrieve_versions",
-        lambda *_: (
-            [Evidence("N1", "新版数值20。", "new.md", 2, 0.9)],
-            [Evidence("O1", "旧版数值10。", "old.md", 1, 0.8)],
-        ),
+        "retrieve_library",
+        lambda *_: [
+            Evidence("S1", "新版数值20。", "new.md", 2, 0.9),
+            Evidence("S2", "旧版数值10。", "old.md", 1, 0.8),
+        ],
     )
     monkeypatch.setattr(
         workflow,
@@ -73,8 +73,8 @@ def engine(tmp_path, monkeypatch):
             labels = context["evidence"]
             return f"### 阶段结论\n不同版本存在差异[{labels[0]['label']}]。\n### 待核实\n需核对适用范围。"
         if "检查各子问题" in instruction:
-            return "## 证据缺口\n适用范围待核实。\n## 来源冲突\n新版20[N1]与旧版10[O1]分别记录。"
-        return "## 主要结论\n新版20[N1]。非法引用[N999]。\n## 分题分析\n各版本分别呈现。\n## 分歧与局限\n需核对适用范围。"
+            return "## 证据缺口\n适用范围待核实。\n## 来源冲突\n新版20[S1]与旧版10[S2]分别记录。"
+        return "## 主要结论\n新版20[S1]。非法引用[S999]。\n## 分题分析\n各版本分别呈现。\n## 分歧与局限\n需核对适用范围。"
 
     monkeypatch.setattr(service, "_generate", generate)
     return service
@@ -89,6 +89,134 @@ def settle(service, task_id):
 def planned(service, allow_web=False):
     task = service.create("研究示例专题", allow_web)
     return settle(service, task["id"])
+
+
+@pytest.mark.parametrize("allowed", [True, False])
+def test_web_consent_pauses_before_search_and_resumes_once(engine, monkeypatch, allowed):
+    queries, searches = [], []
+    retrieve, search = workflow.retrieve_library, workflow.search_web
+    monkeypatch.setattr(
+        workflow,
+        "retrieve_library",
+        lambda query, settings: queries.append(query) or retrieve(query, settings),
+    )
+    monkeypatch.setattr(
+        workflow,
+        "search_web",
+        lambda *args, **kwargs: searches.append(args[0]) or search(*args, **kwargs),
+    )
+    task = engine.create("按需询问联网", ask_web_consent=True)
+    task = settle(engine, task["id"])
+    engine.update_plan(task["id"], PLAN)
+    engine.action(task["id"], "confirm")
+    waiting = settle(engine, task["id"])
+    assert waiting["status"] == "waiting_web_consent" and engine.active_id is None
+    assert waiting["web_consent"] == "unknown" and not waiting["allow_web"]
+    assert waiting["web_consent_request"]["question"] == "子问题2"
+    assert waiting["steps"][2]["local_done"] and not waiting["steps"][2]["web_done"]
+    assert searches == [] and len(queries) == 3
+    for value in (None, "true", 1):
+        with pytest.raises(ValueError):
+            engine.action(task["id"], "web-consent", {"allow_web": value})
+    assert engine.get(task["id"])["status"] == "waiting_web_consent"
+    engine.action(task["id"], "web-consent", {"allow_web": allowed})
+    finished = settle(engine, task["id"])
+    assert finished["status"] == "completed" and len(queries) == 3
+    assert len(searches) == int(allowed)
+    assert finished["web_consent"] == ("allowed" if allowed else "declined")
+    assert finished["web_consent_request"] is None
+    with pytest.raises(workflow.WorkflowConflict):
+        engine.action(task["id"], "web-consent", {"allow_web": True})
+
+
+def test_web_consent_survives_restart_and_can_be_cancelled(engine):
+    task = engine.create("等待许可", ask_web_consent=True)
+    settle(engine, task["id"])
+    engine.action(task["id"], "confirm")
+    waiting = settle(engine, task["id"])
+    restarted = workflow.ResearchWorkflow(engine.settings)
+    assert restarted.get(task["id"])["web_consent_request"] == waiting["web_consent_request"]
+    assert restarted.get(task["id"])["status"] == "waiting_web_consent"
+    cancelled = restarted.action(task["id"], "cancel")
+    assert cancelled["status"] == "cancelled"
+    with pytest.raises(workflow.WorkflowConflict):
+        restarted.action(task["id"], "web-consent", {"allow_web": True})
+
+
+def test_sufficient_evidence_does_not_ask_for_web(engine, monkeypatch):
+    task = engine.create("本地即可回答", ask_web_consent=True)
+    settle(engine, task["id"])
+    plan = deepcopy(PLAN)
+    for question in plan["questions"]:
+        question["needs_current"] = False
+    monkeypatch.setattr(
+        workflow, "search_web", lambda *args, **kwargs: pytest.fail("证据充分时不得搜索")
+    )
+    engine.action(task["id"], "confirm", {"plan": plan})
+    assert settle(engine, task["id"])["status"] == "completed"
+
+
+def test_empty_evidence_asks_and_decline_applies_to_remaining_questions(engine, monkeypatch):
+    task = engine.create("资料缺失", ask_web_consent=True)
+    settle(engine, task["id"])
+    monkeypatch.setattr(workflow, "retrieve_library", lambda *args: [])
+    monkeypatch.setattr(
+        workflow, "search_web", lambda *args, **kwargs: pytest.fail("拒绝后不得搜索")
+    )
+    engine.action(task["id"], "confirm")
+    waiting = settle(engine, task["id"])
+    assert waiting["status"] == "waiting_web_consent"
+    assert "没有检索到" in waiting["web_consent_request"]["reason"]
+    engine.action(task["id"], "web-consent", {"allow_web": False})
+    assert settle(engine, task["id"])["status"] == "completed"
+
+
+def test_partial_coverage_asks_but_retrieval_errors_do_not(engine, monkeypatch):
+    generate = engine._generate
+    monkeypatch.setattr(
+        engine,
+        "_generate",
+        lambda instruction, context: (
+            json.dumps({"sufficient": False, "gaps": "缺少出版日期"})
+            if "判断本地证据" in instruction
+            else generate(instruction, context)
+        ),
+    )
+    task = engine.create("证据只覆盖部分问题", ask_web_consent=True)
+    settle(engine, task["id"])
+    engine.action(task["id"], "confirm")
+    waiting = settle(engine, task["id"])
+    assert waiting["status"] == "waiting_web_consent"
+    assert waiting["web_consent_request"]["reason"] == "缺少出版日期"
+    engine.action(task["id"], "cancel")
+    next_task = engine.create("检索失败", ask_web_consent=True)
+    settle(engine, next_task["id"])
+
+    def fail(*args):
+        raise ConnectionError("模拟检索故障")
+
+    monkeypatch.setattr(workflow, "retrieve_library", fail)
+    engine.action(next_task["id"], "confirm")
+    failed = settle(engine, next_task["id"])
+    assert failed["status"] == "failed" and failed["web_consent_request"] is None
+
+
+def test_disabled_web_service_does_not_ask_or_allow_consent(engine, monkeypatch):
+    from dataclasses import replace
+
+    disabled = workflow.ResearchWorkflow(
+        replace(engine.settings, web_search_enabled=False), engine.directory / "disabled-consent"
+    )
+    monkeypatch.setattr(disabled, "_generate", engine._generate)
+    monkeypatch.setattr(
+        workflow, "search_web", lambda *args, **kwargs: pytest.fail("配置关闭时不得搜索")
+    )
+    with pytest.raises(ValueError):
+        disabled.create("错误选项", ask_web_consent="true")
+    task = disabled.create("只用本地", ask_web_consent=True)
+    settle(disabled, task["id"])
+    disabled.action(task["id"], "confirm")
+    assert settle(disabled, task["id"])["status"] == "completed"
 
 
 @pytest.mark.parametrize(
@@ -109,7 +237,7 @@ def test_invalid_plans(mutation):
 
 
 def test_confirmation_required_and_plan_can_be_edited(engine, monkeypatch):
-    monkeypatch.setattr(workflow, "retrieve_versions", lambda *_: pytest.fail("确认前不应检索"))
+    monkeypatch.setattr(workflow, "retrieve_library", lambda *_: pytest.fail("确认前不应检索"))
     task = planned(engine)
     assert task["status"] == "awaiting_confirmation"
     assert not task["steps"] and not task["evidence"]
@@ -129,23 +257,40 @@ def test_complete_research_citations_sources_and_locked_plan(engine):
     assert len(task["steps"]) == 5
     assert all(step["status"] == "succeeded" for step in task["steps"])
     assert [item["label"] for item in task["evidence"]] == [
-        "N1",
-        "O1",
-        "N2",
-        "O2",
-        "N3",
-        "O3",
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
         "W1",
     ]
-    assert "[N999]" not in task["report"] and "引用校验提示" in task["report"]
+    assert "[S999]" not in task["report"] and "引用校验提示" in task["report"]
+    assert "### 资料库" in task["report"] and "### 网络" in task["report"]
     assert "示例机构" in task["report"] and "2026-10-29" in task["report"]
     assert "第 2 页" in task["report"] and "适用范围" in task["review"]
     with pytest.raises(workflow.WorkflowConflict):
         engine.update_plan(task["id"], PLAN, False)
 
 
+def test_legacy_evidence_keeps_labels_in_library_group(engine):
+    task = {
+        "evidence": [
+            {"label": "N1", "source": "新版.md", "access_date": "2026-10-29"},
+            {"label": "O1", "source": "旧版.md", "access_date": "2026-10-29"},
+        ]
+    }
+    step = {"evidence_labels": []}
+    engine._append_evidence(task, step, "S", [Evidence("S1", "结果", "资料.md")])
+    engine._append_evidence(task, step, "S", [Evidence("S1", "另一个结果", "资料2.md")])
+    assert [item["label"] for item in task["evidence"]] == ["N1", "O1", "S1", "S2"]
+    sources = engine._sources(task["evidence"])
+    assert sources.count("### 资料库") == 1
+    assert "[N1]" in sources and "[O1]" in sources and "[S2]" in sources
+
+
 def test_no_permission_never_searches_and_empty_evidence_is_not_failure(engine, monkeypatch):
-    monkeypatch.setattr(workflow, "retrieve_versions", lambda *_: ([], []))
+    monkeypatch.setattr(workflow, "retrieve_library", lambda *_: [])
     monkeypatch.setattr(workflow, "search_web", lambda *_, **__: pytest.fail("未授权不应联网"))
     task = planned(engine)
     engine.action(task["id"], "confirm")
@@ -155,7 +300,7 @@ def test_no_permission_never_searches_and_empty_evidence_is_not_failure(engine, 
 
 
 def test_local_failure_pauses_and_retry_preserves_completed_steps(engine, monkeypatch):
-    original = workflow.retrieve_versions
+    original = workflow.retrieve_library
     calls = []
     fail = [True]
 
@@ -165,7 +310,7 @@ def test_local_failure_pauses_and_retry_preserves_completed_steps(engine, monkey
             raise ConnectionError("不可将上游敏感异常正文展示给用户")
         return original(query, settings)
 
-    monkeypatch.setattr(workflow, "retrieve_versions", retrieve)
+    monkeypatch.setattr(workflow, "retrieve_library", retrieve)
     task = planned(engine)
     engine.action(task["id"], "confirm")
     failed = settle(engine, task["id"])
@@ -178,15 +323,15 @@ def test_local_failure_pauses_and_retry_preserves_completed_steps(engine, monkey
     done = settle(engine, task["id"])
     assert done["status"] == "completed"
     assert calls.count("子问题0") == 1 and calls.count("子问题1") == 2
-    assert [item["label"] for item in done["evidence"]] == ["N1", "O1", "N2", "O2", "N3", "O3"]
+    assert [item["label"] for item in done["evidence"]] == ["S1", "S2", "S3", "S4", "S5", "S6"]
 
 
 def test_web_failure_keeps_local_checkpoint_and_retries_search_only(engine, monkeypatch):
     local_calls, web_calls = [], []
-    original = workflow.retrieve_versions
+    original = workflow.retrieve_library
     monkeypatch.setattr(
         workflow,
-        "retrieve_versions",
+        "retrieve_library",
         lambda query, settings: local_calls.append(query) or original(query, settings),
     )
 
@@ -221,7 +366,7 @@ def test_summary_retry_reuses_both_local_and_web_snapshots(engine, monkeypatch):
     failed = settle(engine, task["id"])
     assert failed["steps"][2]["web_done"]
     snapshots = deepcopy(failed["evidence"])
-    monkeypatch.setattr(workflow, "retrieve_versions", lambda *_: pytest.fail("不应重复取证"))
+    monkeypatch.setattr(workflow, "retrieve_library", lambda *_: pytest.fail("不应重复取证"))
     monkeypatch.setattr(workflow, "search_web", lambda *_, **__: pytest.fail("不应重复联网"))
     fail[0] = False
     engine.action(task["id"], "retry")
@@ -304,7 +449,7 @@ def test_restart_restores_unfinished_step_without_repeating_evidence(engine, mon
     assert restored.get(task["id"])["status"] == "waiting_continue"
     assert restored.get(task["id"])["steps"][-1]["status"] == "pending"
     monkeypatch.setattr(restored, "_generate", engine._generate)
-    monkeypatch.setattr(workflow, "retrieve_versions", lambda *_: pytest.fail("恢复时不应重新检索"))
+    monkeypatch.setattr(workflow, "retrieve_library", lambda *_: pytest.fail("恢复时不应重新检索"))
     restored.action(task["id"], "continue")
     result = settle(restored, task["id"])
     assert result["status"] == "completed" and result["evidence"] == done["evidence"]
@@ -331,9 +476,9 @@ def test_duplicate_execution_and_cancel_at_external_boundary(engine, monkeypatch
     def retrieve(*_):
         entered.set()
         assert release.wait(10)
-        return [Evidence("N1", "结果", "source.md")], []
+        return [Evidence("S1", "结果", "source.md")]
 
-    monkeypatch.setattr(workflow, "retrieve_versions", retrieve)
+    monkeypatch.setattr(workflow, "retrieve_library", retrieve)
     engine.action(task["id"], "confirm")
     try:
         assert entered.wait(10)
@@ -352,7 +497,8 @@ def test_duplicate_execution_and_cancel_at_external_boundary(engine, monkeypatch
     assert all(step["status"] == "skipped" for step in cancelled["steps"])
 
 
-def test_http_task_contract_static_assets_and_report(engine):
+def test_http_task_contract_static_assets_and_report(engine, monkeypatch):
+    from research_agent.agent import AgentEvent
     from research_agent.web_server import create_handler
 
     server = ThreadingHTTPServer(("127.0.0.1", 0), create_handler(engine.settings, engine))
@@ -393,6 +539,48 @@ def test_http_task_contract_static_assets_and_report(engine):
         )
         for asset in ("/", "/workflow.js", "/workflow.css"):
             assert request("GET", asset)[0] == 200
+        monkeypatch.setattr(
+            "research_agent.web_server.stream_answer_turn",
+            lambda *args, **kwargs: iter(
+                [
+                    AgentEvent(
+                        kind="sources",
+                        library_sources=("[S1] 本地资料",),
+                        web_sources=("[W1] 网络资料",),
+                    ),
+                ]
+            ),
+        )
+        status, body, _ = request(
+            "POST", "/api/chat", {"question": "来源分类", "session_id": "sources"}
+        )
+        payload = json.loads(body.decode().split("data: ", 1)[1].strip())
+        assert status == 200 and payload["library_sources"] == ["[S1] 本地资料"]
+        assert payload["web_sources"] == ["[W1] 网络资料"]
+        assert "new_sources" not in payload and "old_sources" not in payload
+        status, body, _ = request(
+            "POST", "/api/research/tasks", {"goal": "询问联网", "ask_web_consent": True}
+        )
+        consent_id = json.loads(body)["id"]
+        assert status == 202
+        settle(engine, consent_id)
+        assert request("POST", f"/api/research/tasks/{consent_id}/plan", {"plan": PLAN})[0] == 200
+        assert engine.get(consent_id)["web_consent"] == "unknown"
+        assert request("POST", f"/api/research/tasks/{consent_id}/confirm", {})[0] == 200
+        assert settle(engine, consent_id)["status"] == "waiting_web_consent"
+        assert (
+            request("POST", f"/api/research/tasks/{consent_id}/web-consent", {"allow_web": "true"})[
+                0
+            ]
+            == 400
+        )
+        assert (
+            request("POST", f"/api/research/tasks/{consent_id}/web-consent", {"allow_web": False})[
+                0
+            ]
+            == 200
+        )
+        assert settle(engine, consent_id)["status"] == "completed"
     finally:
         server.shutdown()
         server.server_close()

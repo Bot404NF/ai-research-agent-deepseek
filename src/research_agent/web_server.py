@@ -254,7 +254,11 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
             try:
                 payload = self._read_json()
                 if path == "/api/research/tasks":
-                    task = research.create(payload.get("goal"), payload.get("allow_web", False))
+                    task = research.create(
+                        payload.get("goal"),
+                        payload.get("allow_web", False),
+                        ask_web_consent=payload.get("ask_web_consent", False),
+                    )
                     self._send_json(202, task)
                     return
                 parts = path.removeprefix("/api/research/tasks/").split("/")
@@ -264,7 +268,7 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
                 task_id, action = parts
                 if action == "plan":
                     task = research.update_plan(
-                        task_id, payload.get("plan"), payload.get("allow_web", False)
+                        task_id, payload.get("plan"), payload.get("allow_web")
                     )
                 else:
                     task = research.action(task_id, action, payload)
@@ -360,8 +364,7 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
                         "text": event.text,
                         "message": event.text if event.kind == "error" else "",
                         "suggestions": event.suggestions,
-                        "new_sources": event.new_sources,
-                        "old_sources": event.old_sources,
+                        "library_sources": event.library_sources,
                         "web_sources": event.web_sources,
                     }
                     self.wfile.write(b"data: " + _json_bytes(payload) + b"\n\n")

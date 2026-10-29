@@ -1,9 +1,9 @@
-/* 专题研究页面：所有模型和资料文本通过 textContent 或已有安全 Markdown 渲染器展示。 */
+/* 研究页面：所有模型和资料文本通过 textContent 或已有安全 Markdown 渲染器展示。 */
 (() => {
   const workspace = document.querySelector('#researchWorkspace');
   const content = document.querySelector('#researchContent');
   const notice = document.querySelector('#researchNotice');
-  const names = {awaiting_confirmation:'待确认',running:'运行中',waiting_continue:'等待继续',failed:'失败',completed:'已完成',cancelled:'已取消',pending:'待执行',succeeded:'成功',skipped:'已跳过'};
+  const names = {awaiting_confirmation:'待确认',running:'运行中',waiting_continue:'等待继续',waiting_web_consent:'等待联网许可',failed:'失败',completed:'已完成',cancelled:'已取消',pending:'待执行',succeeded:'成功',skipped:'已跳过'};
   const phases = {planning:'拟定研究计划',plan:'确认研究计划',research:'分题收集与分析',review:'检查证据缺口与冲突',report:'汇总研究报告',completed:'研究完成'};
   let selected = null, shownVersion = '', requestBusy = false, polling = false;
   try { selected = localStorage.getItem('researchTaskId'); } catch {}
@@ -15,12 +15,14 @@
     return element;
   }
   function mode(research) {
+    document.body.dataset.mode=research?'research':'chat';
+    closeSidebar();
     workspace.hidden = !research;
     document.querySelector('.chat').hidden = research;
     document.querySelector('.top-actions').hidden = research;
     document.querySelector('#researchMode').setAttribute('aria-pressed', String(research));
     document.querySelector('#chatMode').setAttribute('aria-pressed', String(!research));
-    document.querySelector('.workspace-title').textContent = research ? '专题研究' : '普通问答';
+    document.querySelector('.workspace-title').textContent = research ? '研究' : '问答';
     document.querySelector('.workspace-subtitle').textContent = research ? '确认计划 · 分题取证 · 检查证据 · 汇总报告' : '基于资料的多轮问答与来源引用';
   }
   function remember(id) {
@@ -66,26 +68,44 @@
     const input = node('input'); input.type = 'checkbox'; input.checked = value;
     wrapper.append(input, document.createTextNode(label)); parent.append(wrapper); return input;
   }
-  function newResearch() {
-    remember(null); mode(true); notice.textContent = '';
+  function newResearch(options = {}) {
+    remember(null); if(options.activate!==false)mode(true); notice.textContent = '';
+    workspace.classList.add('research-empty');
     content.replaceChildren();
-    const card = node('div', undefined, 'research-card');
-    card.append(node('h1', '从研究目标，到有依据的报告'), node('p', '拆解问题、逐题取证、检查缺口与分歧，保留每一步成果。'));
-    const flow = node('div', undefined, 'research-flow');
-    ['01 确认计划','02 分题取证','03 检查证据','04 汇总报告'].forEach(text => flow.append(node('span', text)));
-    card.append(flow);
-    const goal = field(card, '你希望完成什么研究？', '', true, 4000);
-    goal.placeholder = '例如：研究某项技术在中国的应用现状，从主要场景、落地条件与局限三个角度整理报告。';
-    const web = check(card, '允许本次任务联网补充资料（仅适用于此任务，搜索词会发送至外部服务）');
-    const actions = node('div', undefined, 'research-actions');
-    actions.append(button('生成研究计划', async () => {
-      if (!goal.value.trim()) throw new Error('请先填写研究目标。');
-      const task = await api('', {goal:goal.value, allow_web:web.checked}); remember(task.id);
-    }, true));
-    card.append(actions, node('p', '计划生成后可以编辑；确认执行后自动推进。普通问答可从顶部切换。', 'research-muted'));
-    content.append(card);
-    workspace.scrollTop = 0;
+    const home = node('div', undefined, 'research-home');
+    home.append(node('h1', '今天想研究什么？', 'research-welcome'));
+    const form = node('form', undefined, 'research-launch composer');
+    const inputWrap = node('div', undefined, 'input-wrap');
+    const goal = node('textarea');goal.id='researchGoal';goal.rows=1;goal.maxLength=4000;
+    goal.required=true;goal.setAttribute('aria-label','研究目标');
+    goal.placeholder='输入研究主题，生成研究计划…';
+    const submit = node('button', undefined, 'send');submit.type='submit';
+    submit.setAttribute('aria-label','生成研究计划');submit.title='生成研究计划';submit.disabled=true;
+    submit.innerHTML='<svg class="icon" aria-hidden="true"><use href="#i-send"/></svg>';
+    inputWrap.append(goal, submit);form.append(inputWrap);
+    let composing=false;
+    function syncGoal(){
+      goal.style.height='auto';goal.style.height=Math.min(goal.scrollHeight,192)+'px';
+      submit.disabled=requestBusy||!goal.value.trim();
+    }
+    goal.addEventListener('input',syncGoal);
+    goal.addEventListener('compositionstart',()=>{composing=true;});
+    goal.addEventListener('compositionend',()=>{composing=false;syncGoal();});
+    goal.addEventListener('keydown',event=>{
+      if(event.key==='Enter'&&!event.shiftKey&&!event.isComposing&&!composing&&event.keyCode!==229){event.preventDefault();form.requestSubmit();}
+    });
+    form.addEventListener('submit',async event=>{
+      event.preventDefault();if(requestBusy||!goal.value.trim())return;
+      submit.setAttribute('aria-busy','true');
+      await perform(async()=>{
+        const task=await api('',{goal:goal.value,ask_web_consent:true});remember(task.id);
+      });
+      submit.removeAttribute('aria-busy');syncGoal();
+    });
+    home.append(form);content.append(home);
+    workspace.scrollTop=0;
   }
+
   function editPlan(task, card) {
     card.append(node('h2', '确认研究计划'));
     const scope = field(card, '研究范围', task.plan.scope, true, 2000);
@@ -120,18 +140,18 @@
       entries.push({question:'',search_query:'',needs_current:false,news:false}); draw();
     };
     card.append(add);
-    const web = check(card, '确认允许本研究任务联网（未勾选时全程仅使用本地资料）', task.allow_web);
-    function payload() { return {plan:{scope:scope.value,expected_output:output.value,questions:entries},allow_web:web.checked}; }
+    function payload() { return {plan:{scope:scope.value,expected_output:output.value,questions:entries}}; }
     const actions = node('div', undefined, 'research-actions');
     actions.append(button('保存计划', async () => { render(await api(`/${task.id}/plan`, payload()), true); }),
       button('确认计划并执行', async () => { render(await api(`/${task.id}/confirm`, payload()), true); }, true));
-    card.append(actions, node('p', '确认后锁定计划；联网按证据缺口或时效需求使用，不会自动写入资料库。', 'research-muted'));
+    card.append(actions, node('p', '确认后锁定计划；需要联网补充资料时会询问你，未经同意不会联网。', 'research-muted'));
   }
   function markdown(text) {
     const view = node('div', undefined, 'research-markdown');
     renderMarkdown(view, text); return view;
   }
   function render(task, force = false) {
+    workspace.classList.remove('research-empty');
     if (!force && shownVersion === task.updated_at) return;
     const resetScroll = force || !shownVersion;
     const expanded = new Set([...content.querySelectorAll('details[open]')].map(item => item.dataset.key));
@@ -142,7 +162,7 @@
     if (task.error) card.append(node('p', task.error, 'research-error'));
     if (task.status === 'awaiting_confirmation' && task.plan) editPlan(task, card);
     else {
-      card.append(node('p', `本任务联网：${task.allow_web ? '已授权' : '未授权，仅本地资料'}`, 'research-muted'));
+      card.append(node('p', `本任务联网：${task.allow_web ? '已获许可' : task.web_consent==='unknown' ? '需要时会询问' : '仅使用资料库'}`, 'research-muted'));
       if (task.plan) {
         const plan = node('details'); plan.dataset.key = 'plan'; plan.append(node('summary', '查看已确认计划'));
         plan.append(node('p', task.plan.scope), node('p', task.plan.expected_output));
@@ -165,6 +185,20 @@
           row.append(details);
         }
         card.append(row);
+      }
+      if(task.status==='waiting_web_consent'){
+        const prompt=node('section',undefined,'research-consent');
+        prompt.setAttribute('aria-label','联网许可');
+        prompt.append(node('h2','是否允许本次研究联网补充资料？'));
+        const request=task.web_consent_request||{};
+        if(request.question)prompt.append(node('p',`当前问题：${request.question}`));
+        prompt.append(node('p',request.reason||'资料库证据不足，需要联网补充。'));
+        if(request.search_query)prompt.append(node('p',`拟搜索：${request.search_query}`,'research-muted'));
+        prompt.append(node('p','许可仅适用于本次研究，搜索词会发送至外部服务；拒绝后仅用资料库继续，不再重复询问。','research-muted'));
+        const choices=node('div',undefined,'research-actions');
+        choices.append(button('允许本次研究联网',async()=>{render(await api(`/${task.id}/web-consent`,{allow_web:true}),true);},true),
+          button('仅用资料库继续',async()=>{render(await api(`/${task.id}/web-consent`,{allow_web:false}),true);}));
+        prompt.append(choices);card.append(prompt);
       }
       const actions = node('div', undefined, 'research-actions');
       if (task.status === 'failed') actions.append(button(task.confirmed ? '重试失败步骤' : '重试生成计划', async () => { render(await api(`/${task.id}/retry`, {}), true); }, true));
@@ -195,19 +229,19 @@
     if (!tasks.length) list.append(node('span', '尚无研究任务', 'history-empty'));
     for (const task of tasks) {
       const item = node('button'); item.type = 'button'; item.setAttribute('aria-current', String(task.id === selected));
-      item.append(node('strong', task.goal), node('span', `${names[task.status]} · ${phases[task.phase] || ''}`));
+      item.append(node('strong', task.goal), node('span', names[task.status]));
       item.onclick = () => perform(async () => { remember(task.id); mode(true); }); list.append(item);
       history.append(new Option(`${names[task.status]} · ${task.goal.slice(0, 38)}`, task.id));
     }
     history.value = selected || '';
     if (id && id === selected) {
-      if (!tasks.some(task => task.id === id)) { remember(null); newResearch(); return; }
+      if (!tasks.some(task => task.id === id)) { remember(null); newResearch({activate:!workspace.hidden}); return; }
       const task = await api(`/${id}`);
       if (id === selected) render(task);
     }
     if (notice.textContent.startsWith('任务状态读取失败：')) notice.textContent = '';
   }
-  ['newResearch','newResearchSide'].forEach(id => { document.getElementById(id).onclick = newResearch; });
+  document.getElementById('newResearch').onclick = newResearch;
   document.querySelector('#researchMode').onclick = () => mode(true);
   document.querySelector('#chatMode').onclick = () => mode(false);
   ['newConversation','newConversationMobile','conversationList'].forEach(id => {
@@ -217,8 +251,8 @@
     const id = event.target.value;
     if (id) perform(async () => { remember(id); mode(true); });
   };
-  mode(true);
-  if (!selected) newResearch();
+  if (!selected) newResearch({activate:false});
+  mode(false);
   refresh().catch(error => { notice.textContent = error.message; });
   setInterval(async () => {
     if (polling || requestBusy || workspace.hidden) return;

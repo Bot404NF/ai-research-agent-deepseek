@@ -8,9 +8,9 @@ from types import SimpleNamespace
 import pytest
 
 from research_agent import embeddings, rag_updates, retrieval
+from research_agent.agent import contextual_retrieval_query
 from research_agent.config import Settings
 from research_agent.storage import write_json_atomic
-from research_agent.agent import contextual_retrieval_query
 
 
 def test_followup_retrieval_keeps_previous_subject_without_affecting_new_questions():
@@ -22,8 +22,11 @@ def test_followup_retrieval_keeps_previous_subject_without_affecting_new_questio
     assert len(contextual_retrieval_query("刚才是谁？", [{"user": "甲" * 2000}])) <= 1000
 
 
-def test_followup_stream_removes_historical_labels_and_retrieves_current_evidence(tmp_path, monkeypatch):
-    from langchain_core.messages import AIMessageChunk, AIMessage
+def test_followup_stream_removes_historical_labels_and_retrieves_current_evidence(
+    tmp_path, monkeypatch
+):
+    from langchain_core.messages import AIMessage, AIMessageChunk
+
     from research_agent import agent
     from research_agent.conversation import ConversationStore
 
@@ -34,7 +37,7 @@ def test_followup_stream_removes_historical_labels_and_retrieves_current_evidenc
 
     def search(query, _settings):
         queries.append(query)
-        return [], [retrieval.Evidence("O1", "《安亭志》由朱瑞熙标点。", "安亭志.md")]
+        return [retrieval.Evidence("S1", "《安亭志》由朱瑞熙标点。", "安亭志.md")]
 
     class Model:
         def bind_tools(self, _):
@@ -43,14 +46,14 @@ def test_followup_stream_removes_historical_labels_and_retrieves_current_evidenc
         def stream(self, messages):
             old_answers = [m for m in messages if isinstance(m, AIMessage) and m.content]
             assert old_answers and "[O99]" not in old_answers[0].content
-            yield AIMessageChunk(content="朱瑞熙[O1]")
+            yield AIMessageChunk(content="朱瑞熙[S1]")
 
-    monkeypatch.setattr(agent, "retrieve_versions", search)
+    monkeypatch.setattr(agent, "retrieve_library", search)
     monkeypatch.setattr(agent, "_model", lambda _: Model())
     monkeypatch.setattr(agent, "_suggest_followups", lambda *_: ())
     events = list(agent.stream_answer_turn("刚才的标点者叫什么？", settings, "followup", store))
     assert "安亭志" in queries[0]
-    assert any(e.kind == "token" and "[O1]" in e.text for e in events)
+    assert any(e.kind == "token" and "[S1]" in e.text for e in events)
     assert len(store.load("followup")) == 2
 
 
@@ -96,17 +99,25 @@ def test_failed_atomic_replace_preserves_previous_json(tmp_path, monkeypatch):
 def test_concurrent_catalog_updates_preserve_all_directories(tmp_path):
     settings = Settings("", "chat", "embed", tmp_path / "documents", "unused", "old", 100, 10, 2)
     with ThreadPoolExecutor(max_workers=8) as executor:
-        list(executor.map(lambda index: rag_updates.create_database(f"目录{index}", settings), range(16)))
+        list(
+            executor.map(
+                lambda index: rag_updates.create_database(f"目录{index}", settings), range(16)
+            )
+        )
     assert len(rag_updates.list_databases(settings)) == 17
 
 
 def test_retrieval_keeps_first_directory_when_initial_is_deleted(tmp_path, monkeypatch):
     settings = Settings("", "chat", "embed", tmp_path, "unused", "old", 100, 10, 2)
     monkeypatch.setattr(retrieval, "create_embeddings", lambda _: object())
-    monkeypatch.setattr(retrieval, "list_databases", lambda _: [
-        {"id": "folder-a", "name": "甲库", "collection": "collection_a"},
-        {"id": "folder-b", "name": "乙库", "collection": "collection_b"},
-    ])
+    monkeypatch.setattr(
+        retrieval,
+        "list_databases",
+        lambda _: [
+            {"id": "folder-a", "name": "甲库", "collection": "collection_a"},
+            {"id": "folder-b", "name": "乙库", "collection": "collection_b"},
+        ],
+    )
 
     def retrieve_fake(_question, _settings, collection, *_args):
         return [retrieval.Evidence("N1", collection, collection)]

@@ -2,10 +2,10 @@ import argparse
 import uuid
 
 from research_agent.agent import stream_answer_turn
-from research_agent.answer import answer_versioned_question
+from research_agent.answer import answer_question
 from research_agent.config import get_settings
 from research_agent.ingest import build_index
-from research_agent.retrieval import retrieve_versions
+from research_agent.retrieval import retrieve_library
 
 
 def main() -> None:
@@ -28,15 +28,11 @@ def main() -> None:
     elif args.command == "ask":
         if not settings.api_key:
             parser.error("请先在 .env 中设置 DEEPSEEK_API_KEY，再提问。")
-        new_evidence, old_evidence = retrieve_versions(args.question, settings)
-        print(answer_versioned_question(args.question, new_evidence, old_evidence, settings))
-        if new_evidence:
-            print("\n新增资料来源：")
-            for item in new_evidence:
-                print(f"[{item.label}] {item.display_source}")
-        if old_evidence:
-            print("\n旧资料来源：")
-            for item in old_evidence:
+        evidence = retrieve_library(args.question, settings)
+        print(answer_question(args.question, evidence, settings))
+        if evidence:
+            print("\n资料库来源：")
+            for item in evidence:
                 print(f"[{item.label}] {item.display_source}")
     elif args.command == "chat":
         if not settings.api_key:
@@ -73,7 +69,9 @@ def main() -> None:
                             print("\n\n引用校验后的回答：\n" + event.text)
                         elif event.kind == "web_search_consent":
                             print(f"\n{event.text}")
-                            consent = input("输入 Y 同意联网搜索，其他键表示暂不联网：").strip().lower()
+                            consent = (
+                                input("输入 Y 同意联网搜索，其他键表示暂不联网：").strip().lower()
+                            )
                             allow_web_search = consent in {"y", "yes", "是"}
                             decline_web_search = not allow_web_search
                             consent_requested = True
@@ -81,16 +79,12 @@ def main() -> None:
                         elif event.kind == "error":
                             print(f"\n{event.text}")
                         elif event.kind == "sources":
-                            if event.new_sources:
-                                print("\n\n新增资料来源：")
-                                for source in event.new_sources:
-                                    print(f"- {source}")
-                            if event.old_sources:
-                                print("\n旧资料来源：")
-                                for source in event.old_sources:
+                            if event.library_sources:
+                                print("\n\n资料库来源：")
+                                for source in event.library_sources:
                                     print(f"- {source}")
                             if event.web_sources:
-                                print("\n联网来源：")
+                                print("\n网络来源：")
                                 for source in event.web_sources:
                                     print(f"- {source}")
                         elif event.kind == "suggestions":
@@ -100,7 +94,7 @@ def main() -> None:
                     print()
                     if not consent_requested:
                         break
-            except Exception as exc:
+            except Exception as exc:  # noqa: BLE001 - CLI 边界保留会话并展示受控错误
                 print(f"本轮处理失败（{type(exc).__name__}）。会话记录仍保留，可稍后重试。")
     else:
         if not settings.api_key:
