@@ -33,15 +33,16 @@ def make_settings(tmp_path: Path, *, web_search_enabled: bool = True) -> Setting
     )
 
 
-def test_conversation_store_persists_and_limits_history(tmp_path: Path) -> None:
+def test_conversation_store_preserves_full_history_and_limits_context(tmp_path: Path) -> None:
     store = ConversationStore(tmp_path / "sessions")
     turns = [{"user": f"问题{i}", "assistant": f"回答{i}"} for i in range(25)]
     store.save("session_1", turns)
 
     restored = ConversationStore(tmp_path / "sessions").load("session_1")
-    assert len(restored) == 20
-    assert restored[0] == turns[5]
+    assert len(restored) == 25
+    assert restored[0] == turns[0]
     assert restored[-1] == turns[-1]
+    assert store.load_recent("session_1") == turns[-20:]
 
 
 def test_conversation_store_deletes_session(tmp_path: Path) -> None:

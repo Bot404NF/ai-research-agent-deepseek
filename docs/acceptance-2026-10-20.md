@@ -46,9 +46,9 @@
 
 ## 原始记录与复现
 
-- [完整检查清单](../eval/final_checks_2026-10-20.json)
-- [逐题回答与审核](../eval/v4_pro_review_2026-10-20.md)、[结构化审核](../eval/v4_pro_reviews_2026-10-20.json)
-- [各轮对比与中断说明](../eval/v4_pro_comparison_2026-10-20.json)
+- [完整检查清单](../eval/reports/final_checks_2026-10-20.json)
+- [逐题回答与审核](../eval/reports/v4_pro_review_2026-10-20.md)、[结构化审核](../eval/reports/v4_pro_reviews_2026-10-20.json)
+- [各轮对比与中断说明](../eval/reports/v4_pro_comparison_2026-10-20.json)
 - [V4-Pro原提示词基线](../eval/results/acceptance_20261020T003644538778Z.json)
 - [第一轮提示词优化](../eval/results/acceptance_20261020T003905989914Z.json)
 - [中断运行](../eval/results/acceptance_20261020T004018859007Z.json)
@@ -66,7 +66,7 @@ $env:HF_HUB_OFFLINE = '1'
 .\.venv\Scripts\python.exe -m research_agent.acceptance --generate --repeats 3
 .\.venv\Scripts\python.exe -m research_agent.smoke
 $env:BGE_M3_EXPECTED_DIMENSION = '1024'
-.\.venv\Scripts\python.exe -m pytest -m integration -s tests/test_embedding_integration.py --basetemp=.pytest-integration-check-tmp
+.\.venv\Scripts\python.exe -m pytest -m integration -s tests/integration/test_embedding_integration.py --basetemp=.pytest-integration-check-tmp
 ```
 
 原始生成记录新增实际模型名、token用量以及回答和代理代码SHA-256。HTTP测试加强结果判断，不再仅以连接正常作为成功，要求有流式文本、无错误事件且会话已保存。`eval/runtime/`使用独立测试会话，不覆盖用户历史。

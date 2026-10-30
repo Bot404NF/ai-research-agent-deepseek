@@ -2,6 +2,7 @@
 
 import json
 import re
+import sqlite3
 import threading
 import webbrowser
 from email import policy
@@ -178,22 +179,32 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
                 self._send_json(200, {"databases": database_details(settings)})
             elif path == "/api/knowledge-status":
                 self._send_json(200, _knowledge_status(settings))
-            elif path == "/api/conversations":
-                store = ConversationStore(settings.conversation_dir)
-                self._send_json(200, {"conversations": store.list_sessions()})
-            elif path.startswith("/api/conversations/"):
-                session_id = path.removeprefix("/api/conversations/")
-                if not SESSION_PATTERN.fullmatch(session_id):
-                    self._send_json(400, {"error": "会话 ID 格式无效。"})
-                    return
-                try:
-                    turns = ConversationStore(settings.conversation_dir).load(session_id)
-                except (OSError, ValueError, json.JSONDecodeError):
-                    self._send_json(400, {"error": "无法读取该历史对话。"})
-                    return
-                self._send_json(200, {"id": session_id, "turns": turns})
+            elif path == "/api/conversations" or path.startswith("/api/conversations/"):
+                self._conversations_get(path)
             else:
                 self.send_error(404)
+
+        def _conversations_get(self, path: str) -> None:
+            try:
+                query = parse_qs(urlparse(self.path).query)
+                store = ConversationStore(settings.conversation_dir)
+                if path == "/api/conversations":
+                    data = store.session_page(
+                        limit=int(query.get("limit", ["50"])[0]),
+                        offset=int(query.get("offset", ["0"])[0]),
+                    )
+                else:
+                    before = query.get("before", [None])[0]
+                    data = store.page(
+                        path.removeprefix("/api/conversations/"),
+                        limit=int(query.get("limit", ["20"])[0]),
+                        before=int(before) if before is not None else None,
+                    )
+                self._send_json(200, data)
+            except ValueError:
+                self._send_json(400, {"error": "会话 ID、分页参数或旧会话格式无效，请检查后重试。"})
+            except (OSError, sqlite3.Error):
+                self._send_json(500, {"error": "无法读取会话数据库，请检查目录权限和存储状态。"})
 
         def do_POST(self) -> None:
             origin = self.headers.get("Origin")
@@ -301,7 +312,9 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
                         self._send_json(404, {"error": "会话不存在或已删除。"})
                         return
                     self._send_json(200, {"deleted": True})
-                except OSError:
+                except ValueError:
+                    self._send_json(400, {"error": "旧会话记录无法读取，原文件已保留。"})
+                except (OSError, sqlite3.Error):
                     self._send_json(500, {"error": "删除会话失败，请稍后重试。"})
                 return
             if path.startswith("/api/databases/"):

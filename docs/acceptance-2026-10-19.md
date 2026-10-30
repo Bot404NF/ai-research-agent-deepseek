@@ -47,12 +47,12 @@ P95采用最近秩法。16条样本的P95等于该组最大值，样本规模有
 
 ## 测试与证据
 
-最终离线测试为 **40 passed、1 deselected**，另行执行的真实BGE-M3集成测试为 **1 passed**，向量维度1024。记录见 `eval/final_checks.json`。离线测试验证解析、来源、文件边界、去重、增量清单、会话、工具控制、距离换算和本次追问回归等；真实集成单独验证本地向量结果。
+最终离线测试为 **40 passed、1 deselected**，另行执行的真实BGE-M3集成测试为 **1 passed**，向量维度1024。记录见 `eval/reports/final_checks.json`。离线测试验证解析、来源、文件边界、去重、增量清单、会话、工具控制、距离换算和本次追问回归等；真实集成单独验证本地向量结果。
 
-- 开发集对比：`eval/summary_round3.md`。
-- 独立题集与冻结清单：`eval/holdout_questions.json`、`eval/holdout_manifest.json`。
+- 开发集对比：`eval/reports/summary_round3.md`。
+- 独立题集与冻结清单：`eval/datasets/holdout_questions.json`、`eval/datasets/holdout_manifest.json`。
 - 检索、生成和性能原始记录：`eval/results/acceptance_20261019T095000005021Z.json`。
-- 逐题完整证据：`eval/acceptance_review.md`；结构化判断：`eval/acceptance_reviews.json`。
+- 逐题完整证据：`eval/reports/acceptance_review.md`；结构化判断：`eval/reports/acceptance_reviews.json`。
 - 首次HTTP记录：`eval/results/smoke_20261019T095258385681Z.json`，包含修复前的追问现象。
 - 修复后HTTP记录：`eval/results/smoke_20261019T095610754660Z.json`，会话和来源对应已复核。
 

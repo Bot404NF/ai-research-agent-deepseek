@@ -11,7 +11,7 @@ from research_agent.embeddings import create_embeddings
 def test_bge_m3_embedding_dimension_and_vector_result() -> None:
     """加载配置的本地模型并验证生成的向量。
 
-    运行 `uv run pytest -m integration -s tests/test_embedding_integration.py` 可查看向量维度和部分结果。
+    运行 `uv run pytest -m integration -s tests/integration/test_embedding_integration.py` 可查看向量维度和部分结果。
     首次运行可能会下载模型权重。
     """
     settings = get_settings()

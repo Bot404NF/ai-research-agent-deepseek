@@ -1,6 +1,6 @@
 """防止小样本性能统计口径出错。"""
 
-from research_agent.acceptance import distribution
+from research_agent.evaluation.acceptance import distribution
 
 
 def test_percentile_uses_nearest_rank_and_median_handles_even_samples():

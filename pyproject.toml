@@ -19,6 +19,8 @@ dependencies = [
     "pypdf==6.6.2",
     "python-dotenv==1.2.1",
     "httpx==0.28.1",
+    "langgraph==1.2.18",
+    "langgraph-checkpoint-sqlite==3.1.2",
 ]
 
 [project.scripts]
@@ -29,6 +31,7 @@ dev = ["pytest==9.0.2"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]
 addopts = "-q -m 'not integration'"
 markers = ["integration: 需要本地模型权重或外部服务的集成检查，默认不运行"]
 

@@ -1,9 +1,8 @@
-from dataclasses import dataclass
 import os
+from dataclasses import dataclass
 from pathlib import Path
 
 from dotenv import load_dotenv
-
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(PROJECT_ROOT / ".env")
@@ -27,6 +26,7 @@ class Settings:
     additions_collection_name: str = "research_docs_additions"
     base_url: str = "https://api.deepseek.com"
     rag_relevance_threshold: float = 0.55
+    chat_context_turns: int = 20
 
 
 def get_settings() -> Settings:
@@ -41,6 +41,12 @@ def get_settings() -> Settings:
     if not 0.0 <= relevance_threshold <= 1.0:
         raise ValueError("RAG_RELEVANCE_THRESHOLD 必须在 0 到 1 之间。")
     conversation_dir = Path(os.getenv("CONVERSATION_DIR", "data/conversations"))
+    try:
+        chat_context_turns = int(os.getenv("CHAT_CONTEXT_TURNS", "20"))
+    except ValueError:
+        raise ValueError("CHAT_CONTEXT_TURNS 必须是 1 至 100 的整数。") from None
+    if not 1 <= chat_context_turns <= 100:
+        raise ValueError("CHAT_CONTEXT_TURNS 必须是 1 至 100 的整数。")
     if not conversation_dir.is_absolute():
         conversation_dir = PROJECT_ROOT / conversation_dir
     collection_name = os.getenv("COLLECTION_NAME", "research_docs")
@@ -60,8 +66,10 @@ def get_settings() -> Settings:
         chunk_overlap=overlap,
         top_k=int(os.getenv("TOP_K", "4")),
         conversation_dir=conversation_dir,
+        chat_context_turns=chat_context_turns,
         max_tool_calls=int(os.getenv("MAX_TOOL_CALLS", "6")),
-        web_search_enabled=os.getenv("WEB_SEARCH_ENABLED", "true").lower() in {"1", "true", "yes", "on"},
+        web_search_enabled=os.getenv("WEB_SEARCH_ENABLED", "true").lower()
+        in {"1", "true", "yes", "on"},
         web_search_max_results=max(1, min(int(os.getenv("WEB_SEARCH_MAX_RESULTS", "5")), 10)),
         additions_collection_name=additions_collection_name,
         base_url=os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),

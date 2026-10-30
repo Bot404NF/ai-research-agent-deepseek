@@ -2,7 +2,7 @@
 
 输入研究目标，确认可编辑的研究计划，由系统逐题收集证据、保存阶段成果、检查资料缺口与冲突，再汇总为可下载的 Markdown 报告。页面采用深色界面，默认进入“问答”，顶部胶囊按钮可切换至“研究”；侧栏依次为资料库、研究任务、历史会话。
 
-工作流采用显式 Python 状态机和本地 JSON 检查点，单进程后台执行与网页连接解耦。本地 BGE-M3 / Milvus 检索和 DeepSeek Search / Fetch 是取证工具，DeepSeek 负责计划、分题分析、证据检查与报告汇总。刷新页面或重启服务后可以继续未完成步骤。
+工作流采用 LangGraph StateGraph 与本地 SQLite checkpoint，单进程后台执行与网页连接解耦；计划确认和按需联网询问通过 interrupt 暂停，再由网页回答后恢复。本地 BGE-M3 / Milvus 检索和 DeepSeek Search / Fetch 是取证工具，DeepSeek 负责计划、分题分析、证据检查与报告汇总。刷新页面或重启服务后可以继续未完成步骤。
 
 ## 完成一次专题研究
 
@@ -12,6 +12,10 @@
 4. 查看证据检查记录和研究报告，下载 Markdown。不同版本的结论分别呈现，证据不足时明确说明。
 
 每次任务只执行一轮计划，不循环补搜；每题最多一次本地检索和一次搜索（正文抓取复用现有上限）。按需询问联网或已授权的任务，在本地有命中的非时效问题上会先调用模型判断覆盖是否充分。3–5 题的完整任务最多 13 次逻辑模型请求，每次模型请求沿用最多 1 次重试；搜索、抓取及人工重试可能额外计费。该上限不是总耗时保证。
+
+[结合本项目学习 LangGraph](docs/langgraph-learning.md)：从无 API 的暂停/恢复练习开始，再阅读实际研究图和恢复测试。
+
+任务目录中的 `checkpoints.sqlite` 保存 LangGraph 执行历史及私有研究数据，与任务 JSON 一并保留；迁移前的 JSON 任务在下次继续时按已有成果初始化图，不需要重建索引。
 
 任务记录默认位于 `CONVERSATION_DIR` 的同级目录 `research_tasks/`（默认 `data/research_tasks/`），包含目标、许可、证据快照和报告，不应提交到版本控制。每个外部调用结果取得后保存检查点，失败重试复用已保存成果；若调用成功后尚未落盘便退出，恢复时可能再次调用，不能保证付费请求恰好执行一次。
 
@@ -101,7 +105,7 @@ uv run python -m research_agent.cli chat
 uv run python -m research_agent.cli chat --session 会话ID
 ```
 
-每个会话最多保留最近 20 轮，默认保存在 `data/conversations/`；可用 `CONVERSATION_DIR` 修改目录。会话记录为本地 JSON 文件，可能包含用户输入和模型回答，请勿将其目录提交到版本控制。
+普通问答完整历史保存在 `data/conversations/conversations.sqlite`，不再按轮数截断；可用 `CONVERSATION_DIR` 修改目录。每次仅向模型附带最近 `CHAT_CONTEXT_TURNS` 轮（默认 20，范围 1–100），网页可分页查看更早记录。旧 JSON 自动幂等导入，原文件保留；无效旧记录会提示，之前已被截断的历史无法恢复。数据库和备份包含私有对话，请勿提交到版本控制。详见 [会话存储与迁移](docs/conversation-storage.md)。
 
 `chat` 会在模型生成回答时逐段显示内容，回答后会结合本轮问题、回答和检索证据生成 3 条追问建议。每轮最多调用 6 次工具，之后模型会根据已有证据整理回答；工具调用和追问建议会增加模型请求次数与 API 用量。按 `Ctrl+C` 可随时结束进程，已完成轮次仍保留；尚未完成回答和建议生成的当前轮不会写入会话记录。
 
@@ -141,7 +145,7 @@ Search 和 Fetch 按成功且有结果的请求分别计费，模型回答另计
 uv run python -m research_agent.cli web
 ```
 
-浏览器会打开 `http://127.0.0.1:8765`。网页展示流式多轮问答、追问建议、资料库与网络来源分类、联网搜索许可与来源，以及文件暂存和显式加入新增资料库的流程。历史对话保存在 `data/conversations/` 的本地 JSON 文件中，网页侧栏可按首条提问查看和恢复；每个会话保留最近 20 轮。上传只会将 TXT、Markdown 或 PDF 放到 `data/incoming/`；点击“加入 RAG”后才开始解析和写入，旧资料集合不会被重建。关闭服务请在终端按 `Ctrl+C`；可用 `--port` 指定其他本地端口。
+浏览器会打开 `http://127.0.0.1:8765`。网页展示流式多轮问答、追问建议、资料库与网络来源分类、联网搜索许可与来源，以及文件暂存和显式加入新增资料库的流程。历史对话保存在本地 SQLite，会话侧栏按首条提问展示，支持加载更多会话；打开后先显示最近 20 轮，可继续加载更早对话，数据库保留完整历史。上传只会将 TXT、Markdown 或 PDF 放到 `data/incoming/`；点击“加入 RAG”后才开始解析和写入，旧资料集合不会被重建。关闭服务请在终端按 `Ctrl+C`；可用 `--port` 指定其他本地端口。
 
 网页顶部会每 10 秒检查本地 Milvus 连接状态，并提示新增资料和原有资料集合是否已建立。若连接失败，请先检查 Docker Desktop、`docker compose ps` 和 `.env` 中的 `MILVUS_URI`。
 
@@ -168,8 +172,11 @@ from research_agent import (
 ├── src/research_agent/
 │   ├── answer.py                # 基于证据生成回答和来源引用
 │   ├── agent.py                 # 多轮问答、流式回答、工具调用和追问建议
-│   ├── workflow.py              # 研究任务状态机、检查点和后台执行器
-│   ├── conversation.py          # 本地会话记忆存取
+│   ├── workflow.py              # 研究服务、业务节点与后台执行器
+│   ├── research_graph.py        # LangGraph State、节点与条件边定义
+│   ├── evaluation/             # 检索评测、固定题集验收与真实服务冒烟
+│   ├── observability/          # 可观测性扩展位置（待实现）
+│   ├── conversation.py          # SQLite 完整会话、近期上下文与旧 JSON 迁移
 │   ├── cli.py                   # ingest / ask 命令行入口
 │   ├── config.py                # 环境变量和 Milvus 连接设置
 │   ├── ingest.py                # 文件读取、文本切分和 Milvus 写入
@@ -178,18 +185,26 @@ from research_agent import (
 │   ├── web_search.py            # 中文网页/新闻搜索及来源元数据
 │   ├── web_server.py            # 仅监听本机的流式网页演示服务
 │   └── static/index.html        # 中文交互演示页面
-├── eval/questions.json          # 20道开发集问题
-├── eval/holdout_questions.json  # 固定的20道验收题与4道合成无答案题
+├── eval/datasets/questions.json          # 20道开发集问题
+├── eval/datasets/holdout_questions.json  # 固定的20道验收题与4道合成无答案题
 ├── eval/results/                # 真实候选、回答与性能原始记录
+├── eval/experiments/            # 实验计划与记录模板
+├── eval/reports/                # 历史总结、人工审核及检查记录
+├── tests/                      # unit / integration 与专项测试计划
+├── scripts/                    # 模拟演示、性能/成本占位入口
+├── docs/                       # 架构、评测、优化、部署及历史验收
+├── .github/workflows/ci.yml     # 离线测试与整理模块静态检查
 ├── docker-compose.yml           # Milvus Standalone 服务
 └── pyproject.toml
 ```
 
+目录迁移、旧命令兼容和未清理项目见 [目录整理记录](docs/directory-layout.md)。新增监控、专项测试和性能/成本脚本为待实现骨架，不代表这些能力已经完成。
+
 ## 运行维护与检查
 
-当前项目使用 LangChain 组件，没有使用 LangGraph。专题研究由 `workflow.py` 的显式状态机协调，并使用本地 JSON 步骤检查点；普通问答仍由 `agent.py` 中的 Python 循环协调，`ConversationStore` 保存会话。
+专题研究使用 LangGraph StateGraph 编排，SQLite checkpoint 保存图状态与执行位置，JSON 保留为网页任务视图和历史任务兼容数据。普通问答仍由 `agent.py` 中的 Python 循环协调，`ConversationStore` 保存会话。
 
-BGE-M3 在同一进程中按模型名和实际设备复用，首次请求加载模型，后续检索和导入复用该模型；进程退出后释放。设备仍由 `BGE_M3_DEVICE` 控制，`auto` 优先选择可用 CUDA。网页进程内的资料库修改按顺序执行，清单和会话使用同目录临时文件原子替换。该锁不协调多个独立服务进程，建议本地演示只运行一个服务实例。
+BGE-M3 在同一进程中按模型名和实际设备复用，首次请求加载模型，后续检索和导入复用该模型；进程退出后释放。设备仍由 `BGE_M3_DEVICE` 控制，`auto` 优先选择可用 CUDA。网页进程内的资料库修改按顺序执行，资料清单使用同目录临时文件原子替换，普通问答会话使用 SQLite 事务保存完整轮次。该锁不协调多个独立服务进程，建议本地演示只运行一个服务实例。
 
 默认运行离线测试，不调用 DeepSeek、Milvus 或下载模型：
 
@@ -201,7 +216,7 @@ $env:PYTHONPATH = 'src'
 真实 BGE-M3 集成检查需要显式选择，首次运行可能下载模型：
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest -m integration -s tests/test_embedding_integration.py --basetemp=.pytest-integration-tmp
+.\.venv\Scripts\python.exe -m pytest -m integration -s tests/integration/test_embedding_integration.py --basetemp=.pytest-integration-tmp
 ```
 
 2026-10-18 的检查范围、改动及限制见 [项目检查记录](docs/project-review-2026-10-18.md)。
@@ -213,7 +228,7 @@ $env:PYTHONPATH = 'src'
 - `ingest.py` 加载支持的本地文件，保留相对路径和 PDF 页码，切分文本并写入 Milvus。
 - `retrieval.py` 从 Milvus 检索相关文本块，并为回答添加 `[S1]`、`[S2]` 等引用标签。
 - `answer.py` 只把问题和检索结果交给模型；证据不足时要求模型说明资料不足，不编造来源。
-- `agent.py` 让模型按需检索，并仅在用户明确要求时增量导入文件；它限制工具白名单和单轮调用次数。`conversation.py` 保存最近 20 轮对话。
+- `agent.py` 让模型按需检索，并仅在用户明确要求时增量导入文件；它限制工具白名单和单轮调用次数。`conversation.py` 用 SQLite 保存完整对话，模型上下文单独限制最近轮数。
 - 更换向量模型后需重建 Milvus 集合，避免向量维度或距离空间不一致。
 - 聊天请求通过 `DEEPSEEK_BASE_URL` 发送，可能产生服务用量费用。首次运行 `uv sync` 和下载 BGE-M3 需要联网。
 

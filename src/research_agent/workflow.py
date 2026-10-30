@@ -1,18 +1,24 @@
-"""专题研究状态机：受控取证、步骤检查点和与页面连接无关的后台执行。"""
+"""研究服务：保留 HTTP 契约，用 LangGraph 编排业务节点并持久化执行位置。"""
 
 import json
 import re
 import threading
 import uuid
+from copy import deepcopy
 from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
 
 from langchain_core.messages import HumanMessage, SystemMessage
+from langgraph.checkpoint.sqlite import SqliteSaver
+from langgraph.errors import GraphInterrupt
+from langgraph.graph import END
+from langgraph.types import Command, interrupt
 
 from research_agent.agent import _model
 from research_agent.answer import citation_validation_notice, validate_citation_labels
 from research_agent.config import Settings
+from research_agent.research_graph import build_research_graph
 from research_agent.retrieval import retrieve_library
 from research_agent.storage import write_json_atomic
 from research_agent.web_search import search_web
@@ -34,8 +40,12 @@ class _Cancelled(Exception):
     pass
 
 
-class _AwaitingWebConsent(Exception):
-    """取证暂停，等待用户决定当前任务是否可以联网。"""
+class _NodeFailure(RuntimeError):
+    """仅将异常类别交给框架，避免上游响应正文进入 checkpoint 的错误记录。"""
+
+    def __init__(self, node: str, error_type: str):
+        self.error_type = error_type
+        super().__init__(f"节点 {node} 失败（{error_type}）。")
 
 
 def _text(value, name: str, limit: int) -> str:
@@ -84,6 +94,7 @@ class ResearchWorkflow:
         self.lock = threading.RLock()
         self.active_id = None
         self.worker = None
+        self.checkpoint_path = self.directory / "checkpoints.sqlite"
         # 仅在服务初始化时恢复，不因读取详情或刷新页面改写运行状态。
         for task in self.list_tasks(full=True):
             if task["status"] == "running":
@@ -261,7 +272,8 @@ class ResearchWorkflow:
     def _checkpoint(self, task: dict) -> None:
         """结果先保存，再响应取消；不丢弃已经付费取得的步骤结果。"""
         with self.lock:
-            task["cancel_requested"] = self.get(task["id"])["cancel_requested"]
+            stored = self.get(task["id"])
+            task["cancel_requested"] = stored["cancel_requested"]
             if task["cancel_requested"]:
                 task["status"] = "cancelled"
                 for step in task["steps"]:
@@ -269,6 +281,20 @@ class ResearchWorkflow:
                         step["status"] = "skipped"
                 self._save(task)
                 raise _Cancelled()
+            # 中断节点从旧 State 重放时，不能用等待快照覆盖刚落盘的人工决定。
+            # 否则恢复前再次崩溃会丢失已确认的计划或联网决定。
+            if (
+                task.get("graph_node") == "approval"
+                and stored["confirmed"]
+                and not task["confirmed"]
+            ):
+                return
+            if (
+                task.get("graph_node") == "web_consent"
+                and task.get("web_consent") == "unknown"
+                and stored.get("web_consent") in {"allowed", "declined"}
+            ):
+                return
             self._save(task)
 
     def _generate(self, instruction: str, context: dict) -> str:
@@ -294,68 +320,174 @@ class ResearchWorkflow:
             task["evidence"].append(record)
             step["evidence_labels"].append(record["label"])
 
-    def _research_question(self, task: dict, index: int, step: dict) -> None:
-        question = task["plan"]["questions"][index]
-        if not step["local_done"]:
-            local = retrieve_library(question["question"], self.settings)
-            self._append_evidence(task, step, "S", local)
-            step["local_done"] = True
+    def _graph_step(self, name: str, state: dict) -> dict:
+        """节点只修改本次副本并返回更新；默认 reducer 用新 task 替换旧 task。"""
+        task = deepcopy(state["task"])
+        index = state.get("index", 0)
+        task.update(engine="langgraph", graph_node=name, error="", status="running")
+        if name not in {"plan", "approval", "select"}:
+            task["steps"][index].update(status="running", error="")
+        result = {}
+        try:
             self._checkpoint(task)
-        evidence = [item for item in task["evidence"] if item["label"] in step["evidence_labels"]]
-        if not step["web_done"]:
-            needs_web = not evidence or question["needs_current"] or question["news"]
-            consent = task.get("web_consent", "allowed" if task["allow_web"] else "declined")
-            can_ask = consent == "unknown" and self.settings.web_search_enabled
-            if (task["allow_web"] or can_ask) and not needs_web:
-                if "local_sufficient" not in step:
-                    assessment = json.loads(
-                        self._generate(
-                            "判断本地证据是否足以覆盖子问题，只输出 JSON："
-                            '{"sufficient":true或false,"gaps":"缺口说明，没有则写无"}。'
-                            "只有部分命中、关键信息缺失或冲突无法解释时 sufficient 为 false。",
-                            {"question": question, "evidence": evidence},
-                        )
+            if name == "select":
+                index = next(
+                    (i for i, step in enumerate(task["steps"]) if step["status"] != "succeeded"),
+                    len(task["steps"]),
+                )
+                total = len(task["plan"]["questions"])
+                if index == len(task["steps"]):
+                    task.update(status="completed", phase="completed")
+                    result = {"route": END}
+                else:
+                    task["phase"] = (
+                        "research" if index < total else "review" if index == total else "report"
                     )
-                    if not isinstance(assessment, dict) or not isinstance(
-                        assessment.get("sufficient"), bool
-                    ):
-                        raise ValueError("本地证据覆盖检查格式无效。")
-                    step["local_sufficient"] = assessment["sufficient"]
-                    step["local_gaps"] = _text(assessment.get("gaps"), "证据缺口", 4000)
-                    self._checkpoint(task)
-                needs_web = not step["local_sufficient"]
-            if can_ask and needs_web:
-                reason = (
-                    "资料库没有检索到相关证据。"
-                    if not evidence
-                    else "该问题涉及需要核对的时效信息。"
-                    if question["needs_current"] or question["news"]
-                    else step.get("local_gaps", "现有资料不足以回答该问题。")
-                )
-                task.update(
-                    status="waiting_web_consent",
-                    web_consent_request={
-                        "question": question["question"],
-                        "reason": reason,
-                        "search_query": question["search_query"],
-                    },
-                )
-                step["status"] = "pending"
+                    result = {"index": index, "route": "local" if index < total else task["phase"]}
+            elif name == "plan":
+                self._plan_node(task)
+            elif name == "approval":
+                task.update(status="awaiting_confirmation", phase="plan")
                 self._checkpoint(task)
-                raise _AwaitingWebConsent()
-            if task["allow_web"] and needs_web:
-                if not self.settings.web_search_enabled:
-                    raise ValueError("服务配置已关闭联网搜索。")
-                found = search_web(
-                    question["search_query"],
-                    news=question["news"],
-                    max_results=self.settings.web_search_max_results,
-                    settings=self.settings,
+                # interrupt 是可持久化暂停，不是 input()；恢复时本节点会从头运行。
+                decision = interrupt({"kind": "plan_confirmation", "plan": task["plan"]})
+                task = deepcopy(decision["task"])
+                task.update(engine="langgraph", graph_node=name, status="running")
+            elif name == "local":
+                step = task["steps"][index]
+                if not step["local_done"]:
+                    found = retrieve_library(
+                        task["plan"]["questions"][index]["question"], self.settings
+                    )
+                    self._append_evidence(task, step, "S", found)
+                    step["local_done"] = True
+            elif name == "coverage":
+                result["needs_web"] = self._coverage_node(task, index)
+            elif name == "web_consent":
+                self._consent_node(task, index, state["needs_web"])
+            elif name == "web_search":
+                step = task["steps"][index]
+                if not step["web_done"]:
+                    if task["allow_web"] and state["needs_web"]:
+                        if not self.settings.web_search_enabled:
+                            raise ValueError("服务配置已关闭联网搜索。")
+                        question = task["plan"]["questions"][index]
+                        found = search_web(
+                            question["search_query"],
+                            news=question["news"],
+                            max_results=self.settings.web_search_max_results,
+                            settings=self.settings,
+                        )
+                        self._append_evidence(task, step, "W", found)
+                    step["web_done"] = True
+            elif name == "summarize":
+                self._summary_node(task, index)
+            elif name == "review":
+                task["review"] = self._checked(
+                    self._generate(
+                        "检查各子问题成果与原始证据，输出‘证据缺口’、‘来源冲突’、‘适用范围与时效局限’。"
+                        "区分未找到信息与来源明确否定。冲突必须分别引用证据；不追加搜索。",
+                        self._context(task),
+                    ),
+                    task["evidence"],
                 )
-                self._append_evidence(task, step, "W", found)
-            step["web_done"] = True
+                task["steps"][index]["status"] = "succeeded"
+            elif name == "report":
+                self._report_node(task)
+                task["steps"][index]["status"] = "succeeded"
             self._checkpoint(task)
-        evidence = [item for item in task["evidence"] if item["label"] in step["evidence_labels"]]
+        except _Cancelled:
+            result["route"] = END
+        except GraphInterrupt:
+            # interrupt 通过特殊异常交还控制权，不能把它转换成业务失败。
+            raise
+        except Exception as exc:  # noqa: BLE001 - 框架可能持久化错误，先移除上游敏感正文
+            raise _NodeFailure(name, type(exc).__name__) from None
+        return {"task": task, **result}
+
+    def _plan_node(self, task: dict) -> None:
+        raw = self._generate(
+            "将目标拆为 3–5 个互不重复的研究子问题。只输出 JSON 对象："
+            '{"scope":"研究范围", "expected_output":"预期成果", "questions":'
+            '[{"question":"子问题", "search_query":"不超过80字符的中文搜索词", '
+            '"needs_current":false, "news":false}]}。'
+            "时效信息将 needs_current 设为 true，最近30天新闻才将 news 设为 true。"
+            "此阶段只拟定计划，不回答事实问题，不联网。",
+            {"goal": task["goal"]},
+        )
+        raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw.strip())
+        task["plan"] = validate_plan(json.loads(raw))
+        task.update(status="awaiting_confirmation", phase="plan")
+
+    @staticmethod
+    def _question_evidence(task: dict, index: int) -> list[dict]:
+        labels = set(task["steps"][index]["evidence_labels"])
+        return [item for item in task["evidence"] if item["label"] in labels]
+
+    def _coverage_node(self, task: dict, index: int) -> bool:
+        question, step = task["plan"]["questions"][index], task["steps"][index]
+        evidence = self._question_evidence(task, index)
+        needs_web = not evidence or question["needs_current"] or question["news"]
+        consent = task.get("web_consent", "allowed" if task["allow_web"] else "declined")
+        can_ask = consent == "unknown" and self.settings.web_search_enabled
+        if not step["web_done"] and (task["allow_web"] or can_ask) and not needs_web:
+            if "local_sufficient" not in step:
+                assessment = json.loads(
+                    self._generate(
+                        "判断本地证据是否足以覆盖子问题，只输出 JSON："
+                        '{"sufficient":true或false,"gaps":"缺口说明，没有则写无"}。'
+                        "只有部分命中、关键信息缺失或冲突无法解释时 sufficient 为 false。",
+                        {"question": question, "evidence": evidence},
+                    )
+                )
+                if not isinstance(assessment, dict) or not isinstance(
+                    assessment.get("sufficient"), bool
+                ):
+                    raise ValueError("本地证据覆盖检查格式无效。")
+                step["local_sufficient"] = assessment["sufficient"]
+                step["local_gaps"] = _text(assessment.get("gaps"), "证据缺口", 4000)
+            needs_web = not step["local_sufficient"]
+        return bool(needs_web)
+
+    def _consent_node(self, task: dict, index: int, needs_web: bool) -> None:
+        step, question = task["steps"][index], task["plan"]["questions"][index]
+        consent = task.get("web_consent", "allowed" if task["allow_web"] else "declined")
+        if (
+            step["web_done"]
+            or consent != "unknown"
+            or not needs_web
+            or not self.settings.web_search_enabled
+        ):
+            return
+        reason = (
+            "资料库没有检索到相关证据。"
+            if not self._question_evidence(task, index)
+            else "该问题涉及需要核对的时效信息。"
+            if question["needs_current"] or question["news"]
+            else step.get("local_gaps", "现有资料不足以回答该问题。")
+        )
+        request = {
+            "question": question["question"],
+            "reason": reason,
+            "search_query": question["search_query"],
+        }
+        task.update(status="waiting_web_consent", web_consent_request=request)
+        step["status"] = "pending"
+        self._checkpoint(task)
+        # 付费检索在后面的 web_search 节点，暂停节点重放不会重复发起搜索。
+        decision = interrupt({"kind": "web_consent", **request})
+        allowed = self._permission(decision["allow_web"])
+        task.update(
+            allow_web=allowed,
+            web_consent="allowed" if allowed else "declined",
+            web_consent_request=None,
+            status="running",
+        )
+        step["status"] = "running"
+
+    def _summary_node(self, task: dict, index: int) -> None:
+        step = task["steps"][index]
+        evidence = self._question_evidence(task, index)
         if not evidence:
             step["summary"] = (
                 "### 阶段结论\n未找到可用于回答该子问题的证据。\n\n### 待核实\n需要补充资料。"
@@ -365,87 +497,80 @@ class ResearchWorkflow:
                 self._generate(
                     "针对子问题输出 Markdown，必须含‘阶段结论’和‘待核实’两部分。"
                     "逐项核对证据是否覆盖问题；列出尚无支持的部分和不同来源的分歧。",
-                    {"goal": task["goal"], "question": question, "evidence": evidence},
+                    {
+                        "goal": task["goal"],
+                        "question": task["plan"]["questions"][index],
+                        "evidence": evidence,
+                    },
                 ),
                 evidence,
             )
+        step["status"] = "succeeded"
+
+    def _report_node(self, task: dict) -> None:
+        body = self._checked(
+            self._generate(
+                "生成中文专题研究报告，包含‘主要结论’、‘分题分析’、‘分歧与局限’。"
+                "根据证据及审核结果逐项引用，不生成来源清单（由程序追加）。"
+                "没有证据时只说明研究缺口，不生成事实性结论。",
+                self._context(task),
+            ),
+            task["evidence"],
+        )
+        task["report"] = (
+            f"# 专题研究报告\n\n研究目标：{task['goal']}\n\n## 研究范围\n\n"
+            f"{task['plan']['scope']}\n\n预期成果：{task['plan']['expected_output']}\n\n"
+            f"{body}\n\n## 证据检查记录\n\n{task['review']}\n\n## 来源清单\n\n"
+            + self._sources(task["evidence"])
+            + "\n\n引用标签已检查；这不代表事实真实性或引用语义已经核验。\n"
+        )
 
     def _run(self, task_id: str) -> None:
-        task = None
-        current_step = None
         try:
             task = self.get(task_id)
             self._checkpoint(task)
-            if not task["confirmed"]:
-                raw = self._generate(
-                    "将目标拆为 3–5 个互不重复的研究子问题。只输出 JSON 对象："
-                    '{"scope":"研究范围", "expected_output":"预期成果", "questions":'
-                    '[{"question":"子问题", "search_query":"不超过80字符的中文搜索词", '
-                    '"needs_current":false, "news":false}]}。'
-                    "时效信息将 needs_current 设为 true，最近30天新闻才将 news 设为 true。"
-                    "此阶段只拟定计划，不回答事实问题，不联网。",
-                    {"goal": task["goal"]},
-                )
-                raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw.strip())
-                task["plan"] = validate_plan(json.loads(raw))
-                task.update(status="awaiting_confirmation", phase="plan")
-                self._checkpoint(task)
-                return
-            for index, step in enumerate(task["steps"]):
-                if step["status"] == "succeeded":
-                    continue
-                current_step = step
-                step.update(status="running", error="")
-                total = len(task["plan"]["questions"])
-                task["phase"] = (
-                    "research" if index < total else "review" if index == total else "report"
-                )
-                self._checkpoint(task)
-                if index < total:
-                    self._research_question(task, index, step)
-                elif index == total:
-                    task["review"] = self._checked(
-                        self._generate(
-                            "检查各子问题成果与原始证据，输出‘证据缺口’、‘来源冲突’、‘适用范围与时效局限’。"
-                            "区分未找到信息与来源明确否定。冲突必须分别引用证据；不追加搜索。",
-                            self._context(task),
-                        ),
-                        task["evidence"],
-                    )
+            self.directory.mkdir(parents=True, exist_ok=True)
+            # thread_id 是图状态的身份，不是操作系统线程号；重启仍使用同一任务 ID。
+            config = {"configurable": {"thread_id": task_id}, "recursion_limit": 128}
+            with SqliteSaver.from_conn_string(str(self.checkpoint_path)) as saver:
+                graph = build_research_graph(self, saver)
+                snapshot = graph.get_state(config)
+                if not snapshot.values:
+                    graph_input = {"task": task, "index": 0, "needs_web": False, "route": ""}
                 else:
-                    body = self._checked(
-                        self._generate(
-                            "生成中文专题研究报告，包含‘主要结论’、‘分题分析’、‘分歧与局限’。"
-                            "根据证据及审核结果逐项引用，不生成来源清单（由程序追加）。"
-                            "没有证据时只说明研究缺口，不生成事实性结论。",
-                            self._context(task),
-                        ),
-                        task["evidence"],
-                    )
-                    task["report"] = (
-                        f"# 专题研究报告\n\n研究目标：{task['goal']}\n\n## 研究范围\n\n"
-                        f"{task['plan']['scope']}\n\n预期成果：{task['plan']['expected_output']}\n\n"
-                        f"{body}\n\n## 证据检查记录\n\n{task['review']}\n\n## 来源清单\n\n"
-                        + self._sources(task["evidence"])
-                        + "\n\n引用标签已检查；这不代表事实真实性或引用语义已经核验。\n"
-                    )
-                step["status"] = "succeeded"
-                self._checkpoint(task)
-            task.update(status="completed", phase="completed")
-            self._checkpoint(task)
-        except (_Cancelled, _AwaitingWebConsent):
+                    graph_input = None  # 失败重试使用 None，继续 checkpoint 中尚未完成的节点。
+                    pauses = [pause for item in snapshot.tasks for pause in item.interrupts]
+                    if pauses:
+                        kind = pauses[0].value["kind"]
+                        if kind == "plan_confirmation" and task["confirmed"]:
+                            graph_input = Command(resume={"task": task})
+                        elif kind == "web_consent" and task.get("web_consent") in {
+                            "allowed",
+                            "declined",
+                        }:
+                            graph_input = Command(resume={"allow_web": task["allow_web"]})
+                # sync 确保当前节点 checkpoint 落盘后才开始下一节点的外部调用。
+                for _ in graph.stream(
+                    graph_input, config, stream_mode="updates", durability="sync"
+                ):
+                    pass
+                final = graph.get_state(config)
+                if not final.next and final.values:
+                    # SQLite 是执行位置的依据；修复终态 checkpoint 已落盘但 JSON 视图滞后的窗口。
+                    self._checkpoint(deepcopy(final.values["task"]))
+        except _Cancelled:
             pass
-        except Exception as exc:  # noqa: BLE001 - 后台任务边界必须保存第三方异常并释放执行槽位
-            if task is None:
-                return
-            # 不记录上游异常正文，防止 URL、请求头等敏感信息落盘或进入界面。
-            task.update(
-                status="failed",
-                error=f"当前步骤失败（{type(exc).__name__}），请检查服务配置或稍后重试。",
-            )
-            if current_step is not None:
-                current_step.update(status="failed", error=task["error"])
+        except Exception as exc:  # noqa: BLE001 - 后台边界隔离第三方异常，不能输出请求正文或密钥
             try:
+                task = self.get(task_id)
+                error_type = exc.error_type if isinstance(exc, _NodeFailure) else type(exc).__name__
+                task.update(
+                    status="failed",
+                    error=f"当前步骤失败（{error_type}），请检查服务配置或稍后重试。",
+                )
+                for step in task["steps"]:
+                    if step["status"] == "running":
+                        step.update(status="failed", error=task["error"])
                 self._checkpoint(task)
             except _Cancelled:
                 pass

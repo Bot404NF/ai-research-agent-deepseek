@@ -254,7 +254,7 @@ def stream_answer_turn(
 ) -> Iterator[AgentEvent]:
     """执行带历史记忆、受控工具调用和流式回答的一轮对话。"""
     history_store = store or ConversationStore(settings.conversation_dir)
-    turns = history_store.load(session_id)
+    turns = history_store.load_recent(session_id, settings.chat_context_turns)
     messages = [SystemMessage(content=AGENT_PROMPT)]
     for turn in turns:
         messages.extend(
@@ -431,7 +431,7 @@ def stream_answer_turn(
     all_sources = [*library_sources, *web_sources]
     if all_sources:
         displayed_answer += "\n\n本轮来源：\n" + "\n".join(all_sources)
-    history_store.save(session_id, [*turns, {"user": question, "assistant": displayed_answer}])
+    history_store.append_turn(session_id, question, displayed_answer)
     if library_sources or web_sources:
         yield AgentEvent(
             kind="sources",

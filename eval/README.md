@@ -1,22 +1,24 @@
 # 检索、回答与性能评估
 
+目录已整理为 `datasets/`、`experiments/`、`reports/` 和 `results/`；代码实现迁入 `src/research_agent/evaluation/`，下方旧模块命令保留兼容。新增开发集入口为 `PYTHONPATH=src` 下的 `python eval/run_eval.py`。历史 JSON 和原始执行快照中的旧路径不改写，映射见 [目录整理记录](../docs/directory-layout.md)。
+
 2026-10-30 新增[真实专题研究验收](../docs/research-acceptance-2026-10-30.md)：关闭联网搜索，以现有上海地方志运行《安亭志》研究。流程通过，内容审核未完整通过。入口为 `run_research_acceptance.py`，原始任务、报告、模型调用、来源匹配和逐项审核位于 `results/research_20261030_anting_live/`；该案例与下述历史问答评估口径不同，不合并计算准确率。
 
-当前模型为 `deepseek-v4-pro`。2026-10-20 已重跑开发集、既有验收集回归、真实生成、性能和HTTP链路，见 [本轮完整报告](../docs/acceptance-2026-10-20.md)、[逐题复核](v4_pro_review_2026-10-20.md) 和 [检查清单](final_checks_2026-10-20.json)。本轮题集已被查看并用于提示词优化，仅属回归；后文的独立验收和性能数字为2026-10-19历史记录，不能直接代表当前模型。
+当前模型为 `deepseek-v4-pro`。2026-10-20 已重跑开发集、既有验收集回归、真实生成、性能和HTTP链路，见 [本轮完整报告](../docs/acceptance-2026-10-20.md)、[逐题复核](reports/v4_pro_review_2026-10-20.md) 和 [检查清单](reports/final_checks_2026-10-20.json)。本轮题集已被查看并用于提示词优化，仅属回归；后文的独立验收和性能数字为2026-10-19历史记录，不能直接代表当前模型。
 
 ## 数据与报告
 
 | 文件 | 用途 |
 |---|---|
-| `questions.json` | 20道参与调优的开发集 |
-| `summary_round3.md` | 同题集Hit@4从60%到70%的改进记录 |
-| `holdout_questions.json` | 20道未参与调参的验收题与4道合成无答案题 |
-| `holdout_manifest.json` | 检索前冻结的题集、检索代码摘要及生成样本ID |
-| `acceptance_reviews.json` | 独立集逐题审核、回答质量与引用支持判断 |
-| `acceptance_review.md` | 完整候选、真实回答和逐题理由 |
+| `datasets/questions.json` | 20道参与调优的开发集 |
+| `reports/summary_round3.md` | 同题集Hit@4从60%到70%的改进记录 |
+| `datasets/holdout_questions.json` | 20道未参与调参的验收题与4道合成无答案题 |
+| `datasets/holdout_manifest.json` | 检索前冻结的题集、检索代码摘要及生成样本ID |
+| `reports/acceptance_reviews.json` | 独立集逐题审核、回答质量与引用支持判断 |
+| `reports/acceptance_review.md` | 完整候选、真实回答和逐题理由 |
 | `results/acceptance_*.json` | 原始候选、回答、耗时与环境 |
 | `results/smoke_*.json` | 本机HTTP、完整代理、会话恢复记录 |
-| `final_checks.json` | 最终自动化和集成检查记录 |
+| `reports/final_checks.json` | 最终自动化和集成检查记录 |
 
 完整结论见 `../docs/acceptance-2026-10-19.md`；简历素材见 `../docs/resume-project.md`。旧轮次文件保留作为历史证据。
 

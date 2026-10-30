@@ -2,7 +2,7 @@
 
 ## 执行与持久化
 
-`workflow.py` 负责计划、分题取证、证据检查和报告汇总，`ResearchWorkflow` 由网页服务创建一次。所有任务状态通过进程内锁读写，JSON 使用同目录临时文件原子替换；外部调用在锁外执行，不阻塞状态查询或取消请求。任务不依赖 SSE 或浏览器连接，网页每 2 秒读取状态。
+`research_graph.py` 定义 LangGraph StateGraph，`workflow.py` 提供业务节点和后台服务，`ResearchWorkflow` 由网页服务创建一次。SQLite checkpoint 记录图状态与恢复位置；JSON 保留为网页视图和人工决定记录。计划确认及按需联网询问使用原生 `interrupt()`，接口通过 `Command(resume=...)` 回答。所有任务状态通过进程内锁读写，JSON 使用同目录临时文件原子替换；外部调用在锁外执行，不阻塞状态查询或取消请求。任务不依赖 SSE 或浏览器连接，网页每 2 秒读取状态。
 
 任务字段包括 `id`、`goal`、`allow_web`、`web_consent`、`web_consent_request`、`status`、`phase`、`plan`、`confirmed`、`steps`、`evidence`、`review`、`report`、`error`、`cancel_requested`、`updated_at`。计划包含 `scope`、`expected_output` 和 3–5 项 `questions`；每个子问题包含 `question`、`search_query`、`needs_current`、`news`。搜索词最长 80 字符，为搜索服务的语言和日期条件留出空间。
 
@@ -45,7 +45,7 @@
 
 ```powershell
 $env:PYTHONPATH = 'src'
-.\.venv\Scripts\python.exe tests/manual_workflow_demo.py --port 8877 --delay 2
+.\.venv\Scripts\python.exe scripts/manual_workflow_demo.py --port 8877 --delay 2
 ```
 
 打开 `http://127.0.0.1:8877`。该入口以模拟器替换研究模型、本地检索和搜索，证据与真实数据完全隔离，保存到 `work/workflow-demo/research_tasks/`。不要在此入口测试普通问答或资料导入，它们不属于模拟范围。
@@ -64,8 +64,8 @@ $env:PYTHONPATH = 'src'
 $env:PYTHONPATH = 'src'
 .\.venv\Scripts\python.exe -m pytest --basetemp=.pytest-workflow-final-tmp
 node --check src/research_agent/static/workflow.js
-uvx --from ruff==0.17.2 ruff check src/research_agent/workflow.py tests/test_workflow.py tests/manual_workflow_demo.py
-uvx --from ruff==0.17.2 ruff format --check src/research_agent/workflow.py tests/test_workflow.py tests/manual_workflow_demo.py
+uvx --from ruff==0.17.2 ruff check src/research_agent/workflow.py tests/integration/test_workflow.py scripts/manual_workflow_demo.py
+uvx --from ruff==0.17.2 ruff format --check src/research_agent/workflow.py tests/integration/test_workflow.py scripts/manual_workflow_demo.py
 ```
 
 离线测试使用模拟模型与取证工具，覆盖授权、计划编辑、失败重试、取消、恢复及真实本地 HTTP 请求。浏览器模拟验收只能证明界面与流程衔接，不能证明真实 DeepSeek 计划质量、检索覆盖、搜索质量、事实准确率、真实服务稳定性或任务费用。历史 RAG 数据继续保留在原验收文档中。
@@ -91,3 +91,28 @@ JSON 中间成果属于本地私有数据，默认目录已忽略。若自定义
 问答和研究空白首页共享网格行高、间距及底部留白，标题和输入框对齐；研究首页和计划确认区均移除联网授权复选框。授权暂停发生在搜索之前，本地证据与覆盖检查已落盘，继续不重复检索；拒绝后保留缺口说明，等待期间支持取消。
 
 本次验证：完整默认测试 80 passed、1 deselected；改动 Python 文件通过 Ruff lint 与 format 检查。离线模拟浏览器验证了确认计划后按需询问、刷新保留等待、同意后完成含网络来源的报告，以及拒绝后仅用本地资料完成。正式页面已实测桌面与375px下问答和研究输入框的 x/y/宽/高一致；未调用真实模型或真实搜索。
+
+
+## LangGraph 迁移与学习
+
+依赖由 uv 锁定为 LangGraph 1.2.18、langgraph-checkpoint-sqlite 3.1.2；不需要 LangSmith 账号或独立数据库服务。运行 `uv sync --locked` 更新虚拟环境。
+
+研究任务目录新增 `checkpoints.sqlite`，可能同时出现 SQLite 日志文件；这些文件与 JSON 一样包含私有研究数据，默认目录已忽略。`thread_id` 使用原任务 ID，服务每次执行以 `durability="sync"` 在节点边界落盘。网页接口、轮询和“资料库 / 网络”来源契约保持兼容，普通问答不迁移。
+
+旧 JSON 任务在下一次确认、继续或重试时惰性初始化图，复用成功步骤、local_done/web_done 和既有证据，不重新入库；已完成任务可继续直接查看。不要单独删除 SQLite 后将其当作正常恢复手段，也不要在执行中单独还原 JSON 文件。SQLite 和 JSON 之间没有跨存储事务，崩溃窗口仍可能重复外部调用。
+
+可执行学习练习、概念与实际节点对应、恢复参数和断言讲解见 [跟着本项目学习 LangGraph](langgraph-learning.md)。新增验证入口：
+
+```powershell
+$env:PYTHONPATH = 'src'
+.\.venv\Scripts\python.exe -m pytest tests/integration/test_langgraph_migration.py tests/integration/test_workflow.py --basetemp=.pytest-langgraph-tmp
+.\.venv\Scripts\python.exe examples/learn_langgraph.py start --thread lesson1
+.\.venv\Scripts\python.exe examples/learn_langgraph.py inspect --thread lesson1
+.\.venv\Scripts\python.exe examples/learn_langgraph.py approve --thread lesson1
+```
+
+前述 2026-10-29 测试数字属于迁移前记录，不应视为 LangGraph 版本验收结论。迁移验证使用真实框架和 SQLite，模型及搜索使用模拟器；不会据此宣称真实模型研究质量已提升。
+
+2026-10-30 迁移验证：完整默认测试 **92 passed, 1 deselected**，其中新增迁移测试 12 项；真实嵌入集成测试按默认配置未选择。验证了原有 HTTP 契约、原生计划/联网中断、重建服务后的恢复、失败节点位置、历史 JSON 惰性接入、不同 thread 隔离、五题流程上限、人工决定在中断重放期间保留，以及错误记录去除上游正文。学习练习的批准/拒绝通过独立进程测试，也已手动运行 start → inspect → approve。
+
+四个改动 Python 文件通过 Ruff lint 和 format 检查；现有网页脚本通过 Node 语法检查，diff 无空白错误。网页交互和 HTTP 接口未改变；本次迁移没有重新做浏览器视觉验收，也没有调用真实模型、Milvus 或联网搜索，不改变此前真实研究内容验收的结论。

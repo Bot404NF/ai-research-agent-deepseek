@@ -162,7 +162,7 @@
     let chatBusy=false;
     function setChatBusy(busy){
       chatBusy=busy;
-      document.querySelectorAll('#newConversation,#newConversationMobile,.history-item,.suggestion,.chip').forEach(button=>{button.disabled=busy;});
+      document.querySelectorAll('#newConversation,#newConversationMobile,.history-item,.history-more,.suggestion,.chip').forEach(button=>{button.disabled=busy;});
     }
     input.addEventListener('input',resizeInput);
     input.addEventListener('compositionstart',()=>{composing=true;});
@@ -173,6 +173,7 @@
     document.querySelector('#sessionLabel').textContent = sessionId;
     let empty = true;
     let currentSessionId = sessionId;
+    let conversationRequest = 0, conversationListRequest = 0;
 
     function resetMessages() {
       messages.innerHTML = '<div class="empty"><strong>今天想研究什么？</strong></div>';chatWorkspace.classList.add('is-empty');followOutput=true;
@@ -180,6 +181,7 @@
     }
     function newConversation() {
       if(chatBusy)return;
+      conversationRequest++;
       input.value='';resizeInput();
       currentSessionId = crypto.randomUUID().replaceAll('-', '').slice(0, 12);
       localStorage.setItem('research-agent-session', currentSessionId);
@@ -189,14 +191,20 @@
       refreshConversations();
       input.focus();
     }
-    async function refreshConversations() {
+    async function refreshConversations(offset = 0) {
       const list = document.querySelector('#conversationList');
+      const request = ++conversationListRequest;
       try {
-        const response = await fetch('/api/conversations', {cache:'no-store'});
+        const response = await fetch(`/api/conversations?limit=50&offset=${offset}`, {cache:'no-store'});
         const data = await response.json();
         if (!response.ok) throw new Error(data.error || '读取失败');
-        list.innerHTML = '';
-        if (!data.conversations.length) { list.innerHTML='<div class="history-empty">暂时没有已完成的对话</div>'; return; }
+        if(request!==conversationListRequest)return;
+        if(offset===0)list.replaceChildren();
+        else list.querySelector('.history-more')?.remove();
+        if(data.migration_warnings?.length && offset===0){
+          const warning=document.createElement('div');warning.className='history-empty';warning.textContent=`${data.migration_warnings.length} 个旧会话尚未导入，原文件已保留，请检查会话文件。`;list.append(warning);
+        }
+        if (!data.conversations.length) { const emptyList=document.createElement('div');emptyList.className='history-empty';emptyList.textContent='暂时没有已完成的对话';list.append(emptyList);return; }
         for (const conversation of data.conversations) {
           const row=document.createElement('div');row.className='history-row';
           const button = document.createElement('button');
@@ -204,27 +212,59 @@
           button.textContent=conversation.title; button.title=conversation.title;button.disabled=chatBusy;button.setAttribute('aria-current',String(conversation.id===currentSessionId));
           button.onclick=()=>openConversation(conversation.id);
           const remove=document.createElement('button');remove.type='button';remove.className='row-delete';remove.innerHTML='<svg class="icon"><use href="#i-trash"/></svg>';remove.title='删除此会话';
-          remove.onclick=()=>confirmDeletion('删除历史会话',`确定删除“${conversation.title}”吗？删除后无法恢复。`,async()=>{
+          remove.onclick=()=>confirmDeletion('删除历史会话',`确定删除“${conversation.title}”吗？将删除数据库中的对话；如有迁移前的 JSON 备份，文件仍保留。`,async()=>{
             const response=await fetch(`/api/conversations/${encodeURIComponent(conversation.id)}`,{method:'DELETE'});await readDeleteResponse(response,'删除会话失败。');
             if(currentSessionId===conversation.id){localStorage.removeItem('research-agent-session');newConversation();}else await refreshConversations();
           });
           row.append(button,remove);list.append(row);
         }
-      } catch { list.innerHTML='<div class="history-empty">暂时无法读取历史对话</div>'; }
+        if(data.has_more){
+          const more=document.createElement('button');more.type='button';more.className='history-item history-more';more.textContent='加载更多会话';more.disabled=chatBusy;
+          more.onclick=()=>{if(chatBusy)return;more.disabled=true;refreshConversations(data.next_offset);};list.append(more);
+        }
+      } catch {
+        if(request!==conversationListRequest)return;
+        if(offset===0)list.innerHTML='<div class="history-empty">暂时无法读取历史对话</div>';
+        else {const more=list.querySelector('.history-more');if(more){more.disabled=chatBusy;more.textContent='加载失败，点击重试';}}
+      }
+    }
+    function prependHistoryPager(id, data, generation) {
+      if(!data.has_more)return;
+      let loading=false;
+      const more=document.createElement('button');more.type='button';more.className='history-item history-more';more.textContent='加载更早对话';
+      more.onclick=async()=>{
+        if(chatBusy||more.disabled||loading)return;loading=true;more.disabled=true;more.textContent='正在读取…';
+        try{
+          const response=await fetch(`/api/conversations/${encodeURIComponent(id)}?limit=20&before=${data.next_before}`,{cache:'no-store'});
+          const page=await response.json();if(!response.ok)throw new Error(page.error||'读取失败');
+          if(id!==currentSessionId||generation!==conversationRequest||chatBusy)return;
+          const height=messages.scrollHeight,top=messages.scrollTop;
+          const fragment=document.createDocumentFragment();
+          for(const turn of page.turns){fragment.append(addMessage('user',turn.user).node,addMessage('assistant',turn.assistant).node);}
+          more.remove();messages.prepend(fragment);prependHistoryPager(id,page,generation);
+          messages.scrollTop=top+messages.scrollHeight-height;
+        }catch{more.textContent='读取失败，点击重试';}
+        finally{loading=false;more.disabled=chatBusy;if(more.textContent==='正在读取…')more.textContent='加载更早对话';}
+      };
+      messages.prepend(more);
     }
     async function openConversation(id) {
       if(chatBusy)return;
+      const request=++conversationRequest;
       try {
         const response=await fetch(`/api/conversations/${encodeURIComponent(id)}`,{cache:'no-store'});
         const data=await response.json();
         if(!response.ok) throw new Error(data.error||'读取失败');
+        if(request!==conversationRequest||chatBusy)return;
         currentSessionId=id; localStorage.setItem('research-agent-session',id);
         document.querySelector('#sessionId').textContent=`会话 ${id}`;
         document.querySelector('#sessionLabel').textContent=id;
         resetMessages();
         for(const turn of data.turns){addMessage('user',turn.user);addMessage('assistant',turn.assistant);}
+        prependHistoryPager(id,data,request);
+        scrollMessages(true);
         refreshConversations();
-      } catch(error) { addMessage('error',error.message||'无法读取历史对话。'); }
+      } catch(error) { if(request===conversationRequest)addMessage('error',error.message||'无法读取历史对话。'); }
     }
     const confirmModal=document.querySelector('#confirmModal');const confirmButton=document.querySelector('#confirmDelete');
     let pendingDelete=null;

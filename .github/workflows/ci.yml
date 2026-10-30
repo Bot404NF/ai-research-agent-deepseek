@@ -1,0 +1,41 @@
+name: 基础检查
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HF_HUB_OFFLINE: "1"
+      DEEPSEEK_API_KEY: ""
+      WEB_SEARCH_ENABLED: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.3"
+          enable-cache: true
+      - run: uv sync --frozen --group dev --python 3.12
+      - name: 离线测试（含本机 HTTP）
+        run: uv run --frozen pytest --basetemp=.pytest-ci-tmp
+      - name: 整理模块 lint
+        run: >-
+          uvx --from ruff==0.17.2 ruff check
+          src/research_agent/evaluation src/research_agent/observability
+          src/research_agent/evaluate.py src/research_agent/acceptance.py src/research_agent/smoke.py
+          scripts eval/run_eval.py tests/unit/test_acceptance.py
+          tests/integration/test_langgraph_migration.py
+      - name: 整理模块格式
+        run: >-
+          uvx --from ruff==0.17.2 ruff format --check
+          src/research_agent/evaluation src/research_agent/observability
+          src/research_agent/evaluate.py src/research_agent/acceptance.py src/research_agent/smoke.py
+          scripts eval/run_eval.py tests/unit/test_acceptance.py
+          tests/integration/test_langgraph_migration.py
