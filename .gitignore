@@ -6,6 +6,8 @@ __pycache__/
 .pytest*/
 .idea/
 web-server*.log
+web-stderr.log
+web-stdout.log
 .ruff_cache/
 .uv-cache/
 work/
