@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-10-30T13:12:19.883483+00:00",
+  "schema_version": 1,
+  "status": "blocked",
+  "git_head": "a7c4b3e971bc86695ff23dd81e63bf21d0b68548",
+  "dataset_sha256": "e10076caec8cc72253385e274d54a601d45d20c13629fcc26a6d5e7b3ddabae5",
+  "code_sha256": {
+    "retrieval": "75965cc705d0931856f75182e1cebeb0dc163ca3c6d8a3fc6ac89c1ce2402bf7",
+    "answer": "d15442dcbc94d8a88543af7a8b412543c9b0d1a9a558208be3fc703505e19182",
+    "evaluation/baseline": "18c822676c46f8f88e037ca82c2246746e61a2355de8b614d4854024a2ce49a0"
+  },
+  "environment": {
+    "python": "3.12.13",
+    "packages": {
+      "langgraph": "1.2.18",
+      "langchain-openai": "1.7.0",
+      "torch": "2.13.0+cu132"
+    }
+  },
+  "scope": "基础集合，只读、单用户顺序检索+单次回答；不代表完整 Agent 或 LangGraph 研究效果",
+  "settings": {
+    "collection": "research_docs",
+    "top_k": 4,
+    "threshold": 0.55,
+    "model": "deepseek-v4-pro",
+    "embedding": "BAAI/bge-m3",
+    "repeats": 3,
+    "generation_max_tokens": 700,
+    "generation_max_retries": 0
+  },
+  "dataset_validation": {
+    "cases": 56,
+    "source_files": 16,
+    "absence_scanned_markdown": 65
+  },
+  "selected_cases": 56,
+  "strata": {
+    "single_source": 40,
+    "synthetic_unanswerable": 4,
+    "multi_evidence": 8,
+    "evidence_boundary": 4
+  },
+  "pricing": null,
+  "results": [],
+  "blocker_type": "MilvusException"
+}

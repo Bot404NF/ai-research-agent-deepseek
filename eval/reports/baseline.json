@@ -1,0 +1,337 @@
+{
+  "created_at": "2026-10-30T13:12:44.845589+00:00",
+  "timezone": "Australia/Sydney",
+  "scope": "基础集合，只读、单用户顺序检索+单次回答；不代表完整 Agent 或 LangGraph 研究效果",
+  "status": "completed",
+  "git_head": "a7c4b3e971bc86695ff23dd81e63bf21d0b68548",
+  "dataset_sha256": "e10076caec8cc72253385e274d54a601d45d20c13629fcc26a6d5e7b3ddabae5",
+  "raw_results": "eval/results/week1_live_20261031.json",
+  "summary_results": "eval/results/week1_summary_final_20261031.json",
+  "raw_results_sha256": "d240c99180d0d53ada0a599bb6a634656a69cbf30d3fa371c64a8bec72c4dc47",
+  "summary_code_sha256": "9cccd1df53844df1614c5ea9d38a29ecf4a0d058375c3e4eabc388492ac24a84",
+  "cold_import_and_first_query_seconds": 5.648799800001143,
+  "semantic_status": "pending_human_review",
+  "cost_status": "unknown_without_verified_pricing",
+  "summary": {
+    "attempted": 56,
+    "succeeded": 56,
+    "failed": 0,
+    "retrieval_metric_denominator": 48,
+    "anchor_hit_at_4": 0.7083333333333334,
+    "annotated_recall_at_4_macro": 0.7534722222222222,
+    "citation_label_validity": {
+      "occurrences": 92,
+      "rate": 1.0
+    },
+    "answers_with_citation": 45,
+    "generated_answers": 56,
+    "semantic_manual": {
+      "hit_at_4": {
+        "eligible": 48,
+        "reviewed": 0,
+        "rate": null
+      },
+      "answer_correct": {
+        "eligible": 48,
+        "reviewed": 0,
+        "rate": null
+      },
+      "citation_supported": {
+        "eligible": 45,
+        "reviewed": 0,
+        "rate": null
+      },
+      "abstention_correct": {
+        "eligible": 8,
+        "reviewed": 0,
+        "rate": null
+      }
+    },
+    "api_attempted": 56,
+    "usage_observed_calls": 56,
+    "observed_input_tokens": 129252,
+    "observed_output_tokens": 3925,
+    "estimated_total_cost": null,
+    "cost_scope": "仅本运行器单次回答 API；不含搜索、追问、研究图、基础设施；失败请求用量可能未知",
+    "latency": {
+      "retrieval": {
+        "count": 168,
+        "median_seconds": 0.041030899999896064,
+        "p95_seconds": 0.048006299999542534
+      },
+      "generation": {
+        "count": 56,
+        "median_seconds": 2.366068950002955,
+        "p95_seconds": 3.772653799998807
+      },
+      "end_to_end": {
+        "count": 56,
+        "median_seconds": 2.4075706000003265,
+        "p95_seconds": 3.811456099996576
+      },
+      "failure_elapsed": {
+        "count": 0,
+        "median_seconds": null,
+        "p95_seconds": null
+      }
+    },
+    "by_stratum": {
+      "evidence_boundary": {
+        "attempted": 4,
+        "succeeded": 4,
+        "failed": 0,
+        "retrieval_metric_denominator": 0,
+        "anchor_hit_at_4": null,
+        "annotated_recall_at_4_macro": null,
+        "citation_label_validity": {
+          "occurrences": 0,
+          "rate": null
+        },
+        "answers_with_citation": 0,
+        "generated_answers": 4,
+        "semantic_manual": {
+          "hit_at_4": {
+            "eligible": 0,
+            "reviewed": 0,
+            "rate": null
+          },
+          "answer_correct": {
+            "eligible": 0,
+            "reviewed": 0,
+            "rate": null
+          },
+          "citation_supported": {
+            "eligible": 0,
+            "reviewed": 0,
+            "rate": null
+          },
+          "abstention_correct": {
+            "eligible": 4,
+            "reviewed": 0,
+            "rate": null
+          }
+        },
+        "api_attempted": 4,
+        "usage_observed_calls": 4,
+        "observed_input_tokens": 8388,
+        "observed_output_tokens": 181,
+        "estimated_total_cost": null,
+        "cost_scope": "仅本运行器单次回答 API；不含搜索、追问、研究图、基础设施；失败请求用量可能未知",
+        "latency": {
+          "retrieval": {
+            "count": 12,
+            "median_seconds": 0.0394430000014836,
+            "p95_seconds": 0.04605750000337139
+          },
+          "generation": {
+            "count": 4,
+            "median_seconds": 2.156037100001413,
+            "p95_seconds": 2.551066499996523
+          },
+          "end_to_end": {
+            "count": 4,
+            "median_seconds": 2.1950034000037704,
+            "p95_seconds": 2.5971239999998943
+          },
+          "failure_elapsed": {
+            "count": 0,
+            "median_seconds": null,
+            "p95_seconds": null
+          }
+        }
+      },
+      "multi_evidence": {
+        "attempted": 8,
+        "succeeded": 8,
+        "failed": 0,
+        "retrieval_metric_denominator": 8,
+        "anchor_hit_at_4": 0.5,
+        "annotated_recall_at_4_macro": 0.7083333333333334,
+        "citation_label_validity": {
+          "occurrences": 24,
+          "rate": 1.0
+        },
+        "answers_with_citation": 8,
+        "generated_answers": 8,
+        "semantic_manual": {
+          "hit_at_4": {
+            "eligible": 8,
+            "reviewed": 0,
+            "rate": null
+          },
+          "answer_correct": {
+            "eligible": 8,
+            "reviewed": 0,
+            "rate": null
+          },
+          "citation_supported": {
+            "eligible": 8,
+            "reviewed": 0,
+            "rate": null
+          },
+          "abstention_correct": {
+            "eligible": 0,
+            "reviewed": 0,
+            "rate": null
+          }
+        },
+        "api_attempted": 8,
+        "usage_observed_calls": 8,
+        "observed_input_tokens": 18687,
+        "observed_output_tokens": 1043,
+        "estimated_total_cost": null,
+        "cost_scope": "仅本运行器单次回答 API；不含搜索、追问、研究图、基础设施；失败请求用量可能未知",
+        "latency": {
+          "retrieval": {
+            "count": 24,
+            "median_seconds": 0.04112834999978077,
+            "p95_seconds": 0.04737050000403542
+          },
+          "generation": {
+            "count": 8,
+            "median_seconds": 2.6530082500030403,
+            "p95_seconds": 4.669999799996731
+          },
+          "end_to_end": {
+            "count": 8,
+            "median_seconds": 2.6947086500076693,
+            "p95_seconds": 4.708809199997631
+          },
+          "failure_elapsed": {
+            "count": 0,
+            "median_seconds": null,
+            "p95_seconds": null
+          }
+        }
+      },
+      "single_source": {
+        "attempted": 40,
+        "succeeded": 40,
+        "failed": 0,
+        "retrieval_metric_denominator": 40,
+        "anchor_hit_at_4": 0.75,
+        "annotated_recall_at_4_macro": 0.7625,
+        "citation_label_validity": {
+          "occurrences": 68,
+          "rate": 1.0
+        },
+        "answers_with_citation": 37,
+        "generated_answers": 40,
+        "semantic_manual": {
+          "hit_at_4": {
+            "eligible": 40,
+            "reviewed": 0,
+            "rate": null
+          },
+          "answer_correct": {
+            "eligible": 40,
+            "reviewed": 0,
+            "rate": null
+          },
+          "citation_supported": {
+            "eligible": 37,
+            "reviewed": 0,
+            "rate": null
+          },
+          "abstention_correct": {
+            "eligible": 0,
+            "reviewed": 0,
+            "rate": null
+          }
+        },
+        "api_attempted": 40,
+        "usage_observed_calls": 40,
+        "observed_input_tokens": 93448,
+        "observed_output_tokens": 2486,
+        "estimated_total_cost": null,
+        "cost_scope": "仅本运行器单次回答 API；不含搜索、追问、研究图、基础设施；失败请求用量可能未知",
+        "latency": {
+          "retrieval": {
+            "count": 120,
+            "median_seconds": 0.04105695000180276,
+            "p95_seconds": 0.0484132000055979
+          },
+          "generation": {
+            "count": 40,
+            "median_seconds": 2.3382175500009907,
+            "p95_seconds": 3.704704899995704
+          },
+          "end_to_end": {
+            "count": 40,
+            "median_seconds": 2.376246400002856,
+            "p95_seconds": 3.7477178999979515
+          },
+          "failure_elapsed": {
+            "count": 0,
+            "median_seconds": null,
+            "p95_seconds": null
+          }
+        }
+      },
+      "synthetic_unanswerable": {
+        "attempted": 4,
+        "succeeded": 4,
+        "failed": 0,
+        "retrieval_metric_denominator": 0,
+        "anchor_hit_at_4": null,
+        "annotated_recall_at_4_macro": null,
+        "citation_label_validity": {
+          "occurrences": 0,
+          "rate": null
+        },
+        "answers_with_citation": 0,
+        "generated_answers": 4,
+        "semantic_manual": {
+          "hit_at_4": {
+            "eligible": 0,
+            "reviewed": 0,
+            "rate": null
+          },
+          "answer_correct": {
+            "eligible": 0,
+            "reviewed": 0,
+            "rate": null
+          },
+          "citation_supported": {
+            "eligible": 0,
+            "reviewed": 0,
+            "rate": null
+          },
+          "abstention_correct": {
+            "eligible": 4,
+            "reviewed": 0,
+            "rate": null
+          }
+        },
+        "api_attempted": 4,
+        "usage_observed_calls": 4,
+        "observed_input_tokens": 8729,
+        "observed_output_tokens": 215,
+        "estimated_total_cost": null,
+        "cost_scope": "仅本运行器单次回答 API；不含搜索、追问、研究图、基础设施；失败请求用量可能未知",
+        "latency": {
+          "retrieval": {
+            "count": 12,
+            "median_seconds": 0.04058709999662824,
+            "p95_seconds": 0.048006299999542534
+          },
+          "generation": {
+            "count": 4,
+            "median_seconds": 2.335355700000946,
+            "p95_seconds": 2.4597113999989233
+          },
+          "end_to_end": {
+            "count": 4,
+            "median_seconds": 2.3745182500024384,
+            "p95_seconds": 2.500916499993764
+          },
+          "failure_elapsed": {
+            "count": 0,
+            "median_seconds": null,
+            "p95_seconds": null
+          }
+        }
+      }
+    }
+  }
+}

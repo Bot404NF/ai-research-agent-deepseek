@@ -1,5 +1,7 @@
 # 评测工作入口
 
+第一周基线：运行 `PYTHONPATH=src` 下的 `python eval/run_baseline.py --output 新结果路径` 先校验数据，再显式选择 `--retrieve` 或 `--generate`。详见[分层数据、指标口径与学习步骤](../eval/experiments/week1.md)和[本次基线报告](../eval/reports/week1_baseline_20261031.md)。
+
 实现位于 `src/research_agent/evaluation/`；数据集位于 `eval/datasets/`，实验计划位于 `eval/experiments/`，人工审核与历史总结位于 `eval/reports/`，原始输出保留在 `eval/results/`。
 
 旧的 `python -m research_agent.evaluate`、`research_agent.acceptance`、`research_agent.smoke` 保留兼容入口。新入口可使用 `python -m research_agent.evaluation.retrieval`、`research_agent.evaluation.acceptance`、`research_agent.evaluation.smoke`；开发集也可使用 `PYTHONPATH=src` 下的 `python eval/run_eval.py`。具体 PowerShell 命令及外部服务要求见 [评测说明](../eval/README.md)。

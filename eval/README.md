@@ -1,5 +1,7 @@
 # 检索、回答与性能评估
 
+2026-10-31 新增[第一周分层基线运行与教学](experiments/week1.md)：56 道公开回归题、已标注证据 Recall@4、锚点 Hit@4、人工语义审核模板、真实 Token 和 P50/P95。入口为 `PYTHONPATH=src` 下的 `python eval/run_baseline.py`；[本次报告](reports/week1_baseline_20261031.md) 单列实际执行与阻碍，不混用历史成绩。
+
 目录已整理为 `datasets/`、`experiments/`、`reports/` 和 `results/`；代码实现迁入 `src/research_agent/evaluation/`，下方旧模块命令保留兼容。新增开发集入口为 `PYTHONPATH=src` 下的 `python eval/run_eval.py`。历史 JSON 和原始执行快照中的旧路径不改写，映射见 [目录整理记录](../docs/directory-layout.md)。
 
 2026-10-30 新增[真实专题研究验收](../docs/research-acceptance-2026-10-30.md)：关闭联网搜索，以现有上海地方志运行《安亭志》研究。流程通过，内容审核未完整通过。入口为 `run_research_acceptance.py`，原始任务、报告、模型调用、来源匹配和逐项审核位于 `results/research_20261030_anting_live/`；该案例与下述历史问答评估口径不同，不合并计算准确率。
