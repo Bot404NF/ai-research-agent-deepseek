@@ -860,11 +860,11 @@ footer {
   flex:1;
   overflow:auto;
   padding:16px 32px 40px;
+  scroll-padding-bottom:110px;
   scrollbar-width:thin;
   scrollbar-color:var(--border-default) transparent
 }
 /* 研究首页复用问答输入框，不影响确认计划及执行详情的表单。 */
-.research-empty .research-toolbar {display:none;}
 .research-empty #researchContent,.research-home {display:contents;}
 .research-workspace.research-empty::after {
   content:"";
@@ -911,15 +911,11 @@ footer {
   margin-left:auto;
   margin-right:auto
 }
-.research-toolbar,.research-actions {
+.research-actions {
   display:flex;
   align-items:center;
   gap:8px;
   flex-wrap:wrap
-}
-.research-toolbar {
-  justify-content:space-between;
-  margin-bottom:12px
 }
 .research-workspace button {
   border:1px solid #7c7c7c;
@@ -937,15 +933,6 @@ footer {
   color:var(--button-primary-text);
   border-color:transparent
 }
-.research-workspace select {
-  max-width:60%;
-  padding:10px;
-  background:var(--bg-main);
-  border:1px solid #7c7c7c;
-  border-radius:8px;
-  color:var(--text-primary);
-  font-size:14px
-}
 .research-notice {
   font-size:14px;
   color:var(--status-warning);
@@ -956,7 +943,7 @@ footer {
   display:none
 }
 .research-card {
-  padding:24px 0;
+  padding:20px 0;
   margin-bottom:16px;
   min-width:0
 }
@@ -964,14 +951,14 @@ footer {
   border-top:1px solid var(--border-default)
 }
 .research-card h1 {
-  font-size:28px;
-  line-height:1.5;
-  margin:0 0 12px;
+  font-size:22px;
+  line-height:1.6;
+  margin:0 0 16px;
   font-weight:600
 }
 .research-card h2 {
-  font-size:20px;
-  margin:0 0 16px
+  font-size:18px;
+  margin:0 0 12px
 }
 .research-card h3 {
   font-size:16px
@@ -984,22 +971,25 @@ footer {
 .research-card label {
   display:block;
   font-size:14px;
-  margin:20px 0 8px
+  margin:16px 0;
+  line-height:1.6
 }
 .research-card textarea,.research-card input[type=text] {
   display:block;
   width:100%;
-  font-size:16px;
-  line-height:1.75;
-  border:1px solid #7c7c7c;
-  border-radius:12px;
-  padding:12px 16px;
+  font-size:15px;
+  line-height:1.7;
+  border:1px solid #707070;
+  border-radius:10px;
+  padding:10px 14px;
+  margin-top:8px;
   background:var(--bg-surface);
   color:var(--text-primary)
 }
 .research-card textarea {
-  min-height:100px;
-  resize:vertical
+  min-height:72px;
+  resize:none;
+  overflow-y:hidden
 }
 .research-card .research-check {
   display:flex;
@@ -1018,13 +1008,13 @@ footer {
 .research-actions {
   margin-top:24px
 }
-.research-task-list button {
+.research-task-list .research-task {
   display:flex;
   align-items:center;
   gap:8px;
   justify-content:space-between;
   min-width:0;
-  width:100%;
+  flex:1;
   background:transparent;
   border:0;
   border-radius:8px;
@@ -1032,7 +1022,7 @@ footer {
   text-align:left;
   font-size:14px
 }
-.research-task-list button:hover,.research-task-list button[aria-current=true] {
+.research-task-list .research-task:hover,.research-task-list .research-task[aria-current=true] {
   background:var(--bg-surface)
 }
 .research-task-list strong {
@@ -1050,11 +1040,14 @@ footer {
 }
 .research-flow {
   display:flex;
-  gap:8px;
+  gap:10px 0;
   flex-wrap:wrap;
-  margin:24px 0
+  margin:20px 0 28px;
+  padding:0 0 20px;
+  border-bottom:1px solid var(--border-default);
+  list-style:none
 }
-.research-flow span,.research-badge {
+.research-badge {
   font-size:12px;
   padding:5px 10px;
   border:1px solid var(--border-default);
@@ -1063,14 +1056,14 @@ footer {
   line-height:1.5
 }
 .research-question {
-  padding:16px 0;
+  padding:20px 0;
   border-top:1px solid var(--border-default)
 }
 .research-question h3 {
   margin:0 0 12px
 }
 .research-remove {
-  margin-top:12px
+  margin:0
 }
 .research-step {
   border-top:1px solid var(--border-default);
@@ -1134,6 +1127,100 @@ footer {
   font-size:12px;
   color:var(--text-secondary)
 }
+/* 研究详情以阅读顺序组织，只有需要决策的区域增加背景强调。 */
+.research-detail-head,.research-step-title,.research-question-head {
+  overflow-wrap:anywhere;
+  min-width:0
+}
+.research-meta {
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px 14px;
+  font-size:13px;
+  color:var(--text-secondary)
+}
+.research-badge[data-status=failed] {color:var(--status-error);border-color:#ffb4ab66;}
+.research-badge[data-status=completed],.research-badge[data-status=succeeded] {color:var(--status-success);border-color:#8fd3a866;}
+.research-badge[data-status=awaiting_confirmation],.research-badge[data-status=waiting_web_consent],.research-badge[data-status=waiting_continue] {color:var(--status-warning);border-color:#eac77a66;}
+.research-badge[data-status=running] {color:var(--text-primary);border-color:#858585;}
+.research-flow li {
+  display:flex;
+  align-items:center;
+  color:var(--text-secondary);
+  font-size:13px;
+  line-height:1.6
+}
+.research-flow li+li::before {
+  content:'→';
+  padding:0 12px;
+  color:var(--text-secondary)
+}
+.research-flow [aria-current=step] {color:var(--text-primary);font-weight:600;}
+.research-card .research-intro {font-size:14px;margin:0 0 24px;}
+.research-question-head,.research-report-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px
+}
+.research-question-head h3,.research-report-head h2 {margin:0;}
+.research-workspace .research-remove,.research-workspace .research-cancel {
+  border-color:transparent;
+  color:var(--text-secondary);
+  font-size:13px;
+  min-height:44px
+}
+.research-workspace .research-remove:hover,.research-workspace .research-cancel:hover {color:var(--status-error);}
+.research-question>label {margin-top:4px;}
+.research-search-settings {font-size:14px;color:var(--text-secondary);}
+.research-card summary {cursor:pointer;line-height:1.7;padding:10px 0;min-height:44px;}
+.research-search-settings[open] {padding-bottom:4px;}
+.research-search-settings label {color:var(--text-primary);}
+.research-plan-actions {
+  position:sticky;
+  bottom:0;
+  z-index:2;
+  justify-content:flex-end;
+  margin-top:16px;
+  padding:14px 0;
+  background:var(--bg-main);
+  border-top:1px solid var(--border-default)
+}
+.research-plan-card {padding-bottom:0;margin-bottom:0;}
+.research-workspace:has(.research-plan-card) {padding-bottom:0;}
+.research-plan-card input,.research-plan-card textarea,.research-plan-card summary,.research-plan-card button {scroll-margin-block:16px 110px;}
+.research-workspace .research-actions button {min-height:44px;}
+.research-confirmed-plan {margin:8px 0 24px;}
+.research-step-number {color:var(--text-secondary);font-variant-numeric:tabular-nums;}
+.research-card .research-state-note,.research-card .research-error {
+  padding:12px 16px;
+  border-left:2px solid var(--status-warning);
+  background:#ffffff04;
+  font-size:14px;
+  overflow-wrap:anywhere
+}
+.research-card .research-error {border-left-color:var(--status-error);}
+.research-consent {background:#ffffff04;overflow-wrap:anywhere;}
+.research-consent h2 {line-height:1.6;}
+.research-report-head {margin-bottom:24px;flex-wrap:wrap;}
+.research-report-head a {font-size:13px;color:var(--link);padding:10px 0;}
+.research-markdown h1 {font-size:22px;}
+.research-markdown h2 {font-size:19px;}
+.research-markdown h3 {font-size:17px;}
+.research-markdown h1,.research-markdown h2,.research-markdown h3,.research-markdown h4 {margin:28px 0 12px;line-height:1.6;}
+.research-markdown>:first-child {margin-top:0;}
+.research-markdown p,.research-markdown li {color:var(--text-primary);}
+.research-markdown p {margin:0 0 16px;}
+.research-markdown ul,.research-markdown ol {padding-left:24px;margin:12px 0 20px;}
+.research-markdown li {margin:6px 0;}
+.research-markdown blockquote {border-left:3px solid var(--border-default);margin:16px 0;padding:0 16px;}
+.research-markdown blockquote p {color:var(--text-secondary);}
+.research-markdown table {margin:16px 0 24px;font-size:14px;}
+.research-markdown th {background:var(--bg-surface);}
+.research-markdown th,.research-markdown td {text-align:left;vertical-align:top;}
+.research-markdown code {font-family:Consolas,monospace;font-size:.9em;}
+.research-markdown pre {white-space:pre;}
 @media(min-width:768px) {
   .sidebar-collapsed .shell {
     grid-template-columns:56px minmax(0,1fr)
@@ -1272,17 +1359,18 @@ footer {
     padding:16px 0
   }
   .research-card h1 {
-    font-size:24px
+    font-size:20px
   }
   .research-step details {
     margin-left:0
   }
-  .research-toolbar select {
-    max-width:64%
-  }
-  .research-toolbar button {
-    padding:10px
-  }
+  .research-flow li+li::before {padding:0 8px;}
+  .research-plan-actions {justify-content:stretch;}
+  .research-plan-actions button {flex:1;}
+  .research-step-title {flex-wrap:wrap;gap:8px;}
+  .research-step-title strong {flex-basis:calc(100% - 40px);}
+  .research-step-title .research-badge {margin-left:28px;}
+  .research-consent {padding:16px;}
   .sidebar .icon-button {
     width:44px;
     height:44px

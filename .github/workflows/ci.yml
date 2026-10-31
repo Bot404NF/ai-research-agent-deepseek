@@ -47,7 +47,8 @@ jobs:
           src/research_agent/grounded_retrieval.py
           src/research_agent/evidence_policy.py eval/verify_business.py tests/integration/test_business_quality.py
           eval/review_week4.py eval/smoke_week4.py tests/unit/test_performance.py
-          eval/interview_acceptance.py eval/interview_demo.py src/research_agent/quote_validation.py
+          eval/interview_acceptance.py eval/interview_demo.py eval/replay_research_report.py
+          tests/unit/test_report_replay.py src/research_agent/quote_validation.py
           tests/unit/test_runtime_observation.py tests/unit/test_quote_validation.py
           eval/run_target.py eval/review_target.py eval/datasets/build_unified.py
           tests/unit/test_grounded_retrieval.py tests/unit/test_target.py
@@ -70,7 +71,8 @@ jobs:
           src/research_agent/grounded_retrieval.py
           src/research_agent/evidence_policy.py eval/verify_business.py tests/integration/test_business_quality.py
           eval/review_week4.py eval/smoke_week4.py tests/unit/test_performance.py
-          eval/interview_acceptance.py eval/interview_demo.py src/research_agent/quote_validation.py
+          eval/interview_acceptance.py eval/interview_demo.py eval/replay_research_report.py
+          tests/unit/test_report_replay.py src/research_agent/quote_validation.py
           tests/unit/test_runtime_observation.py tests/unit/test_quote_validation.py
           eval/run_target.py eval/review_target.py eval/datasets/build_unified.py
           tests/unit/test_grounded_retrieval.py tests/unit/test_target.py

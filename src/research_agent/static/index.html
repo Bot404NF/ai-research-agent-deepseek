@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#212121">
   <title>知研 · 问答与研究</title>
-  <link rel="stylesheet" href="/workflow.css?v=consent-v2">
+  <link rel="stylesheet" href="/workflow.css?v=research-delete-v6">
 
 </head>
 <body data-mode="chat">
@@ -54,7 +54,6 @@
         <div class="top-actions"><span id="sessionLabel" class="session"></span><button id="newConversationMobile" class="icon-button mobile-new-chat" type="button" aria-label="新建对话"><svg class="icon"><use href="#i-plus"/></svg></button></div>
       </header>
       <section id="researchWorkspace" class="research-workspace" aria-label="研究工作区" hidden>
-        <div class="research-toolbar"><button id="newResearch" type="button">＋ 新建研究</button><select id="researchHistory" aria-label="打开历史研究任务"><option value="">打开历史研究任务</option></select></div>
         <p id="researchNotice" class="research-notice" role="status" aria-live="polite"></p>
         <div id="researchContent"></div>
       </section>
@@ -584,7 +583,7 @@
     drop.addEventListener('drop',event=>{event.preventDefault();drop.style.background='';setSelectedUploads([...event.dataTransfer.files],true);});
     refreshDatabases().catch(()=>{document.querySelector('#databaseList').innerHTML='<div class="history-empty">无法读取资料库列表</div>';});
   </script>
-  <script src="/workflow.js?v=consent-v2"></script>
+  <script src="/workflow.js?v=research-delete-v6"></script>
 </body>
 </html>
 

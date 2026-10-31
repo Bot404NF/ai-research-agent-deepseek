@@ -1,5 +1,7 @@
 # 本地面试演示：知研专题研究工作流助手
 
+[四部分导航](interview/README.md) · [验证与证据](interview/evidence.md) · [问题与改进方向](interview/limitations.md)
+
 目标岗位：AI应用／Agent开发。建议5—8分钟，主线只讲一次研究任务，不逐个展示全部按钮。
 
 ## 演示前
@@ -30,11 +32,30 @@
 
 **质量与取舍**：分开看证据命中、答案完整、引用语义支持和拒答。提示词与合法引用标签不能保证事实正确。单变量实验保留失败；未通过当前业务验收的候选不开默认。
 
+## 当前验收边界
+
+最新[网页手测](../eval/reports/manual_research_review_20261101.md)仍遗漏古籍出版社本，人物与全志卷数归纳不清，内容完整性未通过。先前修订稿只对应固定证据，不能据此保证新任务正确。初稿有三卷／四卷记载，允许分别引用并待核对，不把四卷当作无争议唯一答案。
+
+## 修订后的内容展示
+
+主展示使用[辅助复核修订稿](../eval/results/interview_demo_corrected_20261101.md)，配套[修复复核说明](../eval/reports/interview_demo_fix_review_20261101.md)。已区分不同整理本与成书／刊印阶段，获取日期按证据元数据记录，未经页级核验的称谓改为文本块；没有完成扫描原件校勘。
+
+修订稿包含明确标注的辅助编辑，不能冒充模型一次生成全对。原始失败报告和两次模型复验输出均保留；其余百题失败、默认候选关闭状态保持。恢复、下载等完整流程证据仍来自下方原始运行，不将内容复验描述成再次完成整条研究链路。
+
+本机已建立隔离的修订展示任务，可在新PowerShell窗口只读查看：
+
+```powershell
+$env:CONVERSATION_DIR = Join-Path (Get-Location) 'eval/runtime/interview_demo_corrected_20261101/conversations'
+.\.venv\Scripts\python.exe -m research_agent.cli web --port 8766
+```
+
+打开 `http://127.0.0.1:8766`，选择任务 `d51cbf495011495e86cc5475b2163632`。它是辅助修订的展示副本，已验证页面、任务读取和下载一致；不含原始LangGraph执行checkpoint，不能用它证明跨进程恢复，也不要再次执行。目录仅本机保留，缺失时直接展示修订Markdown，不声称已实现备份恢复。不要与下方旧流程环境同时占用端口，勿关闭个人活动服务。
+
 ## 真实验收与备用入口
 
 本轮已保存的真实结果：[运行记录与11项流程检查](../eval/results/interview_demo_20261101.json)、[原始研究报告](../eval/results/interview_demo_20261101.md)、[内容复核与局限](../eval/reports/interview_demo_review_20261101.md)、[统一验收状态表](../eval/reports/interview_completion_20261101.md)。先打开这些结果即可展示，不必再次调用模型。
 
-如需在网页查看保存的任务，在项目根目录的新PowerShell窗口执行：
+如需在网页查看原始流程任务（仍显示旧报告，用于解释修复前后差异），在项目根目录的新PowerShell窗口执行：
 
 ```powershell
 $env:CONVERSATION_DIR = Join-Path (Get-Location) 'eval/runtime/interview_demo_20261101/conversations'

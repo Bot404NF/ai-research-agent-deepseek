@@ -350,6 +350,9 @@ def test_scanner_uses_staged_blob_not_clean_worktree(tmp_path, capsys):
     path.write_text('api_key="test-key"\n', encoding="utf-8")
     assert scanner.scan(tmp_path) == 0
     assert scanner.scan(tmp_path, staged=True) == 1
+    path.unlink()
+    assert scanner.scan(tmp_path) == 0
+    assert scanner.scan(tmp_path, staged=True) == 1
     (tmp_path / ".env").write_text("DEEPSEEK_API_KEY" + chr(61) + SENTINEL, encoding="utf-8")
     git("add", "--", ".env")
     assert scanner.scan(tmp_path, staged=True) == 1

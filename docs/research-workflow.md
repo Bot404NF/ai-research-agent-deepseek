@@ -20,13 +20,14 @@
 
 ## HTTP 接口
 
-所有接口仅服务本地单用户演示，POST 沿用已有同源校验，JSON 请求。状态冲突返回 409，校验失败 400，任务不存在 404，存储失败 500。任务 ID 为 32 位小写十六进制字符。
+所有接口仅服务本地单用户演示，POST 与 DELETE 沿用已有同源校验，POST 使用 JSON 请求。状态冲突返回 409，校验失败 400，任务不存在 404，存储失败 500。任务 ID 为 32 位小写十六进制字符。
 
 | 方法与路径 | 请求或返回 |
 | --- | --- |
 | `POST /api/research/tasks` | `{goal, ask_web_consent:true}`；返回 202 和任务详情，后台生成计划 |
 | `GET /api/research/tasks` | `{tasks:[{id,goal,status,phase,updated_at}]}`，按更新时间倒序 |
 | `GET /api/research/tasks/{id}` | 完整任务快照，包括当前步骤、证据和成果 |
+| `DELETE /api/research/tasks/{id}` | 删除任务 JSON 及该任务的 SQLite checkpoints/writes；成功返回 `{deleted:true}`。运行中或后台尚未退出返回 409，需先取消并等待停止；不删除资料库或其他任务 |
 | `POST /api/research/tasks/{id}/plan` | `{plan}`；仅待确认阶段可保存，旧客户端可选传 `allow_web` |
 | `POST /api/research/tasks/{id}/confirm` | 可携带最终 `{plan}`，校验并锁定计划后执行 |
 | `POST /api/research/tasks/{id}/web-consent` | `{allow_web:true或false}`；仅等待许可状态可用，保存决定并从检查点继续 |

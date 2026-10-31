@@ -84,8 +84,14 @@ def candidates(root: Path, staged: bool, paths: list[str] | None):
             if staged
             else git(root, "ls-files", "-z")
         )
+        # 默认检查工作区；暂存扫描仍读取 index，不能因工作区删除而漏掉凭据。
+        deleted = (
+            set(git(root, "ls-files", "--deleted", "-z").decode("utf-8").split("\0"))
+            if not staged
+            else set()
+        )
         for name in names.decode("utf-8").split("\0"):
-            if name:
+            if name and name not in deleted:
                 yield Path(name)
         return
     for name in paths:

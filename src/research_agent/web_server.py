@@ -334,6 +334,23 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
                 self._send_json(403, {"error": "只接受来自本地演示网页的请求。"})
                 return
             path = urlparse(self.path).path
+            if path.startswith("/api/research/tasks/"):
+                task_id = path.removeprefix("/api/research/tasks/")
+                if "/" in task_id:
+                    self._send_json(404, {"error": "研究接口不存在。"})
+                    return
+                try:
+                    research.delete(task_id)
+                    self._send_json(200, {"deleted": True})
+                except FileNotFoundError:
+                    self._send_json(404, {"error": "研究任务不存在或已删除。"})
+                except WorkflowConflict as exc:
+                    self._send_json(409, {"error": validation_message(exc)})
+                except ValueError as exc:
+                    self._send_json(400, {"error": validation_message(exc)})
+                except (OSError, sqlite3.Error):
+                    self._send_json(500, {"error": "删除研究任务失败，请稍后重试。"})
+                return
             if path.startswith("/api/conversations/"):
                 session_id = path.removeprefix("/api/conversations/")
                 if not SESSION_PATTERN.fullmatch(session_id):

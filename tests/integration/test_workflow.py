@@ -1,6 +1,7 @@
 """研究工作流的离线状态机、恢复与 HTTP 契约测试。"""
 
 import json
+import sqlite3
 import threading
 from copy import deepcopy
 from http.client import HTTPConnection
@@ -497,6 +498,76 @@ def test_duplicate_execution_and_cancel_at_external_boundary(engine, monkeypatch
     assert all(step["status"] == "skipped" for step in cancelled["steps"])
 
 
+@pytest.mark.parametrize(
+    "status",
+    [
+        "awaiting_confirmation",
+        "completed",
+        "cancelled",
+        "failed",
+        "waiting_continue",
+        "waiting_web_consent",
+    ],
+)
+def test_delete_only_target_task_and_checkpoints(engine, status):
+    task = engine.create("将要删除的研究")
+    target = settle(engine, task["id"])
+    other = engine.create("保留的研究")
+    settle(engine, other["id"])
+    target["status"] = status
+    engine._save(target)
+    other_bytes = engine._path(other["id"]).read_bytes()
+    engine.delete(task["id"])
+    assert not engine._path(task["id"]).exists()
+    assert engine._path(other["id"]).read_bytes() == other_bytes
+    with sqlite3.connect(engine.checkpoint_path) as connection:
+        for table in ("checkpoints", "writes"):
+            assert (
+                connection.execute(
+                    f"SELECT count(*) FROM {table} WHERE thread_id = ?", (task["id"],)
+                ).fetchone()[0]
+                == 0
+            )
+        assert (
+            connection.execute(
+                "SELECT count(*) FROM checkpoints WHERE thread_id = ?", (other["id"],)
+            ).fetchone()[0]
+            > 0
+        )
+    restarted = workflow.ResearchWorkflow(engine.settings)
+    assert [item["id"] for item in restarted.list_tasks()] == [other["id"]]
+    with pytest.raises(FileNotFoundError):
+        restarted.get(task["id"])
+
+
+def test_delete_rejects_running_or_still_active_task(engine):
+    task = engine.create("活动研究")
+    stored = settle(engine, task["id"])
+    engine.active_id = task["id"]
+    with pytest.raises(workflow.WorkflowConflict, match="先取消"):
+        engine.delete(task["id"])
+    engine.active_id = None
+    stored["status"] = "running"
+    engine._save(stored)
+    with pytest.raises(workflow.WorkflowConflict, match="先取消"):
+        engine.delete(task["id"])
+    assert engine.get(task["id"])["status"] == "running"
+
+
+def test_delete_checkpoint_failure_preserves_task(engine, monkeypatch):
+    task = engine.create("保留失败记录")
+    settle(engine, task["id"])
+    before = engine._path(task["id"]).read_bytes()
+
+    def fail(*args):
+        raise sqlite3.OperationalError("模拟清理失败")
+
+    monkeypatch.setattr(workflow.SqliteSaver, "delete_thread", fail)
+    with pytest.raises(sqlite3.OperationalError):
+        engine.delete(task["id"])
+    assert engine._path(task["id"]).read_bytes() == before
+
+
 def test_http_task_contract_static_assets_and_report(engine, monkeypatch):
     from research_agent.agent import AgentEvent
     from research_agent.web_server import create_handler
@@ -529,6 +600,24 @@ def test_http_task_contract_static_assets_and_report(engine, monkeypatch):
         assert status == 200 and "专题研究报告" in body.decode()
         assert headers["Content-Disposition"].endswith('.md"')
         assert request("POST", f"/api/research/tasks/{task_id}/retry", {})[0] == 409
+        assert request("DELETE", "/api/research/tasks/invalid")[0] == 400
+        assert request("DELETE", "/api/research/tasks/" + "0" * 32)[0] == 404
+        assert request("DELETE", f"/api/research/tasks/{task_id}/report")[0] == 404
+        assert (
+            request(
+                "DELETE",
+                f"/api/research/tasks/{task_id}",
+                headers={"Origin": "https://other.example"},
+            )[0]
+            == 403
+        )
+        engine.active_id = task_id
+        assert request("DELETE", f"/api/research/tasks/{task_id}")[0] == 409
+        engine.active_id = None
+        status, body, _ = request("DELETE", f"/api/research/tasks/{task_id}")
+        assert status == 200 and json.loads(body) == {"deleted": True}
+        assert request("DELETE", f"/api/research/tasks/{task_id}")[0] == 404
+        assert request("GET", f"/api/research/tasks/{task_id}/report")[0] == 404
         assert request("GET", "/api/research/tasks/invalid")[0] == 400
         assert request("GET", "/api/research/tasks/" + "0" * 32)[0] == 404
         assert (
