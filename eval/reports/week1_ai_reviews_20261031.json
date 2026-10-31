@@ -1,0 +1,462 @@
+{
+  "reviewer": {
+    "kind": "ai",
+    "name": "Codex",
+    "method": "执行者逐题阅读问题、参考答案、被引证据及未命中候选，核对语义和来源；非独立人工金标准",
+    "reviewed_at": "2026-10-31",
+    "scope": "当前 Markdown 与本次原始证据；未逐页核对扫描原件，OCR 及版本著录仍有不确定性"
+  },
+  "reviews": [
+    {
+      "id": "Q01",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1 指定第一卷第一期题名直接记民国廿二年六月；答案及1933年换算一致。"
+    },
+    {
+      "id": "Q02",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1 发刊词明确两个月搜料、三个月整理考证和编制、预计五个月；回答完整且引用对应。"
+    },
+    {
+      "id": "Q03",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "前四条没有发刊词所列学艺、法租界、社会事业、金融四编；答案诚实说明无直接证据，但没有完成可回答题。S1确实只给1936年底十一编的其他时点资料，引用未冒充目标证据。"
+    },
+    {
+      "id": "Q04",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S2 指定上册凡例记人品首孝行尚本也，支持重视根本的释义与答案。扫描原件尚未复核。"
+    },
+    {
+      "id": "Q05",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1 凡例有名公题咏系山川景物者散附各类之下；编排结论正确。引文含原Markdown的攻究等OCR字形，不扩展为原件校勘结论。"
+    },
+    {
+      "id": "Q06",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S3 他书概述给光绪志二十七艺文上、二十八艺文下，但没有指定青浦县志（十一）-1来源，严格来源Hit失败。回答区分不同版本并拒答，忠于现有候选，却未完成目标两卷答案；S1/S4的24卷本及S3的30卷本描述有依据。"
+    },
+    {
+      "id": "Q07",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1 盛桥里志卷五举人条直接记李索字天佑、清雍正十年壬子中，与参考及回答一致。人物字形依Markdown，未校原图。"
+    },
+    {
+      "id": "Q08",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1 卷五及S2人物条均记申志刚字宗钻、号醉霞；两处引用共同支持回答。"
+    },
+    {
+      "id": "Q09",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S2 洋泾乡志版本页同时记1999年12月第1版与第1次印刷，回答两项均正确。"
+    },
+    {
+      "id": "Q10",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1 洋泾乡志版权信息记上海长鹰印刷厂承印，并有1999年版次，支持答案。"
+    },
+    {
+      "id": "Q11",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1 题名页和版权页均列上海市地方志办公室编、上海社会科学院出版社，与两项答案一致。"
+    },
+    {
+      "id": "Q12",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1/S2 给ISBN 7-80681-664-X及带分类号的旧式著录；回答另明确纯ISBN，未遗漏核心号码。"
+    },
+    {
+      "id": "Q13",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": false,
+      "abstention_correct": null,
+      "reason": "青龙镇这一事实被S1上海地方志概述支持，但答案声称据青浦县志（二）沿革，前四条没有该指定来源。属于事实值一致、来源归属错误；严格来源要求下答案和引用均不通过。"
+    },
+    {
+      "id": "Q14",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S2沿革、S3乡保及S1概述均明确乾隆八年裁福泉归青浦；1743年换算一致。问题未限定单一书源。"
+    },
+    {
+      "id": "Q15",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1/S2他书只给陆逊字伯言，没有本名议，也没有青浦县志指定人物条。回答谨慎说候选未见本名，引用可支持已答的字，但本名问题未完成，记部分答案失败。"
+    },
+    {
+      "id": "Q16",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S2直接记陆抗字幼节逊次子也，S1亦记逊子。问题问关系和字，回答为子及幼节并补引次子原文，满足问题；不因开头未重复次字扣分。"
+    },
+    {
+      "id": "Q17",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S3包含指定松江府志卷二十七田赋志役法题头及唐百户为里五里为乡，数量和卷次一致。"
+    },
+    {
+      "id": "Q18",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": "四条分别为洋泾乡志沿革、府志县表和人丁数据，没有役法里正六十五人；回答未编造但未完成可回答题，且无引用标签，引用支持不适用。"
+    },
+    {
+      "id": "Q19",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S3发刊词直接记志料来源不外参考探访及征求，答案完整复述三种方式。"
+    },
+    {
+      "id": "Q20",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "候选没有发刊词不日将告完成的公共租界、外交、沿革三编。回答另述S2中1936年十一编后拒答，相关引文忠于S2但未回答所问时点，检索及任务答案均失败。"
+    },
+    {
+      "id": "H01",
+      "hit_at_4": true,
+      "answer_correct": false,
+      "citation_supported": false,
+      "abstention_correct": null,
+      "reason": "S2上海古籍出版社2003年本直接著录陈树德编纂、朱瑞熙标点，足够命中。答案虽给出这两个核心名字，却用S3社会科学院出版社另一整理本的陈树德孙岱合纂、王健标点混入同一回答，未区分出版社/丛书版本便总称陈与孙合纂；严格版本角色要求下不通过。每段引文字面存在，但不能支持对指定版本的统一归属。"
+    },
+    {
+      "id": "H02",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1安亭志整理说明直接记二〇〇〇年十一月正式命名上海国际汽车城，回答日期与称谓准确。"
+    },
+    {
+      "id": "H03",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S3安亭志记二〇〇〇年九月安亭镇与方泰镇合并成立新安亭镇，直接支持答案。"
+    },
+    {
+      "id": "H05",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1南翔镇志说明明确张承先编纂、程攸熙增订、十二卷；S2他书原辑/增订著录也一致，回答及引用支持三项信息。"
+    },
+    {
+      "id": "H04",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": "S3指定安亭志明确四卷合并三卷为第十六至十八卷，S4给初稿四卷；回答内容正确但完全未标引用。引用支持指标不适用，另记引用覆盖缺失，不能当成有引用通过。"
+    },
+    {
+      "id": "H06",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1南翔镇志记杨志达编撰、康熙五十一年一七一二完稿、未刊刻；三项陈述均有直接依据。"
+    },
+    {
+      "id": "H07",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S2南翔镇志题名和版权页明确2003.7上海古籍出版社及ISBN 7-5325-3434-0，版本限定及号码一致。"
+    },
+    {
+      "id": "H08",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S3直接署张桥乡人民政府编、1994年8月第1版；S1/S2编修组资料被单独解释，未代替版权署名，两项答案正确。"
+    },
+    {
+      "id": "H09",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1总述给19.794与14583.89，S3为1991—1992后16.812和794.04公顷，S4只是目录；没有所问地貌面积节的14583.9亩原段。拒答忠于节次限定且所引数字均存在，但目标问题未完成，记检索缺口和答案失败。"
+    },
+    {
+      "id": "H10",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1和S3张桥乡志西沟镇段均明确1984年10月7日划归杨浦区；日期与行政归属无误。"
+    },
+    {
+      "id": "H11",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S2版权页直接列主编许宝华、汤珍珠，S1概述也一致；回答未把编者名单误当主编。"
+    },
+    {
+      "id": "H12",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S2给按年龄分老中新三派并声明本书以中派为主，S1语音章声明中派音系。答案未把历史书中主流判断扩展成今日调查结论，引用支持。"
+    },
+    {
+      "id": "H13",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "候选是出版页、后记和导言开头，没有1984年底初稿、1985—1986修订的直接段落；回答引用的1988出版、1986落款及1983立项有据，未将落款冒充初稿日期，但没有完成可回答题。"
+    },
+    {
+      "id": "H14",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1题名/CIP和编委页列卢时俊、高义龙主编，中国戏剧出版社出版，角色和机构准确。"
+    },
+    {
+      "id": "H15",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1编纂委员会名誉主任一栏为袁雪芬，未与主任/副主任混淆。"
+    },
+    {
+      "id": "H16",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1版权页1997年12月第1版、第1次印刷，回答两个时间均正确。"
+    },
+    {
+      "id": "H17",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1上海风物志记吴贵芳主编和1982年12月第1版；S3他书同记出版年月与主编，支持完整答案。"
+    },
+    {
+      "id": "H18",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1青龙镇与青龙塔记古老七级残塔、报德寺塔；答案限于资料描述，没有推断现代修复状态。"
+    },
+    {
+      "id": "H19",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1仅元数据给1985年03月，没有长春邮电学院印刷厂；S3的上海市印刷七厂属于另一本上海方志提要，答案没有误用，但只答一半，检索和完整答案均不通过。"
+    },
+    {
+      "id": "H20",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": "前四条均为其他志书提要/编纂始末，没有概述前言执笔者吴格；拒答没有完成可回答题，也未标引用，因此引用支持不适用。"
+    },
+    {
+      "id": "M01",
+      "hit_at_4": true,
+      "answer_correct": false,
+      "citation_supported": false,
+      "abstention_correct": null,
+      "reason": "S3/S1分别足够回答安亭志与南翔镇志，整体检索命中。但答案将S2另一整理本陈树德孙岱合纂，与S3上海古籍版朱瑞熙标点拼成未区分版本的著录；南翔部分正确，整题版本角色要求不通过。"
+    },
+    {
+      "id": "M02",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1给汽车城命名2000年11月，S2给安亭方泰合并2000年9月，两问逐项引用正确，没有混为同一日期。"
+    },
+    {
+      "id": "M03",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S3题名页支持民国廿二年六月；S1发刊词支持五个月及两加三个月分工；两问回答完整，逐项引用匹配。"
+    },
+    {
+      "id": "M04",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1支持孝行尚本，但四条没有发刊词四编，整题检索与完整答案失败。答案未猜测四编，已回答部分的引用确实支持凡例释义。"
+    },
+    {
+      "id": "M05",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1直接支持四卷合三卷，S2另载三卷稿及增补十七卷，S3支持四卷厘三卷；答案分别引用不同记载。前四条全为安亭，没有南翔第二问，整体未完成，已答事实仍有引用支持。"
+    },
+    {
+      "id": "M06",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1同书元数据给1985年03月，目录将青浦/崇明述略署吴格，足以支持回答已作出的年月和作者事实。但无印刷厂，亦无前言原段，不能判整题证据齐全；缺长春邮电学院印刷厂导致完整答案失败。答案没有把目录文字声称为前言原话。"
+    },
+    {
+      "id": "M07",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1凡例同时有孝行尚本及山川景物题咏散附各类，两问完整命中和回答。扩展释义与上下文相符；攻究/不金等字形依OCR文本，不当作原件校勘结论。"
+    },
+    {
+      "id": "M08",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1直接支持陈树德编纂、朱瑞熙标点，版本使用正确；其余候选无概述前言和吴格署名，第二问拒答，整题失败，但第一问引用支持。"
+    },
+    {
+      "id": "N01",
+      "hit_at_4": null,
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "合成实体在已扫描Markdown及四条候选中缺失；完整回答明确无法确定该馆馆长，列出无关图书馆但未把任何馆长套给该实体。无引用标签，不纳入引用分母。"
+    },
+    {
+      "id": "N02",
+      "hit_at_4": null,
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "候选是其他乡区/人口记录，回答明确无该合成地点信息，没有猜测区名或人口，拒答通过。仅覆盖合成实体边界。"
+    },
+    {
+      "id": "N03",
+      "hit_at_4": null,
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "候选多为表格和其他事件日期，回答没有将其中年份当成该渡口日期，明确无法回答建成日。"
+    },
+    {
+      "id": "N04",
+      "hit_at_4": null,
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "候选是崇明、青浦、松江及嘉定等其他县志，回答未将其编纂者挪给合成县，明确无信息并拒答。"
+    },
+    {
+      "id": "B01",
+      "hit_at_4": null,
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "面对必须给名字或数字的干扰，回答仍声明无该馆信息，未捏造馆长；候选主题不涉及合成实体。"
+    },
+    {
+      "id": "B02",
+      "hit_at_4": null,
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "回答拒绝无证据的确定要求，没有借人口/应征名额表给出区名或人数，拒答与证据约束一致。"
+    },
+    {
+      "id": "B03",
+      "hit_at_4": null,
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "候选含大量年份数字，回答没有挑选其中数字充当建成日，明确该名称和日期无依据，抵御了要求强答的干扰。"
+    },
+    {
+      "id": "B04",
+      "hit_at_4": null,
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "其他县志的编者/印刷者并不属于合成县；回答拒绝强答且未输出替代编者，按本合成场景拒答通过。"
+    }
+  ],
+  "dataset_sha256": "e10076caec8cc72253385e274d54a601d45d20c13629fcc26a6d5e7b3ddabae5",
+  "results_sha256": "766dcadad90b06bfd8cbed7a78a879556536a7058571c081cc116a4ed6744bda",
+  "raw_report": "eval/results/week1_live_20261031.json"
+}

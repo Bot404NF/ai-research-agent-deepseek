@@ -1,0 +1,22 @@
+{
+  "scope": "本地面试优化最终离线检查，无额外付费请求。",
+  "production_code_unchanged_since_live": true,
+  "lint": "项目CI配置范围：通过",
+  "format": {
+    "passed": true,
+    "files": 64
+  },
+  "secrets_scan": {
+    "files": 459,
+    "findings": 0,
+    "read_errors": 0,
+    "scope": "src tests scripts eval docs README.md .env.example .github/workflows/ci.yml；排除私密与二进制目录"
+  },
+  "git_diff_check": "通过；仅行尾转换提示",
+  "tests_record": "eval/results/interview_tests_20261101.xml",
+  "tests_passed": 194,
+  "tests_deselected": 1,
+  "missing_document_links": [],
+  "git_commit": false,
+  "git_push": false
+}

@@ -12,6 +12,7 @@ from importlib.metadata import version
 from pathlib import Path
 
 from research_agent.config import PROJECT_ROOT, get_settings
+from research_agent.security import protect_external_call
 from research_agent.storage import write_json_atomic
 
 
@@ -33,6 +34,7 @@ def distribution(values: list[float]) -> dict:
     }
 
 
+@protect_external_call
 def main() -> None:
     parser = argparse.ArgumentParser(description="固定题集验收；只读数据库，结果写入eval/results")
     parser.add_argument(

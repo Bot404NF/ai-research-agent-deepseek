@@ -6,9 +6,16 @@ from research_agent.answer import answer_question
 from research_agent.config import get_settings
 from research_agent.ingest import build_index
 from research_agent.retrieval import retrieve_library
+from research_agent.security import (
+    ExternalServiceError,
+    error_type,
+    protect_external_call,
+    public_endpoint,
+)
 
 
-def main() -> None:
+@protect_external_call
+def _main() -> None:
     parser = argparse.ArgumentParser(description="基于 Milvus 的本地文档 AI 研究助手")
     subparsers = parser.add_subparsers(dest="command", required=True)
     subparsers.add_parser("ingest", help="根据本地资料重建向量索引")
@@ -24,7 +31,7 @@ def main() -> None:
         if not settings.api_key:
             parser.error("请先在 .env 中设置 DEEPSEEK_API_KEY，再导入资料。")
         count = build_index(settings)
-        print(f"已将 {count} 个文本块写入 Milvus：{settings.milvus_uri}")
+        print(f"已将 {count} 个文本块写入 Milvus：{public_endpoint(settings.milvus_uri)}")
     elif args.command == "ask":
         if not settings.api_key:
             parser.error("请先在 .env 中设置 DEEPSEEK_API_KEY，再提问。")
@@ -95,13 +102,23 @@ def main() -> None:
                     if not consent_requested:
                         break
             except Exception as exc:  # noqa: BLE001 - CLI 边界保留会话并展示受控错误
-                print(f"本轮处理失败（{type(exc).__name__}）。会话记录仍保留，可稍后重试。")
+                print(f"本轮处理失败（{error_type(exc)}）。会话记录仍保留，可稍后重试。")
     else:
         if not settings.api_key:
             parser.error("请先在 .env 中设置 DEEPSEEK_API_KEY，再启动网页演示。")
         from research_agent.web_server import serve
 
         serve(settings, port=args.port)
+
+
+def main() -> None:
+    try:
+        _main()
+    except ExternalServiceError as exc:
+        print(str(exc))
+    else:
+        return
+    raise SystemExit(1)
 
 
 if __name__ == "__main__":

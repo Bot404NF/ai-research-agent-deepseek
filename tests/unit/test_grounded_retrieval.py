@@ -21,6 +21,16 @@ def test_content_words_beat_directory_headings():
     assert rank_content("《安亭志》前言人民公社何时建立？", [heading, answer])[0] == answer
 
 
+def test_imprint_question_preserves_direct_bibliographic_evidence():
+    catalogue = Evidence("S1", "出版社出版机构编写出版社介绍出版社", "甲志.md")
+    imprint = Evidence("S2", "图书在版编目 ISBN 示例 乙出版社 版次 第一版", "甲志.md")
+    assert (
+        rank_content("《甲志》由哪个机构编写、哪家出版社出版？", [catalogue, imprint])[0] == imprint
+    )
+    ordinary = Evidence("S3", "唐代里正人数乡制记载", "甲志.md")
+    assert rank_content("《甲志》唐代里正人数如何记载？", [imprint, ordinary])[0] == ordinary
+
+
 def test_scoped_query_does_not_fallback_to_other_books_and_keeps_budget(tmp_path):
     (tmp_path / "甲志.md").write_text("测试", encoding="utf-8")
     settings = replace(get_settings(), data_dir=tmp_path)

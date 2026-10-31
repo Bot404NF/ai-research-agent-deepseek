@@ -9,7 +9,8 @@ from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
 
-from research_agent.answer import SYSTEM_PROMPT, render_context
+from research_agent.answer import BASE_SYSTEM_PROMPT as SYSTEM_PROMPT
+from research_agent.answer import render_context
 from research_agent.config import PROJECT_ROOT, get_settings
 from research_agent.evaluation.acceptance import digest, distribution
 from research_agent.evaluation.baseline import (

@@ -1,0 +1,110 @@
+{
+  "created_at": "2026-10-31T03:34:35.466629+00:00",
+  "schema_version": 1,
+  "status": "validated_only",
+  "git_head": "bc9a7e8d32c233612049edcc6a48c0fb8d93f5d1",
+  "dataset_sha256": "e10076caec8cc72253385e274d54a601d45d20c13629fcc26a6d5e7b3ddabae5",
+  "code_sha256": {
+    "retrieval": "75965cc705d0931856f75182e1cebeb0dc163ca3c6d8a3fc6ac89c1ce2402bf7",
+    "answer": "d15442dcbc94d8a88543af7a8b412543c9b0d1a9a558208be3fc703505e19182",
+    "evaluation/baseline": "3c68fa14a3cfa2a9199d894e1e2c3207c8dfdc8602cfb775f88d382d26304aad"
+  },
+  "environment": {
+    "python": "3.12.13",
+    "packages": {
+      "langgraph": "1.2.18",
+      "langchain-openai": "1.7.0",
+      "torch": "2.13.0+cu132"
+    }
+  },
+  "scope": "基础集合，只读、单用户顺序检索+单次回答；不代表完整 Agent 或 LangGraph 研究效果",
+  "settings": {
+    "collection": "research_docs",
+    "top_k": 4,
+    "threshold": 0.55,
+    "model": "deepseek-v4-pro",
+    "embedding": "BAAI/bge-m3",
+    "repeats": 1,
+    "generation_max_tokens": 700,
+    "generation_max_retries": 0
+  },
+  "dataset_validation": {
+    "cases": 56,
+    "source_files": 16,
+    "absence_scanned_markdown": 65
+  },
+  "selected_cases": 56,
+  "strata": {
+    "single_source": 40,
+    "synthetic_unanswerable": 4,
+    "multi_evidence": 8,
+    "evidence_boundary": 4
+  },
+  "pricing": null,
+  "results": [],
+  "summary": {
+    "attempted": 0,
+    "succeeded": 0,
+    "failed": 0,
+    "retrieval_metric_denominator": 0,
+    "anchor_hit_at_4": null,
+    "annotated_recall_at_4_macro": null,
+    "citation_label_validity": {
+      "occurrences": 0,
+      "rate": null
+    },
+    "answers_with_citation": 0,
+    "generated_answers": 0,
+    "semantic_manual": {
+      "hit_at_4": {
+        "eligible": 0,
+        "reviewed": 0,
+        "rate": null
+      },
+      "answer_correct": {
+        "eligible": 0,
+        "reviewed": 0,
+        "rate": null
+      },
+      "citation_supported": {
+        "eligible": 0,
+        "reviewed": 0,
+        "rate": null
+      },
+      "abstention_correct": {
+        "eligible": 0,
+        "reviewed": 0,
+        "rate": null
+      }
+    },
+    "api_attempted": 0,
+    "usage_observed_calls": 0,
+    "observed_input_tokens": null,
+    "observed_output_tokens": null,
+    "estimated_total_cost": null,
+    "cost_scope": "仅本运行器单次回答 API；不含搜索、追问、研究图、基础设施；失败请求用量可能未知",
+    "latency": {
+      "retrieval": {
+        "count": 0,
+        "median_seconds": null,
+        "p95_seconds": null
+      },
+      "generation": {
+        "count": 0,
+        "median_seconds": null,
+        "p95_seconds": null
+      },
+      "end_to_end": {
+        "count": 0,
+        "median_seconds": null,
+        "p95_seconds": null
+      },
+      "failure_elapsed": {
+        "count": 0,
+        "median_seconds": null,
+        "p95_seconds": null
+      }
+    },
+    "by_stratum": {}
+  }
+}

@@ -1,0 +1,1609 @@
+{
+  "dataset_sha256": "74a40ea634295ccb5c8c3da3ebcce5aed97c3e2f8dd8a4b64a3bb5874eec8351",
+  "results_sha256": "3cf0d56e0d55711ed8cf7e4f7f8e4351e1f4e287fb007af71291524c34d95451",
+  "reviewer": {
+    "kind": "human"
+  },
+  "reviews": [
+    {
+      "id": "T001",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T001",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T002",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T002",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T003",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T003",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T004",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T004",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T005",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T005",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T006",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T006",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T007",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T007",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T008",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T008",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T009",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T009",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T010",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T010",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T011",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T011",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T012",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T012",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T013",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T013",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T014",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T014",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T015",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T015",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T016",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T016",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T017",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T017",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T018",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T018",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T019",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T019",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T020",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T020",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T021",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T021",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T022",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T022",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T023",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T023",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T024",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T024",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T025",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T025",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T026",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T026",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T027",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T027",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T028",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T028",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T029",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T029",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T030",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T030",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T031",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T031",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T032",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T032",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T033",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T033",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T034",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T034",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T035",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T035",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T036",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T036",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T037",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T037",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T038",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T038",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T039",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T039",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T040",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T040",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T041",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T041",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T042",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T042",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T043",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T043",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T044",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T044",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T045",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T045",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T046",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T046",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T047",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T047",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T048",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T048",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T049",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T049",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T050",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T050",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T051",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T051",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T052",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T052",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T053",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T053",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T054",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T054",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T055",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T055",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T056",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T056",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T057",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T057",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T058",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T058",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T059",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T059",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T060",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T060",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T061",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T061",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T062",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T062",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T063",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T063",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T064",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T064",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T065",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T065",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T066",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T066",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T067",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T067",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T068",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T068",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T069",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T069",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T070",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T070",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T071",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T071",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T072",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T072",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T073",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T073",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T074",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T074",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T075",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T075",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T076",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T076",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T077",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T077",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T078",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T078",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T079",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T079",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T080",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T080",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T081",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T081",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T082",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T082",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T083",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T083",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T084",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T084",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T085",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T085",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T086",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T086",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T087",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T087",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T088",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T088",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T089",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T089",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T090",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T090",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T091",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T091",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T092",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T092",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T093",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T093",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T094",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T094",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T095",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T095",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T096",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T096",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T097",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T097",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T098",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T098",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T099",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T099",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T100",
+      "arm": "baseline",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "T100",
+      "arm": "candidate",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    }
+  ]
+}

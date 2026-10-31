@@ -1,9 +1,6 @@
-"""成本分析占位：后续读取真实 token 用量及带日期、币种的价格配置。"""
+"""离线估算已保存调用的成本，未知用量不视为零。"""
 
-
-def main() -> None:
-    raise SystemExit("尚未实现成本分析；不将未知 token 用量或价格视为零。")
-
+from research_agent.evaluation.costs import main
 
 if __name__ == "__main__":
     main()

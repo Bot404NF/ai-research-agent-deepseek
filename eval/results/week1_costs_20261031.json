@@ -1,0 +1,365 @@
+{
+  "created_at": "2026-10-31T03:31:16.905598+00:00",
+  "pricing": {
+    "model": "deepseek-v4-pro",
+    "model_version_on_price_page": "DeepSeek-V4-Pro-0813",
+    "currency": "CNY",
+    "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+    "source_website": "DeepSeek API Docs 中文官网",
+    "publisher": "DeepSeek",
+    "published_date": null,
+    "effective_date": null,
+    "access_date": "2026-10-31",
+    "time_band": "off_peak",
+    "input_hit_per_million": 0.15,
+    "input_miss_per_million": 4.5,
+    "output_per_million": 13.5,
+    "applicability": "仅 deepseek-v4-pro 官方公开空闲时段人民币单价；当前价格页未标发布日期/生效日，按查询日单价回算，非历史账单核验。原始运行开始UTC 2026-10-30 13时，即北京时间21时，约三分钟内完成，均在18时后空闲时段。账户优惠、免费额度和代理平台加价不在此配置内。",
+    "time_band_rule": "北京时间工作日9:00—12:00及14:00—18:00为高峰，其余和周末/中国法定节假日为空闲。此运行21时不依赖节假日判断。"
+  },
+  "scope": "官方公开单价乘已保存用量的估算，非账户账单；不含完整代理、搜索、基础设施",
+  "api_attempted": 56,
+  "priced_calls": 56,
+  "estimated_total_cost": 0.6346215,
+  "observed_partial_cost": 0.6346215,
+  "results": [
+    {
+      "id": "Q01",
+      "input_tokens": 2133,
+      "output_tokens": 25,
+      "estimated_cost": 0.009936
+    },
+    {
+      "id": "Q02",
+      "input_tokens": 1896,
+      "output_tokens": 46,
+      "estimated_cost": 0.009153
+    },
+    {
+      "id": "Q03",
+      "input_tokens": 2100,
+      "output_tokens": 101,
+      "estimated_cost": 0.0108135
+    },
+    {
+      "id": "Q04",
+      "input_tokens": 2650,
+      "output_tokens": 59,
+      "estimated_cost": 0.0127215
+    },
+    {
+      "id": "Q05",
+      "input_tokens": 2515,
+      "output_tokens": 68,
+      "estimated_cost": 0.0122355
+    },
+    {
+      "id": "Q06",
+      "input_tokens": 2855,
+      "output_tokens": 224,
+      "estimated_cost": 0.0158715
+    },
+    {
+      "id": "Q07",
+      "input_tokens": 2886,
+      "output_tokens": 34,
+      "estimated_cost": 0.013446
+    },
+    {
+      "id": "Q08",
+      "input_tokens": 3160,
+      "output_tokens": 35,
+      "estimated_cost": 0.0146925
+    },
+    {
+      "id": "Q09",
+      "input_tokens": 2272,
+      "output_tokens": 49,
+      "estimated_cost": 0.0108855
+    },
+    {
+      "id": "Q10",
+      "input_tokens": 1846,
+      "output_tokens": 20,
+      "estimated_cost": 0.008577
+    },
+    {
+      "id": "Q11",
+      "input_tokens": 2278,
+      "output_tokens": 21,
+      "estimated_cost": 0.0105345
+    },
+    {
+      "id": "Q12",
+      "input_tokens": 2358,
+      "output_tokens": 40,
+      "estimated_cost": 0.011151
+    },
+    {
+      "id": "Q13",
+      "input_tokens": 2433,
+      "output_tokens": 30,
+      "estimated_cost": 0.0113535
+    },
+    {
+      "id": "Q14",
+      "input_tokens": 2325,
+      "output_tokens": 30,
+      "estimated_cost": 0.0108675
+    },
+    {
+      "id": "Q15",
+      "input_tokens": 3155,
+      "output_tokens": 85,
+      "estimated_cost": 0.015345
+    },
+    {
+      "id": "Q16",
+      "input_tokens": 2855,
+      "output_tokens": 48,
+      "estimated_cost": 0.0134955
+    },
+    {
+      "id": "Q17",
+      "input_tokens": 2797,
+      "output_tokens": 31,
+      "estimated_cost": 0.013005
+    },
+    {
+      "id": "Q18",
+      "input_tokens": 2598,
+      "output_tokens": 54,
+      "estimated_cost": 0.01242
+    },
+    {
+      "id": "Q19",
+      "input_tokens": 2193,
+      "output_tokens": 47,
+      "estimated_cost": 0.010503
+    },
+    {
+      "id": "Q20",
+      "input_tokens": 2101,
+      "output_tokens": 190,
+      "estimated_cost": 0.0120195
+    },
+    {
+      "id": "H01",
+      "input_tokens": 2352,
+      "output_tokens": 151,
+      "estimated_cost": 0.0126225
+    },
+    {
+      "id": "H02",
+      "input_tokens": 2601,
+      "output_tokens": 26,
+      "estimated_cost": 0.0120555
+    },
+    {
+      "id": "H03",
+      "input_tokens": 2790,
+      "output_tokens": 30,
+      "estimated_cost": 0.01296
+    },
+    {
+      "id": "H04",
+      "input_tokens": 2192,
+      "output_tokens": 39,
+      "estimated_cost": 0.0103905
+    },
+    {
+      "id": "H05",
+      "input_tokens": 2425,
+      "output_tokens": 84,
+      "estimated_cost": 0.0120465
+    },
+    {
+      "id": "H06",
+      "input_tokens": 2484,
+      "output_tokens": 47,
+      "estimated_cost": 0.0118125
+    },
+    {
+      "id": "H07",
+      "input_tokens": 2410,
+      "output_tokens": 29,
+      "estimated_cost": 0.0112365
+    },
+    {
+      "id": "H08",
+      "input_tokens": 1944,
+      "output_tokens": 129,
+      "estimated_cost": 0.0104895
+    },
+    {
+      "id": "H09",
+      "input_tokens": 1754,
+      "output_tokens": 167,
+      "estimated_cost": 0.0101475
+    },
+    {
+      "id": "H10",
+      "input_tokens": 1873,
+      "output_tokens": 29,
+      "estimated_cost": 0.00882
+    },
+    {
+      "id": "H11",
+      "input_tokens": 1899,
+      "output_tokens": 23,
+      "estimated_cost": 0.008856
+    },
+    {
+      "id": "H12",
+      "input_tokens": 2450,
+      "output_tokens": 85,
+      "estimated_cost": 0.0121725
+    },
+    {
+      "id": "H13",
+      "input_tokens": 1858,
+      "output_tokens": 123,
+      "estimated_cost": 0.0100215
+    },
+    {
+      "id": "H14",
+      "input_tokens": 2596,
+      "output_tokens": 24,
+      "estimated_cost": 0.012006
+    },
+    {
+      "id": "H15",
+      "input_tokens": 2242,
+      "output_tokens": 18,
+      "estimated_cost": 0.010332
+    },
+    {
+      "id": "H16",
+      "input_tokens": 1816,
+      "output_tokens": 53,
+      "estimated_cost": 0.0088875
+    },
+    {
+      "id": "H17",
+      "input_tokens": 2010,
+      "output_tokens": 31,
+      "estimated_cost": 0.0094635
+    },
+    {
+      "id": "H18",
+      "input_tokens": 2404,
+      "output_tokens": 23,
+      "estimated_cost": 0.0111285
+    },
+    {
+      "id": "H19",
+      "input_tokens": 1753,
+      "output_tokens": 44,
+      "estimated_cost": 0.0084825
+    },
+    {
+      "id": "H20",
+      "input_tokens": 2189,
+      "output_tokens": 94,
+      "estimated_cost": 0.0111195
+    },
+    {
+      "id": "N01",
+      "input_tokens": 2167,
+      "output_tokens": 80,
+      "estimated_cost": 0.0108315
+    },
+    {
+      "id": "N02",
+      "input_tokens": 2149,
+      "output_tokens": 27,
+      "estimated_cost": 0.010035
+    },
+    {
+      "id": "N03",
+      "input_tokens": 2218,
+      "output_tokens": 24,
+      "estimated_cost": 0.010305
+    },
+    {
+      "id": "N04",
+      "input_tokens": 2195,
+      "output_tokens": 84,
+      "estimated_cost": 0.0110115
+    },
+    {
+      "id": "M01",
+      "input_tokens": 2578,
+      "output_tokens": 261,
+      "estimated_cost": 0.0151245
+    },
+    {
+      "id": "M02",
+      "input_tokens": 2436,
+      "output_tokens": 99,
+      "estimated_cost": 0.0122985
+    },
+    {
+      "id": "M03",
+      "input_tokens": 1989,
+      "output_tokens": 67,
+      "estimated_cost": 0.009855
+    },
+    {
+      "id": "M04",
+      "input_tokens": 2713,
+      "output_tokens": 87,
+      "estimated_cost": 0.013383
+    },
+    {
+      "id": "M05",
+      "input_tokens": 2222,
+      "output_tokens": 198,
+      "estimated_cost": 0.012672
+    },
+    {
+      "id": "M06",
+      "input_tokens": 1650,
+      "output_tokens": 54,
+      "estimated_cost": 0.008154
+    },
+    {
+      "id": "M07",
+      "input_tokens": 2736,
+      "output_tokens": 191,
+      "estimated_cost": 0.0148905
+    },
+    {
+      "id": "M08",
+      "input_tokens": 2363,
+      "output_tokens": 86,
+      "estimated_cost": 0.0117945
+    },
+    {
+      "id": "B01",
+      "input_tokens": 2064,
+      "output_tokens": 59,
+      "estimated_cost": 0.0100845
+    },
+    {
+      "id": "B02",
+      "input_tokens": 2002,
+      "output_tokens": 33,
+      "estimated_cost": 0.0094545
+    },
+    {
+      "id": "B03",
+      "input_tokens": 2110,
+      "output_tokens": 53,
+      "estimated_cost": 0.0102105
+    },
+    {
+      "id": "B04",
+      "input_tokens": 2212,
+      "output_tokens": 36,
+      "estimated_cost": 0.01044
+    }
+  ],
+  "raw_report_sha256": "d240c99180d0d53ada0a599bb6a634656a69cbf30d3fa371c64a8bec72c4dc47",
+  "pricing_sha256": "4bc6c7dc9acca0a698d41f9b7b0cc1642410a5efd8c9597ba536cbd9858a2aa9"
+}

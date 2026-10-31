@@ -1,10 +1,16 @@
 # 检索、回答与性能评估
 
+第四周已执行统一100题真实业务性能/成本对照与200份AI审核，未通过默认采用门槛。入口为`scripts/benchmark.py`、`eval/review_week4.py`和`eval/smoke_week4.py`；共享10元预算，结果及来源限制见[第四周报告](reports/week4_completion_20261031.md)。以下历史统一候选成绩不代表本轮业务成绩。
+
 日常评测统一使用`datasets/unified.json`，不按新老题分组。主入口为`PYTHONPATH=src`下的`python eval/run_eval.py --output 新结果路径`（默认只校验），显式加`--generate`运行全部100题的基础检索/候选配对。目标：整题正确≥85%、正题引用支持≥95%、无答案拒答≥95%、组合题≥80%。见[统一验收方案](experiments/quality_target.md)。以下周次内容保留为历史运行记录，不是当前需要分别执行的题集。
 
 本轮[统一验收结果](reports/unified_completion_20261031.md)：候选完整正确74/82（90.24%）、引用支持80/82（97.56%）、拒答18/18、组合题16/17，达到AI辅助点估计门槛；仍有8道正题未完成、2道新增核心退化，尚未真人复核或切换业务默认。
 
 第三周已执行[质量对照实验](reports/week3_completion_20261031.md)：共享候选池内优先直接书目后，旧组合题锚点Hit由4/8升至5/8；25题三组共75份回答已AI复核。新增提示词未进一步提高核心答案正确数，业务默认保持不变。[任务与复现](experiments/week3.md)，入口 `eval/run_quality_experiment.py`。
+
+第二周已完成[分题检索对照实验](reports/week2_completion_20261031.md)：旧组合题自动整题Hit仍4/8，暂不接入业务默认。任务范围与命令见[第二周计划](experiments/week2.md)，入口为 `eval/run_split_experiment.py`。
+
+第一周现已收尾：见[56题AI全量复核、成本及Milvus恢复后的工具结果](reports/week1_completion_20261031.md)。AI 代审独立标记，原始生成不重跑、不改写；当前摘要为 `reports/baseline.json`。
 
 2026-10-31 新增[第一周分层基线运行与教学](experiments/week1.md)：56 道公开回归题、已标注证据 Recall@4、锚点 Hit@4、人工语义审核模板、真实 Token 和 P50/P95。入口为 `PYTHONPATH=src` 下的 `python eval/run_baseline.py`；[本次报告](reports/week1_baseline_20261031.md) 单列实际执行与阻碍，不混用历史成绩。
 
@@ -12,7 +18,9 @@
 
 2026-10-30 新增[真实专题研究验收](../docs/research-acceptance-2026-10-30.md)：关闭联网搜索，以现有上海地方志运行《安亭志》研究。流程通过，内容审核未完整通过。入口为 `run_research_acceptance.py`，原始任务、报告、模型调用、来源匹配和逐项审核位于 `results/research_20261030_anting_live/`；该案例与下述历史问答评估口径不同，不合并计算准确率。
 
-当前模型为 `deepseek-v4-pro`。2026-10-20 已重跑开发集、既有验收集回归、真实生成、性能和HTTP链路，见 [本轮完整报告](../docs/acceptance-2026-10-20.md)、[逐题复核](reports/v4_pro_review_2026-10-20.md) 和 [检查清单](reports/final_checks_2026-10-20.json)。本轮题集已被查看并用于提示词优化，仅属回归；后文的独立验收和性能数字为2026-10-19历史记录，不能直接代表当前模型。
+2026-10-31 起当前默认模型为 `deepseek-flash`，见[模型配置规范](../docs/model-spec.md)。下述 2026-10-20 记录及第一周 56 题生成基线使用 `deepseek-v4-pro`，不代表 Flash 的质量、延迟或成本。切换模型后，新的生成评测必须另存结果并使用匹配的价格配置；检索指标仍需注明资料与检索实现版本。
+
+2026-10-20 使用 `deepseek-v4-pro` 重跑了开发集、既有验收集回归、真实生成、性能和HTTP链路，见 [当轮完整报告](../docs/acceptance-2026-10-20.md)、[逐题复核](reports/v4_pro_review_2026-10-20.md) 和 [检查清单](reports/final_checks_2026-10-20.json)。该题集已被查看并用于提示词优化，仅属回归；后文的独立验收和性能数字为2026-10-19历史记录，不能直接代表当前模型。
 
 ## 数据与报告
 

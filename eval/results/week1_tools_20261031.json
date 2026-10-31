@@ -1,0 +1,140 @@
+{
+  "created_at": "2026-10-31T03:31:33.315230+00:00",
+  "results": [
+    {
+      "id": "retrieval_ok",
+      "tool": "search_documents",
+      "mode": "controlled",
+      "expected_outcome": "ok",
+      "scenario_passed": true,
+      "backend_called": true,
+      "operation_succeeded": true,
+      "response": "资料库：\n\n[S1] 来源：fixture.md\n确定的测试证据",
+      "seconds": 0.005791800009319559
+    },
+    {
+      "id": "retrieval_empty",
+      "tool": "search_documents",
+      "mode": "controlled",
+      "expected_outcome": "ok",
+      "scenario_passed": true,
+      "backend_called": true,
+      "operation_succeeded": true,
+      "response": "资料库没有检索到相关内容。",
+      "seconds": 0.00033579999580979347
+    },
+    {
+      "id": "retrieval_error",
+      "tool": "search_documents",
+      "mode": "controlled",
+      "expected_outcome": "error",
+      "scenario_passed": true,
+      "backend_called": true,
+      "operation_succeeded": false,
+      "response": "工具执行失败（RuntimeError）。不要声称操作已经完成；请根据已有证据回答，或告知用户本次操作未成功。",
+      "seconds": 0.0003513999981805682
+    },
+    {
+      "id": "query_empty",
+      "tool": "search_documents",
+      "mode": "controlled",
+      "expected_outcome": "rejected",
+      "scenario_passed": true,
+      "backend_called": false,
+      "operation_succeeded": false,
+      "response": "检索未执行：查询不能为空且不能超过 1000 个字符。",
+      "seconds": 0.00025680000544525683
+    },
+    {
+      "id": "query_long",
+      "tool": "search_documents",
+      "mode": "controlled",
+      "expected_outcome": "rejected",
+      "scenario_passed": true,
+      "backend_called": false,
+      "operation_succeeded": false,
+      "response": "检索未执行：查询不能为空且不能超过 1000 个字符。",
+      "seconds": 0.00040049999370239675
+    },
+    {
+      "id": "unknown_tool",
+      "tool": "unknown",
+      "mode": "controlled",
+      "expected_outcome": "rejected",
+      "scenario_passed": true,
+      "backend_called": false,
+      "operation_succeeded": false,
+      "response": "工具调用已拒绝：该工具不在只读白名单中。",
+      "seconds": 7.940000796224922e-05
+    },
+    {
+      "id": "web_disabled",
+      "tool": "search_web",
+      "mode": "controlled",
+      "expected_outcome": "rejected",
+      "scenario_passed": true,
+      "backend_called": false,
+      "operation_succeeded": false,
+      "response": "工具调用已拒绝：该工具不在只读白名单中。",
+      "seconds": 7.6299998909235e-05
+    },
+    {
+      "id": "list_documents",
+      "tool": "list_documents",
+      "mode": "controlled",
+      "expected_outcome": "ok",
+      "scenario_passed": true,
+      "backend_called": false,
+      "operation_succeeded": true,
+      "response": "sample.md",
+      "seconds": 0.0006310000026132911
+    },
+    {
+      "id": "Q01",
+      "tool": "search_documents",
+      "mode": "live_local",
+      "operation_succeeded": false,
+      "evidence_count": 0,
+      "seconds": 10.347812799998792
+    },
+    {
+      "id": "H08",
+      "tool": "search_documents",
+      "mode": "live_local",
+      "operation_succeeded": false,
+      "evidence_count": 0,
+      "seconds": 2.3000999000068987
+    },
+    {
+      "id": "N01",
+      "tool": "search_documents",
+      "mode": "live_local",
+      "operation_succeeded": false,
+      "evidence_count": 0,
+      "seconds": 2.305954899988137
+    },
+    {
+      "id": "M05",
+      "tool": "search_documents",
+      "mode": "live_local",
+      "operation_succeeded": false,
+      "evidence_count": 0,
+      "seconds": 2.30589579998923
+    }
+  ],
+  "summary": {
+    "controlled_scenarios": 8,
+    "controlled_passed": 8,
+    "controlled_backend_attempts": 3,
+    "controlled_backend_successes": 2,
+    "live_tool_attempts": 4,
+    "live_tool_successes": 0,
+    "live_tool_success_rate": 0.0,
+    "live_latency": {
+      "count": 0,
+      "median_seconds": null,
+      "p95_seconds": null
+    },
+    "scope": "工具执行/异常保护基线；受控模拟不计真实成功率，检索返回非空不代表证据充分；不衡量LLM工具选择准确率，不执行入库或联网搜索"
+  }
+}

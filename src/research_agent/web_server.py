@@ -1,12 +1,14 @@
 """本地网页演示服务。"""
 
 import json
+import logging
 import re
 import sqlite3
 import threading
 import webbrowser
 from email import policy
 from email.parser import BytesParser
+from functools import wraps
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path, PurePosixPath
 from urllib.parse import parse_qs, urlparse
@@ -25,6 +27,12 @@ from research_agent.rag_updates import (
     list_databases,
     list_incoming_files,
 )
+from research_agent.security import (
+    PublicInputError,
+    error_type,
+    public_endpoint,
+    validation_message,
+)
 from research_agent.workflow import ResearchWorkflow, WorkflowConflict
 
 STATIC_PAGE = Path(__file__).parent / "static" / "index.html"
@@ -36,6 +44,23 @@ def _json_bytes(payload: dict) -> bytes:
     return json.dumps(payload, ensure_ascii=False).encode("utf-8")
 
 
+def _http_boundary(function):
+    @wraps(function)
+    def wrapped(self):
+        try:
+            return function(self)
+        except (BrokenPipeError, ConnectionResetError):
+            return
+        except Exception as exc:  # noqa: BLE001 - 防止标准HTTP服务将未知异常和局部变量打印到stderr
+            message = f"请求未完成（{error_type(exc)}），请稍后重试。"
+        try:
+            self._send_json(500, {"error": message})
+        except OSError:
+            pass
+
+    return wrapped
+
+
 def _knowledge_status(settings: Settings) -> dict:
     """检查 Milvus 可达性及两个资料集合是否存在。"""
     client = None
@@ -45,7 +70,7 @@ def _knowledge_status(settings: Settings) -> dict:
         databases = list_databases(settings)
         return {
             "connected": True,
-            "uri": settings.milvus_uri,
+            "uri": public_endpoint(settings.milvus_uri),
             "collections": {
                 "new": settings.additions_collection_name in collections,
                 "old": settings.collection_name in collections,
@@ -59,9 +84,9 @@ def _knowledge_status(settings: Settings) -> dict:
     except Exception as exc:  # noqa: BLE001 - 隔离第三方连接错误，避免泄露响应正文
         return {
             "connected": False,
-            "uri": settings.milvus_uri,
+            "uri": public_endpoint(settings.milvus_uri),
             "collections": {"new": False, "old": False, "databases": False},
-            "error": type(exc).__name__,
+            "error": error_type(exc),
         }
     finally:
         if client is not None:
@@ -75,11 +100,11 @@ def _unique_destination(directory: Path, filename: str) -> Path:
         or not relative.parts
         or any(part in {".", ".."} or ":" in part for part in relative.parts)
     ):
-        raise ValueError("文件名无效。")
+        raise PublicInputError("文件名无效。")
     root = directory.resolve()
     destination = root.joinpath(*relative.parts)
     if not destination.resolve().is_relative_to(root):
-        raise ValueError("文件夹路径无效。")
+        raise PublicInputError("文件夹路径无效。")
     destination.parent.mkdir(parents=True, exist_ok=True)
     if not destination.exists():
         return destination
@@ -98,7 +123,7 @@ def _uploaded_parts(body: bytes, content_type: str) -> list[tuple[str, bytes]]:
         + body
     )
     if not message.is_multipart():
-        raise ValueError("上传请求格式无效，请选择文件后重试。")
+        raise PublicInputError("上传请求格式无效，请选择文件后重试。")
     parts = []
     for part in message.iter_parts():
         filename = part.get_filename()
@@ -107,7 +132,7 @@ def _uploaded_parts(body: bytes, content_type: str) -> list[tuple[str, bytes]]:
         payload = part.get_payload(decode=True) or b""
         parts.append((filename, payload))
     if not parts:
-        raise ValueError("请求中没有找到文件。")
+        raise PublicInputError("请求中没有找到文件。")
     return parts
 
 
@@ -118,8 +143,13 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
         server_version = "ResearchAgentDemo/1.0"
 
         def log_message(self, format: str, *args) -> None:
-            # 访问日志保留方法和状态码，不记录请求正文或会话内容。
-            super().log_message(format, *args)
+            # 基类日志可能包含完整请求行或请求头解析错误，不转发 format/args。
+            logging.getLogger(__name__).info("http_event")
+
+        def log_request(self, code="-", size="-") -> None:
+            method = self.command if self.command in {"GET", "POST", "DELETE", "HEAD"} else "OTHER"
+            status = int(code) if str(code).isdigit() else 0
+            logging.getLogger(__name__).info("http_request method=%s status=%s", method, status)
 
         def _send_json(self, status: int, payload: dict) -> None:
             encoded = _json_bytes(payload)
@@ -134,17 +164,18 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
             try:
                 length = int(self.headers.get("Content-Length", "0"))
             except ValueError as exc:
-                raise ValueError("请求长度无效。") from exc
+                raise PublicInputError("请求长度无效。") from exc
             if length <= 0 or length > MAX_UPLOAD_REQUEST_SIZE:
-                raise ValueError("请求为空或超过大小限制。")
+                raise PublicInputError("请求为空或超过大小限制。")
             try:
                 data = json.loads(self.rfile.read(length))
             except (json.JSONDecodeError, UnicodeDecodeError) as exc:
-                raise ValueError("请求内容不是有效 JSON。") from exc
+                raise PublicInputError("请求内容不是有效 JSON。") from exc
             if not isinstance(data, dict):
-                raise ValueError("请求内容格式无效。")  # noqa: TRY004 - 保留 HTTP 校验契约
+                raise PublicInputError("请求内容格式无效。")
             return data
 
+        @_http_boundary
         def do_GET(self) -> None:
             path = urlparse(self.path).path
             if path == "/api/research/tasks" or path.startswith("/api/research/tasks/"):
@@ -206,6 +237,7 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
             except (OSError, sqlite3.Error):
                 self._send_json(500, {"error": "无法读取会话数据库，请检查目录权限和存储状态。"})
 
+        @_http_boundary
         def do_POST(self) -> None:
             origin = self.headers.get("Origin")
             if origin and origin.rstrip("/") != f"http://{self.headers.get('Host', '')}".rstrip(
@@ -255,9 +287,9 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
             except FileNotFoundError:
                 self._send_json(404, {"error": "研究任务不存在。"})
             except WorkflowConflict as exc:
-                self._send_json(409, {"error": str(exc)})
+                self._send_json(409, {"error": validation_message(exc)})
             except ValueError as exc:
-                self._send_json(400, {"error": str(exc)})
+                self._send_json(400, {"error": validation_message(exc)})
             except OSError:
                 self._send_json(500, {"error": "研究任务读取失败，请检查本地存储。"})
 
@@ -287,12 +319,13 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
             except FileNotFoundError:
                 self._send_json(404, {"error": "研究任务不存在。"})
             except WorkflowConflict as exc:
-                self._send_json(409, {"error": str(exc)})
+                self._send_json(409, {"error": validation_message(exc)})
             except ValueError as exc:
-                self._send_json(400, {"error": str(exc)})
+                self._send_json(400, {"error": validation_message(exc)})
             except OSError:
                 self._send_json(500, {"error": "研究任务保存失败，请检查本地存储。"})
 
+        @_http_boundary
         def do_DELETE(self) -> None:
             origin = self.headers.get("Origin")
             if origin and origin.rstrip("/") != f"http://{self.headers.get('Host', '')}".rstrip(
@@ -329,10 +362,10 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
                         return
                     self._send_json(200, {"deleted": True})
                 except ValueError as exc:
-                    self._send_json(400, {"error": str(exc)})
+                    self._send_json(400, {"error": validation_message(exc)})
                 except Exception as exc:  # noqa: BLE001 - HTTP 边界隔离第三方错误
                     self._send_json(
-                        500, {"error": f"删除目录失败（{type(exc).__name__}），目录记录已保留。"}
+                        500, {"error": f"删除目录失败（{error_type(exc)}），目录记录已保留。"}
                     )
                 return
             self.send_error(404)
@@ -345,17 +378,17 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
                 allow_web_search = payload.get("allow_web_search", False)
                 decline_web_search = payload.get("decline_web_search", False)
                 if not isinstance(question, str) or not question.strip() or len(question) > 10_000:
-                    raise ValueError("问题不能为空且不能超过 10000 个字符。")
+                    raise PublicInputError("问题不能为空且不能超过 10000 个字符。")
                 if not isinstance(session_id, str) or not SESSION_PATTERN.fullmatch(session_id):
-                    raise ValueError("会话 ID 格式无效，请刷新网页后重试。")
+                    raise PublicInputError("会话 ID 格式无效，请刷新网页后重试。")
                 if not isinstance(allow_web_search, bool) or not isinstance(
                     decline_web_search, bool
                 ):
-                    raise ValueError("联网搜索许可格式无效。")  # noqa: TRY004
+                    raise PublicInputError("联网搜索许可格式无效。")
                 if allow_web_search and decline_web_search:
-                    raise ValueError("联网搜索许可状态冲突。")
+                    raise PublicInputError("联网搜索许可状态冲突。")
             except ValueError as exc:
-                self._send_json(400, {"error": str(exc)})
+                self._send_json(400, {"error": validation_message(exc)})
                 return
 
             self.send_response(200)
@@ -389,7 +422,7 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
                     error = _json_bytes(
                         {
                             "kind": "error",
-                            "message": f"本轮处理失败（{type(exc).__name__}）。请检查服务配置后重试。",
+                            "message": f"本轮处理失败（{error_type(exc)}）。请检查服务配置后重试。",
                         }
                     )
                     self.wfile.write(b"data: " + error + b"\n\n")
@@ -403,15 +436,15 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
             try:
                 length = int(self.headers.get("Content-Length", "0"))
                 if length <= 0 or length > MAX_UPLOAD_REQUEST_SIZE:
-                    raise ValueError("上传请求为空或超过 100 MB 限制。")
+                    raise PublicInputError("上传请求为空或超过 100 MB 限制。")
                 content_type = self.headers.get("Content-Type", "")
                 if not content_type.lower().startswith("multipart/form-data;"):
-                    raise ValueError("请选择文件后再上传。")
+                    raise PublicInputError("请选择文件后再上传。")
                 parts = _uploaded_parts(self.rfile.read(length), content_type)
                 database_id = parse_qs(urlparse(self.path).query).get("database_id", [""])[0]
                 known_ids = {item["id"] for item in list_databases(settings)}
                 if database_id and database_id not in known_ids:
-                    raise ValueError("所选资料库不存在。")
+                    raise PublicInputError("所选资料库不存在。")
                 incoming = (
                     settings.data_dir.parent / "incoming" / database_id
                     if database_id and database_id != "legacy-additions"
@@ -422,14 +455,14 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
                 for filename, payload in parts:
                     suffix = Path(filename.replace("\\", "/")).suffix.lower()
                     if suffix not in {".txt", ".md", ".pdf"}:
-                        raise ValueError(f"不支持 {filename}；请选择 TXT、Markdown 或 PDF。")
+                        raise PublicInputError(f"不支持 {filename}；请选择 TXT、Markdown 或 PDF。")
                     if len(payload) > MAX_FILE_SIZE:
-                        raise ValueError(f"{filename} 超过 100 MB 限制。")
+                        raise PublicInputError(f"{filename} 超过 100 MB 限制。")
                     total += len(payload)
                     if total > MAX_FILE_SIZE:
-                        raise ValueError("单次上传总大小不能超过 100 MB。")
+                        raise PublicInputError("单次上传总大小不能超过 100 MB。")
                     if not payload:
-                        raise ValueError(f"{filename} 是空文件。")
+                        raise PublicInputError(f"{filename} 是空文件。")
                     validated.append((filename, payload))
                 incoming.mkdir(parents=True, exist_ok=True)
                 saved = []
@@ -440,26 +473,26 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
                     saved.append(destination.relative_to(incoming).as_posix())
                 self._send_json(200, {"files": saved})
             except (ValueError, OSError, UnicodeError) as exc:
-                self._send_json(400, {"error": str(exc)})
+                self._send_json(400, {"error": validation_message(exc)})
 
         def _index(self) -> None:
             try:
                 payload = self._read_json()
                 relative_path = payload.get("path")
                 if not isinstance(relative_path, str) or not relative_path.strip():
-                    raise ValueError("请选择一个待处理文件。")
+                    raise PublicInputError("请选择一个待处理文件。")
                 database_id = payload.get("database_id")
                 if database_id == "legacy-additions":
                     database_id = None
                 data_version = payload.get("data_version", "supplement")
                 if data_version not in {"original", "supplement"}:
-                    raise ValueError("资料标签无效。")
+                    raise PublicInputError("资料标签无效。")
                 replace_hash = payload.get("replace_hash")
                 if replace_hash is not None and (
                     not isinstance(replace_hash, str)
                     or not re.fullmatch(r"[a-f0-9]{64}", replace_hash)
                 ):
-                    raise ValueError("更新文件标识无效，请刷新管理页后重试。")
+                    raise PublicInputError("更新文件标识无效，请刷新管理页后重试。")
                 result = add_file_to_rag(
                     relative_path, settings, database_id, replace_hash, data_version
                 )
@@ -472,12 +505,12 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
                 )
                 self._send_json(200, {"added": result["added"], "message": message})
             except (ValueError, FileNotFoundError, RuntimeError) as exc:
-                self._send_json(400, {"error": str(exc)})
+                self._send_json(400, {"error": validation_message(exc)})
             except Exception as exc:  # noqa: BLE001 - 索引失败不能透传上游敏感信息
                 self._send_json(
                     500,
                     {
-                        "error": f"索引操作未完成（{type(exc).__name__}）。旧索引保留；请查看索引状态后重试。"
+                        "error": f"索引操作未完成（{error_type(exc)}）。旧索引保留；请查看索引状态后重试。"
                     },
                 )
 
@@ -486,14 +519,14 @@ def create_handler(settings: Settings, workflow: ResearchWorkflow | None = None)
                 payload = self._read_json()
                 name = payload.get("name")
                 if not isinstance(name, str):
-                    raise ValueError("请填写资料库名称。")  # noqa: TRY004
+                    raise PublicInputError("请填写资料库名称。")
                 database = create_database(name, settings)
                 self._send_json(201, {"database": database})
             except (ValueError, OSError, json.JSONDecodeError) as exc:
-                self._send_json(400, {"error": str(exc)})
+                self._send_json(400, {"error": validation_message(exc)})
 
         def log_error(self, format: str, *args) -> None:
-            super().log_error(format, *args)
+            logging.getLogger(__name__).warning("http_error")
 
     return ResearchAgentHandler
 

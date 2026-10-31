@@ -1,9 +1,6 @@
-"""性能基准占位：后续记录环境、冷启动、P50/P95、失败率与样本规模。"""
+"""第四周真实业务性能对照入口；默认只校验，显式--run才调用API。"""
 
-
-def main() -> None:
-    raise SystemExit("尚未实现性能基准；已有单用户历史测量见 eval/README.md。")
-
+from research_agent.evaluation.performance import main
 
 if __name__ == "__main__":
     main()

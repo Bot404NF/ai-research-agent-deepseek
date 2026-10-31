@@ -14,7 +14,7 @@ def test_library_merges_collections_by_relevance_and_keeps_distinct_versions(mon
     monkeypatch.setattr(
         retrieval,
         "retrieve_versions",
-        lambda *_: (
+        lambda *_, **__: (
             [
                 evidence("N1", "同一段原文", "same.md", 1, 0.8),
                 evidence("N2", "数值为20", "新版.md", 1, 0.7),

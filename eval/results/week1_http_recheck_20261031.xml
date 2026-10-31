@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="3.346" timestamp="2026-10-31T14:35:16.305333+11:00" hostname="LegionPro-7i"><testcase classname="tests.integration.test_workflow" name="test_http_task_contract_static_assets_and_report" time="0.883" /></testsuite></testsuites>

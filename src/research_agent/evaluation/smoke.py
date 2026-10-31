@@ -10,10 +10,12 @@ from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 from research_agent.config import PROJECT_ROOT, get_settings
+from research_agent.security import protect_external_call
 from research_agent.storage import write_json_atomic
 from research_agent.web_server import create_handler
 
 
+@protect_external_call
 def main() -> None:
     run_id = datetime.now(UTC).strftime("%Y%m%dT%H%M%S%fZ")
     directory = PROJECT_ROOT / "eval/runtime" / run_id

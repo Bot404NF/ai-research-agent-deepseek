@@ -17,6 +17,7 @@ from pathlib import Path
 from research_agent.config import PROJECT_ROOT, get_settings
 from research_agent.evaluation.acceptance import digest, distribution
 from research_agent.evaluation.retrieval import normalize
+from research_agent.security import protect_external_call
 from research_agent.storage import write_json_atomic
 
 
@@ -114,7 +115,15 @@ def average(values: list) -> float | None:
     return sum(values) / len(values) if values else None
 
 
-def summarize(rows: list[dict], reviews: list[dict] = (), *, stratify: bool = True) -> dict:
+def summarize(
+    rows: list[dict],
+    reviews: list[dict] = (),
+    *,
+    stratify: bool = True,
+    reviewer_kind: str = "human",
+) -> dict:
+    if reviewer_kind not in {"human", "ai"}:
+        raise ValueError("审核者类型必须为 human 或 ai。")
     successful = [r for r in rows if r["status"] == "ok"]
     retrieved = [r for r in rows if "metrics" in r and "retrieval_seconds" in r]
     generated = [r for r in successful if "answer" in r]
@@ -148,7 +157,9 @@ def summarize(rows: list[dict], reviews: list[dict] = (), *, stratify: bool = Tr
         },
         "answers_with_citation": sum(r["checks"]["has_citation"] for r in generated),
         "generated_answers": len(generated),
-        "semantic_manual": semantic,
+        "semantic_manual": semantic
+        if reviewer_kind == "human"
+        else {key: {**value, "reviewed": 0, "rate": None} for key, value in semantic.items()},
         "api_attempted": len(calls),
         "usage_observed_calls": sum(r.get("usage") is not None for r in calls),
         "observed_input_tokens": sum(r.get("tokens", {}).get("input_tokens") or 0 for r in calls)
@@ -172,9 +183,16 @@ def summarize(rows: list[dict], reviews: list[dict] = (), *, stratify: bool = Tr
             ),
         },
     }
+    if reviewer_kind == "ai":
+        result["semantic_ai_review"] = semantic
     if stratify:
         result["by_stratum"] = {
-            name: summarize([r for r in rows if r["stratum"] == name], reviews, stratify=False)
+            name: summarize(
+                [r for r in rows if r["stratum"] == name],
+                reviews,
+                stratify=False,
+                reviewer_kind=reviewer_kind,
+            )
             for name in sorted({r["stratum"] for r in rows})
         }
     return result
@@ -182,6 +200,8 @@ def summarize(rows: list[dict], reviews: list[dict] = (), *, stratify: bool = Tr
 
 def load_reviews(path: Path, report: dict) -> list[dict]:
     data = json.loads(path.read_text(encoding="utf-8"))
+    if data.get("reviewer", {}).get("kind", "human") not in {"human", "ai"}:
+        raise ValueError("审核者类型必须为 human 或 ai。")
     binding = hashlib.sha256(
         json.dumps(report["results"], sort_keys=True, ensure_ascii=False).encode()
     ).hexdigest()
@@ -206,6 +226,15 @@ def load_reviews(path: Path, report: dict) -> list[dict]:
             for k in ("answer_correct", "citation_supported", "abstention_correct")
         ):
             raise ValueError("未生成回答的结果不能审核回答质量。")
+        if original["should_abstain"] and row.get("answer_correct") is not None:
+            raise ValueError("无答案题应填写拒答评测，不计可回答题答案正确率。")
+        if not original["should_abstain"] and row.get("abstention_correct") is not None:
+            raise ValueError("正样本不参与无答案拒答率。")
+        if (
+            not original.get("checks", {}).get("has_citation")
+            and row.get("citation_supported") is not None
+        ):
+            raise ValueError("没有引用标签时，引用支持应为 null，覆盖缺失另计。")
         if any(
             isinstance(row.get(k), bool)
             for k in ("hit_at_4", "answer_correct", "citation_supported", "abstention_correct")
@@ -218,7 +247,8 @@ def generate(question: str, evidence: list, settings) -> dict:
     from langchain_core.messages import HumanMessage, SystemMessage
     from langchain_openai import ChatOpenAI
 
-    from research_agent.answer import SYSTEM_PROMPT, render_context
+    from research_agent.answer import BASE_SYSTEM_PROMPT as SYSTEM_PROMPT
+    from research_agent.answer import render_context
 
     if not evidence:
         return {
@@ -251,6 +281,7 @@ def generate(question: str, evidence: list, settings) -> dict:
     }
 
 
+@protect_external_call
 def main() -> None:
     parser = argparse.ArgumentParser(description="第一周基线；默认只校验，显式选择真实检索/生成")
     parser.add_argument("--dataset", type=Path, default=PROJECT_ROOT / "eval/datasets/week1.json")
@@ -269,6 +300,8 @@ def main() -> None:
         parser.error("--reviews 必须与 --review-report 一起使用。")
     if args.review_report and (args.retrieve or args.generate):
         parser.error("审核汇总不能与真实运行选项混用。")
+    if args.review_report and args.pricing:
+        parser.error("审核汇总不接受价格；离线重算费用请使用 scripts/cost_analysis.py。")
     if args.output.exists():
         parser.error("输出已存在，请使用新路径，避免覆盖历史证据。")
     if not args.review_report and args.output.with_suffix(".reviews.json").exists():
@@ -278,8 +311,14 @@ def main() -> None:
     if args.review_report:
         report = json.loads(args.review_report.read_text(encoding="utf-8"))
         reviews = load_reviews(args.reviews, report) if args.reviews else []
-        report["summary"] = summarize(report["results"], reviews)
-        report["manual_reviews"] = reviews
+        reviewer = (
+            json.loads(args.reviews.read_text(encoding="utf-8")).get("reviewer", {"kind": "human"})
+            if args.reviews
+            else {"kind": "human"}
+        )
+        report["summary"] = summarize(report["results"], reviews, reviewer_kind=reviewer["kind"])
+        report["reviewer"] = reviewer
+        report["ai_reviews" if reviewer["kind"] == "ai" else "manual_reviews"] = reviews
         report["summary_code_sha256"] = digest(Path(__file__))
         write_json_atomic(args.output, report)
         return
@@ -292,13 +331,15 @@ def main() -> None:
     pricing = json.loads(args.pricing.read_text(encoding="utf-8")) if args.pricing else None
     if pricing:
         if (
-            not all(pricing.get(k) for k in ("source_url", "effective_date", "currency", "model"))
+            not all(pricing.get(k) for k in ("source_url", "currency", "model"))
+            or not (pricing.get("effective_date") or pricing.get("access_date"))
             or pricing["model"] != settings.chat_model
         ):
             parser.error("价格必须包含来源、日期、币种和匹配的模型。")
         for key in ("input_miss_per_million", "input_hit_per_million", "output_per_million"):
             if (
-                not isinstance(pricing.get(key), (int, float))
+                isinstance(pricing.get(key), bool)
+                or not isinstance(pricing.get(key), (int, float))
                 or not math.isfinite(pricing[key])
                 or pricing[key] < 0
             ):

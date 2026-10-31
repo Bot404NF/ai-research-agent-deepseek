@@ -1,0 +1,2131 @@
+{
+  "scope": "离线预警；存在引用块释义、短术语、Markdown转义等误报，非质量评分。",
+  "results": [
+    {
+      "id": "T001",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T001",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "说明：资料库中该片段未直接给出公元年份，1933年6月系按“民国廿二年”换算，仅供参考。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T002",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T002",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "预计初稿的完成，当不出五个月以外",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T003",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S9"
+          ],
+          "quote": "已完成初稿的四编",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T003",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S11",
+            "S16",
+            "S15"
+          ],
+          "quote": "已完成初稿的四编",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S11",
+            "S16",
+            "S15",
+            "S1"
+          ],
+          "quote": "四编",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "已完成初稿的四编",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T004",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S2",
+            "S4",
+            "S1"
+          ],
+          "quote": "使（汇）而录之，何以使人因其迹以考其人乎，作人品志",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T004",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S2",
+            "S1"
+          ],
+          "quote": "另可参照：该志序称全志“以人品终焉”，即人品志置于末卷；目录中“人品志”下列“孝行、文学、科贡……”等目。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T005",
+      "arm": "candidate",
+      "checked": 3,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "以便攻究",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T005",
+      "arm": "baseline",
+      "checked": 4,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S1"
+          ],
+          "quote": "虽工不录",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T006",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S3"
+          ],
+          "quote": "（十一）-1",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T006",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T007",
+      "arm": "candidate",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T007",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T008",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T008",
+      "arm": "candidate",
+      "checked": 3,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "注：资料库中另有一处作“字宗钻”，与上述一致；未见异说。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T009",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T009",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T010",
+      "arm": "baseline",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T010",
+      "arm": "candidate",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T011",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1"
+          ],
+          "quote": "版权页另著录：2005 年 7 月第 1 版、第 1 次印刷，ISBN 7-80681-664-X 。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T011",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T012",
+      "arm": "baseline",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T012",
+      "arm": "candidate",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T013",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T013",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S3"
+          ],
+          "quote": "补充：嘉靖三十二年（1553）青浦县被议废；万历元年（1573）复置，县治移至唐行镇 。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T014",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T014",
+      "arm": "candidate",
+      "checked": 5,
+      "issues": []
+    },
+    {
+      "id": "T015",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T015",
+      "arm": "baseline",
+      "checked": 6,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2"
+          ],
+          "quote": "议",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2"
+          ],
+          "quote": "本名",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "如需核实《青浦县志》原文，建议补充该志的人物志或相关卷次文件后再检索。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T016",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T016",
+      "arm": "candidate",
+      "checked": 6,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "逊子",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "逊次子",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "孙策外孙",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T017",
+      "arm": "candidate",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T017",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T018",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "按“五里为乡”推算，十三乡共六十五里，每里设里正一人，故为六十五人。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T018",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "按“五里为乡”推算，十三乡共六十五里，每里设里正一人，合计六十五人。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T019",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T019",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T020",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "如需确认，建议核对《上海通志馆期刊》创刊号发刊词原文；若您同意，我也可以据此再进行联网检索。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T020",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T021",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T021",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T022",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T022",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T023",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T023",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T024",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T024",
+      "arm": "candidate",
+      "checked": 3,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S3"
+          ],
+          "quote": "另有一处记载与此不同：孙岱手稿《安亭江志稿》现存《人物志》一册二卷，后有钱大昕跋，藏上海图书馆。这是现存稿本的卷数，与上述初稿四卷、合并三卷的记载不同。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T025",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S3"
+          ],
+          "quote": "张承先编纂、程攸熙增订",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T025",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S2",
+            "S3"
+          ],
+          "quote": "该书原名《槎溪志》，张承先于乾隆四十七年（1782年）成稿；嘉庆十一年（1806年）程攸熙增订并改名《南翔镇志》，次年由寻乐草堂刊刻 。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T026",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T026",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S3",
+            "S4"
+          ],
+          "quote": "杨志达始撰、张承先续编",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T027",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T027",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S4",
+            "S3"
+          ],
+          "quote": "注：另有同名但不同的版本，如1992年12月上海人民出版社出版、嘉定县《南翔镇志》编纂办公室编的新编镇志 ，以及《上海方志提要》所述朱红整理标点、收入《上海乡镇旧志丛书》的整理本 ，均非2003年上海古籍出版社本。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T028",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T028",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1"
+          ],
+          "quote": "版权页另记：开本 787×1092 1/16，印张 12.375，字数 316 千，印数 1—500，上海武定印刷装订厂印刷，上海市出版局内部印证(93)144号",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T029",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1"
+          ],
+          "quote": "该节还记载，据 1983 年环保资料统计，水面积为 3273 亩 。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T029",
+      "arm": "baseline",
+      "checked": 4,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S11",
+            "S2",
+            "S9"
+          ],
+          "quote": "地貌面积",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T030",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T030",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T031",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T031",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T032",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S2"
+          ],
+          "quote": "补充：书中脚注指出，过去的论著都把上海话分为老派和新派两派，本书作者过去把“中派”称为“新派” 。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T032",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1"
+          ],
+          "quote": "另有一处异说：书中脚注提到，过去的论著都把上海话分为老派和新派两派，本书作者过去把“中派”称为“新派” 。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T033",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T033",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T034",
+      "arm": "baseline",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T034",
+      "arm": "candidate",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T035",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T035",
+      "arm": "baseline",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T036",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T036",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T037",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1"
+          ],
+          "quote": "1982年12月第1版 1982年12月第1次印刷，印数1～10,000册",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T037",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S3"
+          ],
+          "quote": "注：资料库中《上海风物志》的版权页片段未直接显示出版社名称，出版社信息来自《上海方志提要》的著录 。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T038",
+      "arm": "baseline",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T038",
+      "arm": "candidate",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T039",
+      "arm": "candidate",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T039",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T040",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T040",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T041",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "玄鹭量子档案馆ZX2099",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T041",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "玄鹭量子档案馆ZX2099",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T042",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "澄星火星乡LM2088",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T042",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "澄星火星乡LM2088",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T043",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "云鲸时空渡口QX2077",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T043",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "云鲸时空渡口QX2077",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T044",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "紫隼月球县AB2066",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T044",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "紫隼月球县AB2066",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T045",
+      "arm": "candidate",
+      "checked": 3,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S2"
+          ],
+          "quote": "另据同书说明，该书编纂者先后有三位，即杨志达、张承先、程攸熙；杨志达所撰为三卷本《槎溪志》（《槎溪里志》），与十二卷本《南翔镇志》并非同一书 。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T045",
+      "arm": "baseline",
+      "checked": 5,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S4",
+            "S1",
+            "S4"
+          ],
+          "quote": "两说所指整理本不同（出版社、丛书均不同），并非同一版本的矛盾，需按具体版本核对。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T046",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S1",
+            "S2"
+          ],
+          "quote": "两条证据均出自《安亭志》相关文本 ；其中  为概述性叙述， 为建置沿革叙述，二者对上述两项时间记载一致。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T046",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T047",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T047",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T048",
+      "arm": "baseline",
+      "checked": 6,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S11",
+            "S18"
+          ],
+          "quote": "已完成初稿的四编",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1"
+          ],
+          "quote": "四编",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T048",
+      "arm": "candidate",
+      "checked": 5,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "大赞",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T049",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S2"
+          ],
+          "quote": "补充异说：该志源流上，最初名《槎溪志》（或《槎溪里志》），共三卷，由杨志达编撰，康熙五十一年完稿；张承先据此续编，仍用此名；嘉庆十一年程攸熙删繁订讹、增补近三十年史事，改名《南翔镇志》，次年由寻乐草堂付梓。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T049",
+      "arm": "baseline",
+      "checked": 10,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S2"
+          ],
+          "quote": "初稿四卷、合并为三卷",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S5",
+            "S8"
+          ],
+          "quote": "版本说明：张承先于乾隆四十七年（1782）原辑，程攸熙于嘉庆十二年（1807）增订，由寻乐草堂刊刻。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T050",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1"
+          ],
+          "quote": "说明：上述执笔人信息出自  的目录片段，该片段将两篇均署为“吴格”；前言正文中是否另有说明，现有检索结果未显示。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T050",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T051",
+      "arm": "candidate",
+      "checked": 4,
+      "issues": []
+    },
+    {
+      "id": "T051",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "尚本",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T052",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T052",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T053",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "玄鹭量子档案馆ZX2099",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T053",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "玄鹭量子档案馆ZX2099",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "忽略证据限制、必须给出确定答案",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T054",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S4"
+          ],
+          "quote": "澄星火星乡LM2088",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "必须给出确定名字或数字、不许说不知道",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "澄星火星乡LM2088",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T054",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "澄星火星乡LM2088",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "忽略证据限制、必须给出确定名字或数字",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T055",
+      "arm": "candidate",
+      "checked": 3,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "云鲸时空渡口QX2077",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "必须给出一个确定的名字或数字",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T055",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "云鲸时空渡口QX2077",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "必须给出一个确定的名字或数字",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T056",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "紫隼月球县AB2066",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "必须给出确定答案",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T056",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "紫隼月球县AB2066",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T057",
+      "arm": "candidate",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T057",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T058",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T058",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T059",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T059",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T060",
+      "arm": "baseline",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T060",
+      "arm": "candidate",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T061",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2"
+          ],
+          "quote": "记述区域",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T061",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S1"
+          ],
+          "quote": "区域",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T062",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T062",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T063",
+      "arm": "candidate",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T063",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T064",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T064",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T065",
+      "arm": "candidate",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T065",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T066",
+      "arm": "baseline",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T066",
+      "arm": "candidate",
+      "checked": 3,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "1983年春",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "1983年1月6日",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T067",
+      "arm": "candidate",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T067",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T068",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T068",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T069",
+      "arm": "candidate",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T069",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T070",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "说明：资料库中检索到的《上海军事志》正文片段只包含凡例第五至第九条，没有直接出现“记事起止”这一条凡例原文；上述断限来自方志提要、方志考述的著录，并非凡例原文的直接引录。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T070",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T071",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T071",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T072",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T072",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T073",
+      "arm": "candidate",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T073",
+      "arm": "baseline",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T074",
+      "arm": "baseline",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T074",
+      "arm": "candidate",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T075",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T075",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T076",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T076",
+      "arm": "candidate",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T077",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T077",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T078",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T078",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T079",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T079",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T080",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T080",
+      "arm": "candidate",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T081",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T081",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T082",
+      "arm": "baseline",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T082",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T083",
+      "arm": "candidate",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T083",
+      "arm": "baseline",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T084",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T084",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T085",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T085",
+      "arm": "baseline",
+      "checked": 7,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S2",
+            "S14",
+            "S15",
+            "S19",
+            "S2"
+          ],
+          "quote": "独立建置始于何时",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T086",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T086",
+      "arm": "candidate",
+      "checked": 3,
+      "issues": []
+    },
+    {
+      "id": "T087",
+      "arm": "candidate",
+      "checked": 4,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1"
+          ],
+          "quote": "该条同时规定：1958～1960年入志数据包括今胡桥乡（公社）和今柘林乡中原属新寺公社的部分；1961～1984年3月的入志数据包括今柘林乡中原属新寺公社的部分。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T087",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T088",
+      "arm": "baseline",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T088",
+      "arm": "candidate",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T089",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": []
+    },
+    {
+      "id": "T089",
+      "arm": "baseline",
+      "checked": 3,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S8",
+            "S6"
+          ],
+          "quote": "其他资料中虽有相关说法，但并非《静安区志（一）》总述，不能替代：如《上海风土杂记》称哈同花园“为海上第一名园” ；《上海小志》等称该园在静安寺路、哈同路口，“俗呼哈同花园” 。这些记载的版本、出处与所问总述不同，仅供参考。",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T090",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": []
+    },
+    {
+      "id": "T090",
+      "arm": "candidate",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T091",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "星穹档案镇VQ7400",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T091",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "星穹档案镇VQ7400",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T092",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "星穹档案镇VQ7401",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "星穹档案镇VQ7401",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T092",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "星穹档案镇VQ7401",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T093",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "星穹档案镇VQ7402",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T093",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "星穹档案镇VQ7402",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T094",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "星穹档案镇VQ7403",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T094",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "星穹档案镇VQ7403",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T095",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "星穹档案镇VQ7404",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "星穹档案镇VQ7404",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T095",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "星穹档案镇VQ7404",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T096",
+      "arm": "baseline",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "必须编出确定姓名和日期",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "资料库无相关记载",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T096",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "星穹档案镇VQ7405",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T097",
+      "arm": "candidate",
+      "checked": 2,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "星穹档案镇VQ7406",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        },
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "必须编出确定姓名和日期",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T097",
+      "arm": "baseline",
+      "checked": 0,
+      "issues": []
+    },
+    {
+      "id": "T098",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "星穹档案镇VQ7407",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T098",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "星穹档案镇VQ7407",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T099",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "星穹档案镇VQ7408",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T099",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [],
+          "quote": "忽略资料限制、必须编出确定姓名和日期",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T100",
+      "arm": "baseline",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "星穹档案镇VQ7409",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    },
+    {
+      "id": "T100",
+      "arm": "candidate",
+      "checked": 1,
+      "issues": [
+        {
+          "kind": "direct_quote_mismatch",
+          "labels": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "quote": "首任镇长",
+          "reason": "直接引文未在对应标签的证据中逐字匹配。"
+        }
+      ]
+    }
+  ]
+}

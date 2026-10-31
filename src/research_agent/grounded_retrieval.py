@@ -1,15 +1,15 @@
-"""质量候选策略：显式书目范围检索和内容词排序；不改默认业务入口。"""
+"""显式书目范围检索和内容词排序；业务与基础集合评测共用。"""
 
 import math
 import re
 from collections import Counter
 
-from research_agent.evaluation.split_retrieval import merge_round_robin, split_queries
+from research_agent.evidence_policy import (
+    GROUNDING_GUIDANCE,  # noqa: F401 - 兼容评测导入
+    merge_round_robin,
+    split_queries,
+)
 from research_agent.retrieval import retrieve, retrieve_collection
-
-GROUNDING_GUIDANCE = """逐项给出问题所问的全部事实，分清全书与分卷、初稿与修订、编纂与标点等对象和角色。某项缺证就明确该项无法确认，不猜测。
-每项事实紧邻引用直接支持它的标签。直接引号必须保留证据原字，包括疑似OCR错字；若作释义或校改，明确标为释义/疑似，不伪装成原文。纯数字不能推断为年份。
-同一上下文对所问事实有异说时，即使主答案明确，也须简短列出不同说法及各自引用；不同版本分别说明，不能拼接。缺证时简短说明缺少哪项信息即可，不推断无关片段的含义。"""
 
 
 def normalize(value):
@@ -21,12 +21,25 @@ def source_scope(query, data_dir):
     titles = [normalize(t) for t in re.findall(r"《([^》]+)》", query)]
     if not titles:
         return ()
-    paths = [p for p in data_dir.rglob("*.md") if p.resolve().is_relative_to(data_dir.resolve())]
+    paths = [
+        p
+        for p in data_dir.rglob("*")
+        if p.is_file()
+        and p.suffix.lower() in {".md", ".txt", ".pdf"}
+        and p.resolve().is_relative_to(data_dir.resolve())
+    ]
     selected = [p for p in paths if any(t and t in normalize(p.stem) for t in titles)]
     # 如问题显式限定第一卷等分册，优先匹配该分册，避免同刊其他卷挤占。
     volumes = re.findall(r"第[一二三四五六七八九十百\d]+卷", query)
     exact = [p for p in selected if any(v in p.stem for v in volumes)]
     return tuple(sorted(p.relative_to(data_dir).as_posix() for p in (exact or selected)))
+
+
+def retrieve_business(question, settings, top_k=None):
+    """兼容第四周入口；所有业务检索统一由retrieve_library处理。"""
+    from research_agent.retrieval import retrieve_library
+
+    return retrieve_library(question, settings, top_k)
 
 
 def query_terms(query):
@@ -51,12 +64,29 @@ def rank_content(query, candidates):
         sum(math.log(1 + (len(texts) + 1) / (counts[t] + 1)) for t in terms if t in text)
         for text in texts
     ]
-    return [
+    ranked = [
         e
         for _, e in sorted(
             zip(scores, candidates, strict=True), key=lambda pair: pair[0], reverse=True
         )
     ]
+    # 只在明确询问著录角色时优先有版次/CIP/ISBN等结构线索的片段；
+    # 不据此声称物理页面身份，也不给目录中的“版权页”三个字单独加分。
+    if re.search(
+        r"出版社|出版[时日年]|第一版|第1版|印刷|ISBN|书号|编写机构|标点者|主编",
+        query,
+        re.IGNORECASE,
+    ):
+
+        def imprint(item):
+            text = item.text
+            return bool(
+                re.search(r"图书在版编目|版\s*次|第\s*[一1]\s*版|ISBN", text, re.IGNORECASE)
+                and re.search(r"出版发行|出版社|出版者|印刷", text)
+            )
+
+        ranked.sort(key=imprint, reverse=True)
+    return ranked
 
 
 def retrieve_grounded(

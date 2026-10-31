@@ -1,0 +1,114 @@
+{
+  "reviewer": {
+    "kind": "ai",
+    "name": "deepseek-flash + Codex二次复核",
+    "method": "200条模型审核；补审格式失败，复核失败项和已知风险，固定抽样20条候选通过项；未进行真人审核或扫描原件校勘。"
+  },
+  "expected_cases": 100,
+  "coverage_complete": true,
+  "minimum_size_met": true,
+  "arms": {
+    "baseline": {
+      "answer_correct": {
+        "eligible": 82,
+        "reviewed": 82,
+        "passed": 66,
+        "rate": 0.8048780487804879,
+        "wilson_95": [
+          0.7062981066280997,
+          0.8761710252681821
+        ],
+        "target": 0.85,
+        "met": false
+      },
+      "citation_supported": {
+        "eligible": 82,
+        "reviewed": 82,
+        "passed": 74,
+        "rate": 0.9024390243902439,
+        "wilson_95": [
+          0.8191279423857907,
+          0.9497313117173012
+        ],
+        "target": 0.95,
+        "met": false
+      },
+      "abstention_correct": {
+        "eligible": 18,
+        "reviewed": 18,
+        "passed": 18,
+        "rate": 1.0,
+        "wilson_95": [
+          0.8241207763533505,
+          1
+        ],
+        "target": 0.95,
+        "met": true
+      },
+      "multi_correct": {
+        "eligible": 17,
+        "reviewed": 17,
+        "passed": 11,
+        "rate": 0.6470588235294118,
+        "wilson_95": [
+          0.41300363485219294,
+          0.8269027960275591
+        ],
+        "target": 0.8,
+        "met": false
+      },
+      "all_targets_met": false
+    },
+    "candidate": {
+      "answer_correct": {
+        "eligible": 82,
+        "reviewed": 82,
+        "passed": 79,
+        "rate": 0.9634146341463414,
+        "wilson_95": [
+          0.8978726535639178,
+          0.9874804269184304
+        ],
+        "target": 0.85,
+        "met": true
+      },
+      "citation_supported": {
+        "eligible": 82,
+        "reviewed": 82,
+        "passed": 76,
+        "rate": 0.926829268292683,
+        "wilson_95": [
+          0.8494215619114543,
+          0.9660352227433401
+        ],
+        "target": 0.95,
+        "met": false
+      },
+      "abstention_correct": {
+        "eligible": 18,
+        "reviewed": 18,
+        "passed": 18,
+        "rate": 1.0,
+        "wilson_95": [
+          0.8241207763533505,
+          1
+        ],
+        "target": 0.95,
+        "met": true
+      },
+      "multi_correct": {
+        "eligible": 17,
+        "reviewed": 17,
+        "passed": 16,
+        "rate": 0.9411764705882353,
+        "wilson_95": [
+          0.7301796936242538,
+          0.9895395990150021
+        ],
+        "target": 0.8,
+        "met": true
+      },
+      "all_targets_met": false
+    }
+  }
+}

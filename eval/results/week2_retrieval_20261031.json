@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-10-31T04:30:44.437730+00:00",
+  "status": "blocked",
+  "dataset_sha256": "583a4eccc58f23b4563afcfb12adefcc3a1752478552627ffc8551e8ada1a4f0",
+  "git_head": "bc9a7e8d32c233612049edcc6a48c0fb8d93f5d1",
+  "code_sha256": {
+    "retrieval": "75965cc705d0931856f75182e1cebeb0dc163ca3c6d8a3fc6ac89c1ce2402bf7",
+    "answer": "60413d0ada5a2d7b520d88facf16f40b1fcbb9494473922d473c3ce9e407b57a",
+    "evaluation/baseline": "48334cbe71cd8ccaa56341fee7f88e1df3a37e37a5b10a3a991b8cc6e84d997b",
+    "evaluation/split_retrieval": "5f7f647b5dd3ad06f7caa776b6d263519e0a8e135af5c2378f20e2a2785a32d6"
+  },
+  "scope": "基础集合只读配对实验；公开回归与新编开发题分列；不代表独立验收或业务全链路",
+  "settings": {
+    "collection": "research_docs",
+    "embedding": "BAAI/bge-m3",
+    "threshold": 0.55,
+    "final_top_k": 4,
+    "per_query_top_k": 4,
+    "repeats": 3,
+    "model": "deepseek-flash",
+    "generation_max_tokens": 700,
+    "generation_max_retries": 0,
+    "splitter": "连续①②③④；取各子题原文；不读取参考答案或锚点",
+    "merge": "按子题轮流选择、去重并重新编号"
+  },
+  "dataset_validation": {
+    "cases": 57,
+    "source_files": 16,
+    "absence_scanned_markdown": 65
+  },
+  "results": [],
+  "blocker_type": "MilvusException"
+}

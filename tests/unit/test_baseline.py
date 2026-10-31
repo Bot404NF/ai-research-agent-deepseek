@@ -158,3 +158,125 @@ def test_generation_failure_preserves_retrieval_measurements():
     assert result["latency"]["retrieval"]["count"] == 1
     assert result["generated_answers"] == 0
     assert result["estimated_total_cost"] is None
+
+
+def test_ai_review_never_counts_as_independent_human_review():
+    row = {
+        "id": "x",
+        "status": "ok",
+        "stratum": "positive",
+        "should_abstain": False,
+        "metrics": {"anchor_hit_at_4": True, "annotated_recall_at_4": 1},
+        "retrieval_seconds": [0.1],
+    }
+    result = summarize([row], [{"id": "x", "hit_at_4": True}], reviewer_kind="ai")
+    assert result["semantic_ai_review"]["hit_at_4"]["rate"] == 1
+    assert result["semantic_manual"]["hit_at_4"]["reviewed"] == 0
+    assert result["semantic_manual"]["hit_at_4"]["rate"] is None
+    assert result["by_stratum"]["positive"]["semantic_manual"]["hit_at_4"]["rate"] is None
+
+
+def test_no_citation_cannot_receive_citation_support_score(tmp_path):
+    results = [
+        {
+            "id": "x",
+            "status": "ok",
+            "should_abstain": False,
+            "metrics": {},
+            "answer": "答复",
+            "checks": {"has_citation": False},
+        }
+    ]
+    data = {
+        "dataset_sha256": "x",
+        "results_sha256": hashlib.sha256(
+            json.dumps(results, sort_keys=True, ensure_ascii=False).encode()
+        ).hexdigest(),
+        "reviewer": {"kind": "ai"},
+        "reviews": [{"id": "x", "citation_supported": True, "reason": "不能虚构引用通过"}],
+    }
+    path = tmp_path / "reviews.json"
+    path.write_text(json.dumps(data), encoding="utf-8")
+    with pytest.raises(ValueError, match="引用支持应为 null"):
+        load_reviews(path, {"dataset_sha256": "x", "results": results})
+
+
+def test_offline_cost_preserves_unknown_calls_and_model_scope():
+    from research_agent.evaluation.costs import analyze
+
+    pricing = {
+        "model": "test",
+        "source_url": "https://example.invalid/fixture",
+        "access_date": "2026-10-31",
+        "currency": "CNY",
+        "time_band": "fixture",
+        "applicability": "仅测试，非实际价格",
+        "input_hit_per_million": 1,
+        "input_miss_per_million": 2,
+        "output_per_million": 3,
+    }
+    report = {
+        "settings": {"model": "test"},
+        "results": [
+            {
+                "id": "ok",
+                "api_attempted": True,
+                "usage": {
+                    "input_tokens": 100,
+                    "output_tokens": 50,
+                    "input_token_details": {"cache_read": 20},
+                },
+            },
+            {"id": "unknown", "api_attempted": True},
+        ],
+    }
+    result = analyze(report, pricing)
+    assert result["priced_calls"] == 1
+    assert result["estimated_total_cost"] is None
+    assert result["observed_partial_cost"] == pytest.approx(0.00033)
+    with pytest.raises(ValueError, match="模型与原始运行不匹配"):
+        analyze(report, {**pricing, "model": "other"})
+
+
+def test_injected_tool_failure_is_not_counted_as_live_success():
+    from dataclasses import replace
+
+    from research_agent.config import get_settings
+    from research_agent.evaluation.tools import controlled, summarize_tools
+
+    summary = summarize_tools(controlled(replace(get_settings(), api_key="evaluation-test")))
+    assert summary["controlled_scenarios"] == summary["controlled_passed"] == 8
+    assert summary["controlled_backend_attempts"] == 3
+    assert summary["controlled_backend_successes"] == 2
+    assert summary["live_tool_success_rate"] is None
+
+
+def test_week1_ai_reviews_cover_every_applicable_case_and_bind_raw_data():
+    from research_agent.config import PROJECT_ROOT
+
+    report = json.loads(
+        (PROJECT_ROOT / "eval/results/week1_live_20261031.json").read_text(encoding="utf-8")
+    )
+    path = PROJECT_ROOT / "eval/reports/week1_ai_reviews_20261031.json"
+    reviews = load_reviews(path, report)
+    assert {r["id"] for r in reviews} == {r["id"] for r in report["results"]}
+    by_id = {r["id"]: r for r in reviews}
+    for row in report["results"]:
+        review = by_id[row["id"]]
+        if row["should_abstain"]:
+            assert isinstance(review["abstention_correct"], bool)
+        else:
+            assert isinstance(review["hit_at_4"], bool)
+            assert isinstance(review["answer_correct"], bool)
+        if row["checks"]["has_citation"]:
+            assert isinstance(review["citation_supported"], bool)
+
+
+def test_settings_repr_does_not_expose_api_key():
+    from dataclasses import replace
+
+    from research_agent.config import get_settings
+
+    settings = replace(get_settings(), api_key="evaluation-secret-sentinel")
+    assert "evaluation-secret-sentinel" not in repr(settings)
+    assert settings.api_key == "evaluation-secret-sentinel"

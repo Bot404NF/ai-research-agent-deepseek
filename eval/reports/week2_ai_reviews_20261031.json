@@ -1,0 +1,156 @@
+{
+  "dataset_sha256": "583a4eccc58f23b4563afcfb12adefcc3a1752478552627ffc8551e8ada1a4f0",
+  "results_sha256": "b9f644a3cf6c0b685f5135e8374218ea84087e8356acd26caebff77ea33a8d4e",
+  "reviewer": {
+    "kind": "ai",
+    "name": "Codex",
+    "date": "2026-10-31",
+    "method": "逐题阅读两组原始回答、候选证据与指定来源；非独立真人或专家审核。整题各部分完整正确才通过；引用仅判断已陈述事实的支持，缺答另外记失败。"
+  },
+  "reviews": [
+    {
+      "id": "M01",
+      "arm": "whole",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "reason": "S3支持陈树德与朱瑞熙，S1/S4支持张承先、程攸熙和十二卷；回答明确区分上海古籍与上海社科两个版本，未把另一版本标点者并入同一著录。"
+    },
+    {
+      "id": "M01",
+      "arm": "split",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "reason": "S3题名及版权页支持编纂和标点角色；S2/S4支持南翔十二卷及编增订者；两部分均完整且有引用。"
+    },
+    {
+      "id": "M02",
+      "arm": "whole",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "reason": "S1直接记二〇〇〇年十一月汽车城命名，S2直接记同年九月合镇；两项答案和引用一致。"
+    },
+    {
+      "id": "M02",
+      "arm": "split",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "reason": "S1与S3分别直接支持2000年11月和2000年9月，两问均答全。"
+    },
+    {
+      "id": "M03",
+      "arm": "whole",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "reason": "S3题名页为民国廿二年六月；S1发刊词为搜求两月、整理三月、不出五个月；换算1933年和回答均正确。"
+    },
+    {
+      "id": "M03",
+      "arm": "split",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "reason": "S1题名页与S2发刊词分别支持出版时间和2+3个月安排，整题回答完整并逐项引用。"
+    },
+    {
+      "id": "M04",
+      "arm": "whole",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "reason": "缺第一卷发刊词四编证据，第一问拒答；S1支持第二问尚本。未用第二卷内容猜测四编，已有事实引用支持，但整题未完成。"
+    },
+    {
+      "id": "M04",
+      "arm": "split",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "reason": "S1十一编和S3计划25编均不能替代发刊词已完成四编；第二问S4支持尚本，回答明确区分并拒答第一问，整题不通过。"
+    },
+    {
+      "id": "M05",
+      "arm": "whole",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "reason": "安亭S1明确初稿四卷、编入合三卷；S2另述稿三卷，全志二十卷，回答保留来源出入；南翔无证据而拒答。未完成整题，但陈述与引用有对应。"
+    },
+    {
+      "id": "M05",
+      "arm": "split",
+      "hit_at_4": true,
+      "answer_correct": false,
+      "citation_supported": false,
+      "reason": "S1《上海方志通考》虽非锚点指定文件，但直接说明初稿四卷、厘为人物志三卷，S2/S4提供南翔全部事实；可在注明S3异说后回答。回答却把全志二十卷当成人物志合编卷数，并称两处一致，误读S1，答案及引用支持失败。此语义充分判断允许问题未限定取证书目的等价证据，不改自动锚点分。"
+    },
+    {
+      "id": "M06",
+      "arm": "whole",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "reason": "S1仅含书目元信息及目录，支持1985年03月与两篇目录署吴格，但无印刷厂，也不是所问前言；答案只答部分并明确据目录，整题失败，已有事实引用支持。"
+    },
+    {
+      "id": "M06",
+      "arm": "split",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "reason": "仍只有元信息及目录，缺印刷厂和指定前言；回答与整题组相同，目录署吴格有据，但不能算完整回答。"
+    },
+    {
+      "id": "M07",
+      "arm": "whole",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "reason": "S1凡例直接支持尚本和散附各类以便攻究，两部分均完整；怪诞不录的解释与上下文一致但OCR仍需原件校勘。"
+    },
+    {
+      "id": "M07",
+      "arm": "split",
+      "hit_at_4": true,
+      "answer_correct": true,
+      "citation_supported": true,
+      "reason": "S2凡例直接支持人品首孝行尚本也与名公题咏散附各类，两问逐项引用、内容一致。"
+    },
+    {
+      "id": "M08",
+      "arm": "whole",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "reason": "S1题名/版权支持陈树德、朱瑞熙；S3/S4为其他方志提要，缺《上海地方志概述》前言，第二问拒答，整题失败。"
+    },
+    {
+      "id": "M08",
+      "arm": "split",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "reason": "S3题名/版权支持第一问；S2/S4仍不是所需前言，第二问拒答；仅已有事实引用支持，不算整题通过。"
+    },
+    {
+      "id": "W201",
+      "arm": "whole",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "reason": "四条候选无人民公社建立日期，也无南翔体例四项。S1为现代安亭志的编修介绍而非所需前言；回答明确说明缺证，未编日期，整题仍失败。"
+    },
+    {
+      "id": "W201",
+      "arm": "split",
+      "hit_at_4": false,
+      "answer_correct": false,
+      "citation_supported": true,
+      "reason": "S4直接支持赋役、户口、保甲、乡约；S1现代安亭志介绍与S3古代沿革未含人民公社日期。第二问答对但第一问未答，不能算整题正确。"
+    }
+  ]
+}

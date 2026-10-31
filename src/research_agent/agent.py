@@ -22,9 +22,16 @@ from research_agent.answer import (
 )
 from research_agent.config import Settings
 from research_agent.conversation import ConversationStore
+from research_agent.observability.runtime import ObservedModel, observed_step, observed_stream, span
 from research_agent.rag_updates import add_file_to_rag as index_incoming_file
 from research_agent.rag_updates import list_incoming_files as get_incoming_files
 from research_agent.retrieval import Evidence, retrieve_library
+from research_agent.security import (
+    error_type,
+    protect_external_call,
+    protect_external_stream,
+    validation_message,
+)
 from research_agent.web_search import WebEvidence
 from research_agent.web_search import search_web as run_web_search
 
@@ -109,7 +116,7 @@ class ToolExecutionMiddleware:
             try:
                 result = index_incoming_file(relative_path, settings)
             except (FileNotFoundError, RuntimeError, ValueError) as exc:
-                return f"文件未加入 RAG：{exc}"
+                return f"文件未加入 RAG：{validation_message(exc)}"
             if not result["added"]:
                 return f"该文件已加入资料库：{result['source']}（{result['chunks']} 个文本块），未重复写入。"
             return f"已解析并加入资料库：{result['source']}（{result['chunks']} 个文本块）。"
@@ -154,6 +161,7 @@ class ToolExecutionMiddleware:
             tools.append(search_web)
         return tools
 
+    @observed_step("tool")
     def execute(self, name: str, arguments: dict) -> str:
         tool_instance = self.tool_map.get(name)
         if tool_instance is None:
@@ -164,7 +172,7 @@ class ToolExecutionMiddleware:
             if name == "search_documents":
                 self.retrieval_failed = True
             return (
-                f"工具执行失败（{type(exc).__name__}）。不要声称操作已经完成；"
+                f"工具执行失败（{error_type(exc)}）。不要声称操作已经完成；"
                 "请根据已有证据回答，或告知用户本次操作未成功。"
             )
 
@@ -180,17 +188,21 @@ class AgentEvent:
     web_sources: tuple[str, ...] = ()
 
 
-def _model(settings: Settings) -> ChatOpenAI:
-    return ChatOpenAI(
-        model=settings.chat_model,
-        api_key=settings.api_key,
-        base_url=settings.base_url,
-        temperature=0,
-        timeout=60,
-        max_retries=1,
-        # DeepSeek 思考模式下，工具调用后需要回传 reasoning_content；
-        # 当前 LangChain 流式适配不会保留该字段，因此明确使用非思考模式。
-        extra_body={"thinking": {"type": "disabled"}},
+@protect_external_call
+def _model(settings: Settings) -> ObservedModel:
+    return ObservedModel(
+        ChatOpenAI(
+            model=settings.chat_model,
+            api_key=settings.api_key,
+            base_url=settings.base_url,
+            temperature=0,
+            timeout=60,
+            max_retries=1,
+            stream_usage=True,
+            # DeepSeek 思考模式下，工具调用后需要回传 reasoning_content；
+            # 当前 LangChain 流式适配不会保留该字段，因此明确使用非思考模式。
+            extra_body={"thinking": {"type": "disabled"}},
+        )
     )
 
 
@@ -204,6 +216,8 @@ def contextual_retrieval_query(question: str, turns: list[dict[str, str]]) -> st
     return question
 
 
+@protect_external_call
+@observed_step("followup")
 def _suggest_followups(
     question: str,
     answer: str,
@@ -212,6 +226,8 @@ def _suggest_followups(
     settings: Settings,
 ) -> tuple[str, ...]:
     """根据本轮证据生成简短、可执行的追问建议。"""
+    if settings.followup_mode == "local":
+        return local_followups(bool(evidence or web_evidence))
     rag_context = "\n\n".join(
         f"[{item.label}] 来源：{item.display_source}\n{item.text[:1200]}" for item in evidence[:8]
     )
@@ -243,6 +259,23 @@ def _suggest_followups(
     return suggestions or ("这份资料中还有哪些相关内容值得继续了解？",)
 
 
+def local_followups(has_evidence: bool) -> tuple[str, ...]:
+    """用操作型问题延伸当前回答，不新增资料事实，也不发起模型请求。"""
+    if not has_evidence:
+        return (
+            "请列出回答这个问题还需要哪些资料。",
+            "请帮我缩小这个问题的范围。",
+            "资料库有哪些可用资料？",
+        )
+    return (
+        "请逐项列出上述回答对应的原文与来源。",
+        "上述回答还有哪些信息缺少直接证据？",
+        "请区分相关资料的版本、日期和记载差异。",
+    )
+
+
+@protect_external_stream
+@observed_stream
 def stream_answer_turn(
     question: str,
     settings: Settings,
@@ -431,7 +464,8 @@ def stream_answer_turn(
     all_sources = [*library_sources, *web_sources]
     if all_sources:
         displayed_answer += "\n\n本轮来源：\n" + "\n".join(all_sources)
-    history_store.append_turn(session_id, question, displayed_answer)
+    with span("save"):
+        history_store.append_turn(session_id, question, displayed_answer)
     if library_sources or web_sources:
         yield AgentEvent(
             kind="sources",

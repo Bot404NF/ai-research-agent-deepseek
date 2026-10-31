@@ -1,0 +1,17 @@
+{
+  "model": "deepseek-v4-pro",
+  "model_version_on_price_page": "DeepSeek-V4-Pro-0813",
+  "currency": "CNY",
+  "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+  "source_website": "DeepSeek API Docs 中文官网",
+  "publisher": "DeepSeek",
+  "published_date": null,
+  "effective_date": null,
+  "access_date": "2026-10-31",
+  "time_band": "off_peak",
+  "input_hit_per_million": 0.15,
+  "input_miss_per_million": 4.5,
+  "output_per_million": 13.5,
+  "applicability": "仅 deepseek-v4-pro 官方公开空闲时段人民币单价；当前价格页未标发布日期/生效日，按查询日单价回算，非历史账单核验。原始运行开始UTC 2026-10-30 13时，即北京时间21时，约三分钟内完成，均在18时后空闲时段。账户优惠、免费额度和代理平台加价不在此配置内。",
+  "time_band_rule": "北京时间工作日9:00—12:00及14:00—18:00为高峰，其余和周末/中国法定节假日为空闲。此运行21时不依赖节假日判断。"
+}

@@ -1,6 +1,14 @@
 # 知研 · 专题研究工作流助手
 
+面试展示以一条完整研究工作流为主：[5—8分钟演示](docs/interview-demo.md)、[简历表述与技术问答](docs/interview-prep.md)。本地部署覆盖网页、资料存储及向量检索，生成使用DeepSeek API，不声称完整离线推理。
+
+本轮面试优化已收口：[统一状态与验收](eval/reports/interview_completion_20261101.md)。轻量运行诊断已启用；真实研究跨进程恢复和报告下载通过，194项测试通过。检索候选仍未达到引用质量门槛，保留关闭状态；报告内容局限与失败证据一并交付。
+
 质量评测统一使用100题主评测集，整题正确、引用支持和拒答分别评分，不按新老题分组。运行与目标见[统一验收方案](eval/experiments/quality_target.md)。
+
+第四周已完成真实业务100题对照与逐题AI审核：本地追问候选费用降低49.3%、轮次完成P50降低40.3%，但P95增加12.0%、完整正确及引用支持均低于对照，未启用新检索和本地追问默认开关。代码已统一业务入口并保留候选配置，实际结果、限制与复现方式见[第四周报告](eval/reports/week4_completion_20261031.md)。
+
+API Key 的测试隔离、安全异常输出与提交扫描约定见[防泄露说明](docs/secret-protection.md)。默认 pytest 使用测试凭据，不加载真实 `.env`；真实付费评测仍通过独立入口显式运行。
 
 输入研究目标，确认可编辑的研究计划，由系统逐题收集证据、保存阶段成果、检查资料缺口与冲突，再汇总为可下载的 Markdown 报告。页面采用深色界面，默认进入“问答”，顶部胶囊按钮可切换至“研究”；侧栏依次为资料库、研究任务、历史会话。
 
@@ -56,7 +64,7 @@ uv sync
 Copy-Item .env.example .env
 ```
 
-编辑 `.env`，设置 `DEEPSEEK_API_KEY`。默认聊天模型为 `deepseek-v4-pro`，向量模型为本地 `BAAI/bge-m3`；`BGE_M3_DEVICE=auto` 会优先使用可用的 NVIDIA GPU，否则回退到 CPU。本项目 Milvus 服务地址默认为 `http://localhost:19531`，可通过 `MILVUS_URI` 修改。
+编辑 `.env`，设置 `DEEPSEEK_API_KEY`。默认聊天模型为 `deepseek-flash`，通过 `DEEPSEEK_CHAT_MODEL` 配置；官方名称是 `flash`，不是 `flesh`。普通问答、专题研究和新运行的评测统一读取该配置，模型约定见[模型配置规范](docs/model-spec.md)。向量模型为本地 `BAAI/bge-m3`；`BGE_M3_DEVICE=auto` 会优先使用可用的 NVIDIA GPU，否则回退到 CPU。本项目 Milvus 服务地址默认为 `http://localhost:19531`，可通过 `MILVUS_URI` 修改。
 
 ## 启动 Milvus
 

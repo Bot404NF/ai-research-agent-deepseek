@@ -7,6 +7,7 @@ from langchain_milvus import Milvus
 
 from research_agent.config import Settings
 from research_agent.embeddings import create_embeddings
+from research_agent.observability.runtime import observed_step
 from research_agent.rag_updates import list_databases
 
 
@@ -152,9 +153,13 @@ def retrieve_versions(
     question: str,
     settings: Settings,
     top_k: int | None = None,
+    *,
+    candidate_k: int | None = None,
+    source_paths: tuple[str, ...] = (),
 ) -> tuple[list[Evidence], list[Evidence]]:
     """兼容历史调用：分别读取增量与基础集合；业务入口使用 retrieve_library。"""
     embeddings = create_embeddings(settings.embedding_model)
+    retrieval_limit = top_k if candidate_k is None else candidate_k
     databases = list_databases(settings)
     if not any(item["collection"] == settings.additions_collection_name for item in databases):
         databases.insert(
@@ -197,7 +202,7 @@ def retrieve_versions(
                 settings,
                 settings.additions_collection_name,
                 embeddings,
-                top_k,
+                retrieval_limit,
                 "N",
                 named_folder["id"],
             )
@@ -213,7 +218,9 @@ def retrieve_versions(
         if collection in seen_collections:
             continue
         new_evidence.extend(
-            _retrieve_with_embeddings(question, settings, collection, embeddings, top_k, "N")
+            _retrieve_with_embeddings(
+                question, settings, collection, embeddings, retrieval_limit, "N"
+            )
         )
         seen_collections.add(collection)
     if named_folder and len(new_evidence) < (top_k or settings.top_k):
@@ -225,7 +232,9 @@ def retrieve_versions(
             if collection in seen_collections:
                 continue
             new_evidence.extend(
-                _retrieve_with_embeddings(question, settings, collection, embeddings, top_k, "N")
+                _retrieve_with_embeddings(
+                    question, settings, collection, embeddings, retrieval_limit, "N"
+                )
             )
             seen_collections.add(collection)
     old_evidence = _retrieve_with_embeddings(
@@ -233,38 +242,59 @@ def retrieve_versions(
         settings,
         settings.collection_name,
         embeddings,
-        top_k,
+        retrieval_limit,
         "O",
+        **({"source_paths": source_paths} if source_paths else {}),
     )
     return [
         replace(item, label=f"N{index}") for index, item in enumerate(new_evidence, 1)
     ], old_evidence
 
 
+@observed_step("retrieval")
 def retrieve_library(
     question: str,
     settings: Settings,
     top_k: int | None = None,
 ) -> list[Evidence]:
-    """汇总现有物理集合，按相关性统一排序、去重并分配资料库标签。"""
+    """沿用集合/目录选择，分题取候选并按书目及内容选择最终证据。"""
+    from research_agent.evidence_policy import merge_round_robin, split_queries
+    from research_agent.grounded_retrieval import normalize, rank_content, source_scope
+
     limit = settings.top_k if top_k is None else top_k
     if limit <= 0:
         raise ValueError("检索条数必须大于零。")
-    additions, base = retrieve_versions(question, settings, top_k)
-    candidates = sorted(
-        [*additions, *base],
-        key=lambda item: item.relevance_score if item.relevance_score is not None else -1,
-        reverse=True,
-    )
-    found = []
-    seen = set()
-    for item in candidates:
-        # 保留不同文件、页码和版本的来源，只移除跨集合的相同证据。
-        key = (item.source, item.page, re.sub(r"\s+", "", item.text))
-        if key in seen:
-            continue
-        seen.add(key)
-        found.append(replace(item, label=f"S{len(found) + 1}"))
-        if len(found) == limit:
-            break
-    return found
+    if not settings.grounded_answers:
+        additions, base = retrieve_versions(question, settings, top_k)
+        candidates = sorted(
+            [*additions, *base],
+            key=lambda e: e.relevance_score if e.relevance_score is not None else -1,
+            reverse=True,
+        )
+        return merge_round_robin([candidates], top_k=limit)
+    groups = []
+    for query in split_queries(question):
+        scope = source_scope(query, settings.data_dir)
+        additions, base = retrieve_versions(
+            query, settings, limit, candidate_k=max(12, limit), source_paths=scope
+        )
+        candidates = sorted(
+            [*additions, *base],
+            key=lambda item: item.relevance_score if item.relevance_score is not None else -1,
+            reverse=True,
+        )
+        titles = [normalize(t) for t in re.findall(r"《([^》]+)》", query)]
+        # 增量集合也按实际来源名匹配书目；不因导入时间替换或拼接不同版本。
+        matched = [
+            e
+            for e in candidates
+            if any(
+                t
+                and t in normalize(e.source.replace("\\", "/").rsplit("/", 1)[-1].rsplit(".", 1)[0])
+                for t in titles
+            )
+        ]
+        if matched:
+            candidates = matched
+        groups.append(rank_content(query, candidates))
+    return merge_round_robin(groups, top_k=limit)

@@ -1,5 +1,5 @@
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -10,11 +10,11 @@ load_dotenv(PROJECT_ROOT / ".env")
 
 @dataclass(frozen=True)
 class Settings:
-    api_key: str
+    api_key: str = field(repr=False)
     chat_model: str
     embedding_model: str
     data_dir: Path
-    milvus_uri: str
+    milvus_uri: str = field(repr=False)
     collection_name: str
     chunk_size: int
     chunk_overlap: int
@@ -24,12 +24,18 @@ class Settings:
     web_search_enabled: bool = True
     web_search_max_results: int = 5
     additions_collection_name: str = "research_docs_additions"
-    base_url: str = "https://api.deepseek.com"
+    base_url: str = field(default="https://api.deepseek.com", repr=False)
     rag_relevance_threshold: float = 0.55
     chat_context_turns: int = 20
+    grounded_answers: bool = False
+    followup_mode: str = "model"
+    telemetry_enabled: bool = True
 
 
 def get_settings() -> Settings:
+    followup_mode = os.getenv("FOLLOWUP_MODE", "model")
+    if followup_mode not in {"local", "model"}:
+        raise ValueError("FOLLOWUP_MODE 必须为 local 或 model。")
     data_dir = Path(os.getenv("DATA_DIR", "data/documents"))
     if not data_dir.is_absolute():
         data_dir = PROJECT_ROOT / data_dir
@@ -57,7 +63,7 @@ def get_settings() -> Settings:
         raise ValueError("ADDITIONS_COLLECTION_NAME 必须与 COLLECTION_NAME 不同。")
     return Settings(
         api_key=os.getenv("DEEPSEEK_API_KEY", ""),
-        chat_model=os.getenv("DEEPSEEK_CHAT_MODEL", "deepseek-v4-pro"),
+        chat_model=os.getenv("DEEPSEEK_CHAT_MODEL", "deepseek-flash"),
         embedding_model=os.getenv("BGE_M3_MODEL", "BAAI/bge-m3"),
         data_dir=data_dir,
         milvus_uri=os.getenv("MILVUS_URI", "http://localhost:19531"),
@@ -73,5 +79,8 @@ def get_settings() -> Settings:
         web_search_max_results=max(1, min(int(os.getenv("WEB_SEARCH_MAX_RESULTS", "5")), 10)),
         additions_collection_name=additions_collection_name,
         base_url=os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
+        grounded_answers=os.getenv("GROUNDED_ANSWERS", "false").lower() in {"1", "true", "yes"},
+        followup_mode=followup_mode,
+        telemetry_enabled=os.getenv("TELEMETRY_ENABLED", "true").lower() in {"1", "true", "yes"},
         rag_relevance_threshold=relevance_threshold,
     )

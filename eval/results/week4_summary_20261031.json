@@ -1,0 +1,221 @@
+{
+  "raw_report_sha256": "0c59eb94d736871abb31ba54d8c6f4ae85f0c66ad433cff84e22dda60a8f6ae4",
+  "checked_reviews_sha256": "56c99f3d092b14c05c0a7d09b0480489834c99901cf579c061a8a033235359fe",
+  "decision": {
+    "adopt": false,
+    "gates": {
+      "quality": false,
+      "stability": true,
+      "smoke": true,
+      "frozen_code": true,
+      "performance": false
+    },
+    "quality": {
+      "reviewer": {
+        "kind": "ai",
+        "name": "DeepSeek逐题审核及Codex复核",
+        "method": "200份逐题审核、全量核心失败/退化及固定种子20份候选通过回答抽查；核对核心字段、引文、版本/页面身份与语音符号。另复查已知公元换算疑点。非真人审核。"
+      },
+      "expected_cases": 100,
+      "coverage_complete": true,
+      "minimum_size_met": true,
+      "arms": {
+        "baseline": {
+          "answer_correct": {
+            "eligible": 82,
+            "reviewed": 82,
+            "passed": 78,
+            "rate": 0.9512195121951219,
+            "wilson_95": [
+              0.8811853807742431,
+              0.9808689344322536
+            ],
+            "target": 0.85,
+            "met": true
+          },
+          "citation_supported": {
+            "eligible": 82,
+            "reviewed": 82,
+            "passed": 78,
+            "rate": 0.9512195121951219,
+            "wilson_95": [
+              0.8811853807742431,
+              0.9808689344322536
+            ],
+            "target": 0.95,
+            "met": true
+          },
+          "abstention_correct": {
+            "eligible": 18,
+            "reviewed": 18,
+            "passed": 18,
+            "rate": 1.0,
+            "wilson_95": [
+              0.8241207763533505,
+              1
+            ],
+            "target": 0.95,
+            "met": true
+          },
+          "multi_correct": {
+            "eligible": 17,
+            "reviewed": 17,
+            "passed": 16,
+            "rate": 0.9411764705882353,
+            "wilson_95": [
+              0.7301796936242538,
+              0.9895395990150021
+            ],
+            "target": 0.8,
+            "met": true
+          },
+          "all_targets_met": true
+        },
+        "candidate": {
+          "answer_correct": {
+            "eligible": 82,
+            "reviewed": 82,
+            "passed": 76,
+            "rate": 0.926829268292683,
+            "wilson_95": [
+              0.8494215619114543,
+              0.9660352227433401
+            ],
+            "target": 0.85,
+            "met": true
+          },
+          "citation_supported": {
+            "eligible": 82,
+            "reviewed": 82,
+            "passed": 76,
+            "rate": 0.926829268292683,
+            "wilson_95": [
+              0.8494215619114543,
+              0.9660352227433401
+            ],
+            "target": 0.95,
+            "met": false
+          },
+          "abstention_correct": {
+            "eligible": 18,
+            "reviewed": 18,
+            "passed": 18,
+            "rate": 1.0,
+            "wilson_95": [
+              0.8241207763533505,
+              1
+            ],
+            "target": 0.95,
+            "met": true
+          },
+          "multi_correct": {
+            "eligible": 17,
+            "reviewed": 17,
+            "passed": 16,
+            "rate": 0.9411764705882353,
+            "wilson_95": [
+              0.7301796936242538,
+              0.9895395990150021
+            ],
+            "target": 0.8,
+            "met": true
+          },
+          "all_targets_met": false
+        }
+      }
+    },
+    "performance": {
+      "baseline": {
+        "attempted": 100,
+        "failed": 0,
+        "truncated": 0,
+        "model_calls": 217,
+        "normalized_cost_cny": 0.48954948,
+        "total_seconds": {
+          "count": 100,
+          "median_seconds": 3.1899959500078694,
+          "p95_seconds": 4.595223600001191
+        },
+        "first_token_seconds": {
+          "count": 100,
+          "median_seconds": 1.19943074999901,
+          "p95_seconds": 2.6394188000122085
+        },
+        "last_token_seconds": {
+          "count": 100,
+          "median_seconds": 1.839533050006139,
+          "p95_seconds": 3.385650300013367
+        },
+        "retrieval_seconds": {
+          "count": 100,
+          "median_seconds": 0.22982179999962682,
+          "p95_seconds": 0.5879733000037959
+        }
+      },
+      "candidate": {
+        "attempted": 100,
+        "failed": 0,
+        "truncated": 0,
+        "model_calls": 118,
+        "normalized_cost_cny": 0.24803532,
+        "total_seconds": {
+          "count": 100,
+          "median_seconds": 1.9035251000022981,
+          "p95_seconds": 5.148570000004838
+        },
+        "first_token_seconds": {
+          "count": 100,
+          "median_seconds": 1.1864706499982276,
+          "p95_seconds": 3.9049623000028078
+        },
+        "last_token_seconds": {
+          "count": 100,
+          "median_seconds": 1.882699749992753,
+          "p95_seconds": 5.12103819999902
+        },
+        "retrieval_seconds": {
+          "count": 100,
+          "median_seconds": 0.23395394999533892,
+          "p95_seconds": 0.5462000999978045
+        }
+      }
+    },
+    "time_target_met": false,
+    "cost_target_met": true,
+    "p95_reduction": -0.1204177311422896,
+    "cost_reduction": 0.4933396313688251,
+    "paired_changes": {
+      "answer_correct": {
+        "improved": [],
+        "regressed": [
+          "T015",
+          "T018"
+        ]
+      },
+      "citation_supported": {
+        "improved": [
+          "T048"
+        ],
+        "regressed": [
+          "T015",
+          "T026",
+          "T036"
+        ]
+      },
+      "abstention_correct": {
+        "improved": [],
+        "regressed": []
+      }
+    }
+  },
+  "budget": {
+    "limit_cny": 10,
+    "known_estimated_cny": 2.3467594,
+    "unknown_reserve_cny": 1.0,
+    "peak_committed_cny": 5.6935188,
+    "usage_unknown_calls": 2
+  },
+  "default_enabled": false,
+  "performance_repetitions": 1,
+  "repetition_note": "质量门槛未通过，不追加性能重复测量；只使用本轮完整100题统计。"
+}

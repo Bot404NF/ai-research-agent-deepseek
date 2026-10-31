@@ -2,6 +2,8 @@
 
 本次只扩展评测，不调整检索、模型提示词、索引或业务流程。历史冻结数据与结果保持不变。实际结果见 [本次报告](../reports/week1_baseline_20261031.md)。
 
+后续已按用户要求完成全部 56 题的 AI 逐题复核，见[收尾结果与教学案例](../reports/week1_completion_20261031.md)。AI 复核与真人审核分别统计；本轮另修复了配置对象打印密钥的风险。
+
 ## 1. 先沿代码读清楚测量对象
 
 | 路径 | 实际调用链 | 本轮覆盖 |
@@ -78,7 +80,7 @@ uvx --offline --from ruff==0.17.2 ruff format --check src/research_agent/evaluat
 
 `[(输入Token - 缓存命中Token) × 未命中单价 + 缓存命中Token × 命中单价 + 输出Token × 输出单价] / 1,000,000`
 
-这只是指定价格下的 API 估算，不是账单；不包含搜索、抓取、重试、研究任务与基础设施。`scripts/cost_analysis.py` 和 `benchmark.py` 的旧占位不作为新入口，本次统计统一在基线模块中实现。
+这只是指定价格下的 API 估算，不是账单；不包含搜索、抓取、重试、研究任务与基础设施。`scripts/cost_analysis.py` 现已实现离线重算，未知字段保留为空；`benchmark.py` 仍为历史占位，性能统计使用基线模块。
 
 ## 6. 人工审核与下一步学习
 
@@ -89,6 +91,35 @@ uvx --offline --from ruff==0.17.2 ruff format --check src/research_agent/evaluat
 ```
 
 汇总审核不访问外部服务，也不重复生成。当前不接自动 LLM judge，避免把同模型判断包装成人工金标准；若以后接入，必须另记 judge 模型、提示词版本、费用，并用人工样本校准。
+
+审核文件可增加 `reviewer.kind = "ai"` 和审核方法、日期。此时结果写入 `semantic_ai_review`，真人 `semantic_manual` 的审核数保持 0；旧文件未声明类型时兼容为 human。无引用的回答必须将 `citation_supported` 设为 null；正/负题各自使用正确的指标字段。
+
+## 7. 本轮收尾命令：只读原始结果，不重复生成
+
+以下输出名是示例，每次使用新路径。收尾时 Milvus 未启动的一轮真实工具 0/4 已保留；用户启动后重跑为 4/4。再次执行工具需要现有服务可连接，不运行 ingest。
+
+```powershell
+$env:PYTHONPATH = 'src'
+
+# 阅读指定题号的全部被引证据；未命中题和无引用题显示全部候选
+.\.venv\Scripts\python.exe eval/inspect_week1.py Q13 H04 M05
+
+# 复用已完成的56题AI复核，不调用judge或生成API
+.\.venv\Scripts\python.exe eval/run_baseline.py --review-report eval/results/week1_live_20261031.json --reviews eval/reports/week1_ai_reviews_20261031.json --output eval/results/week1_reviewed_new.json
+
+# 用有来源、查询日期和适用时段的公开价格，离线重算费用
+.\.venv\Scripts\python.exe scripts/cost_analysis.py --report eval/results/week1_live_20261031.json --pricing eval/experiments/deepseek_v4_pro_pricing_20261031.json --output eval/results/week1_costs_new.json
+
+# 默认8个受控场景；显式加 --live-local 才额外调用4次本地检索工具
+.\.venv\Scripts\python.exe eval/run_tool_baseline.py --output eval/results/week1_tools_offline_new.json
+.\.venv\Scripts\python.exe eval/run_tool_baseline.py --live-local --output eval/results/week1_tools_live_new.json
+
+# 测试不使用真实密钥；防止失败回溯意外打印外部配置
+$env:DEEPSEEK_API_KEY = ''
+.\.venv\Scripts\python.exe -m pytest --basetemp=.pytest-week1-completion-new-tmp --tb=short
+```
+
+不要将离线价格选项传给 `--review-report`：费用分析单独输出、绑定原始报告摘要，避免审核汇总悄悄忽略价格或改变原始结果。AI 判分不是调用同一生成模型自动匹配参考答案，而是本轮执行者逐题阅读证据后写下的版本化评审；仍不是独立真人金标准。
 
 建议学习顺序：
 

@@ -8,12 +8,14 @@ from dataclasses import asdict
 from datetime import UTC, datetime
 
 from research_agent.config import PROJECT_ROOT, get_settings
+from research_agent.security import protect_external_call
 
 
 def normalize(text: str) -> str:
     return re.sub(r"\s+", "", text)
 
 
+@protect_external_call
 def main() -> None:
     from research_agent.retrieval import retrieve
 
