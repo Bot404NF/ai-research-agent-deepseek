@@ -1,0 +1,609 @@
+{
+  "dataset_sha256": "583a4eccc58f23b4563afcfb12adefcc3a1752478552627ffc8551e8ada1a4f0",
+  "results_sha256": "7ec312ea6f24be12db6b21114e862d23cd7ab3fdb4e93e766034e53aa55aa6d5",
+  "reviewer": {
+    "kind": "human"
+  },
+  "reviews": [
+    {
+      "id": "Q11",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "Q11",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "Q11",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H01",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H01",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H01",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H04",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H04",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H04",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H07",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H07",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H07",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H08",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H08",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H08",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H11",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H11",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H11",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H14",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H14",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H14",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H17",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H17",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "H17",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "N01",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "N01",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "N01",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "N02",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "N02",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "N02",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "N03",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "N03",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "N03",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "N04",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "N04",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "N04",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M01",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M01",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M01",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M02",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M02",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M02",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M03",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M03",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M03",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M04",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M04",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M04",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M05",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M05",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M05",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M06",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M06",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M06",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M07",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M07",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M07",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M08",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M08",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "M08",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "B01",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "B01",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "B01",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "B02",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "B02",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "B02",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "B03",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "B03",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "B03",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "B04",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "B04",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "B04",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "W201",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "W201",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    },
+    {
+      "id": "W201",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": null,
+      "reason": ""
+    }
+  ]
+}

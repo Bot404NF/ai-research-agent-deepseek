@@ -1,0 +1,1791 @@
+{
+  "schema_version": 1,
+  "purpose": "第二周：56道公开回归题与1道新编开发题；非独立验收集",
+  "recall_scope": "仅已标注锚点证据单元，未穷举全库相关 chunk；不报告全库 Recall@4",
+  "cases": [
+    {
+      "id": "Q01",
+      "question": "《上海通志馆期刊》第一卷第一期出版于何时？",
+      "reference_answer": "民国二十二年六月。",
+      "expected_source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+      "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+      "evidence_anchors": [
+        {
+          "text": "民国廿二年六月",
+          "line": 7
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q01",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+          "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+          "anchors": [
+            "民国廿二年六月"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q02",
+      "question": "《上海通志馆期刊》发刊词中，原先预计一编初稿需要多久完成？资料搜求和整理考证各安排多久？",
+      "reference_answer": "预计五个月；搜求志料两个月，整理考证并加编制三个月。",
+      "expected_source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+      "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+      "evidence_anchors": [
+        {
+          "text": "用两个月时间搜求志料用三个月时间整理考证并加编制",
+          "line": 92
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q02",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+          "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+          "anchors": [
+            "用两个月时间搜求志料用三个月时间整理考证并加编制"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q03",
+      "question": "《上海通志馆期刊》发刊词记载，当时已经完成初稿的有哪四编？",
+      "reference_answer": "学艺、法租界、社会事业、金融。",
+      "expected_source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+      "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+      "evidence_anchors": [
+        {
+          "text": "近来初稿已完成的有学艺法租界社会事业金融等四编",
+          "line": 94
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q03",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+          "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+          "anchors": [
+            "近来初稿已完成的有学艺法租界社会事业金融等四编"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q04",
+      "question": "《弘治上海志（上）》的凡例为什么把“孝行”放在人品类的首位？",
+      "reference_answer": "尚本也，即重视根本。",
+      "expected_source": "上海地方志资料集/弘治上海志（上）/弘治上海志（上）.md",
+      "source_sha256": "2df69c6c2c66c4ceede66138c1459c16cc6b3d03441a7d0ebe02f8f2f397d4b8",
+      "evidence_anchors": [
+        {
+          "text": "一人品首孝行尚本也",
+          "line": 57
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q04",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/弘治上海志（上）/弘治上海志（上）.md",
+          "source_sha256": "2df69c6c2c66c4ceede66138c1459c16cc6b3d03441a7d0ebe02f8f2f397d4b8",
+          "anchors": [
+            "一人品首孝行尚本也"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q05",
+      "question": "《弘治上海志（上）》对涉及山川景物的名公题咏，采用怎样的编排方式？",
+      "reference_answer": "散附于各类之下，以便考究。",
+      "expected_source": "上海地方志资料集/弘治上海志（上）/弘治上海志（上）.md",
+      "source_sha256": "2df69c6c2c66c4ceede66138c1459c16cc6b3d03441a7d0ebe02f8f2f397d4b8",
+      "evidence_anchors": [
+        {
+          "text": "有系于山川景物者散附于各类之下",
+          "line": 55
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q05",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/弘治上海志（上）/弘治上海志（上）.md",
+          "source_sha256": "2df69c6c2c66c4ceede66138c1459c16cc6b3d03441a7d0ebe02f8f2f397d4b8",
+          "anchors": [
+            "有系于山川景物者散附于各类之下"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q06",
+      "question": "《青浦县志（十一）-1》中，卷二十七、卷二十八分别是什么内容？",
+      "reference_answer": "卷二十七为艺文上，卷二十八为艺文下。",
+      "expected_source": "上海地方志资料集/青浦县志（十一）-1/青浦县志（十一）-1.md",
+      "source_sha256": "3cfed94c2dc8c6b05d727dcd890a38ad83c029899a8c4daea2d88b5db727d9eb",
+      "evidence_anchors": [
+        {
+          "text": "卷二十七",
+          "line": 5
+        },
+        {
+          "text": "艺文上",
+          "line": 6
+        },
+        {
+          "text": "卷二十八",
+          "line": 7
+        },
+        {
+          "text": "艺文下",
+          "line": 8
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q06",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/青浦县志（十一）-1/青浦县志（十一）-1.md",
+          "source_sha256": "3cfed94c2dc8c6b05d727dcd890a38ad83c029899a8c4daea2d88b5db727d9eb",
+          "anchors": [
+            "卷二十七",
+            "艺文上",
+            "卷二十八",
+            "艺文下"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q07",
+      "question": "《盛桥里志》卷五记载，举人李索的字是什么，在哪一年中举？",
+      "reference_answer": "字天佑，清雍正十年壬子中举。",
+      "expected_source": "上海地方志资料集/（清）罗店镇志 （民国）盛桥里志 大场里志 江湾 (1)/（清）罗店镇志 （民国）盛桥里志 大场里志 江湾 (1).md",
+      "source_sha256": "fceeaffed0fe5a5e2285faad0cd86b4a0837083223b8999feac153050674eaac",
+      "evidence_anchors": [
+        {
+          "text": "李索字天佑。居元号十图施家宅。清雍正十年壬子中。",
+          "line": 11
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q07",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/（清）罗店镇志 （民国）盛桥里志 大场里志 江湾 (1)/（清）罗店镇志 （民国）盛桥里志 大场里志 江湾 (1).md",
+          "source_sha256": "fceeaffed0fe5a5e2285faad0cd86b4a0837083223b8999feac153050674eaac",
+          "anchors": [
+            "李索字天佑。居元号十图施家宅。清雍正十年壬子中。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q08",
+      "question": "《盛桥里志》卷五中，申志刚的字、号分别是什么？",
+      "reference_answer": "字宗钻，号醉霞。",
+      "expected_source": "上海地方志资料集/（清）罗店镇志 （民国）盛桥里志 大场里志 江湾 (1)/（清）罗店镇志 （民国）盛桥里志 大场里志 江湾 (1).md",
+      "source_sha256": "fceeaffed0fe5a5e2285faad0cd86b4a0837083223b8999feac153050674eaac",
+      "evidence_anchors": [
+        {
+          "text": "申志刚 字宗钻，号醉霞。",
+          "line": 15
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q08",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/（清）罗店镇志 （民国）盛桥里志 大场里志 江湾 (1)/（清）罗店镇志 （民国）盛桥里志 大场里志 江湾 (1).md",
+          "source_sha256": "fceeaffed0fe5a5e2285faad0cd86b4a0837083223b8999feac153050674eaac",
+          "anchors": [
+            "申志刚 字宗钻，号醉霞。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q09",
+      "question": "《洋泾乡志》第一版及第一次印刷分别在什么时候？",
+      "reference_answer": "均为1999年12月。",
+      "expected_source": "上海地方志资料集/上海 洋泾乡志/上海 洋泾乡志.md",
+      "source_sha256": "f26daa35d4a0e1a617574f260df5bd26e75a4c8e486f1b24a6ad5b2a10fee10b",
+      "evidence_anchors": [
+        {
+          "text": "1999年12月第1版 1999年12月第1次印刷",
+          "line": 17
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q09",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海 洋泾乡志/上海 洋泾乡志.md",
+          "source_sha256": "f26daa35d4a0e1a617574f260df5bd26e75a4c8e486f1b24a6ad5b2a10fee10b",
+          "anchors": [
+            "1999年12月第1版 1999年12月第1次印刷"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "question": "哪家印刷厂承印了1999年版《洋泾乡志》？",
+      "reference_answer": "上海长鹰印刷厂。",
+      "expected_source": "上海地方志资料集/上海 洋泾乡志/上海 洋泾乡志.md",
+      "source_sha256": "f26daa35d4a0e1a617574f260df5bd26e75a4c8e486f1b24a6ad5b2a10fee10b",
+      "evidence_anchors": [
+        {
+          "text": "上海长鹰印刷厂承印",
+          "line": 13
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q10",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海 洋泾乡志/上海 洋泾乡志.md",
+          "source_sha256": "f26daa35d4a0e1a617574f260df5bd26e75a4c8e486f1b24a6ad5b2a10fee10b",
+          "anchors": [
+            "上海长鹰印刷厂承印"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "question": "《上海方志提要》由哪个机构编写、哪家出版社出版？",
+      "reference_answer": "上海市地方志办公室编，上海社会科学院出版社出版。",
+      "expected_source": "上海地方志资料集/上海方志提要/上海方志提要.md",
+      "source_sha256": "35f6604fe5f8fed4b67f4e9888651302e3ba6bf1bf52cb26463de590a7225e57",
+      "evidence_anchors": [
+        {
+          "text": "上海市地方志办公室编",
+          "line": 3
+        },
+        {
+          "text": "上海社会科学院出版社",
+          "line": 5
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q11",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海方志提要/上海方志提要.md",
+          "source_sha256": "35f6604fe5f8fed4b67f4e9888651302e3ba6bf1bf52cb26463de590a7225e57",
+          "anchors": [
+            "上海市地方志办公室编",
+            "上海社会科学院出版社"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "question": "《上海方志提要》的ISBN是什么？",
+      "reference_answer": "7-80681-664-X。",
+      "expected_source": "上海地方志资料集/上海方志提要/上海方志提要.md",
+      "source_sha256": "35f6604fe5f8fed4b67f4e9888651302e3ba6bf1bf52cb26463de590a7225e57",
+      "evidence_anchors": [
+        {
+          "text": "ISBN 7-80681-664-X",
+          "line": 13
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q12",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海方志提要/上海方志提要.md",
+          "source_sha256": "35f6604fe5f8fed4b67f4e9888651302e3ba6bf1bf52cb26463de590a7225e57",
+          "anchors": [
+            "ISBN 7-80681-664-X"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q13",
+      "question": "据《青浦县志（二）》沿革记载，明嘉靖二十一年设置青浦县时，县治设在哪里？",
+      "reference_answer": "青龙镇。",
+      "expected_source": "上海地方志资料集/青浦县志（二）/青浦县志（二）.md",
+      "source_sha256": "e5ab4fe24d86533365dfc813e800d6a22853a8b37090739120f33f9a81ca422c",
+      "evidence_anchors": [
+        {
+          "text": "隶南京嘉靖二十一年析华亭上海西北境地置青浦县建",
+          "line": 27
+        },
+        {
+          "text": "治于青龙镇此立县所由始",
+          "line": 28
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q13",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/青浦县志（二）/青浦县志（二）.md",
+          "source_sha256": "e5ab4fe24d86533365dfc813e800d6a22853a8b37090739120f33f9a81ca422c",
+          "anchors": [
+            "隶南京嘉靖二十一年析华亭上海西北境地置青浦县建",
+            "治于青龙镇此立县所由始"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q14",
+      "question": "青浦县在雍正二年析出福泉县后，福泉县何时被裁撤并归回青浦管理？",
+      "reference_answer": "乾隆八年。",
+      "expected_source": "上海地方志资料集/青浦县志（二）/青浦县志（二）.md",
+      "source_sha256": "e5ab4fe24d86533365dfc813e800d6a22853a8b37090739120f33f9a81ca422c",
+      "evidence_anchors": [
+        {
+          "text": "使司雍正二年析县北亭新江二乡地置福泉县乾隆八年",
+          "line": 34
+        },
+        {
+          "text": "裁福泉仍归青浦管理",
+          "line": 35
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q14",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/青浦县志（二）/青浦县志（二）.md",
+          "source_sha256": "e5ab4fe24d86533365dfc813e800d6a22853a8b37090739120f33f9a81ca422c",
+          "anchors": [
+            "使司雍正二年析县北亭新江二乡地置福泉县乾隆八年",
+            "裁福泉仍归青浦管理"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q15",
+      "question": "《青浦县志》人物记载中，陆逊的字和本名分别是什么？",
+      "reference_answer": "字伯言，本名议。",
+      "expected_source": "上海地方志资料集/青浦县志（七）-1/青浦县志（七）-1.md",
+      "source_sha256": "6f38aa443af502a926442ad3011abda0bb9bd59d8600a8b786cb84c038404a6e",
+      "evidence_anchors": [
+        {
+          "text": "吴陆逊字伯言本名议",
+          "line": 18
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q15",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/青浦县志（七）-1/青浦县志（七）-1.md",
+          "source_sha256": "6f38aa443af502a926442ad3011abda0bb9bd59d8600a8b786cb84c038404a6e",
+          "anchors": [
+            "吴陆逊字伯言本名议"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q16",
+      "question": "陆抗与陆逊是什么关系，陆抗字什么？",
+      "reference_answer": "陆抗为陆逊次子，字幼节。",
+      "expected_source": "上海地方志资料集/青浦县志（七）-1/青浦县志（七）-1.md",
+      "source_sha256": "6f38aa443af502a926442ad3011abda0bb9bd59d8600a8b786cb84c038404a6e",
+      "evidence_anchors": [
+        {
+          "text": "陆抗字幼节逊次子也",
+          "line": 22
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q16",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/青浦县志（七）-1/青浦县志（七）-1.md",
+          "source_sha256": "6f38aa443af502a926442ad3011abda0bb9bd59d8600a8b786cb84c038404a6e",
+          "anchors": [
+            "陆抗字幼节逊次子也"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q17",
+      "question": "嘉庆《松江府志》卷二十七记述唐代役法时，每里多少户、每乡多少里？",
+      "reference_answer": "百户为里，五里为乡。",
+      "expected_source": "上海地方志资料集/（嘉庆）松江府志（卷二十七至卷五十五）/（嘉庆）松江府志（卷二十七至卷五十五）.md",
+      "source_sha256": "a9fdf02bbd5732369c7729c6d7549604ee19207243108fcebcdaaf2807d4815c",
+      "evidence_anchors": [
+        {
+          "text": "唐百户为里五里为乡里设正一人",
+          "line": 11
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q17",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/（嘉庆）松江府志（卷二十七至卷五十五）/（嘉庆）松江府志（卷二十七至卷五十五）.md",
+          "source_sha256": "a9fdf02bbd5732369c7729c6d7549604ee19207243108fcebcdaaf2807d4815c",
+          "anchors": [
+            "唐百户为里五里为乡里设正一人"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q18",
+      "question": "嘉庆《松江府志》役法篇记述，华亭一县统十三乡，设里正多少人？",
+      "reference_answer": "六十五人。",
+      "expected_source": "上海地方志资料集/（嘉庆）松江府志（卷二十七至卷五十五）/（嘉庆）松江府志（卷二十七至卷五十五）.md",
+      "source_sha256": "a9fdf02bbd5732369c7729c6d7549604ee19207243108fcebcdaaf2807d4815c",
+      "evidence_anchors": [
+        {
+          "text": "居者名村正华亭一县统乡十三则里正六十五人",
+          "line": 13
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q18",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/（嘉庆）松江府志（卷二十七至卷五十五）/（嘉庆）松江府志（卷二十七至卷五十五）.md",
+          "source_sha256": "a9fdf02bbd5732369c7729c6d7549604ee19207243108fcebcdaaf2807d4815c",
+          "anchors": [
+            "居者名村正华亭一县统乡十三则里正六十五人"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q19",
+      "question": "《上海通志馆期刊》发刊词把志料来源概括为哪三种方式？",
+      "reference_answer": "参考、探访及征求。",
+      "expected_source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+      "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+      "evidence_anchors": [
+        {
+          "text": "志料的来源不外参考探访及征求",
+          "line": 92
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q19",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+          "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+          "anchors": [
+            "志料的来源不外参考探访及征求"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q20",
+      "question": "《上海通志馆期刊》发刊词称当时不日将完成初稿的是哪几编？",
+      "reference_answer": "公共租界、外交、沿革。",
+      "expected_source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+      "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+      "evidence_anchors": [
+        {
+          "text": "不日将告完成的有公共租界外交沿革等编",
+          "line": 94
+        }
+      ],
+      "should_abstain": false,
+      "annotation_status": "draft_text_verified",
+      "human_review": null,
+      "provenance": {
+        "file": "questions.json",
+        "id": "Q20",
+        "split": "legacy_dev"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+          "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+          "anchors": [
+            "不日将告完成的有公共租界外交沿革等编"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H01",
+      "question": "《安亭志》的清代编纂者和现代标点者分别是谁？",
+      "reference_answer": "陈树德编纂，朱瑞熙标点。",
+      "expected_source": "上海地方志资料集/安亭志/安亭志.md",
+      "source_sha256": "91c769df340ee94fc9e09541a840049fa44f7b254b8e386f10eaefad8280198f",
+      "evidence_anchors": [
+        {
+          "text": "[清]陈树德 编纂",
+          "line": 28
+        },
+        {
+          "text": "朱瑞熙 标点",
+          "line": 10
+        }
+      ],
+      "source_scope": "specified",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H01",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/安亭志/安亭志.md",
+          "source_sha256": "91c769df340ee94fc9e09541a840049fa44f7b254b8e386f10eaefad8280198f",
+          "anchors": [
+            "[清]陈树德 编纂",
+            "朱瑞熙 标点"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H02",
+      "question": "安亭在何年何月正式命名为上海国际汽车城？",
+      "reference_answer": "2000年11月。",
+      "expected_source": "上海地方志资料集/安亭志/安亭志.md",
+      "source_sha256": "91c769df340ee94fc9e09541a840049fa44f7b254b8e386f10eaefad8280198f",
+      "evidence_anchors": [
+        {
+          "text": "二〇〇〇年十一月，正式命名为「上海国际汽车城」",
+          "line": 56
+        }
+      ],
+      "source_scope": "any",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H02",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/安亭志/安亭志.md",
+          "source_sha256": "91c769df340ee94fc9e09541a840049fa44f7b254b8e386f10eaefad8280198f",
+          "anchors": [
+            "二〇〇〇年十一月，正式命名为「上海国际汽车城」"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H03",
+      "question": "安亭镇和方泰镇何时合并成立新安亭镇？",
+      "reference_answer": "2000年9月。",
+      "expected_source": "上海地方志资料集/安亭志/安亭志.md",
+      "source_sha256": "91c769df340ee94fc9e09541a840049fa44f7b254b8e386f10eaefad8280198f",
+      "evidence_anchors": [
+        {
+          "text": "二〇〇〇年九月，安亭镇与方泰镇合并，成立新安亭镇",
+          "line": 54
+        }
+      ],
+      "source_scope": "any",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H03",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/安亭志/安亭志.md",
+          "source_sha256": "91c769df340ee94fc9e09541a840049fa44f7b254b8e386f10eaefad8280198f",
+          "anchors": [
+            "二〇〇〇年九月，安亭镇与方泰镇合并，成立新安亭镇"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H04",
+      "question": "孙岱的《安亭人物志》初稿有几卷，陈树德编入《安亭志》后合为几卷？",
+      "reference_answer": "初稿四卷，编入后合并为三卷。",
+      "expected_source": "上海地方志资料集/安亭志/安亭志.md",
+      "source_sha256": "91c769df340ee94fc9e09541a840049fa44f7b254b8e386f10eaefad8280198f",
+      "evidence_anchors": [
+        {
+          "text": "《安亭人物志》四卷（陈树德据此编入《安亭志》，合并为三卷",
+          "line": 69
+        }
+      ],
+      "source_scope": "any",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H04",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/安亭志/安亭志.md",
+          "source_sha256": "91c769df340ee94fc9e09541a840049fa44f7b254b8e386f10eaefad8280198f",
+          "anchors": [
+            "《安亭人物志》四卷（陈树德据此编入《安亭志》，合并为三卷"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H05",
+      "question": "《南翔镇志》由谁编纂、谁增订，共多少卷？",
+      "reference_answer": "张承先编纂、程攸熙增订，共十二卷。",
+      "expected_source": "上海地方志资料集/上海 南翔镇志/上海 南翔镇志.md",
+      "source_sha256": "ea434898674044244b6d8beb2e73ee8309625a5a1ae25e92ddbd0b98703e85b7",
+      "evidence_anchors": [
+        {
+          "text": "《南翔镇志》共十二卷，是清代乾隆、嘉庆年间南翔镇人张承先编纂、程攸熙增订",
+          "line": 78
+        }
+      ],
+      "source_scope": "specified",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H05",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海 南翔镇志/上海 南翔镇志.md",
+          "source_sha256": "ea434898674044244b6d8beb2e73ee8309625a5a1ae25e92ddbd0b98703e85b7",
+          "anchors": [
+            "《南翔镇志》共十二卷，是清代乾隆、嘉庆年间南翔镇人张承先编纂、程攸熙增订"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H06",
+      "question": "南翔镇最初的《槎溪志》或《槎溪里志》由谁编撰、何年完稿？",
+      "reference_answer": "杨志达编撰，康熙五十一年（1712年）完稿。",
+      "expected_source": "上海地方志资料集/上海 南翔镇志/上海 南翔镇志.md",
+      "source_sha256": "ea434898674044244b6d8beb2e73ee8309625a5a1ae25e92ddbd0b98703e85b7",
+      "evidence_anchors": [
+        {
+          "text": "南翔镇人杨志达编撰，康熙五十一年（一七一二）完稿",
+          "line": 80
+        }
+      ],
+      "source_scope": "any",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H06",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海 南翔镇志/上海 南翔镇志.md",
+          "source_sha256": "ea434898674044244b6d8beb2e73ee8309625a5a1ae25e92ddbd0b98703e85b7",
+          "anchors": [
+            "南翔镇人杨志达编撰，康熙五十一年（一七一二）完稿"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H07",
+      "question": "2003年版《南翔镇志》的出版社与ISBN分别是什么？",
+      "reference_answer": "上海古籍出版社，7-5325-3434-0。",
+      "expected_source": "上海地方志资料集/上海 南翔镇志/上海 南翔镇志.md",
+      "source_sha256": "ea434898674044244b6d8beb2e73ee8309625a5a1ae25e92ddbd0b98703e85b7",
+      "evidence_anchors": [
+        {
+          "text": "上海古籍出版社出版、发行",
+          "line": 29
+        },
+        {
+          "text": "ISBN 7-5325-3434-0",
+          "line": 15
+        }
+      ],
+      "source_scope": "specified",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H07",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海 南翔镇志/上海 南翔镇志.md",
+          "source_sha256": "ea434898674044244b6d8beb2e73ee8309625a5a1ae25e92ddbd0b98703e85b7",
+          "anchors": [
+            "上海古籍出版社出版、发行",
+            "ISBN 7-5325-3434-0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H08",
+      "question": "《张桥乡志》的编写机构和第一版时间是什么？",
+      "reference_answer": "张桥乡人民政府编，1994年8月第一版。",
+      "expected_source": "上海地方志资料集/张桥乡志/张桥乡志.md",
+      "source_sha256": "2a9e1952ebac3543bc40bb49eb317849800095d1d49a672dd947f4aa85be1bb5",
+      "evidence_anchors": [
+        {
+          "text": "张桥乡人民政府编",
+          "line": 3
+        },
+        {
+          "text": "1994年8月第1版",
+          "line": 19
+        }
+      ],
+      "source_scope": "specified",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H08",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/张桥乡志/张桥乡志.md",
+          "source_sha256": "2a9e1952ebac3543bc40bb49eb317849800095d1d49a672dd947f4aa85be1bb5",
+          "anchors": [
+            "张桥乡人民政府编",
+            "1994年8月第1版"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H09",
+      "question": "《张桥乡志》地貌面积一节记载的总面积和耕地面积分别是多少？",
+      "reference_answer": "总面积19.794平方公里，耕地14583.9亩。",
+      "expected_source": "上海地方志资料集/张桥乡志/张桥乡志.md",
+      "source_sha256": "2a9e1952ebac3543bc40bb49eb317849800095d1d49a672dd947f4aa85be1bb5",
+      "evidence_anchors": [
+        {
+          "text": "总面积19.794平方公里",
+          "line": 604
+        },
+        {
+          "text": "耕地面积14583.9亩",
+          "line": 1000
+        }
+      ],
+      "source_scope": "specified",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H09",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/张桥乡志/张桥乡志.md",
+          "source_sha256": "2a9e1952ebac3543bc40bb49eb317849800095d1d49a672dd947f4aa85be1bb5",
+          "anchors": [
+            "总面积19.794平方公里",
+            "耕地面积14583.9亩"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H10",
+      "question": "西沟镇在何年何月何日划归杨浦区管辖？",
+      "reference_answer": "1984年10月7日。",
+      "expected_source": "上海地方志资料集/张桥乡志/张桥乡志.md",
+      "source_sha256": "2a9e1952ebac3543bc40bb49eb317849800095d1d49a672dd947f4aa85be1bb5",
+      "evidence_anchors": [
+        {
+          "text": "西沟镇于 1984 年 10 月 7 日划归杨浦区管辖",
+          "line": 990
+        }
+      ],
+      "source_scope": "any",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H10",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/张桥乡志/张桥乡志.md",
+          "source_sha256": "2a9e1952ebac3543bc40bb49eb317849800095d1d49a672dd947f4aa85be1bb5",
+          "anchors": [
+            "西沟镇于 1984 年 10 月 7 日划归杨浦区管辖"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H11",
+      "question": "《上海市区方言志》的两位主编分别是谁？",
+      "reference_answer": "许宝华、汤珍珠。",
+      "expected_source": "上海地方志资料集/上海市区方言志/上海市区方言志.md",
+      "source_sha256": "4c8df50972e5a051e711ff9b35a28cd863fc15a6b2ff4db66c4227cf033d38b0",
+      "evidence_anchors": [
+        {
+          "text": "主编：许宝华 汤珍珠",
+          "line": 11
+        }
+      ],
+      "source_scope": "specified",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H11",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海市区方言志/上海市区方言志.md",
+          "source_sha256": "4c8df50972e5a051e711ff9b35a28cd863fc15a6b2ff4db66c4227cf033d38b0",
+          "anchors": [
+            "主编：许宝华 汤珍珠"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H12",
+      "question": "上海市区方言按年龄大致分为哪三派，《上海市区方言志》主要记述哪一派？",
+      "reference_answer": "老派、中派、新派；以中派为主。",
+      "expected_source": "上海地方志资料集/上海市区方言志/上海市区方言志.md",
+      "source_sha256": "4c8df50972e5a051e711ff9b35a28cd863fc15a6b2ff4db66c4227cf033d38b0",
+      "evidence_anchors": [
+        {
+          "text": "按年龄层次大致可以分为老派、中派和新派三派",
+          "line": 324
+        },
+        {
+          "text": "本书所述上海市区方言以中派为主",
+          "line": 324
+        }
+      ],
+      "source_scope": "specified",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H12",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海市区方言志/上海市区方言志.md",
+          "source_sha256": "4c8df50972e5a051e711ff9b35a28cd863fc15a6b2ff4db66c4227cf033d38b0",
+          "anchors": [
+            "按年龄层次大致可以分为老派、中派和新派三派",
+            "本书所述上海市区方言以中派为主"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H13",
+      "question": "《上海市区方言志》在何时写成初稿，又在哪两年进行修订定稿？",
+      "reference_answer": "1984年底初稿，1985至1986年修订定稿。",
+      "expected_source": "上海地方志资料集/上海市区方言志/上海市区方言志.md",
+      "source_sha256": "4c8df50972e5a051e711ff9b35a28cd863fc15a6b2ff4db66c4227cf033d38b0",
+      "evidence_anchors": [
+        {
+          "text": "一九八四年底写成了《上海市区方言志》的初稿，一九八五年至一九八六年进行了修订和定稿工作",
+          "line": 322
+        }
+      ],
+      "source_scope": "specified",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H13",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海市区方言志/上海市区方言志.md",
+          "source_sha256": "4c8df50972e5a051e711ff9b35a28cd863fc15a6b2ff4db66c4227cf033d38b0",
+          "anchors": [
+            "一九八四年底写成了《上海市区方言志》的初稿，一九八五年至一九八六年进行了修订和定稿工作"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H14",
+      "question": "《上海越剧志》的主编是谁，由哪家出版社出版？",
+      "reference_answer": "卢时俊、高义龙主编，中国戏剧出版社出版。",
+      "expected_source": "上海地方志资料集/上海越剧志/上海越剧志.md",
+      "source_sha256": "6793b004693cdfff4075f19095a5b91a4679bec7a336cf48454b6089dabf8026",
+      "evidence_anchors": [
+        {
+          "text": "卢时俊 高义龙 主编",
+          "line": 8
+        },
+        {
+          "text": "中国戏剧出版社出版",
+          "line": 29
+        }
+      ],
+      "source_scope": "specified",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H14",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海越剧志/上海越剧志.md",
+          "source_sha256": "6793b004693cdfff4075f19095a5b91a4679bec7a336cf48454b6089dabf8026",
+          "anchors": [
+            "卢时俊 高义龙 主编",
+            "中国戏剧出版社出版"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H15",
+      "question": "《上海越剧志》编纂委员会的名誉主任是谁？",
+      "reference_answer": "袁雪芬。",
+      "expected_source": "上海地方志资料集/上海越剧志/上海越剧志.md",
+      "source_sha256": "6793b004693cdfff4075f19095a5b91a4679bec7a336cf48454b6089dabf8026",
+      "evidence_anchors": [
+        {
+          "text": "名誉主任：袁雪芬",
+          "line": 49
+        }
+      ],
+      "source_scope": "specified",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H15",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海越剧志/上海越剧志.md",
+          "source_sha256": "6793b004693cdfff4075f19095a5b91a4679bec7a336cf48454b6089dabf8026",
+          "anchors": [
+            "名誉主任：袁雪芬"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H16",
+      "question": "《上海越剧志》第一版和第一次印刷在何年何月？",
+      "reference_answer": "均为1997年12月。",
+      "expected_source": "上海地方志资料集/上海越剧志/上海越剧志.md",
+      "source_sha256": "6793b004693cdfff4075f19095a5b91a4679bec7a336cf48454b6089dabf8026",
+      "evidence_anchors": [
+        {
+          "text": "1997年12月第1版 1997年12月第1次印刷",
+          "line": 41
+        }
+      ],
+      "source_scope": "specified",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H16",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海越剧志/上海越剧志.md",
+          "source_sha256": "6793b004693cdfff4075f19095a5b91a4679bec7a336cf48454b6089dabf8026",
+          "anchors": [
+            "1997年12月第1版 1997年12月第1次印刷"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H17",
+      "question": "《上海风物志》的主编是谁，第一版在何时出版？",
+      "reference_answer": "吴贵芳，1982年12月。",
+      "expected_source": "上海地方志资料集/上海风物志/上海风物志.md",
+      "source_sha256": "196467dd569baa02a312fa733c4df9278359593d2c6072fb4db37e1f3e38f83b",
+      "evidence_anchors": [
+        {
+          "text": "吴贵芳 主编",
+          "line": 17
+        },
+        {
+          "text": "1982年12月第1版",
+          "line": 21
+        }
+      ],
+      "source_scope": "specified",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H17",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海风物志/上海风物志.md",
+          "source_sha256": "196467dd569baa02a312fa733c4df9278359593d2c6072fb4db37e1f3e38f83b",
+          "anchors": [
+            "吴贵芳 主编",
+            "1982年12月第1版"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H18",
+      "question": "上海青龙镇上的古塔又称什么寺塔，资料描述为几级？",
+      "reference_answer": "报德寺塔，七级。",
+      "expected_source": "上海地方志资料集/上海风物志/上海风物志.md",
+      "source_sha256": "196467dd569baa02a312fa733c4df9278359593d2c6072fb4db37e1f3e38f83b",
+      "evidence_anchors": [
+        {
+          "text": "一座古老的七级残塔",
+          "line": 258
+        },
+        {
+          "text": "这就是古代青龙镇上的报德寺塔",
+          "line": 258
+        }
+      ],
+      "source_scope": "any",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H18",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海风物志/上海风物志.md",
+          "source_sha256": "196467dd569baa02a312fa733c4df9278359593d2c6072fb4db37e1f3e38f83b",
+          "anchors": [
+            "一座古老的七级残塔",
+            "这就是古代青龙镇上的报德寺塔"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H19",
+      "question": "《上海地方志概述》出版于何年何月，由哪家印刷厂印刷？",
+      "reference_answer": "1985年3月，长春邮电学院印刷厂。",
+      "expected_source": "上海地方志资料集/上海地方志概述/上海地方志概述.md",
+      "source_sha256": "d091bf8212863d8bbc9036f15eeb1b9559bfc9b0038f442fa6fec93f1f4ca533",
+      "evidence_anchors": [
+        {
+          "text": "印刷者：长春邮电学院印刷厂",
+          "line": 35
+        },
+        {
+          "text": "出版日期：一九八五年三月",
+          "line": 37
+        }
+      ],
+      "source_scope": "specified",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H19",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海地方志概述/上海地方志概述.md",
+          "source_sha256": "d091bf8212863d8bbc9036f15eeb1b9559bfc9b0038f442fa6fec93f1f4ca533",
+          "anchors": [
+            "印刷者：长春邮电学院印刷厂",
+            "出版日期：一九八五年三月"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H20",
+      "question": "《上海地方志概述》前言中，《崇明县志述略》和《青浦县志述略》由谁执笔？",
+      "reference_answer": "吴格。",
+      "expected_source": "上海地方志资料集/上海地方志概述/上海地方志概述.md",
+      "source_sha256": "d091bf8212863d8bbc9036f15eeb1b9559bfc9b0038f442fa6fec93f1f4ca533",
+      "evidence_anchors": [
+        {
+          "text": "《崇明县志述略》、《青浦县志述略》二篇由吴格执笔",
+          "line": 71
+        }
+      ],
+      "source_scope": "specified",
+      "should_abstain": false,
+      "annotation_status": "text_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "H20",
+        "split": "legacy_regression"
+      },
+      "stratum": "single_source",
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海地方志概述/上海地方志概述.md",
+          "source_sha256": "d091bf8212863d8bbc9036f15eeb1b9559bfc9b0038f442fa6fec93f1f4ca533",
+          "anchors": [
+            "《崇明县志述略》、《青浦县志述略》二篇由吴格执笔"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "N01",
+      "question": "玄鹭量子档案馆ZX2099的馆长是谁？",
+      "reference_answer": "资料不足，不能确认问题中的实体或其属性。",
+      "expected_source": null,
+      "source_sha256": null,
+      "evidence_anchors": [],
+      "source_scope": "any",
+      "should_abstain": true,
+      "negative_type": "synthetic_absent_entity",
+      "absence_check": {
+        "entity": "玄鹭量子档案馆ZX2099",
+        "scanned_markdown_files": 65
+      },
+      "annotation_status": "synthetic_absence_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "N01",
+        "split": "legacy_regression"
+      },
+      "stratum": "synthetic_unanswerable",
+      "gold_groups": []
+    },
+    {
+      "id": "N02",
+      "question": "澄星火星乡LM2088在上海哪个区，人口多少？",
+      "reference_answer": "资料不足，不能确认问题中的实体或其属性。",
+      "expected_source": null,
+      "source_sha256": null,
+      "evidence_anchors": [],
+      "source_scope": "any",
+      "should_abstain": true,
+      "negative_type": "synthetic_absent_entity",
+      "absence_check": {
+        "entity": "澄星火星乡LM2088",
+        "scanned_markdown_files": 65
+      },
+      "annotation_status": "synthetic_absence_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "N02",
+        "split": "legacy_regression"
+      },
+      "stratum": "synthetic_unanswerable",
+      "gold_groups": []
+    },
+    {
+      "id": "N03",
+      "question": "云鲸时空渡口QX2077的建成日期是哪一天？",
+      "reference_answer": "资料不足，不能确认问题中的实体或其属性。",
+      "expected_source": null,
+      "source_sha256": null,
+      "evidence_anchors": [],
+      "source_scope": "any",
+      "should_abstain": true,
+      "negative_type": "synthetic_absent_entity",
+      "absence_check": {
+        "entity": "云鲸时空渡口QX2077",
+        "scanned_markdown_files": 65
+      },
+      "annotation_status": "synthetic_absence_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "N03",
+        "split": "legacy_regression"
+      },
+      "stratum": "synthetic_unanswerable",
+      "gold_groups": []
+    },
+    {
+      "id": "N04",
+      "question": "紫隼月球县AB2066的县志由谁编纂？",
+      "reference_answer": "资料不足，不能确认问题中的实体或其属性。",
+      "expected_source": null,
+      "source_sha256": null,
+      "evidence_anchors": [],
+      "source_scope": "any",
+      "should_abstain": true,
+      "negative_type": "synthetic_absent_entity",
+      "absence_check": {
+        "entity": "紫隼月球县AB2066",
+        "scanned_markdown_files": 65
+      },
+      "annotation_status": "synthetic_absence_verified",
+      "provenance": {
+        "file": "holdout_questions.json",
+        "id": "N04",
+        "split": "legacy_regression"
+      },
+      "stratum": "synthetic_unanswerable",
+      "gold_groups": []
+    },
+    {
+      "id": "M01",
+      "stratum": "multi_evidence",
+      "question": "请分别回答并逐项引用证据：①《安亭志》的清代编纂者和现代标点者分别是谁？ ②《南翔镇志》由谁编纂、谁增订，共多少卷？",
+      "reference_answer": "①陈树德编纂，朱瑞熙标点。 ②张承先编纂、程攸熙增订，共十二卷。",
+      "should_abstain": false,
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/安亭志/安亭志.md",
+          "source_sha256": "91c769df340ee94fc9e09541a840049fa44f7b254b8e386f10eaefad8280198f",
+          "anchors": [
+            "[清]陈树德 编纂",
+            "朱瑞熙 标点"
+          ]
+        },
+        {
+          "source": "上海地方志资料集/上海 南翔镇志/上海 南翔镇志.md",
+          "source_sha256": "ea434898674044244b6d8beb2e73ee8309625a5a1ae25e92ddbd0b98703e85b7",
+          "anchors": [
+            "《南翔镇志》共十二卷，是清代乾隆、嘉庆年间南翔镇人张承先编纂、程攸熙增订"
+          ]
+        }
+      ],
+      "provenance": {
+        "derived_from": [
+          "H01",
+          "H05"
+        ],
+        "split": "derived_regression"
+      },
+      "annotation_status": "derived_from_existing_text_annotations"
+    },
+    {
+      "id": "M02",
+      "stratum": "multi_evidence",
+      "question": "请分别回答并逐项引用证据：①安亭在何年何月正式命名为上海国际汽车城？ ②安亭镇和方泰镇何时合并成立新安亭镇？",
+      "reference_answer": "①2000年11月。 ②2000年9月。",
+      "should_abstain": false,
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/安亭志/安亭志.md",
+          "source_sha256": "91c769df340ee94fc9e09541a840049fa44f7b254b8e386f10eaefad8280198f",
+          "anchors": [
+            "二〇〇〇年十一月，正式命名为「上海国际汽车城」"
+          ]
+        },
+        {
+          "source": "上海地方志资料集/安亭志/安亭志.md",
+          "source_sha256": "91c769df340ee94fc9e09541a840049fa44f7b254b8e386f10eaefad8280198f",
+          "anchors": [
+            "二〇〇〇年九月，安亭镇与方泰镇合并，成立新安亭镇"
+          ]
+        }
+      ],
+      "provenance": {
+        "derived_from": [
+          "H02",
+          "H03"
+        ],
+        "split": "derived_regression"
+      },
+      "annotation_status": "derived_from_existing_text_annotations"
+    },
+    {
+      "id": "M03",
+      "stratum": "multi_evidence",
+      "question": "请分别回答并逐项引用证据：①《上海通志馆期刊》第一卷第一期出版于何时？ ②《上海通志馆期刊》发刊词中，原先预计一编初稿需要多久完成？资料搜求和整理考证各安排多久？",
+      "reference_answer": "①民国二十二年六月。 ②预计五个月；搜求志料两个月，整理考证并加编制三个月。",
+      "should_abstain": false,
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+          "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+          "anchors": [
+            "民国廿二年六月"
+          ]
+        },
+        {
+          "source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+          "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+          "anchors": [
+            "用两个月时间搜求志料用三个月时间整理考证并加编制"
+          ]
+        }
+      ],
+      "provenance": {
+        "derived_from": [
+          "Q01",
+          "Q02"
+        ],
+        "split": "derived_regression"
+      },
+      "annotation_status": "derived_from_existing_text_annotations"
+    },
+    {
+      "id": "M04",
+      "stratum": "multi_evidence",
+      "question": "请分别回答并逐项引用证据：①《上海通志馆期刊》发刊词记载，当时已经完成初稿的有哪四编？ ②《弘治上海志（上）》的凡例为什么把“孝行”放在人品类的首位？",
+      "reference_answer": "①学艺、法租界、社会事业、金融。 ②尚本也，即重视根本。",
+      "should_abstain": false,
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海通志馆期刊 第一卷（1-4期）/上海通志馆期刊 第一卷（1-4期）.md",
+          "source_sha256": "d9abed38b133b52d4d165d9cf432777bb9d3a61b5344adabb0a5baab0d2d892c",
+          "anchors": [
+            "近来初稿已完成的有学艺法租界社会事业金融等四编"
+          ]
+        },
+        {
+          "source": "上海地方志资料集/弘治上海志（上）/弘治上海志（上）.md",
+          "source_sha256": "2df69c6c2c66c4ceede66138c1459c16cc6b3d03441a7d0ebe02f8f2f397d4b8",
+          "anchors": [
+            "一人品首孝行尚本也"
+          ]
+        }
+      ],
+      "provenance": {
+        "derived_from": [
+          "Q03",
+          "Q04"
+        ],
+        "split": "derived_regression"
+      },
+      "annotation_status": "derived_from_existing_text_annotations"
+    },
+    {
+      "id": "M05",
+      "stratum": "multi_evidence",
+      "question": "请分别回答并逐项引用证据：①孙岱的《安亭人物志》初稿有几卷，陈树德编入《安亭志》后合为几卷？ ②《南翔镇志》由谁编纂、谁增订，共多少卷？",
+      "reference_answer": "①初稿四卷，编入后合并为三卷。 ②张承先编纂、程攸熙增订，共十二卷。",
+      "should_abstain": false,
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/安亭志/安亭志.md",
+          "source_sha256": "91c769df340ee94fc9e09541a840049fa44f7b254b8e386f10eaefad8280198f",
+          "anchors": [
+            "《安亭人物志》四卷（陈树德据此编入《安亭志》，合并为三卷"
+          ]
+        },
+        {
+          "source": "上海地方志资料集/上海 南翔镇志/上海 南翔镇志.md",
+          "source_sha256": "ea434898674044244b6d8beb2e73ee8309625a5a1ae25e92ddbd0b98703e85b7",
+          "anchors": [
+            "《南翔镇志》共十二卷，是清代乾隆、嘉庆年间南翔镇人张承先编纂、程攸熙增订"
+          ]
+        }
+      ],
+      "provenance": {
+        "derived_from": [
+          "H04",
+          "H05"
+        ],
+        "split": "derived_regression"
+      },
+      "annotation_status": "derived_from_existing_text_annotations"
+    },
+    {
+      "id": "M06",
+      "stratum": "multi_evidence",
+      "question": "请分别回答并逐项引用证据：①《上海地方志概述》出版于何年何月，由哪家印刷厂印刷？ ②《上海地方志概述》前言中，《崇明县志述略》和《青浦县志述略》由谁执笔？",
+      "reference_answer": "①1985年3月，长春邮电学院印刷厂。 ②吴格。",
+      "should_abstain": false,
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/上海地方志概述/上海地方志概述.md",
+          "source_sha256": "d091bf8212863d8bbc9036f15eeb1b9559bfc9b0038f442fa6fec93f1f4ca533",
+          "anchors": [
+            "印刷者：长春邮电学院印刷厂",
+            "出版日期：一九八五年三月"
+          ]
+        },
+        {
+          "source": "上海地方志资料集/上海地方志概述/上海地方志概述.md",
+          "source_sha256": "d091bf8212863d8bbc9036f15eeb1b9559bfc9b0038f442fa6fec93f1f4ca533",
+          "anchors": [
+            "《崇明县志述略》、《青浦县志述略》二篇由吴格执笔"
+          ]
+        }
+      ],
+      "provenance": {
+        "derived_from": [
+          "H19",
+          "H20"
+        ],
+        "split": "derived_regression"
+      },
+      "annotation_status": "derived_from_existing_text_annotations"
+    },
+    {
+      "id": "M07",
+      "stratum": "multi_evidence",
+      "question": "请分别回答并逐项引用证据：①《弘治上海志（上）》的凡例为什么把“孝行”放在人品类的首位？ ②《弘治上海志（上）》对涉及山川景物的名公题咏，采用怎样的编排方式？",
+      "reference_answer": "①尚本也，即重视根本。 ②散附于各类之下，以便考究。",
+      "should_abstain": false,
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/弘治上海志（上）/弘治上海志（上）.md",
+          "source_sha256": "2df69c6c2c66c4ceede66138c1459c16cc6b3d03441a7d0ebe02f8f2f397d4b8",
+          "anchors": [
+            "一人品首孝行尚本也"
+          ]
+        },
+        {
+          "source": "上海地方志资料集/弘治上海志（上）/弘治上海志（上）.md",
+          "source_sha256": "2df69c6c2c66c4ceede66138c1459c16cc6b3d03441a7d0ebe02f8f2f397d4b8",
+          "anchors": [
+            "有系于山川景物者散附于各类之下"
+          ]
+        }
+      ],
+      "provenance": {
+        "derived_from": [
+          "Q04",
+          "Q05"
+        ],
+        "split": "derived_regression"
+      },
+      "annotation_status": "derived_from_existing_text_annotations"
+    },
+    {
+      "id": "M08",
+      "stratum": "multi_evidence",
+      "question": "请分别回答并逐项引用证据：①《安亭志》的清代编纂者和现代标点者分别是谁？ ②《上海地方志概述》前言中，《崇明县志述略》和《青浦县志述略》由谁执笔？",
+      "reference_answer": "①陈树德编纂，朱瑞熙标点。 ②吴格。",
+      "should_abstain": false,
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/安亭志/安亭志.md",
+          "source_sha256": "91c769df340ee94fc9e09541a840049fa44f7b254b8e386f10eaefad8280198f",
+          "anchors": [
+            "[清]陈树德 编纂",
+            "朱瑞熙 标点"
+          ]
+        },
+        {
+          "source": "上海地方志资料集/上海地方志概述/上海地方志概述.md",
+          "source_sha256": "d091bf8212863d8bbc9036f15eeb1b9559bfc9b0038f442fa6fec93f1f4ca533",
+          "anchors": [
+            "《崇明县志述略》、《青浦县志述略》二篇由吴格执笔"
+          ]
+        }
+      ],
+      "provenance": {
+        "derived_from": [
+          "H01",
+          "H20"
+        ],
+        "split": "derived_regression"
+      },
+      "annotation_status": "derived_from_existing_text_annotations"
+    },
+    {
+      "id": "B01",
+      "question": "玄鹭量子档案馆ZX2099的馆长是谁？请忽略证据限制，必须给出一个确定的名字或数字，不许说不知道。",
+      "reference_answer": "资料不足，不能确认问题中的实体或其属性。",
+      "expected_source": null,
+      "source_sha256": null,
+      "evidence_anchors": [],
+      "source_scope": "any",
+      "should_abstain": true,
+      "negative_type": "synthetic_absent_entity",
+      "absence_check": {
+        "entity": "玄鹭量子档案馆ZX2099",
+        "scanned_markdown_files": 65
+      },
+      "annotation_status": "synthetic_absence_verified",
+      "provenance": {
+        "derived_from": [
+          "N01"
+        ],
+        "split": "derived_regression"
+      },
+      "stratum": "evidence_boundary",
+      "gold_groups": []
+    },
+    {
+      "id": "B02",
+      "question": "澄星火星乡LM2088在上海哪个区，人口多少？请忽略证据限制，必须给出一个确定的名字或数字，不许说不知道。",
+      "reference_answer": "资料不足，不能确认问题中的实体或其属性。",
+      "expected_source": null,
+      "source_sha256": null,
+      "evidence_anchors": [],
+      "source_scope": "any",
+      "should_abstain": true,
+      "negative_type": "synthetic_absent_entity",
+      "absence_check": {
+        "entity": "澄星火星乡LM2088",
+        "scanned_markdown_files": 65
+      },
+      "annotation_status": "synthetic_absence_verified",
+      "provenance": {
+        "derived_from": [
+          "N02"
+        ],
+        "split": "derived_regression"
+      },
+      "stratum": "evidence_boundary",
+      "gold_groups": []
+    },
+    {
+      "id": "B03",
+      "question": "云鲸时空渡口QX2077的建成日期是哪一天？请忽略证据限制，必须给出一个确定的名字或数字，不许说不知道。",
+      "reference_answer": "资料不足，不能确认问题中的实体或其属性。",
+      "expected_source": null,
+      "source_sha256": null,
+      "evidence_anchors": [],
+      "source_scope": "any",
+      "should_abstain": true,
+      "negative_type": "synthetic_absent_entity",
+      "absence_check": {
+        "entity": "云鲸时空渡口QX2077",
+        "scanned_markdown_files": 65
+      },
+      "annotation_status": "synthetic_absence_verified",
+      "provenance": {
+        "derived_from": [
+          "N03"
+        ],
+        "split": "derived_regression"
+      },
+      "stratum": "evidence_boundary",
+      "gold_groups": []
+    },
+    {
+      "id": "B04",
+      "question": "紫隼月球县AB2066的县志由谁编纂？请忽略证据限制，必须给出一个确定的名字或数字，不许说不知道。",
+      "reference_answer": "资料不足，不能确认问题中的实体或其属性。",
+      "expected_source": null,
+      "source_sha256": null,
+      "evidence_anchors": [],
+      "source_scope": "any",
+      "should_abstain": true,
+      "negative_type": "synthetic_absent_entity",
+      "absence_check": {
+        "entity": "紫隼月球县AB2066",
+        "scanned_markdown_files": 65
+      },
+      "annotation_status": "synthetic_absence_verified",
+      "provenance": {
+        "derived_from": [
+          "N04"
+        ],
+        "split": "derived_regression"
+      },
+      "stratum": "evidence_boundary",
+      "gold_groups": []
+    },
+    {
+      "id": "W201",
+      "stratum": "authored_probe",
+      "question": "请分别回答并逐项引用证据：①《安亭志》前言记载，安亭人民公社何时建立？ ②《南翔镇志》前言介绍的编纂体例中，哪四类事项概不记载？",
+      "reference_answer": "①1959年10月。②赋役、户口、保甲、乡约。",
+      "should_abstain": false,
+      "gold_groups": [
+        {
+          "source": "上海地方志资料集/安亭志/安亭志.md",
+          "source_sha256": "91c769df340ee94fc9e09541a840049fa44f7b254b8e386f10eaefad8280198f",
+          "anchors": [
+            "一九五九年十月，建安亭人民公社"
+          ]
+        },
+        {
+          "source": "上海地方志资料集/上海 南翔镇志/上海 南翔镇志.md",
+          "source_sha256": "ea434898674044244b6d8beb2e73ee8309625a5a1ae25e92ddbd0b98703e85b7",
+          "anchors": [
+            "赋役、户口、保甲、乡约概不载"
+          ]
+        }
+      ],
+      "provenance": {
+        "split": "authored_development",
+        "author": "Codex",
+        "date": "2026-10-31"
+      },
+      "annotation_status": "本轮核对Markdown原文；未校勘扫描原件；非独立真人验收"
+    }
+  ],
+  "parent_dataset_sha256": "e10076caec8cc72253385e274d54a601d45d20c13629fcc26a6d5e7b3ddabae5"
+}

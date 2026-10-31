@@ -1,5 +1,9 @@
 # 评测工作入口
 
+当前主评测统一为`eval/datasets/unified.json`的100题，不按新老标注或分别出分。`PYTHONPATH=src`下运行`python eval/run_eval.py --output 新结果路径`先校验，显式加`--generate`进行全量配对。门槛与适用范围见[统一质量验收方案](../eval/experiments/quality_target.md)。原有周次文件仅供复现历史。
+
+第三周按“质量优化、第四周再做性能”的最新安排完成来源排序与固定证据提示词对照：[方案](../eval/experiments/week3.md)、[实际结果与保留问题](../eval/reports/week3_completion_20261031.md)。三组均使用同一模型、共享分题候选池、最终4条证据；结果只代表开发回归实验，不等于业务默认路径已改善。
+
 第一周基线：运行 `PYTHONPATH=src` 下的 `python eval/run_baseline.py --output 新结果路径` 先校验数据，再显式选择 `--retrieve` 或 `--generate`。详见[分层数据、指标口径与学习步骤](../eval/experiments/week1.md)和[本次基线报告](../eval/reports/week1_baseline_20261031.md)。
 
 实现位于 `src/research_agent/evaluation/`；数据集位于 `eval/datasets/`，实验计划位于 `eval/experiments/`，人工审核与历史总结位于 `eval/reports/`，原始输出保留在 `eval/results/`。

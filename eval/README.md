@@ -1,5 +1,11 @@
 # 检索、回答与性能评估
 
+日常评测统一使用`datasets/unified.json`，不按新老题分组。主入口为`PYTHONPATH=src`下的`python eval/run_eval.py --output 新结果路径`（默认只校验），显式加`--generate`运行全部100题的基础检索/候选配对。目标：整题正确≥85%、正题引用支持≥95%、无答案拒答≥95%、组合题≥80%。见[统一验收方案](experiments/quality_target.md)。以下周次内容保留为历史运行记录，不是当前需要分别执行的题集。
+
+本轮[统一验收结果](reports/unified_completion_20261031.md)：候选完整正确74/82（90.24%）、引用支持80/82（97.56%）、拒答18/18、组合题16/17，达到AI辅助点估计门槛；仍有8道正题未完成、2道新增核心退化，尚未真人复核或切换业务默认。
+
+第三周已执行[质量对照实验](reports/week3_completion_20261031.md)：共享候选池内优先直接书目后，旧组合题锚点Hit由4/8升至5/8；25题三组共75份回答已AI复核。新增提示词未进一步提高核心答案正确数，业务默认保持不变。[任务与复现](experiments/week3.md)，入口 `eval/run_quality_experiment.py`。
+
 2026-10-31 新增[第一周分层基线运行与教学](experiments/week1.md)：56 道公开回归题、已标注证据 Recall@4、锚点 Hit@4、人工语义审核模板、真实 Token 和 P50/P95。入口为 `PYTHONPATH=src` 下的 `python eval/run_baseline.py`；[本次报告](reports/week1_baseline_20261031.md) 单列实际执行与阻碍，不混用历史成绩。
 
 目录已整理为 `datasets/`、`experiments/`、`reports/` 和 `results/`；代码实现迁入 `src/research_agent/evaluation/`，下方旧模块命令保留兼容。新增开发集入口为 `PYTHONPATH=src` 下的 `python eval/run_eval.py`。历史 JSON 和原始执行快照中的旧路径不改写，映射见 [目录整理记录](../docs/directory-layout.md)。

@@ -1,3 +1,4 @@
+import json
 import re
 from dataclasses import dataclass, replace
 
@@ -64,6 +65,7 @@ def retrieve_collection(
     collection_name: str,
     top_k: int | None = None,
     label_prefix: str = "S",
+    source_paths: tuple[str, ...] = (),
 ) -> list[Evidence]:
     embeddings = create_embeddings(settings.embedding_model)
     return _retrieve_with_embeddings(
@@ -73,6 +75,7 @@ def retrieve_collection(
         embeddings,
         top_k,
         label_prefix,
+        source_paths=source_paths,
     )
 
 
@@ -84,6 +87,7 @@ def _retrieve_with_embeddings(
     top_k: int | None,
     label_prefix: str,
     folder_id: str | None = None,
+    source_paths: tuple[str, ...] = (),
 ) -> list[Evidence]:
     store = Milvus(
         embedding_function=embeddings,
@@ -104,10 +108,15 @@ def _retrieve_with_embeddings(
     if limit <= 0:
         raise ValueError("检索条数必须大于零。")
     # 先扩大候选，避免标题和重复段落挤占最终证据名额；不修改索引。
+    filters = []
+    if folder_id:
+        filters.append(f"folder_id == {json.dumps(folder_id)}")
+    if source_paths:
+        filters.append(f"source in {json.dumps(list(source_paths), ensure_ascii=False)}")
     documents_and_scores = store.similarity_search_with_score(
         question,
         k=min(max(limit * 10, 40), 200),
-        **({"expr": f'folder_id == "{folder_id}"'} if folder_id else {}),
+        **({"expr": " and ".join(filters)} if filters else {}),
     )
     threshold = settings.rag_relevance_threshold
     relevant = []

@@ -1,0 +1,623 @@
+{
+  "dataset_sha256": "583a4eccc58f23b4563afcfb12adefcc3a1752478552627ffc8551e8ada1a4f0",
+  "results_sha256": "7ec312ea6f24be12db6b21114e862d23cd7ab3fdb4e93e766034e53aa55aa6d5",
+  "reviewer": {
+    "kind": "ai",
+    "name": "Codex",
+    "method": "逐题核对原始回答、最终证据及参考答案；未调用额外judge API"
+  },
+  "reviews": [
+    {
+      "id": "Q11",
+      "arm": "plain",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "题名页/CIP直接著录上海市地方志办公室编、上海社会科学院出版社；三组核心事实及引用一致。"
+    },
+    {
+      "id": "Q11",
+      "arm": "scoped",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "题名页/CIP直接著录上海市地方志办公室编、上海社会科学院出版社；三组核心事实及引用一致。"
+    },
+    {
+      "id": "Q11",
+      "arm": "constrained",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "题名页/CIP直接著录上海市地方志办公室编、上海社会科学院出版社；三组核心事实及引用一致。"
+    },
+    {
+      "id": "H01",
+      "arm": "plain",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "安亭志题名页与CIP直接支持陈树德编纂、朱瑞熙标点；plain另述社科院版本王健标点并分开，不拼接角色。"
+    },
+    {
+      "id": "H01",
+      "arm": "scoped",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "安亭志题名页与CIP直接支持陈树德编纂、朱瑞熙标点；plain另述社科院版本王健标点并分开，不拼接角色。"
+    },
+    {
+      "id": "H01",
+      "arm": "constrained",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "安亭志题名页与CIP直接支持陈树德编纂、朱瑞熙标点；plain另述社科院版本王健标点并分开，不拼接角色。"
+    },
+    {
+      "id": "H04",
+      "arm": "plain",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "直接前言载初稿四卷、编入后三卷即十六至十八卷；plain/scoped分别说明三卷异说，constrained核心正确但省略同上下文自跋三卷异说，另列风险。",
+      "conflict_acknowledged": true
+    },
+    {
+      "id": "H04",
+      "arm": "scoped",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "直接前言载初稿四卷、编入后三卷即十六至十八卷；plain/scoped分别说明三卷异说，constrained核心正确但省略同上下文自跋三卷异说，另列风险。",
+      "conflict_acknowledged": true
+    },
+    {
+      "id": "H04",
+      "arm": "constrained",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "直接前言载初稿四卷、编入后三卷即十六至十八卷；plain/scoped分别说明三卷异说，constrained核心正确但省略同上下文自跋三卷异说，另列风险。",
+      "conflict_acknowledged": false
+    },
+    {
+      "id": "H07",
+      "arm": "plain",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "南翔版权页直接支持2003年7月上海古籍出版社及ISBN 7-5325-3434-0；未混用1992年新志。"
+    },
+    {
+      "id": "H07",
+      "arm": "scoped",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "南翔版权页直接支持2003年7月上海古籍出版社及ISBN 7-5325-3434-0；未混用1992年新志。"
+    },
+    {
+      "id": "H07",
+      "arm": "constrained",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "南翔版权页直接支持2003年7月上海古籍出版社及ISBN 7-5325-3434-0；未混用1992年新志。"
+    },
+    {
+      "id": "H08",
+      "arm": "plain",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "题名页张桥乡人民政府编及1994年8月第1版，与后记编修组署名/1993年1月脱稿分开；三组均有对应直接引用。"
+    },
+    {
+      "id": "H08",
+      "arm": "scoped",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "题名页张桥乡人民政府编及1994年8月第1版，与后记编修组署名/1993年1月脱稿分开；三组均有对应直接引用。"
+    },
+    {
+      "id": "H08",
+      "arm": "constrained",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "题名页张桥乡人民政府编及1994年8月第1版，与后记编修组署名/1993年1月脱稿分开；三组均有对应直接引用。"
+    },
+    {
+      "id": "H11",
+      "arm": "plain",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "题名页直接著录许宝华、汤珍珠主编，提要/后记亦支持；三组引用映射不同但均可支持。"
+    },
+    {
+      "id": "H11",
+      "arm": "scoped",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "题名页直接著录许宝华、汤珍珠主编，提要/后记亦支持；三组引用映射不同但均可支持。"
+    },
+    {
+      "id": "H11",
+      "arm": "constrained",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "题名页直接著录许宝华、汤珍珠主编，提要/后记亦支持；三组引用映射不同但均可支持。"
+    },
+    {
+      "id": "H14",
+      "arm": "plain",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "题名页/CIP直接支持卢时俊、高义龙主编、中国戏剧出版社；plain额外1997年12月亦有版权页依据。"
+    },
+    {
+      "id": "H14",
+      "arm": "scoped",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "题名页/CIP直接支持卢时俊、高义龙主编、中国戏剧出版社；plain额外1997年12月亦有版权页依据。"
+    },
+    {
+      "id": "H14",
+      "arm": "constrained",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "题名页/CIP直接支持卢时俊、高义龙主编、中国戏剧出版社；plain额外1997年12月亦有版权页依据。"
+    },
+    {
+      "id": "H17",
+      "arm": "plain",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "题名页吴贵芳主编、版权页1982年12月第1版，提要亦支持；三组对应标签均可核对。"
+    },
+    {
+      "id": "H17",
+      "arm": "scoped",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "题名页吴贵芳主编、版权页1982年12月第1版，提要亦支持；三组对应标签均可核对。"
+    },
+    {
+      "id": "H17",
+      "arm": "constrained",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "题名页吴贵芳主编、版权页1982年12月第1版，提要亦支持；三组对应标签均可核对。"
+    },
+    {
+      "id": "N01",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "未发现合成实体ZX2099；三组均拒绝给馆长。constrained提到的图书馆名称可在候选核对，不能据此证明所问虚构实体。"
+    },
+    {
+      "id": "N01",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "未发现合成实体ZX2099；三组均拒绝给馆长。constrained提到的图书馆名称可在候选核对，不能据此证明所问虚构实体。"
+    },
+    {
+      "id": "N01",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": true,
+      "abstention_correct": true,
+      "reason": "未发现合成实体ZX2099；三组均拒绝给馆长。constrained提到的图书馆名称可在候选核对，不能据此证明所问虚构实体。"
+    },
+    {
+      "id": "N02",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": true,
+      "abstention_correct": true,
+      "reason": "候选为洋泾、军事应征名额及静安区材料，未提及LM2088；三组均拒绝移用其他地点人口。"
+    },
+    {
+      "id": "N02",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": true,
+      "abstention_correct": true,
+      "reason": "候选为洋泾、军事应征名额及静安区材料，未提及LM2088；三组均拒绝移用其他地点人口。"
+    },
+    {
+      "id": "N02",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": true,
+      "abstention_correct": true,
+      "reason": "候选为洋泾、军事应征名额及静安区材料，未提及LM2088；三组均拒绝移用其他地点人口。"
+    },
+    {
+      "id": "N03",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": false,
+      "abstention_correct": true,
+      "reason": "三组拒答QX2077正确，但都把没有年份语境的连续数字称作年份，超出候选可支持范围；有引用且引用支持false。不能把资料缺证扩展为全库不存在的证明。"
+    },
+    {
+      "id": "N03",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": false,
+      "abstention_correct": true,
+      "reason": "三组拒答QX2077正确，但都把没有年份语境的连续数字称作年份，超出候选可支持范围；有引用且引用支持false。不能把资料缺证扩展为全库不存在的证明。"
+    },
+    {
+      "id": "N03",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": false,
+      "abstention_correct": true,
+      "reason": "三组拒答QX2077正确，但都把没有年份语境的连续数字称作年份，超出候选可支持范围；有引用且引用支持false。不能把资料缺证扩展为全库不存在的证明。"
+    },
+    {
+      "id": "N04",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "候选仅崇明、青浦、松江、嘉定志，三组未编造AB2066编者；只有scoped附标签，引用支持缺证说明。"
+    },
+    {
+      "id": "N04",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": true,
+      "abstention_correct": true,
+      "reason": "候选仅崇明、青浦、松江、嘉定志，三组未编造AB2066编者；只有scoped附标签，引用支持缺证说明。"
+    },
+    {
+      "id": "N04",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "候选仅崇明、青浦、松江、嘉定志，三组未编造AB2066编者；只有scoped附标签，引用支持缺证说明。"
+    },
+    {
+      "id": "M01",
+      "arm": "plain",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "安亭题名页支持陈树德、朱瑞熙；南翔前言直接支持张承先编纂、程攸熙增订、十二卷。plain额外年份两说分别有S2与提要S4支持。"
+    },
+    {
+      "id": "M01",
+      "arm": "scoped",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "安亭题名页支持陈树德、朱瑞熙；南翔前言直接支持张承先编纂、程攸熙增订、十二卷。plain额外年份两说分别有S2与提要S4支持。"
+    },
+    {
+      "id": "M01",
+      "arm": "constrained",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "安亭题名页支持陈树德、朱瑞熙；南翔前言直接支持张承先编纂、程攸熙增订、十二卷。plain额外年份两说分别有S2与提要S4支持。"
+    },
+    {
+      "id": "M02",
+      "arm": "plain",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1载2000年11月命名汽车城，S3载2000年9月两镇合并；constrained附述次年9月建设启动亦有S1支持。"
+    },
+    {
+      "id": "M02",
+      "arm": "scoped",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1载2000年11月命名汽车城，S3载2000年9月两镇合并；constrained附述次年9月建设启动亦有S1支持。"
+    },
+    {
+      "id": "M02",
+      "arm": "constrained",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1载2000年11月命名汽车城，S3载2000年9月两镇合并；constrained附述次年9月建设启动亦有S1支持。"
+    },
+    {
+      "id": "M03",
+      "arm": "plain",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1民国廿二年六月，S2发刊词两个月搜求、三个月整理考证、不出五个月；三组核心及引用均支持。"
+    },
+    {
+      "id": "M03",
+      "arm": "scoped",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1民国廿二年六月，S2发刊词两个月搜求、三个月整理考证、不出五个月；三组核心及引用均支持。"
+    },
+    {
+      "id": "M03",
+      "arm": "constrained",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1民国廿二年六月，S2发刊词两个月搜求、三个月整理考证、不出五个月；三组核心及引用均支持。"
+    },
+    {
+      "id": "M04",
+      "arm": "plain",
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "三组均缺发刊词四编直接证据，只能答孝行尚本；核心答案不完整，缺证说明合理。scoped/constrained第二卷访员与报刊片段不能代替第一卷发刊词。"
+    },
+    {
+      "id": "M04",
+      "arm": "scoped",
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "三组均缺发刊词四编直接证据，只能答孝行尚本；核心答案不完整，缺证说明合理。scoped/constrained第二卷访员与报刊片段不能代替第一卷发刊词。"
+    },
+    {
+      "id": "M04",
+      "arm": "constrained",
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "三组均缺发刊词四编直接证据，只能答孝行尚本；核心答案不完整，缺证说明合理。scoped/constrained第二卷访员与报刊片段不能代替第一卷发刊词。"
+    },
+    {
+      "id": "M05",
+      "arm": "plain",
+      "answer_correct": false,
+      "citation_supported": false,
+      "abstention_correct": null,
+      "reason": "plain结论把人物志三卷误答为全志二十卷，虽S1有厘为人物志三卷但引用不支持所问对象；scoped/constrained换入直接前言，S1四卷并三卷、S2南翔十二卷及两位编者齐全。"
+    },
+    {
+      "id": "M05",
+      "arm": "scoped",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "plain结论把人物志三卷误答为全志二十卷，虽S1有厘为人物志三卷但引用不支持所问对象；scoped/constrained换入直接前言，S1四卷并三卷、S2南翔十二卷及两位编者齐全。"
+    },
+    {
+      "id": "M05",
+      "arm": "constrained",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "plain结论把人物志三卷误答为全志二十卷，虽S1有厘为人物志三卷但引用不支持所问对象；scoped/constrained换入直接前言，S1四卷并三卷、S2南翔十二卷及两位编者齐全。"
+    },
+    {
+      "id": "M06",
+      "arm": "plain",
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1末尾元数据1985年03月及目录吴格支持已答部分，但没有印刷厂，整题仍缺答案；三组均合理声明缺证。"
+    },
+    {
+      "id": "M06",
+      "arm": "scoped",
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1末尾元数据1985年03月及目录吴格支持已答部分，但没有印刷厂，整题仍缺答案；三组均合理声明缺证。"
+    },
+    {
+      "id": "M06",
+      "arm": "constrained",
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "S1末尾元数据1985年03月及目录吴格支持已答部分，但没有印刷厂，整题仍缺答案；三组均合理声明缺证。"
+    },
+    {
+      "id": "M07",
+      "arm": "plain",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "三组核心尚本/散附各类便考究正确。scoped把可见OCR虽工不金改成引号内虽工不录且未说明校改，严格引文支持false；plain保留原字，constrained未复述此疑文。未校勘扫描原件。",
+      "literal_quote_faithful": true
+    },
+    {
+      "id": "M07",
+      "arm": "scoped",
+      "answer_correct": true,
+      "citation_supported": false,
+      "abstention_correct": null,
+      "reason": "三组核心尚本/散附各类便考究正确。scoped把可见OCR虽工不金改成引号内虽工不录且未说明校改，严格引文支持false；plain保留原字，constrained未复述此疑文。未校勘扫描原件。",
+      "literal_quote_faithful": false
+    },
+    {
+      "id": "M07",
+      "arm": "constrained",
+      "answer_correct": true,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "三组核心尚本/散附各类便考究正确。scoped把可见OCR虽工不金改成引号内虽工不录且未说明校改，严格引文支持false；plain保留原字，constrained未复述此疑文。未校勘扫描原件。",
+      "literal_quote_faithful": true
+    },
+    {
+      "id": "M08",
+      "arm": "plain",
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "安亭题名页支持陈树德、朱瑞熙，但另两条为上海方志提要，缺概述前言及吴格，三组整题未完成；已答部分有引用支持。"
+    },
+    {
+      "id": "M08",
+      "arm": "scoped",
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "安亭题名页支持陈树德、朱瑞熙，但另两条为上海方志提要，缺概述前言及吴格，三组整题未完成；已答部分有引用支持。"
+    },
+    {
+      "id": "M08",
+      "arm": "constrained",
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "安亭题名页支持陈树德、朱瑞熙，但另两条为上海方志提要，缺概述前言及吴格，三组整题未完成；已答部分有引用支持。"
+    },
+    {
+      "id": "B01",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "面对必须给姓名的要求仍说明ZX2099缺证；未将其他图书馆/慈善机构人名当馆长。"
+    },
+    {
+      "id": "B01",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": true,
+      "abstention_correct": true,
+      "reason": "面对必须给姓名的要求仍说明ZX2099缺证；未将其他图书馆/慈善机构人名当馆长。"
+    },
+    {
+      "id": "B01",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": true,
+      "abstention_correct": true,
+      "reason": "面对必须给姓名的要求仍说明ZX2099缺证；未将其他图书馆/慈善机构人名当馆长。"
+    },
+    {
+      "id": "B02",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "面对必须给区名和数字的要求仍拒答LM2088；constrained正确指出应征表、洋泾人口和静安居委表属于其他对象。"
+    },
+    {
+      "id": "B02",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": true,
+      "abstention_correct": true,
+      "reason": "面对必须给区名和数字的要求仍拒答LM2088；constrained正确指出应征表、洋泾人口和静安居委表属于其他对象。"
+    },
+    {
+      "id": "B02",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": true,
+      "abstention_correct": true,
+      "reason": "面对必须给区名和数字的要求仍拒答LM2088；constrained正确指出应征表、洋泾人口和静安居委表属于其他对象。"
+    },
+    {
+      "id": "B03",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": false,
+      "abstention_correct": true,
+      "reason": "三组均拒绝编造QX2077日期；但把纯数字片段称作年份序列，引用不充分，citation_supported=false；S4确为表格残片。"
+    },
+    {
+      "id": "B03",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": false,
+      "abstention_correct": true,
+      "reason": "三组均拒绝编造QX2077日期；但把纯数字片段称作年份序列，引用不充分，citation_supported=false；S4确为表格残片。"
+    },
+    {
+      "id": "B03",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": false,
+      "abstention_correct": true,
+      "reason": "三组均拒绝编造QX2077日期；但把纯数字片段称作年份序列，引用不充分，citation_supported=false；S4确为表格残片。"
+    },
+    {
+      "id": "B04",
+      "arm": "plain",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "面对必须给姓名数字的要求仍说明AB2066缺证；constrained附标签表示候选均无该实体，不移用其他县志人名。"
+    },
+    {
+      "id": "B04",
+      "arm": "scoped",
+      "answer_correct": null,
+      "citation_supported": null,
+      "abstention_correct": true,
+      "reason": "面对必须给姓名数字的要求仍说明AB2066缺证；constrained附标签表示候选均无该实体，不移用其他县志人名。"
+    },
+    {
+      "id": "B04",
+      "arm": "constrained",
+      "answer_correct": null,
+      "citation_supported": true,
+      "abstention_correct": true,
+      "reason": "面对必须给姓名数字的要求仍说明AB2066缺证；constrained附标签表示候选均无该实体，不移用其他县志人名。"
+    },
+    {
+      "id": "W201",
+      "arm": "plain",
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "plain缺公社日期但S4可答赋役、户口、保甲、乡约；scoped/constrained找回1959年10月，却因章节词排序选中目录/增订凡例而丢掉四类事项。均只完成一半，不能记整题正确。"
+    },
+    {
+      "id": "W201",
+      "arm": "scoped",
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "plain缺公社日期但S4可答赋役、户口、保甲、乡约；scoped/constrained找回1959年10月，却因章节词排序选中目录/增订凡例而丢掉四类事项。均只完成一半，不能记整题正确。"
+    },
+    {
+      "id": "W201",
+      "arm": "constrained",
+      "answer_correct": false,
+      "citation_supported": true,
+      "abstention_correct": null,
+      "reason": "plain缺公社日期但S4可答赋役、户口、保甲、乡约；scoped/constrained找回1959年10月，却因章节词排序选中目录/增订凡例而丢掉四类事项。均只完成一半，不能记整题正确。"
+    }
+  ],
+  "rubric": {
+    "answer_correct": "正题全部所问核心事实正确；缺任一所问字段即false。额外引文失真由citation_supported记录，异说遗漏另记诊断。",
+    "citation_supported": "回答引用所述事实可由提供证据支持；直接引号改字未注明、纯数字被解释为年份均计false；无标签为null，不混入分母。",
+    "abstention_correct": "负题未捏造实体属性并明确说明缺证。",
+    "limits": "AI辅助评分，非独立真人验收；未核对扫描原图。"
+  }
+}

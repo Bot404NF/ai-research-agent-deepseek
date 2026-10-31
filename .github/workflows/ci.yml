@@ -33,6 +33,12 @@ jobs:
           scripts eval/run_eval.py eval/run_baseline.py eval/datasets/build_week1.py
           tests/unit/test_acceptance.py tests/unit/test_baseline.py
           tests/integration/test_langgraph_migration.py
+          src/research_agent/security.py src/research_agent/retrieval.py
+          src/research_agent/grounded_retrieval.py
+          eval/run_split_experiment.py eval/datasets/build_week2.py tests/unit/test_split_retrieval.py
+          eval/run_quality_experiment.py tests/unit/test_quality.py
+          eval/run_target.py eval/review_target.py eval/datasets/build_unified.py
+          tests/unit/test_grounded_retrieval.py tests/unit/test_target.py tests/conftest.py
       - name: 整理模块格式
         run: >-
           uvx --from ruff==0.17.2 ruff format --check
@@ -41,3 +47,9 @@ jobs:
           scripts eval/run_eval.py eval/run_baseline.py eval/datasets/build_week1.py
           tests/unit/test_acceptance.py tests/unit/test_baseline.py
           tests/integration/test_langgraph_migration.py
+          src/research_agent/security.py src/research_agent/retrieval.py
+          src/research_agent/grounded_retrieval.py
+          eval/run_split_experiment.py eval/datasets/build_week2.py tests/unit/test_split_retrieval.py
+          eval/run_quality_experiment.py tests/unit/test_quality.py
+          eval/run_target.py eval/review_target.py eval/datasets/build_unified.py
+          tests/unit/test_grounded_retrieval.py tests/unit/test_target.py tests/conftest.py
