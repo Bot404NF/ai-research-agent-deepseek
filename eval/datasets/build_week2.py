@@ -4,6 +4,8 @@ import hashlib
 import json
 from pathlib import Path
 
+from research_agent.evaluation.dataset_hash import text_digest
+
 
 def build(root: Path) -> dict:
     original = root / "week1.json"
@@ -42,7 +44,7 @@ def build(root: Path) -> dict:
         }
     )
     dataset["purpose"] = "第二周：56道公开回归题与1道新编开发题；非独立验收集"
-    dataset["parent_dataset_sha256"] = hashlib.sha256(original.read_bytes()).hexdigest()
+    dataset["parent_dataset_sha256"] = text_digest(original)
     return dataset
 
 

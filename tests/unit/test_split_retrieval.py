@@ -125,17 +125,14 @@ def test_bound_reviews_do_not_invent_human_scores_or_ignore_mismatch():
 
 
 def test_week2_preserves_frozen_week1_cases():
-    import hashlib
     import json
 
     from research_agent.config import PROJECT_ROOT
+    from research_agent.evaluation.dataset_hash import matches_text_digest
 
     root = PROJECT_ROOT / "eval/datasets"
     first = json.loads((root / "week1.json").read_text(encoding="utf-8"))
     second = json.loads((root / "week2.json").read_text(encoding="utf-8"))
     assert second["cases"][:-1] == first["cases"]
-    assert (
-        second["parent_dataset_sha256"]
-        == hashlib.sha256((root / "week1.json").read_bytes()).hexdigest()
-    )
+    assert matches_text_digest(root / "week1.json", second["parent_dataset_sha256"])
     assert second["cases"][-1]["stratum"] == "authored_probe"

@@ -43,6 +43,7 @@ jobs:
           scripts eval/run_eval.py eval/run_baseline.py eval/run_tool_baseline.py
           eval/inspect_week1.py eval/datasets/build_week1.py
           eval/run_split_experiment.py eval/datasets/build_week2.py tests/unit/test_split_retrieval.py
+          tests/unit/test_dataset_hash.py
           eval/run_quality_experiment.py tests/unit/test_quality.py
           src/research_agent/grounded_retrieval.py
           src/research_agent/evidence_policy.py eval/verify_business.py tests/integration/test_business_quality.py
@@ -67,6 +68,7 @@ jobs:
           scripts eval/run_eval.py eval/run_baseline.py eval/run_tool_baseline.py
           eval/inspect_week1.py eval/datasets/build_week1.py
           eval/run_split_experiment.py eval/datasets/build_week2.py tests/unit/test_split_retrieval.py
+          tests/unit/test_dataset_hash.py
           eval/run_quality_experiment.py tests/unit/test_quality.py
           src/research_agent/grounded_retrieval.py
           src/research_agent/evidence_policy.py eval/verify_business.py tests/integration/test_business_quality.py
