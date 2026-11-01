@@ -36,7 +36,7 @@
 | `results/smoke_*.json` | 本机HTTP、完整代理、会话恢复记录 |
 | `reports/final_checks.json` | 最终自动化和集成检查记录 |
 
-完整结论见 `../docs/acceptance-2026-10-19.md`；简历素材见 `../docs/resume-project.md`。旧轮次文件保留作为历史证据。
+完整结论见 `../docs/acceptance-2026-10-19.md`；项目介绍见 `../docs/project-overview.md`。旧轮次文件保留作为历史证据。
 
 ## 2026-10-19历史验收
 

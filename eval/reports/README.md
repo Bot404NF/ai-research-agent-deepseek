@@ -6,6 +6,6 @@
 
 ## 正式留档规则
 
-原始结果、审核、改分理由与结论成套保留；失败实验不因未采用而删除。当前面试材料的证据入口见[证据索引](../../docs/interview/evidence.md)，清理清单见[项目收尾记录](../../docs/project-closeout-2026-11-01.md)。
+原始结果、审核、改分理由与结论成套保留；失败实验不因未采用而删除。当前项目的验证入口见[证据索引](../../docs/project/evidence.md)，清理清单见[项目收尾记录](../../docs/project-closeout-2026-11-01.md)。
 
 日常 JUnit、临时诊断和重复检查输出写入被忽略的 `.security-artifacts/`、`eval/runtime/` 或 `work/`，正式验收再选择性留档。不要整体忽略 `eval/results/`。已被正式报告引用的历史记录保留；新产物提交前检查正文、私人路径与凭据。
